@@ -10,9 +10,10 @@ exports.rengoring = (req, res) => {
     message: "Hello from MVC!",
   });
 };
-exports.login = (req, res) => {
-  res.render("home/login", {
-    title: "Welcome",
-    message: "Hello from MVC!",
+
+exports.login = ('/login',(req,res)=>{
+  res.render("home/login",{
+    title: 'login',
+    message: 'skriv dit brugernavn og kodeord her'
   });
-};
+});
