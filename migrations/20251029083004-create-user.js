@@ -20,7 +20,13 @@ module.exports = {
                 unique: true
             },
             roleId: {
-                type: Sequelize.INTEGER
+                type: Sequelize.INTEGER,
+                references: {
+                    model: 'Roles',
+                    key: 'id',
+                },
+                onUpdate: 'CASCADE',
+                onDelete: 'SET NULL',
             },
             password: {
                 type: Sequelize.STRING

@@ -10,10 +10,22 @@ module.exports = {
         type: Sequelize.INTEGER
       },
       productId: {
-        type: Sequelize.INTEGER
+        type: Sequelize.INTEGER,
+          references: {
+              model: 'Products',
+              key: 'id',
+          },
+          onUpdate: 'CASCADE',
+          onDelete: 'SET NULL',
       },
       taskId: {
-        type: Sequelize.INTEGER
+        type: Sequelize.INTEGER,
+          references: {
+              model: 'Tasks',
+              key: 'id',
+          },
+          onUpdate: 'CASCADE',
+          onDelete: 'SET NULL',
       },
       amount: {
         type: Sequelize.FLOAT

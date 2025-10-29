@@ -10,10 +10,23 @@ module.exports = {
         type: Sequelize.INTEGER
       },
       userId: {
-        type: Sequelize.INTEGER
+        type: Sequelize.INTEGER,
+          references: {
+              model: 'Users',
+              key: 'id',
+          },
+          onUpdate: 'CASCADE',
+          onDelete: 'SET NULL',
       },
       gasstationId: {
-        type: Sequelize.INTEGER
+        type: Sequelize.INTEGER,
+          references: {
+              model: 'Gasstations',
+              key: 'id',
+          },
+          onUpdate: 'CASCADE',
+          onDelete: 'SET NULL',
+
       },
       isOwner: {
         type: Sequelize.BOOLEAN

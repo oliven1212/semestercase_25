@@ -11,6 +11,8 @@ module.exports = (sequelize, DataTypes) => {
      */
     static associate(models) {
       // define association here
+        models.Branch.hasMany(models.Gasstation, {foreignKey: 'branchId'});
+        models.Gasstation.belongsTo(models.Branch);
     }
   }
   Branch.init({
