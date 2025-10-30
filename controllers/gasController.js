@@ -1,9 +1,14 @@
+const { User, Gasstation, GasstationUser} = require('../models');
 
-exports.gasstation = (req, res) => {
+exports.gasstation = async (req, res) => {
+
+    const users = await User.findAll({ raw: true});
+
   res.render("home/gasstation", {
     title: 'gasstation',
     message: 'Vælg tankstation',
-    name: [{fornavn:'Steve'},{fornavn:'Lone'}, {fornavn:'Jan'}]
+    users: users,
+    gasstation: [{branch:'Cirkle K'},{branch:'OK'},{branch:'Uno-X'},{branch:'Q8'},{branch:'Shell'}]
   });
 
 };

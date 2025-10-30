@@ -1,5 +1,14 @@
-<p>Velkommen {{name.2.fornavn}}!</p> <!-- EW! >:( -->
-
+<p>Velkommen
+    {{#each users}}
+    {{this.firstName}}!
+    {{/each}}
 <h2>{{message}}</h2>
 
-<button>Shell</button>
+
+
+    {{#each gasstation}}
+    <button>
+        {{this.branch}}
+    </button>
+    {{/each}}
+
