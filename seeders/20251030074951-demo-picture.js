@@ -20,11 +20,11 @@ module.exports = {
       const picturesArray = [];
 
       // Example: insert the same UUID twice using a loop
-      for (let i = 0; i < 100; i++) {
+      for (let i = 1; i < 100; i++) {
           const pictureId = uuidv4();
           picturesArray.push({
               id: pictureId,              // same UUID for both
-              taskId: Math.floor(Math.random() * 100),
+              taskId: Math.floor(Math.random() * 99)+1,
               filename: pictureId,        // also the same filename
               beforeAfter: Math.round(Math.random()),       // 0 or 1
               productImage: Math.round(Math.random()),       // 0 or 1
