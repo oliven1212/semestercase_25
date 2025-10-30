@@ -7,7 +7,7 @@ module.exports = {
       {
         name: 'OK Plus',
         createdAt: new Date(),
-        updatedAt: new Date()
+        updatedAt: new Date(),
       }
     ], {});
   },

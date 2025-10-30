@@ -13,7 +13,7 @@ module.exports = {
         phone: '24846948',
         adress: 'Thomas t thrigesgade 87, 5000 Odense C',
         createdAt: new Date(),
-        updatedAt: new Date()
+        updatedAt: new Date(),
       },
       {
         firstName: 'Mikkel',
