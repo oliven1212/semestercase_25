@@ -1,9 +1,9 @@
 
-exports.task = (req, res) => {
-  res.render("home/task", {
+exports.createTask = (req, res) => {
+  res.render("home/createTask", {
     title: "Welcome",
     message: "Hello from MVC!",
-    tasks: models.task,
+    tasks: models.createTask,
   });
 };
 
