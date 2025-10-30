@@ -8,7 +8,7 @@ module.exports = {
                 primaryKey: true,
                 type: Sequelize.UUID
             },
-            taskid: {
+            taskId: {
                 type: Sequelize.INTEGER,
                 references: {
                     model: 'Tasks',

@@ -13,7 +13,7 @@ module.exports = (sequelize, DataTypes) => {
     }
   }
   Picture.init({
-    taskid: DataTypes.INTEGER,
+    taskId: DataTypes.INTEGER,
     filename: DataTypes.STRING,
     beforeAfter: DataTypes.BOOLEAN,
     productImage: DataTypes.BOOLEAN
