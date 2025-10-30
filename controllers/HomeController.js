@@ -7,16 +7,16 @@ exports.createTask = (req, res) => {
   });
 };
 
-exports.login = ('/', (req, res) => {
+exports.login = (req, res) => {
   res.render("home/login", {
     title: 'login',
     message: 'skriv dit brugernavn og kodeord her'
   });
-});
+};
 
-exports.gasstation = ('/gasstation', (req, res) => {
+exports.gasstation = (req, res) => {
   res.render("home/gasstation", {
     title: 'gasstation',
     message: 'Vælg tankstation'
   });
-});
+};
