@@ -12,14 +12,32 @@ module.exports = {
      *   isBetaMember: false
      * }], {});
     */
+    await queryInterface.bulkInsert('Roles', [
+      {
+        name: 'Admin',
+        createdAt: new Date(),
+        updatedAt: new Date(),
+      },      
+      {
+        name: 'Bruger',
+        createdAt: new Date(),
+        updatedAt: new Date(),
+      },
+      {
+        name: 'Ejer',
+        createdAt: new Date(),
+        updatedAt: new Date(),
+      },
+    ]);
   },
 
   async down (queryInterface, Sequelize) {
     /**
-     * Add commands to revert seed here.
-     *
-     * Example:
-     * await queryInterface.bulkDelete('People', null, {});
-     */
+    * Add commands to revert seed here.
+    *
+    * Example:
+    * await queryInterface.bulkDelete('People', null, {});
+    */
+    await queryInterface.bulkDelete('Roles', null, {});
   }
 };
