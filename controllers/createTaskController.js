@@ -1,9 +1,12 @@
-const { Task } = require('../models');
+const { Task, User } = require('../models');
 exports.createTask = async (req, res) => {
+
+    const users = await User.findAll({ raw: true });
+
     res.render("home/createTask", {
         title: "start log",
         message: "Hello from MVC!",
-        name: [{ fornavn: 'Steve' }, { fornavn: 'Lone' }, { fornavn: 'Jan' }],
+        users: users,
         tankstation: [{ branch: 'Shell' }, { branch: 'OK Plus' }, { branch: 'Q8' }]
     });
 };
