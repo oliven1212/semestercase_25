@@ -12,14 +12,32 @@ module.exports = {
      *   isBetaMember: false
      * }], {});
     */
+   await queryInterface.bulkInsert('Units', [
+      {
+        name: 'Kg',
+        createdAt: new Date(),
+        updatedAt: new Date(),
+      },      
+      {
+        name: 'L',
+        createdAt: new Date(),
+        updatedAt: new Date(),
+      },
+      {
+        name: 'mL',
+        createdAt: new Date(),
+        updatedAt: new Date(),
+      },
+    ]);
   },
 
   async down (queryInterface, Sequelize) {
     /**
-     * Add commands to revert seed here.
-     *
-     * Example:
-     * await queryInterface.bulkDelete('People', null, {});
-     */
+    * Add commands to revert seed here.
+    *
+    * Example:
+    * await queryInterface.bulkDelete('People', null, {});
+    */
+    await queryInterface.bulkDelete('Units', null, {});
   }
 };
