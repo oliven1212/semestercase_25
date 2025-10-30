@@ -12,3 +12,10 @@ exports.login = ('/', (req, res) => {
     message: 'skriv dit brugernavn og kodeord her'
   });
 });
+
+exports.gasstation = ('/gasstation', (req, res) => {
+  res.render("home/gasstation", {
+    title: 'gasstation',
+    message: 'Vælg tankstation'
+  });
+});
