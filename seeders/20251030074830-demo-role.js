@@ -21,13 +21,13 @@ module.exports = {
       },      
       {
         id: 2,
-        name: 'Bruger',
+        name: 'Ejer',
         createdAt: new Date(),
         updatedAt: new Date(),
       },
       {
         id: 3,
-        name: 'Ejer',
+        name: 'Bruger',
         createdAt: new Date(),
         updatedAt: new Date(),
       },
