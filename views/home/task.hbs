@@ -1,6 +1,9 @@
 <!--velkommen (med tom string der henter fra profil)-->
 <h1>Velkommen {{''}}</h1>
 
+{{#each tasks}}
+<p>{{this.userId}}</p>
+{{/each}}
 
 <!--Modal-->
 <button id="getGasStation">Vælg tankstation</button>

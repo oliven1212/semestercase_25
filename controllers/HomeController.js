@@ -1,10 +1,11 @@
 
-exports.task = ('/task', (req, res) => {
+exports.task = (req, res) => {
   res.render("home/task", {
     title: "Welcome",
     message: "Hello from MVC!",
+    tasks: models.task,
   });
-});
+};
 
 exports.login = ('/', (req, res) => {
   res.render("home/login", {
