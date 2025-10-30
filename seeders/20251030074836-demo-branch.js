@@ -8,6 +8,26 @@ module.exports = {
         name: 'OK Plus',
         createdAt: new Date(),
         updatedAt: new Date(),
+      },
+      {
+        name: 'Shell',
+        createdAt: new Date(),
+        updatedAt: new Date(),
+      },
+      {
+        name: 'Circle K',
+        createdAt: new Date(),
+        updatedAt: new Date(),
+      },
+      {
+        name: 'Uno X',
+        createdAt: new Date(),
+        updatedAt: new Date(),
+      },
+      {
+        name: 'Q8',
+        createdAt: new Date(),
+        updatedAt: new Date(),
       }
     ], {});
   },
