@@ -14,9 +14,3 @@ exports.login = (req, res) => {
   });
 };
 
-exports.gasstation = (req, res) => {
-  res.render("home/gasstation", {
-    title: 'gasstation',
-    message: 'Vælg tankstation'
-  });
-};
