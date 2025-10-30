@@ -14,21 +14,24 @@ module.exports = {
     */
    await queryInterface.bulkInsert('Units', [
       {
+        id: 1,
         name: 'Kg',
         createdAt: new Date(),
         updatedAt: new Date(),
       },      
       {
+        id: 2,
         name: 'L',
         createdAt: new Date(),
         updatedAt: new Date(),
       },
       {
+        id: 3,
         name: 'mL',
         createdAt: new Date(),
         updatedAt: new Date(),
       },
-    ]);
+    ], {});
   },
 
   async down (queryInterface, Sequelize) {
