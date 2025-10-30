@@ -1,4 +1,5 @@
 'use strict';
+/*database pictures skal være ens hos alle, så billednavn er det samme i vores mapper også. SÅ ingen random værdier*/
 
 const { v4: uuidv4 } = require('uuid');
 
