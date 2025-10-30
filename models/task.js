@@ -22,7 +22,7 @@ module.exports = (sequelize, DataTypes) => {
     startTime: DataTypes.DATE
   }, {
     sequelize,
-    modelName: 'task',
+    modelName: 'Task',
   });
   return Task;
 };

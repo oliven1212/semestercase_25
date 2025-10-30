@@ -1,9 +1,9 @@
-
-exports.createTask = (req, res) => {
+const { Task } = require('../models');
+exports.createTask = async (req, res) => {
   res.render("home/createTask", {
     title: "Welcome",
     message: "Hello from MVC!",
-    tasks: models.createTask,
+    tasks: Task.findAll(),
   });
 };
 
