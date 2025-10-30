@@ -1,7 +1,10 @@
 <!--velkommen (med tom string der henter fra profil)-->
-<h1>Velkommen {{name.2.fornavn}}!</h1> <!-- EW! >:( -->
+<p>Velkommen
+    {{#each users}}
+    {{this.firstName}}!
+    {{/each}}<!-- EW! >:( -->
 
-{{#each tasks}}
+    {{#each tasks}}
 <p>{{this.userId}}</p>
 {{/each}}
 
