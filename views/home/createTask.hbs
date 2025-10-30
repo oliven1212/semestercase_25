@@ -1,15 +1,15 @@
 <!--velkommen (med tom string der henter fra profil)-->
-<h1>Velkommen {{''}}</h1>
+<h1>Velkommen {{name.2.fornavn}}!</h1> <!-- EW! >:( -->
 
 {{#each tasks}}
 <p>{{this.userId}}</p>
 {{/each}}
 
 <!--Modal-->
-<button id="getGasStation">Vælg tankstation</button>
+<button id="getGasstation">Vælg tankstation</button>
 
 <!--start rengøring ved (valgte tankstation)-->
-<p>start rengøring ved {{''}}</p>
+<p>start rengøring ved {{tankstation.2.branch}}</p>
 
 
 <!--valg af dato, med automatisk valg af idag-->
@@ -19,7 +19,7 @@
 
 <!--tidspunkt for rengøring-->
 <div>
-    <p>starttidspunt for rengøring</p>
+    <p>start tidspunt for rengøring</p>
 </div>
 
 <!--start log-->
