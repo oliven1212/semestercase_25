@@ -10,5 +10,4 @@ exports.gasstation = async (req, res) => {
     users: users,
     gasstation: [{branch:'Cirkle K'},{branch:'OK'},{branch:'Uno-X'},{branch:'Q8'},{branch:'Shell'}]
   });
-
 };
