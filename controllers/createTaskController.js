@@ -11,4 +11,13 @@ exports.createTask = async (req, res) => {
     });
 };
 
+const { Gasstation, Branch } = require('../models');
+
+exports.stations = async (req, res, next) => {
+
+    const gasstations = await Gasstation.findAll();
+    const branches = await Branch.findAll();
+
+}
+
 
