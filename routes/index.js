@@ -4,6 +4,8 @@ const gasController = require("../controllers/gasController");
 const createTaskController = require("../controllers/createTaskController");
 const adminListController = require("../controllers/adminListController");
 const profileController = require("../controllers/profileController");
+const taskPageOneController = require("../controllers/taskPageOneController");
+
 
 const router = express.Router();
 
@@ -12,5 +14,6 @@ router.get('/', HomeController.login);
 router.get('/gasstation', gasController.gasstation);
 router.get('/adminList', adminListController.adminList);
 router.get('/profile', profileController.profile);
+router.get('/taskPageOne', taskPageOneController.taskPageOne);
 
 module.exports = router;
