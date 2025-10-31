@@ -1,14 +1,14 @@
-const { User, Gasstation, GasstationUser} = require('../models');
+const { User, Gasstation, GasstationUser, task} = require('../models');
 
 exports.taskPageOne = async (req, res) => {
     const users = await User.findAll();
     const newUsers = users.map(user => user.toJSON());
-    const exampleUser = await User.findOne({ where: { id: 1 } });
-    const exampleUser2 = await User.findByPk(2);
+    const gasstation2 = await Gasstation.findOne({ where: { id: 2 } });
+    const user2 = await User.findByPk(2);
     res.render("home/taskPageOne", {
-        title: 'login',
+        title: 'Log din rengøring',
         users: newUsers,
-        exampleUser: exampleUser.toJSON(),
-        exampleUser2: exampleUser2.toJSON()
+        gasstation2: gasstation2.toJSON(),
+        user2: user2.toJSON()
     });
 };

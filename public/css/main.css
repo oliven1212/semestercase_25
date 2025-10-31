@@ -1,8 +1,25 @@
 :root {
+  --sideMargin: 10%;
+  --sansFont: 'Open Sans', sans-serif;
+  --white: #ffffff;
+  --green: #4F9D69;
+  --red: #ff0000;
+  --darkBlue:#03045E;
+  --lightBlue:#CAF0F8;
+
   color-scheme: light dark;
 }
 
 body {
   font-family: sans-serif;
   margin: 2rem;
+  margin: var(--general);
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--sansFont);
+}
+h1 {
+  font-size: 2.5rem;
+  font-weight: bold;
 }

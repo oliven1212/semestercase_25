@@ -1,14 +1,11 @@
-<p>Velkommen
-    {{#each users}}
-    {{this.firstName}}!
-    {{/each}}
+<p>Velkommen {{owner.firstName}}!
 <h2>{{message}}</h2>
 
 
 
-    {{#each gasstation}}
+    {{#each gasstations}}
     <button>
-        {{this.branch}}
+        {{this.[branch.name]}}
     </button>
     {{/each}}
 
