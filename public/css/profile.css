@@ -15,5 +15,15 @@ section.profile-card svg {
     display: block;
 }
 section.profile-card .inputField {
-
+    margin-top: 15px;
+}
+section.profile-card .inputField:last-of-type {
+    margin-bottom: 25px;
+}
+section.profile-card .inputField input{
+    width: 100%;;
+}
+section.profile-card .inputField label{
+    display: block;
+    margin-bottom: 0px;
 }
