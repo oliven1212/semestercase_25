@@ -1,17 +1,21 @@
-<p>
-{{#each users}}
-    {{this.firstName}}, 
-{{/each}}
-</p>
-<p>{{ exampleUser.firstName }}</p>
+<link rel="stylesheet" type="text/css" href="./css/profile.css">
+<div style="height:50px; overflow-x:scroll;">
+    <p>
+    {{#each users}}
+        {{this.firstName}}, 
+    {{/each}}
+    </p>
+    <p>{{ exampleUser.firstName }}</p>
+</div>
+<section class="profile-card">
+    <svg width="152" height="134" viewBox="0 0 152 134" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <rect x="1.5" y="1.5" width="148.965" height="130.719" rx="3.5" stroke="black" stroke-width="3"/>
+        <circle cx="77.1229" cy="52.0351" r="33.0702" fill="black"/>
+        <rect x="34.9299" y="80.5438" width="84.386" height="52.4561" rx="5" fill="black"/>
+    </svg>
+    <p>{{currentUser.firstName}} {{currentUser.lastName}}</p>
+    <p>{{ currentUser.email }}</p>
+    <p>{{currentUser.phone}}</p>
 
-<svg width="152" height="134" viewBox="0 0 152 134" fill="none" xmlns="http://www.w3.org/2000/svg">
-<rect x="1.5" y="1.5" width="148.965" height="130.719" rx="3.5" stroke="black" stroke-width="3"/>
-<circle cx="77.1229" cy="52.0351" r="33.0702" fill="black"/>
-<rect x="34.9299" y="80.5438" width="84.386" height="52.4561" rx="5" fill="black"/>
-</svg>
-<p>{{currentUser.firstName}} {{currentUser.lastName}}</p>
-<p>{{ currentUser.email }}</p>
-<p>{{currentUser.phone}}</p>
-
-<a href="/">Rengørings historik</a>
+    <a href="/">Rengørings historik</a>
+</section>

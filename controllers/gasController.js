@@ -1,16 +1,26 @@
-const { User, Gasstation, GasstationUser} = require('../models');
+const { User, Gasstation, GasstationUser, Branch} = require('../models');
 
 exports.gasstation = async (req, res) => {
 
     const users = await User.findAll();
     const owner = await User.findOne({ where: {id: 4}});
-    const gasstationId = await GasstationUser.findAll({ where: {userId: 4}});
+    const gasstationId = await GasstationUser.findAll({ where: {userId: 4},raw: true});
+    const gasstationIds = gasstationId.map(link => link.gasstationId);
 
-    console.log(gasstationId.join(', '));
 
 
-    const gasstations = await Gasstation.findAll({ where: {id: [(gasstationId.gasstationId.join(", "))]}});
-
+    const gasstations = await Gasstation.findAll({
+      attributes: ['id', 'branchId', 'location', 'contactEmail', 'contactPhone', 'frontSpace'],
+      where: {id: gasstationIds},
+      raw: true,
+      include: [
+    {
+      model: Branch,
+      as: 'branch',
+      attributes: ['name'] // only fetch the branch name
+    }
+  ],
+    });
     console.log(gasstations);
 
   res.render("home/gasstation", {
@@ -18,7 +28,7 @@ exports.gasstation = async (req, res) => {
     message: 'Vælg tankstation',
     users: users,
     owner: owner.toJSON(),
-    gasstations: gasstation,
+    gasstations: gasstations,
   });
 };
 
