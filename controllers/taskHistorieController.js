@@ -12,7 +12,9 @@ exports.taskHistorie = (req, res) => {
 };
 
 exports.taskHistorie = async (req, res) => {
-  const users = await User.findAll({attributes:'firstName''lastName','phone'});
+  const users = await User.findAll({
+    attributes:['firstName','lastName','phone']
+  });
   const newUsers = users.map((user) => user.toJSON());
   res.render("home/taskHistorie", {
     Users: newUsers,
