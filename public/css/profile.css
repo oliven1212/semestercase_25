@@ -1,8 +1,29 @@
 section.profile-card {
-    width: 100%;
+    margin-left: var(--sideMargin);
+    margin-right: var(--sideMargin);
+    width: calc(100 - var(--sideMargin)*2);
     padding: 20px;
     border: 2px solid #000;
-    border-radius: 10px;
     box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.1);
     background-color: #f9f9f9;
+    display: grid;
+    place-items: center;
+}
+section.profile-card svg {
+    width: 50%;
+    height: auto;
+    display: block;
+}
+section.profile-card .inputField {
+    margin-top: 15px;
+}
+section.profile-card .inputField:last-of-type {
+    margin-bottom: 25px;
+}
+section.profile-card .inputField input{
+    width: 100%;;
+}
+section.profile-card .inputField label{
+    display: block;
+    margin-bottom: 0px;
 }
