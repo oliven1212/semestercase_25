@@ -1,5 +1,26 @@
+body{
+    margin: var(--sideMargin);
+}
+
 section{
     background-color: black;
+    display: grid;
+    
+}
+
+.sec1{
+    display: grid;
+    justify-content: space-around;
+
+}
+
+.before .after {
+    justify-content: space-around;
+}
+
+.sec2{
+    display: grid;
+    justify-content: space-around;
 }
 
 .before {
