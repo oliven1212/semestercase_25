@@ -8,9 +8,20 @@
 <p>{{this.userId}}</p>
 {{/each}}
 
-<!--Modal-->
-<button id="getGasstation">Vælg tankstation</button>
 
+<!-- Trigger/Open The Modal -->
+<button id="myBtn">Open Modal</button>
+
+<!-- The Modal -->
+<div id="myModal" class="modal">
+
+    <!-- Modal content -->
+    <div class="modal-content">
+        <span class="close">&times;</span>
+        <p>Some text in the Modal..</p>
+    </div>
+
+</div>
 <!--start rengøring ved (valgte tankstation)-->
 <p>start rengøring ved {{tankstation.2.branch}}</p>
 
@@ -27,3 +38,6 @@
 
 <!--start log-->
 <button>start log</button>
+
+<link rel="stylesheet" type="text/css" href="./css/modal.css">
+<script src="/js/modal.js" defer></script>
