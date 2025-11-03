@@ -1,23 +1,37 @@
-const { Task, User } = require('../models');
+// controllers/createTaskController.js
+const { User, Gasstation, Branch } = require('../models');
+
 exports.createTask = async (req, res) => {
 
-    const users = await User.findAll({ raw: true });
+    const users = await User.findAll();
+    const gasstation = await Gasstation.findAll();
+    const branch = await Branch.findAll();
 
-    res.render("home/createTask", {
-        title: "start log",
-        message: "Hello from MVC!",
+
+    const gasstationIds = gasstationId.map(link => link.gasstationId);
+
+
+
+    const gasstations = await Gasstation.findAll({
+        attributes: ['id', 'branchId', 'location', 'contactEmail', 'contactPhone', 'frontSpace'],
+        where: { id: gasstationIds },
+        raw: true,
+        include: [
+            {
+                model: Branch,
+
+                as: 'branch',
+                attributes: ['name'] // only fetch the branch name
+            }
+        ],
+    });
+    console.log(gasstations);
+
+    res.render("home/gasstation", {
+        title: 'gasstation',
+        message: 'Vælg tankstation',
         users: users,
-        tankstation: [{ branch: 'Shell' }, { branch: 'OK Plus' }, { branch: 'Q8' }]
+        owner: owner.toJSON(),
+        gasstations: gasstations,
     });
 };
-
-const { Gasstation, Branch } = require('../models');
-
-exports.stations = async (req, res, next) => {
-
-    const gasstations = await Gasstation.findAll();
-    const branches = await Branch.findAll();
-
-}
-
-

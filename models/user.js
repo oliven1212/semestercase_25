@@ -4,14 +4,22 @@ const {
 } = require('sequelize');
 module.exports = (sequelize, DataTypes) => {
   class User extends Model {
+    static async getAllUserIds(){
+      const allUsers = await User.findAll({ 
+        attributes: ['id'],
+        raw: true 
+        });
+      return allUsers.map(user => user.id);
+    }
     /**
      * Helper method for defining associations.
      * This method is not a part of Sequelize lifecycle.
      * The `models/index` file will call this method automatically.
      */
+
     static associate(models) {
       // define association here
-        //models.User.belongsToMany(models.Gasstation, { through: 'GasstationUsers' });
+      User.belongsToMany(models.Gasstation, { through: 'GasstationUsers', foreignKey: 'userId' });
     }
   }
   User.init({
