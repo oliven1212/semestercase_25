@@ -1,7 +1,5 @@
-'use strict';
-const {
-  Model
-} = require('sequelize');
+"use strict";
+const { Model } = require("sequelize");
 module.exports = (sequelize, DataTypes) => {
   class Gasstation extends Model {
     /**
@@ -11,25 +9,28 @@ module.exports = (sequelize, DataTypes) => {
      */
     static associate(models) {
       // define association here
-        models.Gasstation.belongsToMany(models.User, { through: 'GasstationUsers' });
-        models.Gasstation.belongsTo(models.Branch, {
-          foreignKey: 'branchId',
-          as: 'branch'
-        });
-
-
-
+      models.Gasstation.belongsToMany(models.User, {
+        through: "GasstationUsers",
+      });
+      models.Gasstation.belongsTo(models.Branch, {
+        foreignKey: "branchId",
+        as: "branch",
+      });
+      Gasstation.hasMany(models.Task, { foreignKey: "gasstationId" });
     }
   }
-  Gasstation.init({
-    branchId: DataTypes.INTEGER,
-    location: DataTypes.STRING,
-    contactEmail: DataTypes.STRING,
-    contactPhone: DataTypes.STRING,
-    frontSpace: DataTypes.BOOLEAN
-  }, {
-    sequelize,
-    modelName: 'Gasstation',
-  });
+  Gasstation.init(
+    {
+      branchId: DataTypes.INTEGER,
+      location: DataTypes.STRING,
+      contactEmail: DataTypes.STRING,
+      contactPhone: DataTypes.STRING,
+      frontSpace: DataTypes.BOOLEAN,
+    },
+    {
+      sequelize,
+      modelName: "Gasstation",
+    },
+  );
   return Gasstation;
 };

@@ -1,11 +1,9 @@
 <h1>Task Historie</h1>
 
+<p>{{user.firstName}},{{user.lastName}},{{user.phone}}</p>
+<p>{{this.branchName}},{{this.location}} </p>
 <ul>
-  {{#each Users}}
-    <li>{{firstName}} {{lastName}} - {{phone}}</li>
+  {{#each tasks}}
+    <li>{{this.startTime}} - {{this.id}}</li>
   {{/each}}
 </ul>
-
-<p>{{this.firstname}}</p>
-<p>{{this.lastname}}</p>
-<p>{{this.phone}}</p>
