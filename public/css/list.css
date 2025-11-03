@@ -1,0 +1,43 @@
+
+.listSite {
+    margin-left: var(--sideMargin);
+    margin-right: var(--sideMargin);
+    display: grid;
+    grid-template-rows: 3em 1fr;
+    place-items: center;
+}
+
+.createNew {
+}
+
+.listCards {
+    display: grid;
+    row-gap: 1em;
+}
+
+.listCard {
+    display: grid;
+    grid-template-columns: 2fr 1fr;
+    grid-template-rows: 1fr auto;
+    border: 2px solid #bdbdbd;
+    grid-template-areas:
+        'name functions'
+        'contact contact';
+
+    .name {
+        grid-area: name;
+    }
+
+    .contact {
+        grid-area: contact;
+        font-size: small;
+        margin-top: 0;
+    }
+    .functions{
+        grid-area: functions;
+        svg {
+            max-width: 50px;
+            height: auto;
+        }
+    }
+}
