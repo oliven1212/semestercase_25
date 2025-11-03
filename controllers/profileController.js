@@ -4,7 +4,10 @@ exports.profile = async (req, res) => {
     const currentUser = await User.findByPk(3,{
         raw: true
     });
-    console.log(currentUser);
+
+    const allUserIds = await User.getAllUserIds();
+    console.log(allUserIds);
+
 
     const users = await User.findAll({
         raw: true
