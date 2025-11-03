@@ -20,17 +20,16 @@ exports.gasstation = async (req, res) => {
   const gasstations = await Gasstation.findAll({
     attributes: ['id', 'branchId', 'location', 'contactEmail', 'contactPhone', 'frontSpace'],
     where: { id: gasstationIds },
-    raw: true,
     include: [
       {
         model: Branch,
-
         as: 'branch',
         attributes: ['name'] // only fetch the branch name
       }
     ],
+    raw: true,
   });
-
+console.log(gasstations);
   res.render("home/gasstation", {
     title: 'gasstation',
     message: 'Vælg tankstation',
