@@ -34,6 +34,7 @@ module.exports = {
 
 
   async down(queryInterface, Sequelize) {
+    await queryInterface.bulkDelete('Branches', null, {});
     /**
      * Add commands to revert seed here.
      *
