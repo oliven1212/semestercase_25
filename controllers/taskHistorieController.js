@@ -34,6 +34,7 @@ exports.taskHistorie = async (req, res) => {
         model: Gasstation,
       },
     ],
+
     raw: true,
   });
   console.log(task);
