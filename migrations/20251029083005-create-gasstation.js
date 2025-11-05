@@ -18,7 +18,16 @@ module.exports = {
                 onUpdate: 'CASCADE',
                 onDelete: 'SET NULL',
             },
-            location: {
+            cityCode: {
+                type: Sequelize.INTEGER,
+                references: {
+                    model: 'Cities',
+                    key: 'zipCode',
+                },
+                onUpdate: 'CASCADE',
+                onDelete: 'SET NULL',
+            },
+            address: {
                 type: Sequelize.STRING
             },
             contactEmail: {

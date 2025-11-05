@@ -34,7 +34,16 @@ module.exports = {
             phone: {
                 type: Sequelize.STRING
             },
-            adress: {
+            cityCode: {
+                type: Sequelize.INTEGER,
+                references: {
+                    model: 'Cities',
+                    key: 'zipCode',
+                },
+                onUpdate: 'CASCADE',
+                onDelete: 'SET NULL',
+            },
+            address: {
                 type: Sequelize.STRING
             },
             createdAt: {
