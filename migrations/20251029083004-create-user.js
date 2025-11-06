@@ -15,10 +15,6 @@ module.exports = {
             lastName: {
                 type: Sequelize.STRING
             },
-            email: {
-                type: Sequelize.STRING,
-                unique: true
-            },
             roleId: {
                 type: Sequelize.INTEGER,
                 references: {
@@ -28,10 +24,17 @@ module.exports = {
                 onUpdate: 'CASCADE',
                 onDelete: 'SET NULL',
             },
+            email: {
+                type: Sequelize.STRING,
+                unique: true
+            },
             password: {
                 type: Sequelize.STRING
             },
             phone: {
+                type: Sequelize.STRING
+            },
+            address: {
                 type: Sequelize.STRING
             },
             cityCode: {
@@ -42,9 +45,6 @@ module.exports = {
                 },
                 onUpdate: 'CASCADE',
                 onDelete: 'SET NULL',
-            },
-            address: {
-                type: Sequelize.STRING
             },
             createdAt: {
                 allowNull: false,
