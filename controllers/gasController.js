@@ -23,7 +23,6 @@ exports.gasstation = async (req, res) => {
     include: [
       {
         model: Branch,
-        as: 'branch',
         attributes: ['name'] // only fetch the branch name
       }
     ],
