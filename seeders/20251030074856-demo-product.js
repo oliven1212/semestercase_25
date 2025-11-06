@@ -13,7 +13,7 @@ module.exports = {
       },
        {
     name: 'Forvask alkalisk',
-    unitId: 1,
+    unitId: 2,
      createdAt: new Date(),
         updatedAt: new Date()
   },
@@ -25,7 +25,7 @@ module.exports = {
   },
   {
     name: 'Hovedshampoo koncentrat',
-    unitId: 1,
+    unitId: 3,
      createdAt: new Date(),
         updatedAt: new Date()
   },
@@ -43,7 +43,7 @@ module.exports = {
   },
   {
     name: 'Børstepleje middel',
-    unitId: 2,
+    unitId: 3,
      createdAt: new Date(),
         updatedAt: new Date()
   },
@@ -73,7 +73,7 @@ module.exports = {
   },
   {
     name: 'Skumvoks',
-    unitId: 1,
+    unitId: 2,
      createdAt: new Date(),
         updatedAt: new Date()
   },
@@ -85,7 +85,7 @@ module.exports = {
   },
   {
     name: 'Tromleaffedter',
-    unitId: 1,
+    unitId: 3,
      createdAt: new Date(),
         updatedAt: new Date()
   },
@@ -133,7 +133,7 @@ module.exports = {
   },
   {
     name: 'Understelrens middel',
-    unitId: 1,
+    unitId: 2,
      createdAt: new Date(),
         updatedAt: new Date()
   },
@@ -157,7 +157,7 @@ module.exports = {
   },
   {
     name: 'Børstebeskyttelse',
-    unitId: 1,
+    unitId: 3,
      createdAt: new Date(),
         updatedAt: new Date()
   }

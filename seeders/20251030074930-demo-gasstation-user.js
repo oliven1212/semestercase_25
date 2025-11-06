@@ -2,34 +2,180 @@
 
 /** @type {import('sequelize-cli').Migration} */
 module.exports = {
-  async up(queryInterface, Sequelize) {
-    const GasstationUsersArray = [];
+    async up(queryInterface, Sequelize) {
+        const GasstationUsersArray = [
+            {
+                userId: 1,
+                gasstationId: 1,
+                isOwner: 1,
+                createdAt: new Date(),
+                updatedAt: new Date()
+            },
+            {
+                userId: 6,
+                gasstationId: 1,
+                isOwner: 0,
+                createdAt: new Date(),
+                updatedAt: new Date()
+            },
+            {userId: 7, gasstationId: 1, isOwner: 0, createdAt: new Date(), updatedAt: new Date()},
+            {userId: 2, gasstationId: 2, isOwner: 1, createdAt: new Date(), updatedAt: new Date()},
+            {userId: 8, gasstationId: 2, isOwner: 0, createdAt: new Date(), updatedAt: new Date()},
+            {userId: 9, gasstationId: 2, isOwner: 0, createdAt: new Date(), updatedAt: new Date()},
+            {userId: 3, gasstationId: 3, isOwner: 1, createdAt: new Date(), updatedAt: new Date()},
+            {userId: 10, gasstationId: 3, isOwner: 0, createdAt: new Date(), updatedAt: new Date()},
+            {userId: 11, gasstationId: 3, isOwner: 0, createdAt: new Date(), updatedAt: new Date()},
+            {userId: 4, gasstationId: 4, isOwner: 1, createdAt: new Date(), updatedAt: new Date()},
+            {userId: 12, gasstationId: 4, isOwner: 0, createdAt: new Date(), updatedAt: new Date()},
+            {userId: 13, gasstationId: 4, isOwner: 0, createdAt: new Date(), updatedAt: new Date()},
+            {userId: 5, gasstationId: 5, isOwner: 1, createdAt: new Date(), updatedAt: new Date()},
+            {userId: 14, gasstationId: 5, isOwner: 0, createdAt: new Date(), updatedAt: new Date()},
+            {userId: 15, gasstationId: 5, isOwner: 0, createdAt: new Date(), updatedAt: new Date()},
+            {userId: 1, gasstationId: 6, isOwner: 1, createdAt: new Date(), updatedAt: new Date()},
+            {userId: 16, gasstationId: 6, isOwner: 0, createdAt: new Date(), updatedAt: new Date()},
+            {userId: 17, gasstationId: 6, isOwner: 0, createdAt: new Date(), updatedAt: new Date()},
+            {userId: 2, gasstationId: 7, isOwner: 1, createdAt: new Date(), updatedAt: new Date()},
+            {userId: 18, gasstationId: 7, isOwner: 0, createdAt: new Date(), updatedAt: new Date()},
+            {userId: 19, gasstationId: 7, isOwner: 0, createdAt: new Date(), updatedAt: new Date()},
+            {userId: 3, gasstationId: 8, isOwner: 1, createdAt: new Date(), updatedAt: new Date()},
+            {userId: 6, gasstationId: 8, isOwner: 0, createdAt: new Date(), updatedAt: new Date()},
+            {userId: 7, gasstationId: 8, isOwner: 0, createdAt: new Date(), updatedAt: new Date()},
+            {userId: 4, gasstationId: 9, isOwner: 1, createdAt: new Date(), updatedAt: new Date()},
+            {userId: 8, gasstationId: 9, isOwner: 0, createdAt: new Date(), updatedAt: new Date()},
+            {userId: 9, gasstationId: 9, isOwner: 0, createdAt: new Date(), updatedAt: new Date()},
+            {userId: 5, gasstationId: 10, isOwner: 1, createdAt: new Date(), updatedAt: new Date()},
+            {userId: 10, gasstationId: 10, isOwner: 0, createdAt: new Date(), updatedAt: new Date()},
+            {userId: 11, gasstationId: 10, isOwner: 0, createdAt: new Date(), updatedAt: new Date()},
+            {userId: 1, gasstationId: 11, isOwner: 1, createdAt: new Date(), updatedAt: new Date()},
+            {userId: 12, gasstationId: 11, isOwner: 0, createdAt: new Date(), updatedAt: new Date()},
+            {userId: 13, gasstationId: 11, isOwner: 0, createdAt: new Date(), updatedAt: new Date()},
+            {userId: 2, gasstationId: 12, isOwner: 1, createdAt: new Date(), updatedAt: new Date()},
+            {userId: 14, gasstationId: 12, isOwner: 0, createdAt: new Date(), updatedAt: new Date()},
+            {userId: 15, gasstationId: 12, isOwner: 0, createdAt: new Date(), updatedAt: new Date()},
+            {userId: 3, gasstationId: 13, isOwner: 1, createdAt: new Date(), updatedAt: new Date()},
+            {userId: 16, gasstationId: 13, isOwner: 0, createdAt: new Date(), updatedAt: new Date()},
+            {userId: 17, gasstationId: 13, isOwner: 0, createdAt: new Date(), updatedAt: new Date()},
+            {userId: 4, gasstationId: 14, isOwner: 1, createdAt: new Date(), updatedAt: new Date()},
+            {userId: 18, gasstationId: 14, isOwner: 0, createdAt: new Date(), updatedAt: new Date()},
+            {userId: 19, gasstationId: 14, isOwner: 0, createdAt: new Date(), updatedAt: new Date()},
+            {userId: 5, gasstationId: 15, isOwner: 1, createdAt: new Date(), updatedAt: new Date()},
+            {userId: 6, gasstationId: 15, isOwner: 0, createdAt: new Date(), updatedAt: new Date()},
+            {userId: 7, gasstationId: 15, isOwner: 0, createdAt: new Date(), updatedAt: new Date()},
+            {userId: 1, gasstationId: 16, isOwner: 1, createdAt: new Date(), updatedAt: new Date()},
+            {userId: 8, gasstationId: 16, isOwner: 0, createdAt: new Date(), updatedAt: new Date()},
+            {userId: 9, gasstationId: 16, isOwner: 0, createdAt: new Date(), updatedAt: new Date()},
+            {userId: 2, gasstationId: 17, isOwner: 1, createdAt: new Date(), updatedAt: new Date()},
+            {userId: 10, gasstationId: 17, isOwner: 0, createdAt: new Date(), updatedAt: new Date()},
+            {userId: 11, gasstationId: 17, isOwner: 0, createdAt: new Date(), updatedAt: new Date()},
+            {userId: 3, gasstationId: 18, isOwner: 1, createdAt: new Date(), updatedAt: new Date()},
+            {userId: 12, gasstationId: 18, isOwner: 0, createdAt: new Date(), updatedAt: new Date()},
+            {userId: 13, gasstationId: 18, isOwner: 0, createdAt: new Date(), updatedAt: new Date()},
+            {userId: 4, gasstationId: 19, isOwner: 1, createdAt: new Date(), updatedAt: new Date()},
+            {userId: 14, gasstationId: 19, isOwner: 0, createdAt: new Date(), updatedAt: new Date()},
+            {userId: 15, gasstationId: 19, isOwner: 0, createdAt: new Date(), updatedAt: new Date()},
+            {userId: 5, gasstationId: 20, isOwner: 1, createdAt: new Date(), updatedAt: new Date()},
+            {userId: 16, gasstationId: 20, isOwner: 0, createdAt: new Date(), updatedAt: new Date()},
+            {userId: 17, gasstationId: 20, isOwner: 0, createdAt: new Date(), updatedAt: new Date()},
+            {userId: 1, gasstationId: 21, isOwner: 1, createdAt: new Date(), updatedAt: new Date()},
+            {userId: 18, gasstationId: 21, isOwner: 0, createdAt: new Date(), updatedAt: new Date()},
+            {userId: 19, gasstationId: 21, isOwner: 0, createdAt: new Date(), updatedAt: new Date()},
+            {userId: 2, gasstationId: 22, isOwner: 1, createdAt: new Date(), updatedAt: new Date()},
+            {userId: 6, gasstationId: 22, isOwner: 0, createdAt: new Date(), updatedAt: new Date()},
+            {userId: 7, gasstationId: 22, isOwner: 0, createdAt: new Date(), updatedAt: new Date()},
+            {userId: 3, gasstationId: 23, isOwner: 1, createdAt: new Date(), updatedAt: new Date()},
+            {userId: 8, gasstationId: 23, isOwner: 0, createdAt: new Date(), updatedAt: new Date()},
+            {userId: 9, gasstationId: 23, isOwner: 0, createdAt: new Date(), updatedAt: new Date()},
+            {userId: 4, gasstationId: 24, isOwner: 1, createdAt: new Date(), updatedAt: new Date()},
+            {userId: 10, gasstationId: 24, isOwner: 0, createdAt: new Date(), updatedAt: new Date()},
+            {userId: 11, gasstationId: 24, isOwner: 0, createdAt: new Date(), updatedAt: new Date()},
+            {userId: 5, gasstationId: 25, isOwner: 1, createdAt: new Date(), updatedAt: new Date()},
+            {userId: 12, gasstationId: 25, isOwner: 0, createdAt: new Date(), updatedAt: new Date()},
+            {userId: 13, gasstationId: 25, isOwner: 0, createdAt: new Date(), updatedAt: new Date()},
+            {userId: 1, gasstationId: 26, isOwner: 1, createdAt: new Date(), updatedAt: new Date()},
+            {userId: 14, gasstationId: 26, isOwner: 0, createdAt: new Date(), updatedAt: new Date()},
+            {userId: 15, gasstationId: 26, isOwner: 0, createdAt: new Date(), updatedAt: new Date()},
+            {userId: 2, gasstationId: 27, isOwner: 1, createdAt: new Date(), updatedAt: new Date()},
+            {userId: 16, gasstationId: 27, isOwner: 0, createdAt: new Date(), updatedAt: new Date()},
+            {userId: 17, gasstationId: 27, isOwner: 0, createdAt: new Date(), updatedAt: new Date()},
+            {userId: 3, gasstationId: 28, isOwner: 1, createdAt: new Date(), updatedAt: new Date()},
+            {userId: 18, gasstationId: 28, isOwner: 0, createdAt: new Date(), updatedAt: new Date()},
+            {userId: 19, gasstationId: 28, isOwner: 0, createdAt: new Date(), updatedAt: new Date()},
+            {userId: 4, gasstationId: 29, isOwner: 1, createdAt: new Date(), updatedAt: new Date()},
+            {userId: 6, gasstationId: 29, isOwner: 0, createdAt: new Date(), updatedAt: new Date()},
+            {userId: 7, gasstationId: 29, isOwner: 0, createdAt: new Date(), updatedAt: new Date()},
+            {userId: 5, gasstationId: 30, isOwner: 1, createdAt: new Date(), updatedAt: new Date()},
+            {userId: 8, gasstationId: 30, isOwner: 0, createdAt: new Date(), updatedAt: new Date()},
+            {userId: 9, gasstationId: 30, isOwner: 0, createdAt: new Date(), updatedAt: new Date()},
+            {userId: 1, gasstationId: 31, isOwner: 1, createdAt: new Date(), updatedAt: new Date()},
+            {userId: 10, gasstationId: 31, isOwner: 0, createdAt: new Date(), updatedAt: new Date()},
+            {userId: 11, gasstationId: 31, isOwner: 0, createdAt: new Date(), updatedAt: new Date()},
+            {userId: 2, gasstationId: 32, isOwner: 1, createdAt: new Date(), updatedAt: new Date()},
+            {userId: 12, gasstationId: 32, isOwner: 0, createdAt: new Date(), updatedAt: new Date()},
+            {userId: 13, gasstationId: 32, isOwner: 0, createdAt: new Date(), updatedAt: new Date()},
+            {userId: 3, gasstationId: 33, isOwner: 1, createdAt: new Date(), updatedAt: new Date()},
+            {userId: 14, gasstationId: 33, isOwner: 0, createdAt: new Date(), updatedAt: new Date()},
+            {userId: 15, gasstationId: 33, isOwner: 0, createdAt: new Date(), updatedAt: new Date()},
+            {userId: 4, gasstationId: 34, isOwner: 1, createdAt: new Date(), updatedAt: new Date()},
+            {userId: 16, gasstationId: 34, isOwner: 0, createdAt: new Date(), updatedAt: new Date()},
+            {userId: 17, gasstationId: 34, isOwner: 0, createdAt: new Date(), updatedAt: new Date()},
+            {userId: 5, gasstationId: 35, isOwner: 1, createdAt: new Date(), updatedAt: new Date()},
+            {userId: 18, gasstationId: 35, isOwner: 0, createdAt: new Date(), updatedAt: new Date()},
+            {userId: 19, gasstationId: 35, isOwner: 0, createdAt: new Date(), updatedAt: new Date()},
+            {userId: 1, gasstationId: 36, isOwner: 1, createdAt: new Date(), updatedAt: new Date()},
+            {userId: 6, gasstationId: 36, isOwner: 0, createdAt: new Date(), updatedAt: new Date()},
+            {userId: 7, gasstationId: 36, isOwner: 0, createdAt: new Date(), updatedAt: new Date()},
+            {userId: 2, gasstationId: 37, isOwner: 1, createdAt: new Date(), updatedAt: new Date()},
+            {userId: 8, gasstationId: 37, isOwner: 0, createdAt: new Date(), updatedAt: new Date()},
+            {userId: 9, gasstationId: 37, isOwner: 0, createdAt: new Date(), updatedAt: new Date()},
+            {userId: 3, gasstationId: 38, isOwner: 1, createdAt: new Date(), updatedAt: new Date()},
+            {userId: 10, gasstationId: 38, isOwner: 0, createdAt: new Date(), updatedAt: new Date()},
+            {userId: 11, gasstationId: 38, isOwner: 0, createdAt: new Date(), updatedAt: new Date()},
+            {userId: 4, gasstationId: 39, isOwner: 1, createdAt: new Date(), updatedAt: new Date()},
+            {userId: 12, gasstationId: 39, isOwner: 0, createdAt: new Date(), updatedAt: new Date()},
+            {userId: 13, gasstationId: 39, isOwner: 0, createdAt: new Date(), updatedAt: new Date()},
+            {userId: 5, gasstationId: 40, isOwner: 1, createdAt: new Date(), updatedAt: new Date()},
+            {userId: 14, gasstationId: 40, isOwner: 0, createdAt: new Date(), updatedAt: new Date()},
+            {userId: 15, gasstationId: 40, isOwner: 0, createdAt: new Date(), updatedAt: new Date()},
+            {userId: 1, gasstationId: 41, isOwner: 1, createdAt: new Date(), updatedAt: new Date()},
+            {userId: 16, gasstationId: 41, isOwner: 0, createdAt: new Date(), updatedAt: new Date()},
+            {userId: 17, gasstationId: 41, isOwner: 0, createdAt: new Date(), updatedAt: new Date()},
+            {userId: 2, gasstationId: 42, isOwner: 1, createdAt: new Date(), updatedAt: new Date()},
+            {userId: 18, gasstationId: 42, isOwner: 0, createdAt: new Date(), updatedAt: new Date()},
+            {userId: 19, gasstationId: 42, isOwner: 0, createdAt: new Date(), updatedAt: new Date()},
+            {userId: 3, gasstationId: 43, isOwner: 1, createdAt: new Date(), updatedAt: new Date()},
+            {userId: 6, gasstationId: 43, isOwner: 0, createdAt: new Date(), updatedAt: new Date()},
+            {userId: 7, gasstationId: 43, isOwner: 0, createdAt: new Date(), updatedAt: new Date()},
+            {userId: 4, gasstationId: 44, isOwner: 1, createdAt: new Date(), updatedAt: new Date()},
+            {userId: 8, gasstationId: 44, isOwner: 0, createdAt: new Date(), updatedAt: new Date()},
+            {userId: 9, gasstationId: 44, isOwner: 0, createdAt: new Date(), updatedAt: new Date()},
+            {userId: 5, gasstationId: 45, isOwner: 1, createdAt: new Date(), updatedAt: new Date()},
+            {userId: 10, gasstationId: 45, isOwner: 0, createdAt: new Date(), updatedAt: new Date()},
+            {userId: 11, gasstationId: 45, isOwner: 0, createdAt: new Date(), updatedAt: new Date()},
+            {userId: 1, gasstationId: 46, isOwner: 1, createdAt: new Date(), updatedAt: new Date()},
+            {userId: 12, gasstationId: 46, isOwner: 0, createdAt: new Date(), updatedAt: new Date()},
+            {userId: 13, gasstationId: 46, isOwner: 0, createdAt: new Date(), updatedAt: new Date()},
+            {userId: 2, gasstationId: 47, isOwner: 1, createdAt: new Date(), updatedAt: new Date()},
+            {userId: 14, gasstationId: 47, isOwner: 0, createdAt: new Date(), updatedAt: new Date()},
+            {userId: 15, gasstationId: 47, isOwner: 0, createdAt: new Date(), updatedAt: new Date()},
+            {userId: 3, gasstationId: 48, isOwner: 1, createdAt: new Date(), updatedAt: new Date()},
+            {userId: 16, gasstationId: 48, isOwner: 0, createdAt: new Date(), updatedAt: new Date()},
+            {userId: 17, gasstationId: 48, isOwner: 0, createdAt: new Date(), updatedAt: new Date()},
+            {userId: 4, gasstationId: 49, isOwner: 1, createdAt: new Date(), updatedAt: new Date()},
+            {userId: 18, gasstationId: 49, isOwner: 0, createdAt: new Date(), updatedAt: new Date()},
+            {userId: 19, gasstationId: 49, isOwner: 0, createdAt: new Date(), updatedAt: new Date()}
+        ];
 
-    // Example: insert the same UUID twice using a loop
-    for (let i = 1; i < 50; i++) {
-      for (let y = 1; y < 20; y++) {
+        await queryInterface.bulkInsert('GasstationUsers', GasstationUsersArray, {});
 
-        GasstationUsersArray.push({
+    },
 
-          userId: y,
-          gasstationId: i,
-          isOwner: Math.round(Math.random()),       // 0 or 1
-          createdAt: new Date(),
-          updatedAt: new Date(),
-        });
-      }
+    async down(queryInterface, Sequelize) {
+        await queryInterface.bulkDelete('GasstationUsers', null, {});
+        /**
+         * Add commands to revert seed here.
+         *
+         * Example:
+         * await queryInterface.bulkDelete('People', null, {});
+         */
     }
-    await queryInterface.bulkInsert('GasstationUsers', GasstationUsersArray, {});
-
-  },
-
-  async down(queryInterface, Sequelize) {
-    await queryInterface.bulkDelete('GasstationUsers', null, {});
-    /**
-     * Add commands to revert seed here.
-     *
-     * Example:
-     * await queryInterface.bulkDelete('People', null, {});
-     */
-  }
 };

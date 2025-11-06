@@ -6,8 +6,8 @@ module.exports = {
     const tasksArray = [];
 
     // Example: insert the same UUID twice using a loop
-    for (let i = 1; i < 50; i++) {
-      for (let y = 1; y < 20; y++) {
+    for (let i = 0; i < 50; i++) {
+      for (let y = 5; y < 20; y++) {
 
         tasksArray.push({
           userId: y,
