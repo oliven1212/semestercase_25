@@ -19,16 +19,16 @@ module.exports = {
 
       // Create an array of entries to insert
       const picturesArray = [
-                { id: 'f1a7c9d2-1234-4e56-89ab-1a2b3c4d5e6f', taskId: 0, filename: 'f1a7c9d2-1234-4e56-89ab-1a2b3c4d5e6f', beforeAfter: 0, productImage: 0, createdAt: new Date(), updatedAt: new Date() },
-                { id: 'f1a7c9d2-1234-4e56-89ab-1a2b3c4d5e6f', taskId: 0, filename: 'f1a7c9d2-1234-4e56-89ab-1a2b3c4d5e6f', beforeAfter: 0, productImage: 0, createdAt: new Date(), updatedAt: new Date() },
-                { id: 'f1a7c9d2-1234-4e56-89ab-1a2b3c4d5e6f', taskId: 0, filename: 'f1a7c9d2-1234-4e56-89ab-1a2b3c4d5e6f', beforeAfter: 0, productImage: 0, createdAt: new Date(), updatedAt: new Date() },
-                { id: 'f1a7c9d2-1234-4e56-89ab-1a2b3c4d5e6f', taskId: 0, filename: 'f1a7c9d2-1234-4e56-89ab-1a2b3c4d5e6f', beforeAfter: 0, productImage: 0, createdAt: new Date(), updatedAt: new Date() },
-                { id: 'f1a7c9d2-1234-4e56-89ab-1a2b3c4d5e6f', taskId: 0, filename: 'f1a7c9d2-1234-4e56-89ab-1a2b3c4d5e6f', beforeAfter: 0, productImage: 0, createdAt: new Date(), updatedAt: new Date() },
-                { id: 'f1a7c9d2-1234-4e56-89ab-1a2b3c4d5e6f', taskId: 0, filename: 'f1a7c9d2-1234-4e56-89ab-1a2b3c4d5e6f', beforeAfter: 0, productImage: 0, createdAt: new Date(), updatedAt: new Date() },
-                { id: 'f1a7c9d2-1234-4e56-89ab-1a2b3c4d5e6f', taskId: 0, filename: 'f1a7c9d2-1234-4e56-89ab-1a2b3c4d5e6f', beforeAfter: 0, productImage: 0, createdAt: new Date(), updatedAt: new Date() },
-                { id: 'f1a7c9d2-1234-4e56-89ab-1a2b3c4d5e6f', taskId: 0, filename: 'f1a7c9d2-1234-4e56-89ab-1a2b3c4d5e6f', beforeAfter: 0, productImage: 0, createdAt: new Date(), updatedAt: new Date() },
-                { id: 'f1a7c9d2-1234-4e56-89ab-1a2b3c4d5e6f', taskId: 0, filename: 'f1a7c9d2-1234-4e56-89ab-1a2b3c4d5e6f', beforeAfter: 0, productImage: 0, createdAt: new Date(), updatedAt: new Date() },
-                { id: 'f1a7c9d2-1234-4e56-89ab-1a2b3c4d5e6f', taskId: 0, filename: 'f1a7c9d2-1234-4e56-89ab-1a2b3c4d5e6f', beforeAfter: 0, productImage: 0, createdAt: new Date(), updatedAt: new Date() },
+                { id: 'f1a7c9d2-1234-4e56-89ab-1a2b3c4d5e6f', taskId: 10, filename: 'f1a7c9d2-1234-4e56-89ab-1a2b3c4d5e6f', beforeAfter: 0, productImage: 0, createdAt: new Date(), updatedAt: new Date() },
+                { id: 'f1a7c9d2-1234-4e56-89ab-1a2b3c4d5e6f', taskId: 10, filename: 'f1a7c9d2-1234-4e56-89ab-1a2b3c4d5e6f', beforeAfter: 0, productImage: 0, createdAt: new Date(), updatedAt: new Date() },
+                { id: 'f1a7c9d2-1234-4e56-89ab-1a2b3c4d5e6f', taskId: 10, filename: 'f1a7c9d2-1234-4e56-89ab-1a2b3c4d5e6f', beforeAfter: 0, productImage: 0, createdAt: new Date(), updatedAt: new Date() },
+                { id: 'f1a7c9d2-1234-4e56-89ab-1a2b3c4d5e6f', taskId: 10, filename: 'f1a7c9d2-1234-4e56-89ab-1a2b3c4d5e6f', beforeAfter: 0, productImage: 0, createdAt: new Date(), updatedAt: new Date() },
+                { id: 'f1a7c9d2-1234-4e56-89ab-1a2b3c4d5e6f', taskId: 10, filename: 'f1a7c9d2-1234-4e56-89ab-1a2b3c4d5e6f', beforeAfter: 0, productImage: 0, createdAt: new Date(), updatedAt: new Date() },
+                { id: 'f1a7c9d2-1234-4e56-89ab-1a2b3c4d5e6f', taskId: 10, filename: 'f1a7c9d2-1234-4e56-89ab-1a2b3c4d5e6f', beforeAfter: 0, productImage: 0, createdAt: new Date(), updatedAt: new Date() },
+                { id: 'f1a7c9d2-1234-4e56-89ab-1a2b3c4d5e6f', taskId: 10, filename: 'f1a7c9d2-1234-4e56-89ab-1a2b3c4d5e6f', beforeAfter: 0, productImage: 0, createdAt: new Date(), updatedAt: new Date() },
+                { id: 'f1a7c9d2-1234-4e56-89ab-1a2b3c4d5e6f', taskId: 10, filename: 'f1a7c9d2-1234-4e56-89ab-1a2b3c4d5e6f', beforeAfter: 0, productImage: 0, createdAt: new Date(), updatedAt: new Date() },
+                { id: 'f1a7c9d2-1234-4e56-89ab-1a2b3c4d5e6f', taskId: 10, filename: 'f1a7c9d2-1234-4e56-89ab-1a2b3c4d5e6f', beforeAfter: 0, productImage: 0, createdAt: new Date(), updatedAt: new Date() },
+                { id: 'f1a7c9d2-1234-4e56-89ab-1a2b3c4d5e6f', taskId: 10, filename: 'f1a7c9d2-1234-4e56-89ab-1a2b3c4d5e6f', beforeAfter: 0, productImage: 0, createdAt: new Date(), updatedAt: new Date() },
 
                 { id: 'b2c8d9e3-2345-4f67-90bc-2b3c4d5e6f7a', taskId: 1, filename: 'b2c8d9e3-2345-4f67-90bc-2b3c4d5e6f7a', beforeAfter: 0, productImage: 0, createdAt: new Date(), updatedAt: new Date() },
                 { id: 'b2c8d9e3-2345-4f67-90bc-2b3c4d5e6f7a', taskId: 1, filename: 'b2c8d9e3-2345-4f67-90bc-2b3c4d5e6f7a', beforeAfter: 0, productImage: 0, createdAt: new Date(), updatedAt: new Date() },

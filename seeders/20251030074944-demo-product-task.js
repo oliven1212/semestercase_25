@@ -118,10 +118,10 @@ module.exports = {
         { productId: 25, taskId: 2, amount: 5, createdAt: new Date(), updatedAt: new Date() },
         { productId: 25, taskId: 3, amount: 1, createdAt: new Date(), updatedAt: new Date() },
         { productId: 25, taskId: 4, amount: 2, createdAt: new Date(), updatedAt: new Date() },
-        { productId: 0, taskId: 1, amount: 4, createdAt: new Date(), updatedAt: new Date() },
-        { productId: 0, taskId: 2, amount: 2, createdAt: new Date(), updatedAt: new Date() },
-        { productId: 0, taskId: 3, amount: 3, createdAt: new Date(), updatedAt: new Date() },
-        { productId: 0, taskId: 4, amount: 5, createdAt: new Date(), updatedAt: new Date() }
+        { productId: 26, taskId: 1, amount: 4, createdAt: new Date(), updatedAt: new Date() },
+        { productId: 26, taskId: 2, amount: 2, createdAt: new Date(), updatedAt: new Date() },
+        { productId: 26, taskId: 3, amount: 3, createdAt: new Date(), updatedAt: new Date() },
+        { productId: 26, taskId: 4, amount: 5, createdAt: new Date(), updatedAt: new Date() }
 
     ], {});
   },
