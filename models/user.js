@@ -34,7 +34,7 @@ module.exports = (sequelize, DataTypes) => {
         roleId: DataTypes.INTEGER,
         password: DataTypes.STRING,
         phone: DataTypes.STRING,
-        adress: DataTypes.STRING
+        address: DataTypes.STRING
     }, {
         sequelize,
         modelName: 'User',

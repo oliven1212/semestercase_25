@@ -1,6 +1,8 @@
 const { User, Gasstation, GasstationUser} = require('../models');
 
 exports.profile = async (req, res) => {
+const pictures = await User.findAll({raw: true});
+console.log(pictures);
     const currentUser = await User.findByPk(3,{
         raw: true
     });
