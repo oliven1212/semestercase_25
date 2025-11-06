@@ -19,7 +19,7 @@ module.exports = (sequelize, DataTypes) => {
     Gasstation.init(
         {
             branchId: DataTypes.INTEGER,
-            location: DataTypes.STRING,
+            address: DataTypes.STRING,
             contactEmail: DataTypes.STRING,
             contactPhone: DataTypes.STRING,
             frontSpace: DataTypes.BOOLEAN,

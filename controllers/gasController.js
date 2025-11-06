@@ -18,7 +18,7 @@ exports.gasstation = async (req, res) => {
 
 
   const gasstations = await Gasstation.findAll({
-    attributes: ['id', 'branchId', 'location', 'contactEmail', 'contactPhone', 'frontSpace'],
+    attributes: ['id', 'branchId', 'address', 'contactEmail', 'contactPhone', 'frontSpace'],
     where: { id: gasstationIds },
     include: [
       {

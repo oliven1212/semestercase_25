@@ -1,8 +1,6 @@
-const { User, Gasstation, GasstationUser} = require('../models');
+const { User, Gasstation} = require('../models');
 
 exports.profile = async (req, res) => {
-const pictures = await User.findAll({raw: true});
-console.log(pictures);
     const currentUser = await User.findByPk(3,{
         raw: true
     });
@@ -15,9 +13,9 @@ console.log(pictures);
             attributes: ['id', 'firstName', 'lastName'],
             where: { id: 3 },
             include: [{
-                attributes: ['id', 'location'],
+                attributes: ['id', 'address'],
                 model: Gasstation,
-                through: { attributes: [] }
+                through: {/* attributes: []*/}
             }],
             raw: true
           }
