@@ -5,7 +5,6 @@ module.exports = {
         await queryInterface.createTable('Pictures', {
             id: {
                 allowNull: false,
-                primaryKey: true,
                 type: Sequelize.UUID
             },
             taskId: {
