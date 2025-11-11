@@ -16,11 +16,11 @@ module.exports = (sequelize, DataTypes) => {
             const FrontSpace = frontSpace || originalGasstation.frontSpace;
            
             const gasstation = await Gasstation.update({
-                branchId: `${BranchId}`,
+                branchId: BranchId,
                 address: `${Address}`,
                 contactEmail: `${ContactEmail}`,
                 contactPhone: `${ContactPhone}`,
-                frontSpace: `${FrontSpace}`,
+                frontSpace: parseInt(FrontSpace),
            }, {
                 where: { id: id },
            });

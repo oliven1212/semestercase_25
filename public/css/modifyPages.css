@@ -1,0 +1,22 @@
+
+section.modifySection form {
+    display: block;
+}
+section.modifySection form div *:not(button) {
+    display: block;
+    width: 100%;
+    padding: 0;
+    margin: 0;
+    padding: 5px;
+    box-sizing: border-box;
+    border: none;
+}
+section.modifySection form div input, section.modifySection form div select {
+        border-style: solid;
+        border-width: 1.5px;
+        border-color: var(--darkBlue);
+        background-color: var(--white);
+}
+section.modifySection form div {
+    margin-bottom: 15px;
+}

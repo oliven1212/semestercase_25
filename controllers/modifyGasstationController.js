@@ -12,15 +12,17 @@ exports.modifyGasstation = async (req, res) => {
         ],
         raw: true,
     });
-    console.log(gasstation);
+    const branches = await Branch.findAll({ raw: true });
+
     res.render("home/modifyGasstation", {
         title: 'login',
         gasstation: gasstation,
+        branches: branches,
     });
 };
 
 exports.updateGasstation = async (req, res) => {
-    Gasstation.updateGasstation({
+    await Gasstation.updateGasstation({
         id: req.params.id,
         branchId: req.body.branchId,
         address: req.body.address,
