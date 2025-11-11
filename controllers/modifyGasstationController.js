@@ -7,7 +7,7 @@ exports.modifyGasstation = async (req, res) => {
         include: [
             {
                 model: Branch,
-                attributes: ['id', 'name'] // only fetch the branch name
+                attributes: ['name'] // only fetch the branch name
             }
         ],
         raw: true,
@@ -20,6 +20,13 @@ exports.modifyGasstation = async (req, res) => {
 };
 
 exports.updateGasstation = async (req, res) => {
-
+    Gasstation.updateGasstation({
+        id: req.params.id,
+        branchId: req.body.branchId,
+        address: req.body.address,
+        contactEmail: req.body.contactEmail,
+        contactPhone: req.body.contactPhone,
+        frontSpace: req.body.frontSpace,
+    });
     res.redirect(`/modifyGasstation/${req.params.id}`);
 };

@@ -1,13 +1,27 @@
 {{#each gasstation}}
-<p>{{this.id}}</p>
-<p>{{this.branchId}}</p>
-<p>{{this.address}}</p>
-<p>{{this.contactEmail}}</p>
-<p>{{this.contactPhone}}</p>
-<p>{{this.[Branch.name]}}</p>
-<p>{{this.[Branch.id]}}</p>
+<p><strong>id(remove):</strong> {{this.id}}</p>
+<p><strong>branchId(remove):</strong> {{this.branchId}}</p>
+<p><strong>Address:</strong> {{this.address}}</p>
+<p><strong>Contact email:</strong> {{this.contactEmail}}</p>
+<p><strong>Contact: phone:</strong> {{this.contactPhone}}</p>
+<p><strong>Branch:</strong> {{this.[Branch.name]}}</p>
+<p><strong>Front space:</strong> {{this.frontSpace}}</p>
 
 {{/each}}
 <form action="/modifyGasstation/{{gasstation.[0].id}}/update" method="post">
-    <button type="submit">Update Gasstation</button>
+<!--Make drop down with list of branch names -->
+    <label for="branchId">Branch ID:</label>
+    <input type="number" id="branchId" name="branchId" value="{{gasstation.[0].branchId}}" required><br>
+    <label for="address">Address:</label>
+    <input type="text" id="address" name="address" value="{{gasstation.[0].address}}"><br>
+    <label for="contactEmail">Contact Email:</label>
+    <input type="email" id="contactEmail" name="contactEmail" value="{{gasstation.[0].contactEmail}}"><br>
+    <label for="contactPhone">Contact Phone:</label>
+    <input type="text" id="contactPhone" name="contactPhone" value="{{gasstation.[0].contactPhone}}"><br>
+    <label for="frontSpace">Front Space:</label>
+    <select id="frontSpace" name="frontSpace">
+        <option value="1" {{#ifEq gasstation.[0].frontSpace 1}}selected{{/ifEq}}>Ja</option>
+        <option value="0" {{#ifEq gasstation.[0].frontSpace 0}}selected{{/ifEq}}>Nej</option>
+    </select>
+    <br><button type="submit">Update Gasstation</button>
 </form>

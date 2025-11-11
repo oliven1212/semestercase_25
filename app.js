@@ -14,7 +14,18 @@ app.use(express.json());
 app.use(express.static(path.join(__dirname, "public")));
 
 // View engine
-app.engine(".hbs", exphbs.engine({ extname: ".hbs" }));
+app.engine(".hbs", exphbs.engine({
+  extname: ".hbs",
+  helpers: {
+//Works like the if handlebar helper, but checks if 2 values are equal ( == )
+    ifEq: function (a, b, options) {
+      if (a == b) {
+        return options.fn(this); 
+      }
+    }
+  }
+}));
+
 app.set("view engine", ".hbs");
 app.set("views", path.join(__dirname, "views"));
 
