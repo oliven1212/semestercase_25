@@ -12,9 +12,14 @@
 
 body {
   font-family: sans-serif;
-  margin: var(--sideMargin);
+  margin: 0;
+  width: 100vw;
 }
+section {
+  padding-left: var(--sideMargin);
+  padding-right: var(--sideMargin);
 
+}
 h1, h2, h3, h4, h5, h6 {
   font-family: var(--sansFont);
 }
