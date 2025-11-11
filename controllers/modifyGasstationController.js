@@ -1,22 +1,25 @@
-const { User, Gasstation} = require('../models');
+const { Gasstation, Branch } = require('../models');
 
 exports.modifyGasstation = async (req, res) => {
-    const currentUser = await User.findByPk(3,{
-        raw: true
+    const gasstation = await Gasstation.findAll({
+        attributes: ['id', 'branchId', 'address', 'contactEmail', 'contactPhone', 'frontSpace'],
+        where: { id: req.params.id },
+        include: [
+            {
+                model: Branch,
+                attributes: ['id', 'name'] // only fetch the branch name
+            }
+        ],
+        raw: true,
     });
-
-
-    const users = await User.findAll({
-        raw: true
-    });
-    const exampleUser = await User.findOne({ 
-        where: { id: 1 },
-        raw: true 
-    });
-    res.render("home/profile", {
+    console.log(gasstation);
+    res.render("home/modifyGasstation", {
         title: 'login',
-        users: users,
-        exampleUser: exampleUser,
-        currentUser: currentUser
+        gasstation: gasstation,
     });
+};
+
+exports.updateGasstation = async (req, res) => {
+
+    res.redirect(`/modifyGasstation/${req.params.id}`);
 };

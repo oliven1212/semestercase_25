@@ -1,0 +1,13 @@
+{{#each gasstation}}
+<p>{{this.id}}</p>
+<p>{{this.branchId}}</p>
+<p>{{this.address}}</p>
+<p>{{this.contactEmail}}</p>
+<p>{{this.contactPhone}}</p>
+<p>{{this.[Branch.name]}}</p>
+<p>{{this.[Branch.id]}}</p>
+
+{{/each}}
+<form action="/modifyGasstation/{{gasstation.[0].id}}/update" method="post">
+    <button type="submit">Update Gasstation</button>
+</form>
