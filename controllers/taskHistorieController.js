@@ -38,9 +38,7 @@ exports.taskHistorie = async (req, res) => {
             model: Branch,
             attributes: ["name"],
           },
-          {
-            model: City,
-          },
+          // husk city virkede ikke (tilføj))
         ],
       },
       {
@@ -61,7 +59,7 @@ exports.taskHistorie = async (req, res) => {
       },
     ],
 
-    nest: true,
+    raw: true,
   });
   const timeStamp = {
     date: `${task[0].startTime.getDate()}/${task[0].startTime.getMonth()}/${task[0].startTime.getFullYear()}`,
