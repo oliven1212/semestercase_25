@@ -1,7 +1,6 @@
 {
   "name": "orm",
   "version": "1.0.0",
-  "description": "",
   "main": "server.js",
   "scripts": {
     "dev": "nodemon server.js",
@@ -28,6 +27,7 @@
     "dotenv": "^17.2.2",
     "express": "^5.1.0",
     "express-handlebars": "^8.0.3",
+    "handlebars": "^4.7.8",
     "mysql2": "^3.15.3",
     "sequelize": "^6.37.7",
     "uuid": "^8.3.2"
@@ -35,5 +35,6 @@
   "devDependencies": {
     "nodemon": "^3.1.10",
     "sequelize-cli": "^6.6.3"
-  }
+  },
+  "description": ""
 }

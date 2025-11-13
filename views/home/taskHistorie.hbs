@@ -1,9 +1,19 @@
 <h1>Task Historie</h1>
 
-<p>{{user.firstName}},{{user.lastName}},{{user.phone}}</p>
-<p>{{this.branchName}},{{this.address}} </p>
-<ul>
-  {{#each tasks}}
-    <li>{{this.startTime}} - {{this.id}}</li>
-  {{/each}}
+<p>Tak {{user.firstName}} {{user.lastName}} {{user.phone}} </p>
+<p>din rengøring er logget hos</p>
+<div>{{timeStamp.date}} {{timeStamp.time}}</div>
+<ul style="list-style-type: none;">
+
+    {{#each task}}
+        <div>
+            <p>{{this.[Products.name]}}</p>
+
+            <p>{{this.[Products.ProductTask.productId]}}</p>
+
+            <p>{{this.[Products.Unit.name]}}</p>
+        </div>
+    {{/each}}
+    <li>{{timeStamp.date}} {{timeStamp.time}} </li>
 </ul>
+<p>Tak {{user.firstName}},{{user.lastName}}, {{user.phone}} </p>
