@@ -3,11 +3,16 @@
     <a>
         <button type="button" class="createNew">{{message}}</button>
     </a>
+    <search>
+        <form>
+            <input name="listSearch" id="listSearch" placeholder="Søg efter navne">
+        </form>
+    </search>
     <section class="listCards">
         {{#each name}}
             <div class="listCard">
-                <p class="name">{{this.firstName}} {{this.lastName}}</p>
-                <p class="contact">Email: <a>{{this.email}}</a> Phone: {{this.phone}}</p>
+                <p class="name">{{name}}</p>
+                <p class="contact">Email: <a>{{this.email}}</a> Telefon: {{this.phone}}</p>
                 <div class="functions">
                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
                         <!--!Font Awesome Free v7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2025 Fonticons, Inc.-->

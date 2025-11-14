@@ -1,9 +1,13 @@
 const {
   User,
   Task,
-  UserTasks,
   Gasstation,
   GastationUser,
+  Product,
+  ProductTask,
+  Unit,
+  Branch,
+  City,
 } = require("../models");
 exports.taskHistorie = (req, res) => {
   console.log("routes/taskHistorie rammes!");
@@ -16,12 +20,8 @@ exports.taskHistorie = async (req, res) => {
     raw: true,
   });
 
-  const tasks = await Task.findOne({
-    where: { userId: user.id },
-    raw: true,
-  });
-
   const gasstation = await Gasstation.findAll({
+    where: { branchId: 2 },
     raw: true,
   });
 
@@ -32,17 +32,49 @@ exports.taskHistorie = async (req, res) => {
     include: [
       {
         model: Gasstation,
+        attributes: ["address", "cityCode"],
+        include: [
+          {
+            model: Branch,
+            attributes: ["name"],
+          },
+          // husk city virkede ikke (tilføj))
+        ],
+      },
+      {
+        model: User,
+        attributes: ["firstName", "lastName", "phone"],
+      },
+      {
+        model: Product,
+        attributes: ["name"],
+        through: {
+          model: ProductTask,
+          attributes: ["amount"],
+        },
+        include: {
+          model: Unit,
+          attributes: ["name"],
+        },
       },
     ],
 
     raw: true,
   });
+  const timeStamp = {
+    date: `${task[0].startTime.getDate()}/${task[0].startTime.getMonth()}/${task[0].startTime.getFullYear()}`,
+    time: `${task[0].startTime.getHours()}:${task[0].startTime.getMinutes()}`,
+  };
   console.log(task);
-
+  //response til ens http kald som der åbner taskhistoriefilen
   res.render("home/taskHistorie", {
-    user: user,
-    newUsers: ["firstName", "lastName", "phone"],
-    tasks: tasks,
+    user: {
+      firstName: task[0]["User.firstName"],
+      lastName: task[0]["User.lastName"],
+      phone: task[0]["User.phone"],
+    },
+    task: task,
+    timeStamp: timeStamp,
     gasstation: gasstation,
   });
 };
