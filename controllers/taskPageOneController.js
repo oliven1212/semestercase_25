@@ -6,12 +6,13 @@ exports.taskPageOne = async (req, res) => {
     const gasstation2 = await Gasstation.findOne({ where: { id: 2 } });
     const user2 = await User.findByPk(2);
 
-    const unit = await Unit.findAll({
-        raw: true
-    });
     const product = await Product.findAll({
+        include: {
+            model: Unit,
+        },
         raw: true
     });
+    console.log(product);
 
     
 
@@ -20,7 +21,6 @@ exports.taskPageOne = async (req, res) => {
         users: newUsers,
         gasstation2: gasstation2.toJSON(),
         user2: user2.toJSON(),
-        unit: unit,
         product: product,
 
     });
