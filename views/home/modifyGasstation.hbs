@@ -18,7 +18,7 @@
     </div>
     <div>
         <label for="city">By:</label>
-        <input list="cities" id="city" name="city" value="{{gasstation.[0].[City.name]}} ({{gasstation.[0].[City.zipCode]}})" autocomplete="off">
+        <input list="cities" id="city" name="city" value="{{#if gasstation.[0].[City.zipCode]}}{{gasstation.[0].[City.name]}} ({{gasstation.[0].[City.zipCode]}}){{/if}}" autocomplete="off">
     
         <datalist id="cities">
             {{#each cities}}
