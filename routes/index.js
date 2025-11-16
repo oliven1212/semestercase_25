@@ -19,8 +19,14 @@ router.get("/adminList/products", adminListController.adminListProducts);
 router.get("/profile", profileController.profile);
 router.get("/taskPageOne", taskPageOneController.taskPageOne);
 router.get("/taskHistorie", taskHistorieController.taskHistorie);
-router.get("/admin/gasstation/:id", modifyGasstationController.modifyGasstation);
+
+router.get("/admin/gasstation/:id", modifyGasstationController.adminGasstation);
 router.post("/admin/gasstation/:id/update", modifyGasstationController.updateGasstation);
 router.post("/admin/gasstation/:id/delete", modifyGasstationController.deleteGasstation);
+
+router.get("/admin/user/:id", profileController.adminUser);
+router.post("/admin/user/:id/update", profileController.updateUser);
+router.post("/admin/user/:id/delete", profileController.deleteUser);
+
 
 module.exports = router;

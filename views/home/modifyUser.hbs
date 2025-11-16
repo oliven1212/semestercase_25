@@ -2,15 +2,14 @@
 
 
 <section class="modifySection">
-    <form action="/admin/gasstation/{{gasstation.[0].id}}/update" method="post" id="updateGasstation">
-    <!--Make drop down with list of branch names -->
+    <form action="/admin/user/{{user.[0].id}}/update" method="post" id="updateUser">
     <div>
-        <label for="branchId">Kæde</label>
-        <select name="branchId" id="branchId">
-            {{#each branches}}
-                <option value="{{this.id}}" {{#ifEq this.id ../gasstation.[0].branchId}}selected{{/ifEq}}>{{this.name}}</option>
-            {{/each}}
-        </select>
+        <label for="firstName">For navn:</label>
+        <input type="text" id="firstName" name="firstName" value="{{user.[0].firstName}}">
+    </div>
+        <div>
+        <label for="lastName">Efter navn:</label>
+        <input type="text" id="lastName" name="lastName" value="{{user.[0].lastName}}">
     </div>
     <div>
         <label for="address">Address:</label>
@@ -43,9 +42,17 @@
         </select>
     </div>
     <div>
-        <button type="submit" form="deleteGasstation">Delete gasstation</button>
-        <button type="submit" form="updateGasstation">Update gasstation</button>
+        <label for="roleId">Kæde</label>
+        <select name="roleId" id="roleId">
+            {{#each roles}}
+                <option value="{{this.id}}" {{#ifEq this.id ../user.[0].roleId}}selected{{/ifEq}}>{{this.name}}</option>
+            {{/each}}
+        </select>
+    </div>
+    <div>
+        <button type="submit" form="deleteUser">Delete gasstation</button>
+        <button type="submit" form="updateUser">Update user</button>
     </div>
     </form>
-    <form class="hidden" action="/admin/gasstation/{{gasstation.[0].id}}/delete" method="post" id="deleteGasstation" onsubmit="return confirm('Slet nuværende tankstation?');"/>
+    <form class="hidden" action="/admin/user/{{gasstation.[0].id}}/delete" method="post" id="deleteUser" onsubmit="return confirm('Slet nuværende tankstation?');"/>
 </section>

@@ -1,6 +1,6 @@
 const { Gasstation, Branch, City } = require('../models');
 
-exports.modifyGasstation = async (req, res) => {
+exports.adminGasstation = async (req, res) => {
     const gasstation = await Gasstation.findAll({
         attributes: ['id', 'branchId', 'cityCode', 'address', 'contactEmail', 'contactPhone', 'frontSpace'],
         where: { id: req.params.id },
@@ -26,7 +26,6 @@ exports.modifyGasstation = async (req, res) => {
         raw:true
 
     });
-console.log(cities);
     res.render("home/modifyGasstation", {
         title: 'login',
         gasstation: gasstation,
