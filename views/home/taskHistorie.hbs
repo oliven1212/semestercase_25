@@ -1,19 +1,22 @@
+<link rel="stylesheet" type="text/css" href="./css/taskHistorie.css">
 <h1>Task Historie</h1>
-
+<body class="task-historie">
 <p>Tak {{user.firstName}} {{user.lastName}} {{user.phone}} </p>
 <p>din rengøring er logget hos</p>
 <div>{{timeStamp.date}} {{timeStamp.time}}</div>
 <ul style="list-style-type: none;">
 
     {{#each task}}
-        <div>
-            <p>{{this.[Products.name]}}</p>
-
+        <div class="product-item">
             <p>{{this.[Products.ProductTask.productId]}}</p>
+            <input class="product-name" type="text" value={{[Products.name]}} {{[products.productTask.amount]}} readonly>{{this.[Products.name]}} >
+            
+            <label class="unit-label" for="unit">{{this.[Products.Unit.name]}}</label>
 
-            <p>{{this.[Products.Unit.name]}}</p>
+
         </div>
     {{/each}}
     <li>{{timeStamp.date}} {{timeStamp.time}} </li>
 </ul>
 <p>Tak {{user.firstName}},{{user.lastName}}, {{user.phone}} </p>
+</body>

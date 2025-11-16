@@ -14,6 +14,7 @@ module.exports = (sequelize, DataTypes) => {
       contactEmail,
       contactPhone,
       frontSpace,
+      cityCode,
     }) {
       const originalGasstation = await Gasstation.findByPk(id, { raw: true });
       const BranchId = branchId || originalGasstation.branchId;
@@ -21,10 +22,12 @@ module.exports = (sequelize, DataTypes) => {
       const ContactEmail = contactEmail || originalGasstation.contactEmail;
       const ContactPhone = contactPhone || originalGasstation.contactPhone;
       const FrontSpace = frontSpace || originalGasstation.frontSpace;
+      const CityCode = cityCode || originalGasstation.cityCode;
 
       const gasstation = await Gasstation.update(
         {
           branchId: BranchId,
+          cityCode: parseInt(CityCode),
           address: `${Address}`,
           contactEmail: `${ContactEmail}`,
           contactPhone: `${ContactPhone}`,

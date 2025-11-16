@@ -29,3 +29,7 @@ h1 {
   font-weight: bold;
   
 }
+
+datalist{
+  display: none !important;
+}

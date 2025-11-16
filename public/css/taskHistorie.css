@@ -1,0 +1,37 @@
+.task-historie {
+    color: #000;
+    border-radius: 5px;
+    margin: 20px;
+}
+input.product-name {
+    display: block;
+    padding: 10px;
+    border-radius: 5px;
+    max-width: 300px;
+}
+
+.task-historie ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+.task-historie li {
+    margin-bottom: 10px;
+}
+
+.task-historie p {
+    margin-bottom: 10px;
+}
+
+.task-historie div {
+    margin-bottom: 10px;
+}
+
+.task-historie h1 {
+    margin-bottom: 20px;
+}
+
+.task-historie body {
+    margin: 0;
+    padding: 0;
+}
