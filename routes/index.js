@@ -19,7 +19,8 @@ router.get("/adminList/products", adminListController.adminListProducts);
 router.get("/profile", profileController.profile);
 router.get("/taskPageOne", taskPageOneController.taskPageOne);
 router.get("/taskHistorie", taskHistorieController.taskHistorie);
-router.get("/modifyGasstation/:id", modifyGasstationController.modifyGasstation);
-router.post("/modifyGasstation/:id/update", modifyGasstationController.updateGasstation);
+router.get("/admin/gasstation/:id", modifyGasstationController.modifyGasstation);
+router.post("/admin/gasstation/:id/update", modifyGasstationController.updateGasstation);
+router.post("/admin/gasstation/:id/delete", modifyGasstationController.deleteGasstation);
 
 module.exports = router;

@@ -1,4 +1,3 @@
-const { where } = require('sequelize');
 const { Gasstation, Branch, City } = require('../models');
 
 exports.modifyGasstation = async (req, res) => {
@@ -63,5 +62,13 @@ exports.updateGasstation = async (req, res) => {
         cityCode: zipCode,
     });
     
-    res.redirect(`/modifyGasstation/${req.params.id}`);
+    res.redirect(`/admin/gasstation/${req.params.id}`);
+};
+
+exports.deleteGasstation = async (req, res) => {
+    await Gasstation.destroy({
+        where: { id: req.params.id,}, 
+    });
+    
+    res.redirect(`/gasstation`);
 };

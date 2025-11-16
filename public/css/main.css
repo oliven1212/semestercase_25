@@ -21,6 +21,9 @@ section {
   padding-right: var(--sideMargin);
 
 }
+header{
+  background-color: var(--darkBlue);
+}
 h1, h2, h3, h4, h5, h6 {
   font-family: var(--sansFont);
 }
@@ -32,4 +35,14 @@ h1 {
 
 datalist{
   display: none !important;
+}
+
+.hidden, .hidden *{
+  display: none;
+  border: none;
+  padding: 0;
+  margin: 0;
+}
+input, select, option ,label{
+  color: var(--darkBlue);
 }

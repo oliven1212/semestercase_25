@@ -1,18 +1,8 @@
 <link rel="stylesheet" type="text/css" href="/css/modifyPages.css">
 
-{{#each gasstation}}
-<p><strong>id(remove):</strong> {{this.id}}</p>
-<p><strong>branchId(remove):</strong> {{this.branchId}}</p>
-<p>cityCode: {{this.cityCode}}</p>
-<p><strong>Address:</strong> {{this.address}}</p>
-<p><strong>Contact email:</strong> {{this.contactEmail}}</p>
-<p><strong>Contact: phone:</strong> {{this.contactPhone}}</p>
-<p><strong>Branch:</strong> {{this.[Branch.name]}}</p>
-<p><strong>Front space:</strong> {{this.frontSpace}}</p>
 
-{{/each}}
 <section class="modifySection">
-    <form action="/modifyGasstation/{{gasstation.[0].id}}/update" method="post">
+    <form action="/admin/gasstation/{{gasstation.[0].id}}/update" method="post" id="updateGasstation">
     <!--Make drop down with list of branch names -->
     <div>
         <label for="branchId">Kæde</label>
@@ -29,7 +19,7 @@
     <div>
         <label for="city">By:</label>
         <input list="cities" id="city" name="city" value="{{gasstation.[0].[City.name]}} ({{gasstation.[0].[City.zipCode]}})" autocomplete="off">
-            
+    
         <datalist id="cities">
             {{#each cities}}
             <option value="{{this.name}} ({{this.zipCode}})"></option>
@@ -53,8 +43,9 @@
         </select>
     </div>
     <div>
-        <button type="submit">Update Gasstation</button>
-        <button type="">Delete gasstation</button>
+        <button type="submit" form="deleteGasstation">Delete gasstation</button>
+        <button type="submit" form="updateGasstation">Update Gasstation</button>
     </div>
     </form>
+    <form class="hidden" action="/admin/gasstation/{{gasstation.[0].id}}/delete" method="post" id="deleteGasstation" onsubmit="return confirm('Slet nuværende tankstation?');"/>
 </section>
