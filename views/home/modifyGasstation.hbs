@@ -1,7 +1,9 @@
 <link rel="stylesheet" type="text/css" href="/css/modifyPages.css">
+
 {{#each gasstation}}
 <p><strong>id(remove):</strong> {{this.id}}</p>
 <p><strong>branchId(remove):</strong> {{this.branchId}}</p>
+<p>cityCode: {{this.cityCode}}</p>
 <p><strong>Address:</strong> {{this.address}}</p>
 <p><strong>Contact email:</strong> {{this.contactEmail}}</p>
 <p><strong>Contact: phone:</strong> {{this.contactPhone}}</p>
@@ -23,6 +25,17 @@
     <div>
         <label for="address">Address:</label>
         <input type="text" id="address" name="address" value="{{gasstation.[0].address}}">
+    </div>
+    <div>
+        <label for="city">By:</label>
+        <input list="cities" id="city" name="city" value="{{gasstation.[0].[City.name]}} ({{gasstation.[0].[City.zipCode]}})" autocomplete="off">
+            
+        <datalist id="cities">
+            {{#each cities}}
+            <option value="{{this.name}} ({{this.zipCode}})"></option>
+            {{/each}}
+        </datalist>
+
     </div>
     <div>
         <label for="contactEmail">Contact Email:</label>
