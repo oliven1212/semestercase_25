@@ -5,13 +5,19 @@ exports.adminListUsers = async (req, res) => {
         order: [['lastName', 'ASC']],
         raw: true
     });
-    /*console.log(users[2].dataValues.firstName);
-    .dataValues virker ikke, men chatgpt har guidet os til at bruge { raw: true}*/
+
+    // Map over users array to add name property to each user
+    const usersMap = users.map(user => ({
+        ...user,
+        name: `${user.lastName}, ${user.firstName}`,
+
+    }));
+
     res.render("home/adminList", {
         title: 'Liste af brugere',
         message: 'Opret ny bruger',
         users: users,
-        name: `${users.lastName}, ${users.firstName}`
+        name: usersMap.name
     });
 };
 
