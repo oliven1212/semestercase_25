@@ -17,7 +17,7 @@ router.get("/adminList/users", adminListController.adminListUsers);
 router.get("/adminList/gasstations", adminListController.adminListGasstations);
 router.get("/adminList/products", adminListController.adminListProducts);
 router.get("/profile", profileController.profile);
-router.get("/createtaskdata/:userId", createTaskDataController.taskPageOne);
+router.get("/createtaskdata", createTaskDataController.taskPageOne);
 router.get("/taskHistorie", taskHistorieController.taskHistorie);
 
 router.get("/admin/gasstation/:id", modifyGasstationController.adminGasstation);
