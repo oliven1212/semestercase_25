@@ -13,20 +13,20 @@ const router = express.Router();
 router.get("/createTask", createTaskController.createTask);
 router.get("/", HomeController.login);
 router.get("/gasstation", gasController.gasstation);
-router.get("/adminList/users", adminListController.adminListUsers);
-router.get("/adminList/gasstations", adminListController.adminListGasstations);
-router.get("/adminList/products", adminListController.adminListProducts);
+router.get("/admin/users", adminListController.adminListUsers);
+router.get("/admin/gasstations", adminListController.adminListGasstations);
+router.get("/admin/products", adminListController.adminListProducts);
 router.get("/profile", profileController.profile);
 router.get("/createtaskdata/:userId", createTaskDataController.taskPageOne);
 router.get("/taskHistorie", taskHistorieController.taskHistorie);
 
-router.get("/admin/gasstation/:id", modifyGasstationController.adminGasstation);
-router.post("/admin/gasstation/:id/update", modifyGasstationController.updateGasstation);
-router.post("/admin/gasstation/:id/delete", modifyGasstationController.deleteGasstation);
+router.get("/admin/gasstations/:id", modifyGasstationController.adminGasstation);
+router.post("/admin/gasstations/:id/update", modifyGasstationController.updateGasstation);
+router.post("/admin/gasstations/:id/delete", modifyGasstationController.deleteGasstation);
 
-router.get("/admin/user/:id", profileController.adminUser);
-router.post("/admin/user/:id/update", profileController.updateUser);
-router.post("/admin/user/:id/delete", profileController.deleteUser);
+router.get("/admin/users/:id", profileController.adminUser);
+router.post("/admin/users/:id/update", profileController.updateUser);
+router.post("/admin/users/:id/delete", profileController.deleteUser);
 
 
 module.exports = router;

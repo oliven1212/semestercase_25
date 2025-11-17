@@ -24,6 +24,7 @@
 }
 
 .listCard {
+    background: white;
     display: grid;
     grid-template-columns: 2fr 1fr;
     grid-template-rows: 1fr auto;
@@ -47,11 +48,14 @@
     .functions{
         display: flex;
         justify-content: space-around;
-        align-items: end;
+        align-items: flex-end;
         grid-area: functions;
         svg {
-            width: auto;
-            max-height: 20px;
+            width: 1.2em;
+            height: 1.2em;
+        }
+        button {
+            style: none;
         }
     }
 }

@@ -10,41 +10,61 @@ exports.adminListUsers = async (req, res) => {
     const usersMap = users.map(user => ({
         ...user,
         name: `${user.lastName}, ${user.firstName}`,
+        contact: `Email: ${user.email}  Telefon: ${user.phone}`,
+        link: `users/${user.id}`
 
     }));
 
     res.render("home/adminList", {
         title: 'Liste af brugere',
         message: 'Opret ny bruger',
-        users: users,
-        name: usersMap.name
+        content: usersMap,
+        type: 'users'
     });
 };
 
 exports.adminListGasstations = async (req, res) => {
     const stations = await Gasstation.findAll({
-        order: [['address', 'ASC']]
+        order: [['address', 'ASC']],
+        include: [{
+            model: City
+        }],
+        raw: true
     });
-    /*console.log(users[2].dataValues.firstName);
-    .dataValues virker ikke, men chatgpt har guidet os til at bruge { raw: true}*/
-    const allstations = stations.map(station => station.toJSON());
+    console.log(stations);
+
+    // Map over users array to add name property to each user
+    const stationsMap = stations.map(gasstation => ({
+        ...gasstation,
+        name: `${gasstation.address}, ${gasstation['City.name']}`,
+        contact: `Email: ${gasstation.contactEmail}  Telefon: ${gasstation.contactPhone}`,
+        link: `gasstations/${gasstation.id}`
+    }));
+
     res.render("home/adminList", {
         title: 'Liste af tankstationer',
         message: 'Opret ny tankstation',
-        name: allstations
+        content: stationsMap
     });
 };
 
 exports.adminListProducts = async (req, res) => {
     const products = await Product.findAll({
-        order: [['name', 'ASC']]
+        order: [['name', 'ASC']],
+        raw: true
     });
-    /*console.log(users[2].dataValues.firstName);
-    .dataValues virker ikke, men chatgpt har guidet os til at bruge { raw: true}*/
-    const allProducts = products.map(product => product.toJSON());
+
+    // Map over users array to add name property to each user
+    const productsMap = products.map(product => ({
+        ...product,
+        name: `${product.name}`
+
+    }));
+
     res.render("home/adminList", {
         title: 'Liste af produkter',
-        message: 'Opret nyt product',
-        name: allProducts
+        message: 'Opret nyt produkt',
+        users: productsMap,
+        type: 'products'
     });
 };
