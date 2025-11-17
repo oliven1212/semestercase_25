@@ -1,0 +1,52 @@
+<link rel="stylesheet" type="text/css" href="/css/modifyPages.css">
+
+
+<section class="modifySection">
+    <form action="/admin/user/{{user.[0].id}}/update" method="post" id="updateUser">
+    <div>
+        <label for="firstName">For navn:</label>
+        <input type="text" id="firstName" name="firstName" value="{{user.[0].firstName}}">
+    </div>
+        <div>
+        <label for="lastName">Efter navn:</label>
+        <input type="text" id="lastName" name="lastName" value="{{user.[0].lastName}}">
+    </div>
+    <div>
+        <label for="email">Email:</label>
+        <input type="email" id="email" name="email" value="{{user.[0].email}}">
+    </div>
+    <div>
+        <label for="phone">Telefon:</label>
+        <input type="text" id="phone" name="phone" value="{{user.[0].phone}}">
+    </div>
+    <div>
+        <label for="address">Address:</label>
+        <input type="text" id="address" name="address" value="{{user.[0].address}}">
+    </div>
+    <div>
+        <label for="city">By:</label>
+        <input list="cities" id="city" name="city" value="{{#if user.[0].[City.zipCode]}}{{user.[0].[City.name]}} ({{user.[0].[City.zipCode]}}){{/if}}" autocomplete="off">
+    
+        <datalist id="cities">
+            {{#each cities}}
+                <option value="{{this.name}} ({{this.zipCode}})"></option>
+            {{/each}}
+        </datalist>
+
+    </div>
+
+    <div>
+        <label for="roleId">Rolle</label>
+        <select name="roleId" id="roleId">
+            {{#each roles}}
+                <option value="{{this.id}}" {{#ifEq this.id ../user.[0].roleId}}selected{{/ifEq}}>{{this.name}}</option>
+            {{/each}}
+        </select>
+    </div>
+    <div>
+        <button type="submit" form="deleteUser">Slet bruger</button>
+        <button type="submit" form="updateUser">Opdater bruger</button>
+    </div>
+    </form>
+    <form class="hidden" action="/admin/user/{{gasstation.[0].id}}/delete" method="post" id="deleteUser" onsubmit="return confirm('Slet nuværende tankstation?');"/>
+</section>

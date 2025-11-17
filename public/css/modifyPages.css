@@ -1,13 +1,4 @@
 /* temp for night coding*/
-body{
-    background-color: rgb(37, 37, 37);
-}
-*{
-    color:white;
-}
-* input, * select{
-    color: black;
-}
 
 
 
@@ -32,4 +23,14 @@ section.modifySection form div input, section.modifySection form div select {
 }
 section.modifySection form div {
     margin-bottom: 15px;
+}
+section.modifySection form div:last-child {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+}
+section.modifySection form div:last-child button:first-child {
+    justify-self: start;
+}
+section.modifySection form div:last-child button:last-child {
+    justify-self: end;
 }

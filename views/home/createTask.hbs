@@ -1,48 +1,73 @@
 <!--velkommen (med tom string der henter fra profil)-->
-<p>Velkommen
-    {{#each users}}
-    {{this.firstName}}!
-    {{/each}}<!-- EW! >:( -->
-
-    {{#each tasks}}
-<p>{{this.userId}}</p>
-{{/each}}
+<section>
+    <p>Velkommen {{users.firstName}}
+</section>
 
 
-<!-- Trigger/Open The Modal -->
-<button id="myBtn">Open Modal</button>
 
-<!-- The Modal -->
-<div id="myModal" class="modal">
+<section>
+    <!-- Trigger/Open The Modal -->
+    <button id="myBtn">Open Modal</button>
 
-    <!-- Modal content -->
-    <div class="modal-content">
-        <span class="close">&times;</span>
-        <h1>Vælg tankstation</h1>
-        <button>Q8</button>
-        <button>Shell</button>
-        <button>OK Plus</button>
-        <button>UNO-X</button>
-        <button>Cirkle K</button>
+    <!-- The Modal -->
+    <div id="myModal" class="modal">
+
+        <!-- Modal content -->
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <h1>Vælg tankstation</h1>
+
+            {{!-- loop over hver branch --}}
+            {{#each branchDropdowns}}
+            <div class="branch-dropdown">
+                <label for="station-{{name}}">{{name}}</label>
+                <select id="station-{{name}}" name="station-{{name}}" class="station-select">
+                    <option value="">Vælg station</option>
+
+                    {{!-- loop over stationer under denne branch --}}
+                    {{#each stations}}
+                    <option value="{{id}}" data-address="{{address}}">
+                        {{address}}
+                    </option>
+                    {{/each}}
+                </select>
+            </div>
+            {{/each}}
+
+
+            <!-- Knap til at vælge station -->
+            <button id="selectStationBtn" type="button">Vælg station</button>
+        </div>
     </div>
+</section>
 
-</div>
-<!--start rengøring ved (valgte tankstation)-->
-<p>start rengøring ved {{tankstation.2.branch}}</p>
+<section>
+    <!--start rengøring ved (valgte tankstation)-->
+    <p>start rengøring ved {{gasstations.branch}}</p>
+</section>
 
 
-<!--valg af dato, med automatisk valg af idag-->
-<div>
-    <p>kalender</p>
-</div>
+<section>
+    <!--valg af dato, med automatisk valg af idag-->
+    <div>
+        <p>kalender</p>
+    </div>
+</section>
 
-<!--tidspunkt for rengøring-->
-<div>
-    <p>start tidspunt for rengøring</p>
-</div>
 
+<section>
+    <!--tidspunkt for rengøring-->
+    <div>
+        <p>start tidspunt for rengøring</p>
+    </div>
+</section>
+
+
+<section></section>
 <!--start log-->
 <button>start log</button>
+</section>
+
 
 <link rel="stylesheet" type="text/css" href="./css/modal.css">
 <script src="/js/modal.js" defer></script>
