@@ -23,3 +23,53 @@ window.onclick = function (event) {
         modal.style.display = "none";
     }
 }
+
+document.addEventListener('DOMContentLoaded', function () {
+    const selects = document.querySelectorAll('.station-select');
+    const selectStationBtn = document.getElementById('selectStationBtn');
+    const selectedStationText = document.getElementById('selected-station');
+
+    // 1) Kun én valgt dropdown ad gangen
+    selects.forEach(function (select) {
+        select.addEventListener('change', function () {
+            if (this.value !== '') {
+                selects.forEach(function (otherSelect) {
+                    if (otherSelect !== select) {
+                        otherSelect.value = '';
+                    }
+                });
+            }
+        });
+    });
+
+    // 2) Når man klikker "Vælg station"
+    selectStationBtn.addEventListener('click', function () {
+        let chosenOption = null;
+
+        // Find den dropdown, der har en valgt station
+        selects.forEach(function (select) {
+            if (select.value !== '') {
+                // selectedIndex er det nummer, den valgte option har
+                chosenOption = select.options[select.selectedIndex];
+            }
+        });
+
+        // Hvis der ikke er valgt nogen station
+        if (!chosenOption) {
+            alert('Vælg en station først.');
+            return;
+        }
+
+        // Hent adressen fra data-address
+        const address = chosenOption.getAttribute('data-address');
+
+        // Skriv adressen ind i <span id="selected-station">
+        selectedStationText.textContent = address;
+
+        // (Valgfrit) Luk modalen, hvis du har kode til det
+        const modal = document.getElementById('myModal');
+        if (modal) {
+            modal.style.display = 'none';
+        }
+    });
+});

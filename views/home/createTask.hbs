@@ -20,9 +20,9 @@
             {{!-- loop over hver branch --}}
             {{#each branchDropdowns}}
             <div class="branch-dropdown">
-                <label for="station-{{name}}">{{name}}</label>
+                {{!-- <label for="station-{{name}}">{{name}}</label>--}}
                 <select id="station-{{name}}" name="station-{{name}}" class="station-select">
-                    <option value="">Vælg station</option>
+                    <option value="">{{name}}</option>
 
                     {{!-- loop over stationer under denne branch --}}
                     {{#each stations}}
@@ -42,8 +42,8 @@
 </section>
 
 <section>
-    <!--start rengøring ved (valgte tankstation)-->
-    <p>start rengøring ved {{gasstations.branch}}</p>
+    <!-- start rengøring ved (valgte tankstation) -->
+    <p>start rengøring ved <span id="selected-station">ingen station valgt endnu</span></p>
 </section>
 
 
