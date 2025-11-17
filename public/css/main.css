@@ -46,3 +46,10 @@ datalist{
 input, select, option ,label{
   color: var(--darkBlue);
 }
+
+.darkbg{
+  background-color: var(--darkBlue);
+}
+.darkbg *{
+  color: var(--lightBlue);
+}
