@@ -12,6 +12,40 @@ module.exports = (sequelize, DataTypes) => {
             return allUsers.map(user => user.id);
         }
 
+        static async updateUser({
+            id,
+            firstName,
+            lastName,
+            email,
+            phone,
+            address,
+            cityCode,
+        })
+        {
+            const originalUser = await User.findByPk(id, { raw: true });
+            const FirstName = firstName || originalUser.firstName;
+            const LastName = lastName || originalUser.lastName;
+            const Email = email || originalUser.email;
+            const Phone = phone || originalUser.phone;
+            const Address = address || originalUser.address;
+            const CityCode = cityCode || originalUser.cityCode;
+
+            const gasstation = await User.update(
+                {
+                    firstName: `${FirstName}`,
+                    lastName: `${LastName}`,
+                    email: `${Email}`,
+                    Phone: `${Phone}`,
+                    address: `${Address}`,
+                    cityCode: parseInt(CityCode),
+                },
+                {
+                where: { id: id },
+                },
+            );
+            return gasstation;
+        }
+
         /**
          * Helper method for defining associations.
          * This method is not a part of Sequelize lifecycle.
