@@ -6,6 +6,7 @@
   --red: #ff0000;
   --darkBlue:#03045E;
   --lightBlue:#CAF0F8;
+  --sectionWidth: calc(100% - var(--sideMargin)*2);
 
   color-scheme: light dark;
 }
@@ -50,4 +51,7 @@ datalist{
 }
 .darkbg *{
   color: var(--lightBlue);
+}
+.btn-white{
+
 }
