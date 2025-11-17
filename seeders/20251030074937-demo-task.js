@@ -18,12 +18,11 @@ module.exports = {
         });
       }
     }
-    await queryInterface.bulkInsert('tasks', tasksArray, {});
-
+    await queryInterface.bulkInsert('Tasks', tasksArray, {});
   },
 
   async down(queryInterface, Sequelize) {
-     await queryInterface.bulkDelete('tasks', null, {});
+     await queryInterface.bulkDelete('Tasks', null, {});
     /**
      * Add commands to revert seed here.
      *
