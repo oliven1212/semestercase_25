@@ -38,6 +38,9 @@ exports.taskHistorie = async (req, res) => {
             model: Branch,
             attributes: ["name"],
           },
+          {
+            model: City,
+          },
           // husk city virkede ikke (tilføj))
         ],
       },
@@ -66,6 +69,7 @@ exports.taskHistorie = async (req, res) => {
     time: `${task[0].startTime.getHours()}:${task[0].startTime.getMinutes()}`,
   };
   console.log(task);
+
   //response til ens http kald som der åbner taskhistoriefilen
   res.render("home/taskHistorie", {
     user: {

@@ -1,22 +1,35 @@
-<link rel="stylesheet" type="text/css" href="./css/taskHistorie.css">
-<h1>Task Historie</h1>
-<body class="task-historie">
-<p>Tak {{user.firstName}} {{user.lastName}} {{user.phone}} </p>
-<p>din rengøring er logget hos</p>
-<div>{{timeStamp.date}} {{timeStamp.time}}</div>
-<ul style="list-style-type: none;">
 
+<link rel="stylesheet" type="text/css" href="./css/taskHistorie.css">
+<section>
+<h1>Task Historie</h1>
+
+<div class="text-container">
+    <p>rengøring hos:</p>
+    <h2>{{task.[0].[Gasstation.address]}}, {{task.[0].[Gasstation.cityCode]}} {{task.[0].[Gasstation.City.name]}}</h2>
+
+</div>
+
+<div class="text-container">
+    <p>din rengøring er logget den:</p>
+    <h3>{{timeStamp.date}} {{timeStamp.time}}</h3>
+</div>
+
+    <ul class="product-list" style="list-style-type: none;">
+    <h3>Producter opfyldt</h3>
     {{#each task}}
         <div class="product-item">
-            <p>{{this.[Products.ProductTask.productId]}}</p>
-            <input class="product-name" type="text" value={{[Products.name]}} {{[products.productTask.amount]}} readonly>{{this.[Products.name]}} >
-            
-            <label class="unit-label" for="unit">{{this.[Products.Unit.name]}}</label>
 
+            <label class="product-name">{{[Products.name]}}
+                 </label>
+                 <p class="unit-name">{{this.[Products.Unit.name]}} </p>
+            <input class="product-amount" type="text" value='{{[Products.ProductTask.amount]}}' readonly>
 
         </div>
     {{/each}}
     <li>{{timeStamp.date}} {{timeStamp.time}} </li>
 </ul>
-<p>Tak {{user.firstName}},{{user.lastName}}, {{user.phone}} </p>
-</body>
+<div class="user-info">
+<p>rengøring udført af:{{user.firstName}} {{user.lastName}} </p>
+<p>Telefon: {{user.phone}} </p>
+</div>
+</section>
