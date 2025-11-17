@@ -8,32 +8,47 @@ exports.createTask = async (req, res) => {
             raw: true
         });
 
-
-        const gasstations = await Gasstation.findAll({
-            attributes: ['id', 'address'],
+        // 1) Hent alle gasstationer + deres branch
+        const gasstationsRaw = await Gasstation.findAll({
+            attributes: ['id', 'address'], // skift 'address' hvis feltet hedder noget andet
             include: [
                 {
                     model: Branch,
-                    attributes: ['name'], // kun branch name
-                }],
-            raw: true
-        }
-        );
-
-
-        const branchOrder = ['Q8', 'Shell', 'OK Plus', 'UNO-X', 'Cirkle K'];
-
-        const branchDropdowns = branchOrder.map((branchName) => {
-            return {
-                name: branchName,
-                stations: gasstations
-                    .filter(gs => gs.Branch && gs.Branch.name === branchName)
-                    .map(gs => ({
-                        id: gs.id,
-                        address: gs.address
-                    }))
-            };
+                    attributes: ['name'] // fx Q8, Shell, osv.
+                }
+            ]
+            // VIGTIGT: ingen raw: true her, ellers findes gs.get(...) ikke
         });
+
+        // 2) Lav dem om til plain JS-objekter
+        const gasstations = gasstationsRaw.map(gs => gs.get({ plain: true }));
+
+        console.log('Gasstations (plain):', JSON.stringify(gasstations, null, 2));
+
+        // 3) Gruppér efter branch-navn
+        const stationsByBranch = {};
+        gasstations.forEach(gs => {
+            const branchName = gs.Branch ? gs.Branch.name : 'Ukendt';
+
+            if (!stationsByBranch[branchName]) {
+                stationsByBranch[branchName] = [];
+            }
+
+            stationsByBranch[branchName].push({
+                id: gs.id,
+                address: gs.address
+            });
+        });
+
+        console.log('stationsByBranch:', JSON.stringify(stationsByBranch, null, 2));
+
+        // 4) Lav array til Handlebars: [{ name: 'Q8', stations: [...] }, ...]
+        const branchDropdowns = Object.keys(stationsByBranch).map(name => ({
+            name,
+            stations: stationsByBranch[name]
+        }));
+
+        console.log('branchDropdowns:', JSON.stringify(branchDropdowns, null, 2));
 
         res.render('home/createTask', {
             title: 'velkommen',

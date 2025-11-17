@@ -17,21 +17,26 @@
             <span class="close">&times;</span>
             <h1>Vælg tankstation</h1>
 
-            {{!-- loop over hver branch (Q8, Shell, OK Plus, UNO-X, Cirkle K) --}}
+            {{!-- loop over hver branch --}}
             {{#each branchDropdowns}}
             <div class="branch-dropdown">
                 <label for="station-{{name}}">{{name}}</label>
-                <select id="station-{{name}}" name="station-{{name}}">
+                <select id="station-{{name}}" name="station-{{name}}" class="station-select">
                     <option value="">Vælg station</option>
 
                     {{!-- loop over stationer under denne branch --}}
                     {{#each stations}}
-                    <option value="{{id}}">{{address}}</option>
+                    <option value="{{id}}" data-address="{{address}}">
+                        {{address}}
+                    </option>
                     {{/each}}
                 </select>
             </div>
             {{/each}}
 
+
+            <!-- Knap til at vælge station -->
+            <button id="selectStationBtn" type="button">Vælg station</button>
         </div>
     </div>
 </section>
