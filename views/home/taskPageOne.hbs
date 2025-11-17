@@ -1,4 +1,7 @@
 <section>
+
+
+<!-- Denne skal vise udfra url om den valgte tanksstation har frontspace rengøring-->
     <h2>{{gasstation2.address}}</h2>
 
     {{#if gasstation2.frontSpace}}
@@ -40,6 +43,15 @@
 
 <section class="sec2">
     <h4>Opfyldning af produkter</h4>
+<!-- denne dropdown skal bruges til at vælge produkter som skal udfyldes med unit -->
+    <div>
+        <label for="productId">Produkter</label>
+        <select name="productId" id="productId">
+            {{#each product}}
+                <option value="{{this.id}}" {{#ifEq this.id ../gasstation.[0].productId}}selected{{/ifEq}}>{{this.name}}</option>
+            {{/each}}
+        </select>
+    </div>
 
     <form>
         <div class="product-row">
