@@ -54,7 +54,6 @@ exports.adminUser = async (req, res) => {
             },
             {
                 model: Role,
-                attributes: ['id','name'],
             },
         ],
         raw: true,
@@ -74,6 +73,7 @@ console.log(user);
         user: user,
         cities: cities,
         roles: roles,
+        currentPath: req.originalUrl,
     });
 };
 

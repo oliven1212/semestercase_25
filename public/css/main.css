@@ -2,6 +2,7 @@
   --sideMargin: 10%;
   --sansFont: 'Open Sans', sans-serif;
   --white: #ffffff;
+  --black: #000000;
   --green: #4F9D69;
   --red: #ff0000;
   --darkBlue:#03045E;
@@ -53,5 +54,14 @@ datalist{
   color: var(--lightBlue);
 }
 .btn-white{
-
+  display: grid;
+  background-color: var(--white);
+  border-radius: 3px;
+  overflow: hidden;
+  place-items: center;
+  padding: 5px 10px;
+  text-decoration: none;
+}
+.btn-white *,.btn-white{
+  color: var(--black);
 }

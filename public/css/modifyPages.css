@@ -6,7 +6,7 @@
 section.modifySection form {
     display: block;
 }
-section.modifySection form div *:not(button) {
+section.modifySection form div label,section.modifySection form div input,section.modifySection form div select {
     display: block;
     width: 100%;
     padding: 0;
