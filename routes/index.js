@@ -7,6 +7,7 @@ const profileController = require("../controllers/profileController");
 const createTaskDataController = require("../controllers/createTaskDataController");
 const taskHistorieController = require("../controllers/taskHistorieController");
 const modifyGasstationController = require("../controllers/modifyGasstationController");
+const taskController = require("../controllers/tasksController");
 
 const router = express.Router();
 
@@ -20,15 +21,19 @@ router.get("/profile", profileController.profile);
 router.get("/createtaskdata/:userId", createTaskDataController.taskPageOne);
 router.get("/taskHistorie", taskHistorieController.taskHistorie);
 
-router.get("/admin/gasstations/:id", modifyGasstationController.adminGasstation);
-router.post("/admin/gasstations/:id/update", modifyGasstationController.updateGasstation);
-router.post("/admin/gasstations/:id/delete", modifyGasstationController.deleteGasstation);
+router.get("/admin/gasstations/:gasId", modifyGasstationController.adminGasstation);
+router.post("/admin/gasstations/:gasId/update", modifyGasstationController.updateGasstation);
+router.post("/admin/gasstations/:gasId/delete", modifyGasstationController.deleteGasstation);
 
-router.get("/admin/users/:id", profileController.adminUser);
-router.post("/admin/users/:id/update", profileController.updateUser);
-router.post("/admin/users/:id/delete", profileController.deleteUser);
-router.post("/admin/users/:id/historie", profileController.deleteUser);
+router.get("/admin/users/:userId", profileController.adminUser);
+router.post("/admin/users/:userId/update", profileController.updateUser);
+router.post("/admin/users/:userId/delete", profileController.deleteUser);
+router.get("/admin/users/:userId/historie", profileController.adminHistorie);
 
+//router.get("/admin/tasks/:taskId", taskController);
+//router.post("/admin/tasks/:taskId/update", taskController);
+router.post("/admin/tasks/:taskId/delete", taskController.deleteTask);
+//router.get("/admin/tasks/:taskId/historie", taskController);
 
 
 module.exports = router;

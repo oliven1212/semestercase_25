@@ -3,7 +3,7 @@ const { Gasstation, Branch, City } = require('../models');
 exports.adminGasstation = async (req, res) => {
     const gasstation = await Gasstation.findAll({
         attributes: ['id', 'branchId', 'cityCode', 'address', 'contactEmail', 'contactPhone', 'frontSpace'],
-        where: { id: req.params.id },
+        where: { id: req.params.gasId },
         include: [
             {
                 model: Branch,
@@ -51,7 +51,7 @@ exports.updateGasstation = async (req, res) => {
 
 
     await Gasstation.updateGasstation({
-        id: req.params.id,
+        id: req.params.gasId,
         branchId: req.body.branchId,
         address: req.body.address,
         contactEmail: req.body.contactEmail,
@@ -60,12 +60,12 @@ exports.updateGasstation = async (req, res) => {
         cityCode: zipCode,
     });
     
-    res.redirect(`/admin/gasstation/${req.params.id}`);
+    res.redirect(`/admin/gasstation/${req.params.gasId}`);
 };
 
 exports.deleteGasstation = async (req, res) => {
     await Gasstation.destroy({
-        where: { id: req.params.id,}, 
+        where: { id: req.params.gasId,}, 
     });
     
     res.redirect(`/gasstation`);

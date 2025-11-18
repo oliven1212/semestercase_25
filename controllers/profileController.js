@@ -1,4 +1,4 @@
-const { User, Gasstation, Role, City } = require('../models');
+const { User, Gasstation, Role, City, Task, Branch } = require('../models');
 
 exports.profile = async (req, res) => {
     const currentUser = await User.findByPk(3,{
@@ -46,7 +46,7 @@ exports.profile = async (req, res) => {
 
 exports.adminUser = async (req, res) => {
     const user = await User.findAll({
-        where: { id: req.params.id },
+        where: { id: req.params.userId },
         include: [
             {
                 model: City,
@@ -93,9 +93,9 @@ exports.updateUser = async (req, res) => {
 
     }
 
-
+//---------------------------------------------------------------------------------------------------
     await Gasstation.updateGasstation({
-        id: req.params.id,
+        id: req.params.userId,
         branchId: req.body.branchId,
         address: req.body.address,
         contactEmail: req.body.contactEmail,
@@ -104,46 +104,50 @@ exports.updateUser = async (req, res) => {
         cityCode: zipCode,
     });
     
-    res.redirect(`/admin/gasstation/${req.params.id}`);
+    res.redirect(`/admin/gasstation/${req.params.userId}`);
 };
 
 exports.deleteUser = async (req, res) => {
     await Gasstation.destroy({
-        where: { id: req.params.id,}, 
+        where: { id: req.params.userId,}, 
     });
     
     res.redirect(`/profiles`);
 };
 
+
+
 exports.adminHistorie = async (req, res) => {
-    const user = await User.findAll({
-        where: { id: req.params.id },
-        include: [
+    const relatedTasks = await Task.findAll({
+        where:{userId: req.params.userId,},
+        attributes:['id'],
+        include:[
             {
-                model: City,
-                attributes:['zipCode','name'],
-            },
-            {
-                model: Role,
+                model: Gasstation,
+                attributes:['address'],
+                include:[{
+                    model: Branch,
+                    attributes:['name']
+                },
+                {
+                    model: City,
+                    attributes:['name']
+                }
+            ],
             },
         ],
-        raw: true,
-    });
-    //retreives all branches so you can pick the one you need
-    const cities = await City.findAll({
-        attributes:['zipCode','name'],
-        raw: true
 
-    });
-    const roles = await Role.findAll({
         raw: true,
     });
-console.log(user);
-    res.render("home/modifyUser", {
+    const contentMap = relatedTasks.map(task => ({
+        name: `${task['Gasstation.Branch.name']}`,
+        contact: `${task['Gasstation.City.name']}, ${task['Gasstation.address']}`,
+        link: `/admin/tasks/${task.id}`,
+        originalUrl: req.originalUrl,
+    }));
+
+    res.render("home/adminTaskHistorie", {
         title: 'login',
-        user: user,
-        cities: cities,
-        roles: roles,
-        currentPath: req.originalUrl,
+        content: contentMap,
     });
 };
