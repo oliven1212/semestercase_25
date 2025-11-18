@@ -114,3 +114,36 @@ exports.deleteUser = async (req, res) => {
     
     res.redirect(`/profiles`);
 };
+
+exports.adminHistorie = async (req, res) => {
+    const user = await User.findAll({
+        where: { id: req.params.id },
+        include: [
+            {
+                model: City,
+                attributes:['zipCode','name'],
+            },
+            {
+                model: Role,
+            },
+        ],
+        raw: true,
+    });
+    //retreives all branches so you can pick the one you need
+    const cities = await City.findAll({
+        attributes:['zipCode','name'],
+        raw: true
+
+    });
+    const roles = await Role.findAll({
+        raw: true,
+    });
+console.log(user);
+    res.render("home/modifyUser", {
+        title: 'login',
+        user: user,
+        cities: cities,
+        roles: roles,
+        currentPath: req.originalUrl,
+    });
+};

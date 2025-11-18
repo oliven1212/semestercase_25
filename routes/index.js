@@ -27,6 +27,8 @@ router.post("/admin/gasstations/:id/delete", modifyGasstationController.deleteGa
 router.get("/admin/users/:id", profileController.adminUser);
 router.post("/admin/users/:id/update", profileController.updateUser);
 router.post("/admin/users/:id/delete", profileController.deleteUser);
+router.post("/admin/users/:id/historie", profileController.deleteUser);
+
 
 
 module.exports = router;

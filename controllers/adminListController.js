@@ -11,7 +11,7 @@ exports.adminListUsers = async (req, res) => {
         ...user,
         name: `${user.lastName}, ${user.firstName}`,
         contact: `Email: ${user.email}  Telefon: ${user.phone}`,
-        link: `users/${user.id}`
+        link: `${req.originalUrl}`
 
     }));
 
@@ -38,7 +38,7 @@ exports.adminListGasstations = async (req, res) => {
         ...gasstation,
         name: `${gasstation.address}, ${gasstation['City.name']}`,
         contact: `Email: ${gasstation.contactEmail}  Telefon: ${gasstation.contactPhone}`,
-        link: `gasstations/${gasstation.id}`
+        link: `${req.originalUrl}`
     }));
 
     res.render("home/adminList", {
@@ -57,14 +57,15 @@ exports.adminListProducts = async (req, res) => {
     // Map over users array to add name property to each user
     const productsMap = products.map(product => ({
         ...product,
-        name: `${product.name}`
+        name: `${product.name}`,
+        link: `${req.originalUrl}`
 
     }));
 
     res.render("home/adminList", {
         title: 'Liste af produkter',
         message: 'Opret nyt produkt',
-        users: productsMap,
+        content: productsMap,
         type: 'products'
     });
 };
