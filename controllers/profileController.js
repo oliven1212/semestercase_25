@@ -118,6 +118,12 @@ exports.deleteUser = async (req, res) => {
 
 
 exports.adminHistorie = async (req, res) => {
+    const user = await User.findOne({
+        where: { id: req.params.userId },
+        attributes: ['firstName','lastName'],
+        raw: true,
+    });
+    console.log(user);
     const relatedTasks = await Task.findAll({
         where:{userId: req.params.userId,},
         attributes:['id'],
@@ -147,7 +153,7 @@ exports.adminHistorie = async (req, res) => {
     }));
 
     res.render("home/adminTaskHistorie", {
-        title: 'login',
+        user: user,
         content: contentMap,
     });
 };

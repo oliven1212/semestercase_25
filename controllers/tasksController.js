@@ -8,6 +8,3 @@ exports.deleteTask = async (req, res) => {
     });
     res.redirect(`${req.body.link}`);
 };
-
-
-
