@@ -1,6 +1,6 @@
 .listSite {
     display: grid;
-    grid-template-rows: 3em 1fr;
+    grid-template-rows: 3rem 1fr;
     place-items: center;
     row-gap: 1em;
     
@@ -15,11 +15,11 @@
 
 .listCards {
     display: grid;
-    row-gap: 1em;
+    row-gap: 1rem;
     padding: 0;
     @media screen and (min-width: 900px) {
         grid-template-columns: 1fr 1fr;
-        column-gap: 2em;
+        column-gap: 2rem;
     }
 }
 
@@ -35,15 +35,15 @@
 
     .name {
         grid-area: name;
-        margin: 0.5em;
-        margin-left: 1em;
+        margin: 0.5rem;
+        margin-left: 1rem;
     }
 
     .contact {
         grid-area: contact;
         font-size: small;
         margin-top: 0;
-        margin-left: 1em;
+        margin-left: 1rem;
     }
     .functions{
         display: flex;
@@ -51,8 +51,8 @@
         align-items: flex-end;
         grid-area: functions;
         svg {
-            width: 1.2em;
-            height: 1.2em;
+            width: 1.5rem;
+            height: 1.5rem;
         }
         button {
             style: none;
