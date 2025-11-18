@@ -7,7 +7,6 @@ exports.adminGasstation = async (req, res) => {
         include: [
             {
                 model: Branch,
-                attributes: ['name'] // only fetch the branch name
             },
             {
                 model: City,

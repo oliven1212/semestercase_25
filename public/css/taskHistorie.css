@@ -1,26 +1,65 @@
 .task-historie {
     color: #000;
     border-radius: 5px;
-    margin: 20px;
+    margin: 10px;
+    max-width: 320px;
 }
-input.product-name {
-    display: block;
-    padding: 10px;
-    border-radius: 5px;
-    max-width: 300px;
+ul.product-list {
+    display: grid;
+    place-items: center;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    list-style-type: none;
+}
+ul.product-list h3 {
+    text-align: center;
+    margin-bottom: 10px;
+}
+.user-info {
+    margin-bottom: 10px;
+}
+.product-item {
+    width: 100%;
+    display: grid;
+    grid-template-columns: 4fr 1fr;
+    grid-template-areas:
+        "label amount"
+        "input input";
+}
+.product-item label {
+    grid-area: label;
+    display: inline-block;
+}
+.product-item p {
+    grid-area: amount;
+    text-align: right;
+    margin: 0;
+    display: inline-block;
 }
 
+.product-item input {
+    grid-area: input;
+}
+input.product-amount {
+    padding: 10px;
+    border-radius: 5px;
+    text-align: right;
+}
+.unit-name {
+    text-align: right;
+}
 .task-historie ul {
     list-style-type: none;
     padding: 0;
+    margin: 0;
 }
 
 .task-historie li {
     margin-bottom: 10px;
 }
 
-.task-historie p {
+.text-container {
     margin-bottom: 10px;
+    text-align: center;
 }
 
 .task-historie div {
@@ -29,9 +68,4 @@ input.product-name {
 
 .task-historie h1 {
     margin-bottom: 20px;
-}
-
-.task-historie body {
-    margin: 0;
-    padding: 0;
 }
