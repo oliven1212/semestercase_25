@@ -108,11 +108,11 @@ exports.updateUser = async (req, res) => {
 };
 
 exports.deleteUser = async (req, res) => {
-    await Gasstation.destroy({
-        where: { id: req.params.userId,}, 
+    await User.destroy({
+        where: { id: req.params.userId,},
     });
     
-    res.redirect(`/profiles`);
+    res.redirect(`/admin/users`);
 };
 
 

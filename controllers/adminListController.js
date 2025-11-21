@@ -11,7 +11,7 @@ exports.adminListUsers = async (req, res) => {
         ...user,
         name: `${user.lastName}, ${user.firstName}`,
         contact: `Email: ${user.email}  Telefon: ${user.phone}`,
-        link: `${req.originalUrl}`
+        link: `${req.originalUrl}/${user.id}`
 
     }));
 
@@ -38,7 +38,7 @@ exports.adminListGasstations = async (req, res) => {
         ...gasstation,
         name: `${gasstation.address}, ${gasstation['City.name']}`,
         contact: `Email: ${gasstation.contactEmail}  Telefon: ${gasstation.contactPhone}`,
-        link: `${req.originalUrl}`
+        link: `${req.originalUrl}/${gasstation.id}`
     }));
 
     res.render("home/adminList", {
@@ -58,7 +58,7 @@ exports.adminListProducts = async (req, res) => {
     const productsMap = products.map(product => ({
         ...product,
         name: `${product.name}`,
-        link: `${req.originalUrl}`
+        link: `${req.originalUrl}/${product.id}`
 
     }));
 
