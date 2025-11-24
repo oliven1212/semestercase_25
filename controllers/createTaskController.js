@@ -1,5 +1,6 @@
 // controllers/createTaskController.js
-const { User, Gasstation, Branch } = require('../models');
+const { User, Gasstation, Branch, Task } = require('../models');
+const { gasstation } = require('./gasController');
 
 exports.createTask = async (req, res) => {
     try {
@@ -50,12 +51,21 @@ exports.createTask = async (req, res) => {
 
         console.log('branchDropdowns:', JSON.stringify(branchDropdowns, null, 2));
 
+        const userId = 3; // hvis du er hårdkodet til dev — men helst: req.user.id
+        // Hvis du har req her (typisk i Express controller), brug req.user.id
+        const tasksRaw = await Task.findAll({
+            where: { userId }, // tilpas hvis du bruger req.user.id
+            order: [['startTime', 'ASC']]
+            });
+        const tasks = tasksRaw.map(t => t.get({ plain: true }));
+
         res.render('home/createTask', {
             title: 'velkommen',
             message: 'Vælg tankstation',
             users: users,
             gasstation: gasstations,
-            branchDropdowns
+            branchDropdowns,
+            tasks
         });
 
 
@@ -73,4 +83,12 @@ exports.createTask = async (req, res) => {
         }
         res.status(500).send('Der opstod en fejl på serveren');
     }
+};
+
+
+exports.logStart = async (req, res) => {
+    const gasstationId = await Gasstation.create();
+    console.log(gasstationId.toJSON());
+    gasstationId.toJSON();
+    res.redirect(`/createtaskdata/${gasstationId.id}`);
 };

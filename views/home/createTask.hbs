@@ -48,18 +48,9 @@
 
 
 <section>
-    <!--valg af dato, med automatisk valg af idag-->
-    <div>
-        <p>kalender</p>
-    </div>
-</section>
-
-
-<section>
-    <!--tidspunkt for rengøring-->
-    <div>
-        <p>start tidspunt for rengøring</p>
-    </div>
+    <div id="calendar" style="max-width:900px;margin:20px auto;"></div>
+    <label for="startTime">Dato & tid</label>
+    <input id="startTime" name="startTime" type="datetime-local" required />
 </section>
 
 
@@ -68,6 +59,17 @@
 <button>start log</button>
 </section>
 
+  <form action="/createTask" method="post" id="deleteGasstation">
+  <input type="hidden" name="gasstation" id="gasstation" value="1">
+  <button type="submit">helt rigtig <data value=""></data></button>
+  </form>
+
+
+<link href="https://cdn.jsdelivr.net/npm/@fullcalendar/core@6.1.7/main.min.css" rel="stylesheet" />
+<link href="https://cdn.jsdelivr.net/npm/@fullcalendar/daygrid@6.1.7/main.min.css" rel="stylesheet" />
 
 <link rel="stylesheet" type="text/css" href="./css/modal.css">
 <script src="/js/modal.js" defer></script>
+<script src="https://cdn.jsdelivr.net/npm/@fullcalendar/core@6.1.7/main.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@fullcalendar/daygrid@6.1.7/main.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@fullcalendar/interaction@6.1.7/main.min.js"></script>
