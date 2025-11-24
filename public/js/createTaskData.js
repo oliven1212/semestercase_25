@@ -1,4 +1,3 @@
-
 const amountInput = document.getElementById('amount');
 const addBtn = document.getElementById('addProductBtn');
 const selectedProductsDiv = document.getElementById('selectedProducts');
@@ -6,10 +5,7 @@ const submitBtn = document.getElementById('submitAllBtn');
 const productSelect = document.getElementById('productId');
 const unitDisplay = document.getElementById('unit-display');
 
-
 const selectedProducts = [];
-
-
 
 // Vis enhed når produkt vælges
 productSelect.addEventListener('input', function () {
@@ -42,9 +38,9 @@ addBtn.addEventListener('click', function () {
     const productDiv = document.createElement('div');
     productDiv.className = 'product-row';
     productDiv.innerHTML = `
-    <span class="product-display">${productName}: ${amount} ${unit}</span>
-    <button type="button" class="remove-btn" data-index="${selectedProducts.length - 1}">Fjern</button>
-`;
+        <span class="product-display">${productName}: ${amount} ${unit}</span>
+        <button type="button" class="remove-btn" data-index="${selectedProducts.length - 1}">Fjern</button>
+    `;
 
     selectedProductsDiv.appendChild(productDiv);
 
@@ -57,15 +53,18 @@ addBtn.addEventListener('click', function () {
     submitBtn.style.display = 'block';
 });
 
-// Fjern produkt fra listen
-function removeProduct(btn, index) {
-    selectedProducts.splice(index, 1);
-    btn.parentElement.remove();
+// Fjern produkt fra listen (delegeret event listener)
+selectedProductsDiv.addEventListener('click', function(e) {
+    if (e.target.classList.contains('remove-btn')) {
+        const index = e.target.getAttribute('data-index');
+        selectedProducts.splice(index, 1);
+        e.target.parentElement.remove();
 
-    if (selectedProducts.length === 0) {
-        submitBtn.style.display = 'none';
+        if (selectedProducts.length === 0) {
+            submitBtn.style.display = 'none';
+        }
     }
-}
+});
 
 // Gem alle produkter
 submitBtn.addEventListener('click', function () {
