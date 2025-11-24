@@ -48,9 +48,8 @@
 
 
 <section>
-  <div id="calendar" style="max-width:900px;margin:20px auto;"></div>
-
-  <label for="startTime">Dato & tid</label>
+    <div id="calendar" style="max-width:900px;margin:20px auto;"></div>
+    <label for="startTime">Dato & tid</label>
     <input id="startTime" name="startTime" type="datetime-local" required />
 </section>
 
@@ -60,6 +59,9 @@
 <button>start log</button>
 </section>
 
+  <form action="/createTask/" method="post" id="deleteGasstation">
+  <input type="hidden" name="gasstation" id="gasstation" value="1" >
+  </form>
 
 
 <link href="https://cdn.jsdelivr.net/npm/@fullcalendar/core@6.1.7/main.min.css" rel="stylesheet" />
