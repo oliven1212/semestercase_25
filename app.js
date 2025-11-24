@@ -1,8 +1,6 @@
 const express = require("express");
 const exphbs = require("express-handlebars");
 const path = require("path");
-const multer  = require('multer')
-const upload = multer();
 
 const routes = require("./routes");
 
