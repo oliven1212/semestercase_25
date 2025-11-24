@@ -19,8 +19,6 @@ body {
   background-color: var(--lightBlue);
 }
 section {
-  padding-left: var(--sideMargin);
-  padding-right: var(--sideMargin);
 
 }
 header{
