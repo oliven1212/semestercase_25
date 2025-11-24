@@ -3,31 +3,14 @@ const bcrypt = require("bcrypt");
 
 const saltRounds = 10;
 
-function hashPassword(password, saltRounds) {
-  return bcrypt.hash("dingdong", saltRounds, function (err, hash) {
-    if (err) {
-      console.error(err);
-      return;
-    }
-    console.log(hash);
+async function hashPassword(password, saltRounds) {
+  const hashedPassword = await bcrypt.hash(password,saltRounds);
+  return hashedPassword;
+};
+async function comparePassword(password, hashedpassword){
+  await bcrypt.compare(password, hashedpassword).then(function(hash) {
+    return hash;
   });
-}
-function comparePassword(password, hashedpassword) {
-  const salt = 10;
-  console.log(
-    bcrypt.compare(password, hashedpassword, function (err, result) {
-      if (err) {
-        console.error(err);
-        return;
-      }
-      if (result) {
-        console.log("Password is correct");
-      } else {
-        console.log("Password is incorrect");
-      }
-    }),
-  );
-  return bcrypt.compare(password, hashedpassword);
 }
 
 exports.login = (req, res) => {
@@ -38,11 +21,14 @@ exports.login = (req, res) => {
 };
 exports.loginSend = async (req, res) => {
   const { email, password } = req.body;
+  console.log(password);
 
+
+
+  comparePassword(password, await hashPassword(password, saltRounds));
   const user = await User.findOne({
     where: { email: email, password: password },
   });
-  comparePassword(user.password, hashPassword);
 
   // console.log(email, password, user);
 };

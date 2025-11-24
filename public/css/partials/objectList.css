@@ -16,12 +16,16 @@
     display: grid;
     grid-template-columns: 3fr 1fr;
     grid-template-rows: 1fr auto;
+    padding: 0.5rem 1rem ;
+    border: 2px solid #bdbdbd;
 
     grid-template-areas:
         'name functions'
         'contact functions';
 }
-
+.listItem *{
+    margin: 0;
+}
 .listItem .name{
     grid-area: name;
 }
@@ -32,8 +36,9 @@
     grid-area: functions;
     display: flex;
     align-items: center;
+    gap: 10px;
 }
 
-.listItem .functions >{
+.listItem .functions >* {
     width: 50px;
 }
