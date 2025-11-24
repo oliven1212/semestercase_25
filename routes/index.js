@@ -8,6 +8,8 @@ const createTaskDataController = require("../controllers/createTaskDataControlle
 const taskHistorieController = require("../controllers/taskHistorieController");
 const modifyGasstationController = require("../controllers/modifyGasstationController");
 const taskController = require("../controllers/tasksController");
+const upload  = require('../multer');
+
 
 const router = express.Router();
 
@@ -21,6 +23,7 @@ router.get("/admin/products", adminListController.adminListProducts);
 router.get("/profile", profileController.profile);
 router.get("/createtaskdata/:userId", createTaskDataController.taskPageOne);
 router.get("/taskHistorie", taskHistorieController.taskHistorie);
+router.post("/uploadTask", upload.array('taskUploads'), createTaskDataController.uploadTasks);
 
 router.post("/createTask", createTaskController.logStart);
 
