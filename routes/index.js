@@ -8,7 +8,7 @@ const createTaskDataController = require("../controllers/createTaskDataControlle
 const taskHistorieController = require("../controllers/taskHistorieController");
 const modifyGasstationController = require("../controllers/modifyGasstationController");
 const taskController = require("../controllers/tasksController");
-const upload  = require('multer');
+const upload  = require('../multer');
 
 
 const router = express.Router();

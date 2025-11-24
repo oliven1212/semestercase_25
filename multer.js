@@ -13,12 +13,6 @@ const storage = multer.diskStorage({
 });
 
 
-const upload = multer({
-    storage: storage,
-    limits: { fileSize: 5 * 1024 * 1024 },
-    fileFilter: fileFilter
-});
-
 
 const fileFilter = (req, file, cb) => {
     const allowedTypes = /jpeg|jpg|png|gif|webp/;
@@ -31,6 +25,13 @@ const fileFilter = (req, file, cb) => {
         cb(new Error('Kun billedfiler er tilladt'));
     }
 };
+
+
+const upload = multer({
+    storage: storage,
+    limits: { fileSize: 5 * 1024 * 1024 },
+    fileFilter: fileFilter
+});
 
 
 module.exports = upload;
