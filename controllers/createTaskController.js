@@ -1,6 +1,6 @@
 // controllers/createTaskController.js
 const { User, Gasstation, Branch, Task } = require('../models');
-const { gasstation, gasstation } = require('./gasController');
+const { gasstation } = require('./gasController');
 
 exports.createTask = async (req, res) => {
     try {
@@ -87,6 +87,8 @@ exports.createTask = async (req, res) => {
 
 
 exports.logStart = async (req, res) => {
-    const Gasstation = await Gasstation.push({gasstationId: req.body.gasstation});
-    res.redirect(`/createtaskdata/${req.body.gasstation}`);
+    const gasstationId = await Gasstation.create();
+    console.log(gasstationId.toJSON());
+    gasstationId.toJSON();
+    res.redirect(`/createtaskdata/${gasstationId.id}`);
 };

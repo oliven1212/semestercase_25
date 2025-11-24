@@ -12,7 +12,7 @@ exports.taskPageOne = async (req, res) => {
         },
         raw: true
     });
-    console.log(product);
+    //console.log(product);
 
     
 

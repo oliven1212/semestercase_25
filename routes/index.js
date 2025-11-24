@@ -21,7 +21,7 @@ router.get("/profile", profileController.profile);
 router.get("/createtaskdata/:userId", createTaskDataController.taskPageOne);
 router.get("/taskHistorie", taskHistorieController.taskHistorie);
 
-//router.post("/createTask", createTaskController.logstart);
+router.post("/createTask", createTaskController.logStart);
 
 router.get("/admin/gasstations/:gasId", modifyGasstationController.adminGasstation);
 router.post("/admin/gasstations/:gasId/update", modifyGasstationController.updateGasstation);
