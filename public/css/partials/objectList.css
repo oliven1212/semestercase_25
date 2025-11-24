@@ -11,13 +11,29 @@
     }
 }
 .listItem {
-    background: white;
-    border: 2px solid #bdbdbd;
+    background: var(--white);
+    border: none;
     display: grid;
     grid-template-columns: 3fr 1fr;
     grid-template-rows: 1fr auto;
 
     grid-template-areas:
         'name functions'
-        'contact contact';
+        'contact functions';
+}
+
+.listItem .name{
+    grid-area: name;
+}
+.listItem .contact{
+    grid-area: contact;
+}
+.listItem .functions{
+    grid-area: functions;
+    display: flex;
+    align-items: center;
+}
+
+.listItem .functions >{
+    width: 50px;
 }

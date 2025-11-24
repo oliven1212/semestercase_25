@@ -2,7 +2,7 @@
 
 
 <section class="modifySection">
-    <form action="/admin/gasstation/{{gasstation.[0].id}}/update" method="post" id="updateGasstation">
+    <form action="/admin/gasstations/{{gasstation.[0].id}}/update" method="post" id="updateGasstation">
     <!--Make drop down with list of branch names -->
     <div>
         <label for="branchId">Kæde</label>
@@ -47,5 +47,5 @@
         <button type="submit" form="updateGasstation">Update gasstation</button>
     </div>
     </form>
-    <form class="hidden" action="/admin/gasstation/{{gasstation.[0].id}}/delete" method="post" id="deleteGasstation" onsubmit="return confirm('Slet nuværende tankstation?');"/>
+    <form class="hidden" action="/admin/gasstations/{{gasstation.[0].id}}/delete" method="post" id="deleteGasstation" onsubmit="return confirm('Slet nuværende tankstation?');"/>
 </section>
