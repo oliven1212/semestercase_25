@@ -1,4 +1,7 @@
-const { User, Gasstation, GasstationUser, task, Unit, Product} = require('../models');
+const { User, Gasstation, GasstationUser, task, Unit, Product, Picture} = require('../models');
+const multer = require('multer');
+const path = require('path');
+
 
 exports.taskPageOne = async (req, res) => {
     const users = await User.findAll();
@@ -25,4 +28,37 @@ exports.taskPageOne = async (req, res) => {
 
     });
     
+};
+
+
+
+exports.uploadTasks = async (req, res) => {
+    const taskId = req.body.taskId;
+        const uploadedPictures = [];
+
+        // Loop gennem alle uploadede filer
+        for (let file of req.files) {
+            // Tjek fieldname for at bestemme før/efter
+            const beforeAfter = file.fieldname === 'beforePicture';
+            
+            const picture = await Picture.pictureUpload({
+                taskId: taskId,
+                filename: file.filename,
+                beforeAfter: beforeAfter,
+                productImage: false
+            });
+            
+            uploadedPictures.push(picture);
+        }
+        
+    const taskData = {
+        taskId: req.params.taskId,
+        pictures: [req.files.fileName],
+        beforeAfter: beforeAfter,
+
+
+
+    };
+
+
 };
