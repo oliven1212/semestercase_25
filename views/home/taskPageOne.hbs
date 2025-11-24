@@ -4,7 +4,7 @@
 <section>
 
 
-<!-- Denne skal vise udfra url om den valgte tanksstation har frontspace rengøring-->
+    <!-- Denne skal vise udfra url om den valgte tanksstation har frontspace rengøring-->
     <h2>{{gasstation2.address}}</h2>
 
     {{#if gasstation2.frontSpace}}
@@ -46,31 +46,31 @@
 
 <section class="sec2">
     <h4>Opfyldning af produkter</h4>
-<!-- denne dropdown skal bruges til at vælge produkter som skal udfyldes med unit -->
-    <div>
-        <label for="productId">Produkter</label>
+
+    <div class="product-selector">
+        <label for="productId">Vælg produkt</label>
+        
         <select name="productId" id="productId">
+            <option value="">-- Vælg et produkt --</option>
             {{#each product}}
-                <option value="{{this.id}}" {{#ifEq this.id ../gasstation.[0].productId}}selected{{/ifEq}}>{{this.name}}</option>
+            <option value="{{this.id}}" data-unit="{{this.[Unit.name]}}">{{this.name}}</option>
             {{/each}}
         </select>
+
+        <label for="amount">Mængde</label>
+        <div class="input-unit">
+        <input type="number" id="amount" name="amount" placeholder="Indtast mængde">
+        <span id="unit-display"></span>
+        </div>
+
+        <button type="button" id="addProductBtn">Tilføj produkt</button>
     </div>
 
-    <form>
-        <div class="product-row">
-            <label for="soap">{{product.name}}</label>
-            <input type="number" id="soap" name="soap">
-            <span class="unit">{{unit.name}}</span>
-        </div>
+    <div id="selectedProducts">
+        <!-- Her vises de valgte produkter -->
+    </div>
 
-        {{#each product}}
-        <div>
-            <label for="{{this.id}}">{{this.name}}</label>
-            <input type="number" id="{{this.id}}" name="{{this.id}}">
-            <span class="unit">{{this.[Unit.name]}}</span>
-        </div>
-        {{/each}}
-    </form>
-
+    <button type="submit" id="submitAllBtn" style="display: none;">Gem alle</button>
 </section>
 
+<script src="/js/createTaskData.js"></script>
