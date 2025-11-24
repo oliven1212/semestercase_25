@@ -60,7 +60,7 @@ exports.updateGasstation = async (req, res) => {
         cityCode: zipCode,
     });
     
-    res.redirect(`/admin/gasstation/${req.params.gasId}`);
+    res.redirect(`/admin/gasstations/${req.params.gasId}`);
 };
 
 exports.deleteGasstation = async (req, res) => {
@@ -68,5 +68,5 @@ exports.deleteGasstation = async (req, res) => {
         where: { id: req.params.gasId,}, 
     });
     
-    res.redirect(`/gasstation`);
+    res.redirect(`/admin/gasstations`);
 };

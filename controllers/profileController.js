@@ -104,7 +104,7 @@ exports.updateUser = async (req, res) => {
         cityCode: zipCode,
     });
     
-    res.redirect(`/admin/gasstation/${req.params.userId}`);
+    res.redirect(`/admin/gasstations/${req.params.userId}`);
 };
 
 exports.deleteUser = async (req, res) => {
@@ -150,6 +150,8 @@ exports.adminHistorie = async (req, res) => {
         contact: `${task['Gasstation.City.name']}, ${task['Gasstation.address']}`,
         link: `/admin/tasks/${task.id}`,
         originalUrl: req.originalUrl,
+        editLink: `temp`,
+        deleteLink: `ttemp`,
     }));
 
     res.render("home/adminTaskHistorie", {
