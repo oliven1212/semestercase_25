@@ -13,6 +13,7 @@ const router = express.Router();
 
 router.get("/createTask", createTaskController.createTask);
 router.get("/", HomeController.login);
+router.post("/login", HomeController.loginSend);
 router.get("/gasstation", gasController.gasstation);
 router.get("/admin/users", adminListController.adminListUsers);
 router.get("/admin/gasstations", adminListController.adminListGasstations);
