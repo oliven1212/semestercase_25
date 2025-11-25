@@ -30,7 +30,7 @@ module.exports = (sequelize, DataTypes) => {
             const Address = address || originalUser.address;
             const CityCode = cityCode || originalUser.cityCode;
 
-            const gasstation = await User.update(
+            const user = await User.update(
                 {
                     firstName: `${FirstName}`,
                     lastName: `${LastName}`,
@@ -43,7 +43,7 @@ module.exports = (sequelize, DataTypes) => {
                 where: { id: id },
                 },
             );
-            return gasstation;
+            return user;
         }
 
         /**

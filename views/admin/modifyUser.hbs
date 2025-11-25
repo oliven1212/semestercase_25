@@ -45,7 +45,7 @@
     </div>
     
     <div>
-        <a class="btn-white" href="{{currentPath}}/historie">Rengørings historik</a>
+        <a class="btn-white" href="{{currentPath}}/tasks">Rengørings historik</a>
     </div>
     <div>
         <a class="btn-white" href="{{currentPath}}/gasstations">Relaterede tankstationer</a>
@@ -56,5 +56,5 @@
         <button type="submit" form="updateUser">Opdater bruger</button>
     </div>
     </form>
-    <form class="hidden" action="/admin/users/{{gasstation.[0].id}}/delete" method="post" id="deleteUser" onsubmit="return confirm('Slet nuværende tankstation?');"/>
+    <form class="hidden" action="/admin/users/{{user.[0].id}}/delete" method="post" id="deleteUser" onsubmit="return confirm('Slet nuværende tankstation?');"/>
 </section>

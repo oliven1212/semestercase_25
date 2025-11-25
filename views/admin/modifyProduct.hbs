@@ -1,0 +1,24 @@
+<link rel="stylesheet" type="text/css" href="/css/modifyPages.css">
+
+
+<section class="modifySection">
+    <form action="/admin/products/{{product.[0].id}}/update" method="post" id="updateProduct">
+        <div>
+            <label for="name">Produkt navn:</label>
+            <input type="text" id="name" name="name" value="{{product.[0].name}}">
+        </div>
+    <div>
+        <label for="unitId">Enhed:</label>
+        <select name="unitId" id="unitId">
+            {{#each units}}
+                <option value="{{this.id}}" {{#ifEq this.id ../product.[0].unitId}}selected{{/ifEq}}>{{this.name}}</option>
+            {{/each}}
+        </select>
+    </div>
+    <div>
+        <button type="submit" form="deleteProduct">Slet product</button>
+        <button type="submit" form="updateProduct">Opdater product</button>
+    </div>
+    </form>
+    <form class="hidden" action="/admin/products/{{product.[0].id}}/delete" method="post" id="deleteProduct" onsubmit="return confirm('Slet nuværende product?');"/>
+</section>

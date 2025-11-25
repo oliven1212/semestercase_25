@@ -8,6 +8,7 @@ const createTaskDataController = require("../controllers/createTaskDataControlle
 const taskHistorieController = require("../controllers/taskHistorieController");
 const modifyGasstationController = require("../controllers/modifyGasstationController");
 const taskController = require("../controllers/tasksController");
+const productController = require("../controllers/productController");
 const upload  = require('../multer');
 
 
@@ -34,7 +35,13 @@ router.post("/admin/gasstations/:gasId/delete", modifyGasstationController.delet
 router.get("/admin/users/:userId", profileController.adminUser);
 router.post("/admin/users/:userId/update", profileController.updateUser);
 router.post("/admin/users/:userId/delete", profileController.deleteUser);
-router.get("/admin/users/:userId/historie", profileController.adminHistorie);
+router.get("/admin/users/:userId/tasks", profileController.tasks);
+router.get("/admin/users/:userId/gasstations", profileController.gasstations);
+
+router.get("/admin/products/:productId", productController.adminProducts);
+router.post("/admin/products/:productId/update", productController.updateProduct);
+router.post("/admin/products/:productId/delete", productController.deleteProduct);
+//router.get("/admin/users/:userId/historie", productController.adminHistorie);
 
 //router.get("/admin/tasks/:taskId", taskController);
 //router.post("/admin/tasks/:taskId/update", taskController);

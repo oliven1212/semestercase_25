@@ -1,27 +1,9 @@
-const { User, Gasstation, Role, City, Task, Branch } = require('../models');
+const { User, Gasstation, Role, City, Task, Branch, GasstationUser } = require('../models');
 
 exports.profile = async (req, res) => {
     const currentUser = await User.findByPk(3,{
         raw: true
     });
-
-    const allUserIds = await User.getAllUserIds();
-    //console.log(allUserIds);
-
-    const temp = await User.findAll(
-        { 
-            attributes: ['id', 'firstName', 'lastName'],
-            where: { id: 3 },
-            include: [{
-                attributes: ['id', 'address'],
-                model: Gasstation,
-                through: {/* attributes: []*/}
-            }],
-            raw: true
-          }
-    );
-    console.log(temp);
-    
 
     const users = await User.findAll({
         raw: true
@@ -34,7 +16,7 @@ exports.profile = async (req, res) => {
         title: 'login',
         users: users,
         exampleUser: exampleUser,
-        currentUser: currentUser
+        currentUser: currentUser,
     });
 };
 
@@ -67,13 +49,13 @@ exports.adminUser = async (req, res) => {
     const roles = await Role.findAll({
         raw: true,
     });
-console.log(user);
-    res.render("home/modifyUser", {
+    res.render("admin/modifyUser", {
         title: 'login',
         user: user,
         cities: cities,
         roles: roles,
-        currentPath: req.originalUrl,
+        currentPath: req.originalUrl.replace(/\/$/, ""),
+        lastPage: `/admin/users/`,
     });
 };
 
@@ -104,7 +86,7 @@ exports.updateUser = async (req, res) => {
         cityCode: zipCode,
     });
     
-    res.redirect(`/admin/gasstations/${req.params.userId}`);
+    res.redirect(`/admin/users/${req.params.userId}`);
 };
 
 exports.deleteUser = async (req, res) => {
@@ -112,50 +94,110 @@ exports.deleteUser = async (req, res) => {
         where: { id: req.params.userId,},
     });
     
-    res.redirect(`/admin/users`);
+    if(req.body.link){
+        res.redirect(req.body.link);
+    }else{
+        res.redirect(`/admin/users`);
+    }
 };
 
-
-
-exports.adminHistorie = async (req, res) => {
+exports.tasks = async (req, res) => {
     const user = await User.findOne({
         where: { id: req.params.userId },
         attributes: ['firstName','lastName'],
         raw: true,
     });
-    console.log(user);
     const relatedTasks = await Task.findAll({
         where:{userId: req.params.userId,},
-        attributes:['id'],
+        attributes:['id','startTime'],
         include:[
             {
                 model: Gasstation,
-                attributes:['address'],
                 include:[{
                     model: Branch,
-                    attributes:['name']
                 },
+                
                 {
                     model: City,
-                    attributes:['name']
                 }
-            ],
+                ],
             },
         ],
 
         raw: true,
     });
-    const contentMap = relatedTasks.map(task => ({
-        name: `${task['Gasstation.Branch.name']}`,
-        contact: `${task['Gasstation.City.name']}, ${task['Gasstation.address']}`,
-        link: `/admin/tasks/${task.id}`,
-        originalUrl: req.originalUrl,
-        editLink: `temp`,
-        deleteLink: `ttemp`,
-    }));
+    //sorts so the oldest task is at the end and newest first
+    relatedTasks.sort((a, b) =>{
+        return new Date(b.startTime) - new Date(a.startTime);
+    });
+    const contentMap = relatedTasks.map(task => {
+        if(task['Gasstation.id']){
+            return {
+                name: `${task['Gasstation.Branch.name']} - ${task.startTime.toLocaleDateString("en-GB")}`,
+                contact: `${task['Gasstation.City.name']}, ${task['Gasstation.address']}`,
+                link: `/admin/tasks/${task.id}`,
+                originalUrl: req.originalUrl.replace(/\/$/, ""),
+            };
+        }else{
+            return {
+                name: `${task.startTime.toLocaleDateString("en-GB")}`,
+                contact: ` `,
+                link: `/admin/tasks/${task.id}`,
+                originalUrl: req.originalUrl.replace(/\/$/, ""),
+            };
+        }
 
-    res.render("home/adminTaskHistorie", {
+
+    });
+
+    res.render("admin/adminTaskHistorie", {
+        title: `Opgaver for `,
         user: user,
         content: contentMap,
+        lastPage: `.`,
+    });
+};
+
+
+exports.gasstations = async (req, res) => {
+    const user = await User.findOne({
+        where: { id: req.params.userId },
+        attributes: ['firstName','lastName'],
+        raw: true,
+    });
+
+
+    const gasstations = await User.findAll({
+        where:{id: req.params.userId,},
+        attributes:[],
+        include:[{
+            model: Gasstation,
+            attributes:['id','address'],
+            include:[{
+                model: City,
+                attributes:['name']
+            },
+            {
+                model: Branch,
+                attributes:['name'],
+            }],
+            raw: true,
+        }],
+        raw: true,
+    });
+    const contentMap = gasstations.map(gasstation => {
+        return {
+            name: `${gasstation['Gasstations.Branch.name']}`,
+            contact: `${gasstation['Gasstations.City.name']}, ${gasstation['Gasstations.address']}`,
+            link: `/admin/gasstations/${gasstation['Gasstations.id']}`,
+            originalUrl: req.originalUrl.replace(/\/$/, "")
+        };
+    });
+
+    res.render("admin/adminTaskHistorie", {
+        title: `Relaterede tankstationer til`,
+        user: user,
+        content: contentMap,
+        lastPage: `.`,
     });
 };

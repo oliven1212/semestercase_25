@@ -25,8 +25,7 @@ exports.adminGasstation = async (req, res) => {
         raw:true
 
     });
-    res.render("home/modifyGasstation", {
-        title: 'login',
+    res.render("admin/modifyGasstation", {
         gasstation: gasstation,
         branches: branches,
         cities: cities,
@@ -67,6 +66,9 @@ exports.deleteGasstation = async (req, res) => {
     await Gasstation.destroy({
         where: { id: req.params.gasId,}, 
     });
-    
-    res.redirect(`/admin/gasstations`);
+        if(req.body.link){
+        res.redirect(req.body.link);
+    }else{
+        res.redirect(`/admin/gasstations`);
+    }
 };

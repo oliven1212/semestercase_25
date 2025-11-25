@@ -14,6 +14,9 @@
 <body>
 
   <header>
+    {{#if lastPage}}
+    <a href="{{lastPage}}">last page</a>
+    {{/if}}
     <a href="/">Login page</a> |
     <a href="/createTask">create task</a> |
     <a href="/gasstation">Tankstationsejer</a>
@@ -23,6 +26,7 @@
     <a href="/taskHistorie">Task historie</a>
     <a href="/admin/gasstations/7">Modify Gasstation</a>
     <a href="/admin/users/7">Modify User</a>
+    <a href="/admin/products/2">Modify product 2</a>
   </header>
 
   {{{body}}}

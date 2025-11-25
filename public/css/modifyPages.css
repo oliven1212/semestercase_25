@@ -1,12 +1,14 @@
-/* temp for night coding*/
-
-
-
+section {
+    padding-left: var(--sideMargin);
+    padding-right: var(--sideMargin);
+}
 
 section.modifySection form {
     display: block;
 }
-section.modifySection form div label,section.modifySection form div input,section.modifySection form div select {
+section.modifySection form div label,
+section.modifySection form div input,
+section.modifySection form div select {
     display: block;
     width: 100%;
     padding: 0;
@@ -14,8 +16,10 @@ section.modifySection form div label,section.modifySection form div input,sectio
     padding: 5px;
     box-sizing: border-box;
     border: none;
+    color: var(--darkBlue);
 }
-section.modifySection form div input, section.modifySection form div select {
+section.modifySection form div input, 
+section.modifySection form div select {
         border-style: solid;
         border-width: 1.5px;
         border-color: var(--darkBlue);

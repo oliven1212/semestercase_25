@@ -64,3 +64,12 @@ datalist{
 .btn-white *,.btn-white{
   color: var(--black);
 }
+.listTitle{
+  text-align: center;
+}
+.listTitle h2{
+    margin: 0;
+}
+.listTitle h3{
+    margin-bottom: 5px;
+}
