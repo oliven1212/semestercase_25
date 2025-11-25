@@ -56,8 +56,8 @@ module.exports = (sequelize, DataTypes) => {
             // define association here
             User.belongsTo(models.Role, {foreignKey: "roleId",});
             User.belongsTo(models.City, {foreignKey: "cityCode",});
-            User.hasMany(models.Task, {foreignKey: 'userId'})
-            User.belongsToMany(models.Gasstation, {through: models.GasstationUser, foreignKey: 'userId'});
+            User.hasMany(models.Task, {foreignKey: 'userId', onDelete: "SET NULL",})
+            User.belongsToMany(models.Gasstation, {through: models.GasstationUser, foreignKey: 'userId',onDelete: "CASCADE",});
         }
     }
 

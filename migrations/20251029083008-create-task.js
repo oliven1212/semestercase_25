@@ -15,6 +15,7 @@ module.exports = {
                     model: 'Users',
                     key: 'id',
                 },
+                onDelete: "SET NULL",
             },
             gasstationId: {
                 type: Sequelize.INTEGER,

@@ -47,6 +47,7 @@ module.exports = (sequelize, DataTypes) => {
       Gasstation.belongsToMany(models.User, {
         through: models.GasstationUser,
         foreignKey: "gasstationId",
+        onDelete: "CASCADE",
       });
     }
   }
