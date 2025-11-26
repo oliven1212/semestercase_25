@@ -86,7 +86,7 @@ h2 {
 .sec2 h4 {
     color: var(--lightBlue);
     margin-top: 0;
-    margin-bottom: 5px;
+    margin-bottom: 5px; /* rem for at skaler rigtigt */
 }
 
 .product-selector {
@@ -210,4 +210,39 @@ h2 {
 
 .remove-btn:hover {
     background-color: #d32f2f;
+}
+
+.submit-container {
+    text-align: center;
+    margin: 30px;
+}
+
+#submitAllBtn {
+    width: calc(100% - 60px);
+    max-width: 600px;
+    padding: 15px;
+    background-color: #2196F3;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    font-size: 18px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background-color 0.2s;
+}
+
+#submitAllBtn:hover {
+    background-color: #1976D2;
+}
+
+#submitAllBtn:disabled {
+    background-color: #999;
+    cursor: not-allowed;
+}
+
+.file-count {
+    color: var(--green);
+    font-size: 14px;
+    font-weight: bold;
+    margin-left: 10px;
 }

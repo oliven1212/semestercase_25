@@ -1,3 +1,5 @@
+
+
 const amountInput = document.getElementById('amount');
 const addBtn = document.getElementById('addProductBtn');
 const selectedProductsDiv = document.getElementById('selectedProducts');
@@ -5,16 +7,40 @@ const submitBtn = document.getElementById('submitAllBtn');
 const productSelect = document.getElementById('productId');
 const unitDisplay = document.getElementById('unit-display');
 
+//Tilføjer disse variabler til billede håndteringen
+
+const taskForm = document.getElementById('taskForm');
+const beforeInput = document.getElementById('beforeInput');
+const afterInput = document.getElementById('afterInput');
+const beforeCount = document.getElementById('beforeCount');
+const afterCount = document.getElementById('afterCount');
+
+
+
 const selectedProducts = [];
 
-// Vis enhed når produkt vælges
+//Viser antal valgte før billeder
+beforeInput.addEventListener('change', function () {
+    const count = this.files.length;
+    beforeCount.textContent = count > 0 ? `${count} valgt` : '';
+    checkSubmitButton();
+
+});
+
+afterInput.addEventListener('change', function () {
+    const count = this.files.length;
+    afterCount.textContent = count > 0 ? `${count} valgt` : '';
+    checkSubmitButton();
+});
+
+// Viser enhed når produkt vælges
 productSelect.addEventListener('input', function () {
     const selectedOption = this.options[this.selectedIndex];
     const unit = selectedOption.getAttribute('data-unit');
     unitDisplay.textContent = unit || '';
 });
 
-// Tilføj produkt til listen
+// Tilføjer produkt til listen
 addBtn.addEventListener('click', function () {
     const productId = productSelect.value;
     const productName = productSelect.options[productSelect.selectedIndex].text;
@@ -26,15 +52,14 @@ addBtn.addEventListener('click', function () {
         return;
     }
 
-    // Tilføj til array
+    // Tilføjer til array
     selectedProducts.push({
-        id: productId,
-        name: productName,
-        amount: amount,
-        unit: unit
+        taskId: 50,
+        productId: productId,
+        amount: amount
     });
 
-    // Opret HTML element
+    // Opretter HTML element
     const productDiv = document.createElement('div');
     productDiv.className = 'product-row';
     productDiv.innerHTML = `
@@ -66,12 +91,54 @@ selectedProductsDiv.addEventListener('click', function(e) {
     }
 });
 
-// Gem alle produkter
-submitBtn.addEventListener('click', function () {
-    console.log('Gemmer produkter:', selectedProducts);
-    // Her sender du data til din backend
-    // fetch('/api/save-products', {
-    //     method: 'POST',
-    //     body: JSON.stringify(selectedProducts)
-    // })
+// Gem alt (produkter og billeder)
+submitBtn.addEventListener('click', async function () {
+    //Her valdieres at alt er udfyldt
+    if(beforeInput.files.length === 0){
+        alert('Upload mindst ét før billeder');
+        return;
+    }
+    if(afterInput.files.length === 0){
+        alert('Upload mindst ét efter billede');
+        return;
+
+    }
+    if(selectedProducts.length === 0){ //Denne kan muligvis undlades hvis de skal logge uden produkter
+        alert('Tilføj mindst ét produkt');
+        return;
+    }
+
+    const taskData = new FormData(taskForm);
+
+    //Tilføjer produkter som json 
+    taskData.append('products', JSON.stringify(selectedProducts));
+
+    try {
+        submitBtn.disabled = true;
+        submitBtn.textContent = 'Gemmer...';
+
+        const response = await fetch('/uploadTask', {
+            method: 'POST',
+            body: taskData
+
+        });
+
+        const result = await response.json();
+
+         if (result.success) {
+            // Redirect til bekræftelsesside
+            window.location.href = `/completedTask/${result.taskId}`;
+        } else {
+            alert('Fejl: ' + result.error);
+            submitBtn.disabled = false;
+            submitBtn.textContent = 'Gem alle';
+        }
+    } catch (error) {
+        console.error('Submit fejl:', error);
+        alert('Kunne ikke gemme data');
+        submitBtn.disabled = false;
+        submitBtn.textContent = 'Gem alle';
+    }
+
+    
 });

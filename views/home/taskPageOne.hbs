@@ -13,9 +13,12 @@
 
 </section>
 
-<form action="">
+<form id="taskForm" enctype="multipart/form-data">
+    <input type="hidden" name="taskId" value="{{this.id}}">
+
     <section class="sec1">
         <h4>Upload Billeder</h4>
+
 
 
         <div class="pic-upload">
@@ -27,7 +30,10 @@
     16-16 16L64 432c-8.8 0-16-7.2-16-16l0-256c0-8.8 7.2-16 16-16l69.3 0c8 0 15.5-4 20-10.7l33.2-49.8zM256 384a112 
     112 0 1 0 0-224 112 112 0 1 0 0 224zM192 272a64 64 0 1 1 128 0 64 64 0 1 1 -128 0z" />
             </svg>
-            <button class="before">Før billeder</button>
+            <input type="file" id="beforeInput" name="beforePicture" accept="image/*" multiple style="display: none;">
+            <button type="button" class="before" onclick="document.getElementById('beforeInput').click()">
+                Før billeder</button>
+            <span id="beforeCount" class="file-count"></span>
         </div>
 
         <div>
@@ -40,14 +46,14 @@
     112 0 1 0 0-224 112 112 0 1 0 0 224zM192 272a64 64 0 1 1 128 0 64 64 0 1 1 -128 0z" />
             </svg>
             <div>
-                <form>
-                    <input>
-                    <button class="after">Efter billeder</button>
-                </form>
+                <input type="file" id="afterInput" name="afterPicture" accept="image/*" multiple style="display: none;">
+                <button type="button" class="before" onclick="document.getElementById('afterInput').click()">
+                    Efter billeder</button>
+                <span id="afterCount" class="file-count"></span>
             </div>
         </div>
 
-        <button class="uploadet">Se uploadet billeder</button>
+        <button type="button" class="uploadet">Se uploadet billeder</button>
 
     </section>
 
@@ -76,9 +82,10 @@
         <div id="selectedProducts">
             <!-- Her vises de valgte produkter -->
         </div>
-
-        <button type="submit" id="submitAllBtn" style="display: none;">Gem alle</button>
     </section>
 </form>
+<div class="submit-container">
+    <button type="button" id="submitAllBtn" style="display: none;">Gem alle</button>
+</div>
 
 <script src="/js/createTaskData.js"></script>
