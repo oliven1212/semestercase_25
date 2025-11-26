@@ -17,3 +17,8 @@ function isNotAuthenticated(req, res, next) {
   }
   next();
 }
+
+module.exports = {
+  isAuthenticated,
+  isNotAuthenticated,
+};
