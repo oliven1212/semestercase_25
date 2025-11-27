@@ -87,8 +87,10 @@ exports.createTask = async (req, res) => {
 
 
 exports.logStart = async (req, res) => {
-    const taskId = await Task.create();
-//console.log(taskId.toJSON());
+    const taskId = await Task.create({
+        gasstationId: req.body.gasstation,
+    });
+console.log(taskId.toJSON());
     taskId.toJSON();
     res.redirect(`/createtaskdata/${taskId.id}`);
 };
