@@ -2,9 +2,13 @@ section {
     padding-left: var(--sideMargin);
     padding-right: var(--sideMargin);
 }
-
+section.modifySection{
+    height: auto;
+}
 section.modifySection form {
     display: block;
+    overflow-y: scroll;
+    max-height: 80%;
 }
 section.modifySection form div label,
 section.modifySection form div input,
@@ -28,13 +32,16 @@ section.modifySection form div select {
 section.modifySection form div {
     margin-bottom: 15px;
 }
-section.modifySection form div:last-child {
+.functionButtons{
     display: grid;
     grid-template-columns: 1fr 1fr;
+    margin-top: auto;
+    height: 20%;
+
 }
-section.modifySection form div:last-child button:first-child {
+.functionButtons button:first-child {
     justify-self: start;
 }
-section.modifySection form div:last-child button:last-child {
+.functionButtons button:last-child {
     justify-self: end;
 }
