@@ -1,0 +1,25 @@
+section.login {
+    width: calc(100% - (2 * var(--sideMargin)));
+    margin-left: var(--sideMargin);
+    margin-right: var(--sideMargin);
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-template-rows: 1fr auto 1fr;
+    grid-gap: 1em;
+}
+svg {
+    grid-column: 1;
+    grid-row: 1;
+    justify-self: center;
+}
+.login p {
+    grid-column: 1;
+    grid-row: 1;
+}
+form#login {
+    grid-column: 1;
+    grid-row: 2/3;
+    justify-content: center;
+    grid-gap: 1em;
+    display: grid;
+}
