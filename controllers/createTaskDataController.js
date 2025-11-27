@@ -1,6 +1,7 @@
-const { User, Gasstation, GasstationUser, Task, Unit, Product, Picture, ProductTask } = require('../models');
+const { User, Gasstation, GasstationUser, Task, Unit, Product, Picture, ProductTask, Branch, City } = require('../models');
 const upload = require('../multer');
 const path = require('path');
+const { gasstation } = require('./gasController');
 
 exports.uploadMiddleware = upload.fields([
     { name: 'beforePicture', maxCount: 100 },
@@ -10,11 +11,20 @@ exports.uploadMiddleware = upload.fields([
 
 
 exports.taskPageOne = async (req, res) => {
-    const users = await User.findAll();
-    const newUsers = users.map(user => user.toJSON());
-    const gasstation2 = await Gasstation.findOne({ where: { id: 2 } });
-    const user2 = await User.findByPk(2);
+    const task = await Task.findByPk(req.params.taskId, {
+        include: [{
+            model: Gasstation,
+            include: [{
+                model: Branch,
+            }, {
+                model: City,
+            }],
+        }],
+        raw: true
+    });
     //Her skal tilføjes taskId så gasstation og user bliver sendt med
+
+
 
     const product = await Product.findAll({
         include: {
@@ -22,15 +32,26 @@ exports.taskPageOne = async (req, res) => {
         },
         raw: true
     });
+
+    const user = await User.findAll({
+        where: { id: 1 }, // skal ændres!!!!!!!!!!!
+        raw: true
+    });
+
+    console.log(task);
+    console.log("jajajajajajajajajjaajajaj");
+
+
+
+
     //console.log(product);
 
 
 
     res.render("home/taskPageOne", {
         title: 'Log din rengøring',
-        users: newUsers,
-        gasstation2: gasstation2.toJSON(),
-        user2: user2.toJSON(),
+        user: user,
+        task: task,
         product: product,
 
     });
@@ -82,7 +103,7 @@ exports.uploadTasks = async (req, res) => {
         for (let file of afterPictures) {
             await Picture.pictureUpload({
                 id: file.filename + Date.now(),
-                taskId: req.params.taskId ,
+                taskId: req.params.taskId,
                 filename: file.filename,
                 beforeAfter: true,
                 productImage: false //Skal fjernes
@@ -98,7 +119,7 @@ exports.uploadTasks = async (req, res) => {
             });
         }
 
-       return res.redirect(`/completedTask/${task.id}`);
+        return res.redirect(`/completedTask/${task.id}`);
 
     } catch (error) {
         console.error('Submit task fejl:', error);

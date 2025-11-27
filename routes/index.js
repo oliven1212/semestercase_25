@@ -22,7 +22,7 @@ router.get("/admin/users", adminListController.adminListUsers);
 router.get("/admin/gasstations", adminListController.adminListGasstations);
 router.get("/admin/products", adminListController.adminListProducts);
 router.get("/profile", profileController.profile);
-router.get("/createtaskdata/:userId", createTaskDataController.taskPageOne);
+router.get("/createtaskdata/:taskId", createTaskDataController.taskPageOne);
 router.get("/taskHistorie", taskHistorieController.taskHistorie);
 router.post("/uploadTask", createTaskDataController.uploadMiddleware, createTaskDataController.uploadTasks);
 
