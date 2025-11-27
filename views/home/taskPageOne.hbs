@@ -5,11 +5,11 @@
 
 
     <!-- Denne skal vise udfra url om den valgte tanksstation har frontspace rengøring-->
-    <h2>{{gasstation2.address}}</h2>
+    <h2>{{task.[Gasstation.Branch.name]}}, {{task.[Gasstation.address]}}, {{task.[Gasstation.City.zipCode]}} {{task.[Gasstation.City.name]}} </h2>
 
-    {{#if gasstation2.frontSpace}}
+    {{#ifEq task.[Gasstation.frontSpace] 1}}
     <p class="frontspace-warning">! Obs. på denne lokation skal du rengøre forpladsen !</p>
-    {{/if}}
+    {{/ifEq}}
 
 </section>
 
