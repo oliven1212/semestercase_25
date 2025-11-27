@@ -36,7 +36,7 @@
     </div>
 
     <div>
-        <label for="roleId">Rolle</label>
+        <label for="roleId">Rolle:</label>
         <select name="roleId" id="roleId">
             {{#each roles}}
                 <option value="{{this.id}}" {{#ifEq this.id ../user.[0].roleId}}selected{{/ifEq}}>{{this.name}}</option>

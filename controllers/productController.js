@@ -16,6 +16,7 @@ exports.adminProducts = async (req, res) => {
     res.render("admin/modifyProduct", {
         product: product,
         units: units,
+        currentPath: req.originalUrl.replace(/\/$/, ""),
     });
 };
 

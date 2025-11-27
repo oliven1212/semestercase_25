@@ -5,7 +5,7 @@
     <form action="/admin/gasstations/{{gasstation.[0].id}}/update" method="post" id="updateGasstation">
     <!--Make drop down with list of branch names -->
     <div>
-        <label for="branchId">Kæde</label>
+        <label for="branchId">Kæde:</label>
         <select name="branchId" id="branchId">
             {{#each branches}}
                 <option value="{{this.id}}" {{#ifEq this.id ../gasstation.[0].branchId}}selected{{/ifEq}}>{{this.name}}</option>
@@ -28,11 +28,11 @@
 
     </div>
     <div>
-        <label for="contactEmail">Contact Email:</label>
+        <label for="contactEmail">Kontakt email:</label>
         <input type="email" id="contactEmail" name="contactEmail" value="{{gasstation.[0].contactEmail}}">
     </div>
     <div>
-        <label for="contactPhone">Contact Phone:</label>
+        <label for="contactPhone">Kontakt telefon:</label>
         <input type="text" id="contactPhone" name="contactPhone" value="{{gasstation.[0].contactPhone}}">
     </div>
     <div>
@@ -41,6 +41,9 @@
             <option value="1" {{#ifEq gasstation.[0].frontSpace 1}}selected{{/ifEq}}>Ja</option>
             <option value="0" {{#ifEq gasstation.[0].frontSpace 0}}selected{{/ifEq}}>Nej</option>
         </select>
+    </div>
+    <div>
+        <a class="btn-white" href="{{currentPath}}/tasks">Rengørings historik</a>
     </div>
     <div>
         <button type="submit" form="deleteGasstation">Delete gasstation</button>

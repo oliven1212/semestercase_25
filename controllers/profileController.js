@@ -50,7 +50,6 @@ exports.adminUser = async (req, res) => {
         raw: true,
     });
     res.render("admin/modifyUser", {
-        title: 'login',
         user: user,
         cities: cities,
         roles: roles,

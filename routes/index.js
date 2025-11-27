@@ -43,7 +43,6 @@ router.get("/admin/users/:userId/gasstations", profileController.gasstations);
 router.get("/admin/products/:productId", productController.adminProducts);
 router.post("/admin/products/:productId/update", productController.updateProduct);
 router.post("/admin/products/:productId/delete", productController.deleteProduct);
-//router.get("/admin/users/:userId/historie", productController.adminHistorie);
 
 //router.get("/admin/tasks/:taskId", taskController);
 //router.post("/admin/tasks/:taskId/update", taskController);
