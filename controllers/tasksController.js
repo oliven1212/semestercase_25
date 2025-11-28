@@ -3,8 +3,7 @@ const { Task } = require('../models');
 
 
 exports.deleteTask = async (req, res) => {
-    console.log(`_______________________________________________________`);
-    console.log(req.params.taskId);
+    console.log(`Deleting task with the ID: ${req.params.taskId}`);
     await Task.destroy({
         where: { id: req.params.taskId,}, 
     });
