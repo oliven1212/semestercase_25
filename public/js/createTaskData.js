@@ -91,7 +91,12 @@ selectedProductsDiv.addEventListener('click', function(e) {
 
 // Gem alt (produkter og billeder)
 submitBtn.addEventListener('click', async function () {
+
+    return ;
     //Her valdieres at alt er udfyldt
+    console.log(beforeInput.files);
+    console.log('_________________________');
+
     if(beforeInput.files.length === 0){
         alert('Upload mindst ét før billeder');
         return;
@@ -105,21 +110,26 @@ submitBtn.addEventListener('click', async function () {
         alert('Tilføj mindst ét produkt');
         return;
     }
+    
 
-    const taskData = new FormData(taskForm);
+
+
+
+
+    const taskData = new FormData();
 
     //Tilføjer produkter som json 
     taskData.append('products', JSON.stringify(selectedProducts));
 
-    try {
+
         submitBtn.disabled = true;
         submitBtn.textContent = 'Gemmer...';
-
-        const response = await fetch('/uploadTask', {
+     
+        const response = await fetch(`/uploadTask/${selectedProducts.taskId}`, {
             method: 'POST',
             body: taskData
 
-        });
+        }); 
 
         const result = await response.json();
 
@@ -130,13 +140,6 @@ submitBtn.addEventListener('click', async function () {
             alert('Fejl: ' + result.error);
             submitBtn.disabled = false;
             submitBtn.textContent = 'Gem alle';
-        }
-    } catch (error) {
-        console.error('Submit fejl:', error);
-        alert('Kunne ikke gemme data');
-        submitBtn.disabled = false;
-        submitBtn.textContent = 'Gem alle';
-    }
-
-    
-});
+        
+    };
+ });
