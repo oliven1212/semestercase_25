@@ -24,7 +24,6 @@ exports.createTask = async (req, res) => {
         // 2) Lav dem om til plain JS-objekter
         const gasstations = gasstationsRaw.map(gs => gs.get({ plain: true }));
 
-        console.log('Gasstations (plain):', JSON.stringify(gasstations, null, 2));
 
         // 3) Gruppér efter branch-navn
         const stationsByBranch = {};
@@ -41,7 +40,7 @@ exports.createTask = async (req, res) => {
             });
         });
 
-        console.log('stationsByBranch:', JSON.stringify(stationsByBranch, null, 2));
+//console.log('stationsByBranch:', JSON.stringify(stationsByBranch, null, 2));
 
         // 4) Lav array til Handlebars: [{ name: 'Q8', stations: [...] }, ...]
         const branchDropdowns = Object.keys(stationsByBranch).map(name => ({
@@ -49,7 +48,7 @@ exports.createTask = async (req, res) => {
             stations: stationsByBranch[name]
         }));
 
-        console.log('branchDropdowns:', JSON.stringify(branchDropdowns, null, 2));
+//console.log('branchDropdowns:', JSON.stringify(branchDropdowns, null, 2));
 
         const userId = 3; // hvis du er hårdkodet til dev — men helst: req.user.id
         // Hvis du har req her (typisk i Express controller), brug req.user.id
