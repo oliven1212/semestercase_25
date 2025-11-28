@@ -13,8 +13,8 @@
 
 </section>
 
-<form id="taskForm" enctype="multipart/form-data">
-    <input type="hidden" name="taskId" value="{{this.id}}">
+<form id="taskForm" enctype="multipart/form-data" action="/uploadTask/{{task.id}}" method="post">
+    <input type="hidden" name="taskId" value="{{task.id}}">
 
     <section class="sec1">
         <h4>Upload Billeder</h4>
@@ -85,7 +85,7 @@
     </section>
 </form>
 <div class="submit-container">
-    <button type="button" id="submitAllBtn" style="display: none;">Gem alle</button>
+    <button type="submit" id="submitAllBtn" form="taskForm" style="display: none;">Gem alle</button>
 </div>
 
 <script src="/js/createTaskData.js"></script>

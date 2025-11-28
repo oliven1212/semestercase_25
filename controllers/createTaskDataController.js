@@ -61,11 +61,14 @@ exports.taskPageOne = async (req, res) => {
 
 
 exports.uploadTasks = async (req, res) => {
+    console.log(req.body);
+   
     try {
-        const { gasstationId, userId, products } = req.body;
+        const { products } = req.body;
         const beforePictures = req.files['beforePicture'] || []; // || betyder ELLER
         const afterPictures = req.files['afterPicture'] || [];
-
+console.log(beforePictures);
+console.log(afterPictures);
         // Valider input
         if (beforePictures.length === 0 || afterPictures.length === 0) {
             return res.status(400).json({
@@ -80,6 +83,13 @@ exports.uploadTasks = async (req, res) => {
                 error: 'Mindst ét produkt er påkrævet'
             });
         }
+    
+
+        const taskId = req.body.taskId || req.params.taskId;
+        console.log('xaxaxaxaxaxaxaxaxaxaxaxaxaxaxa');
+        
+
+
         // Opret Task 
         /* const task = await Task.create({
              gasstationId: gasstationId,
@@ -92,7 +102,7 @@ exports.uploadTasks = async (req, res) => {
         for (let file of beforePictures) {
             await Picture.pictureUpload({
                 id: file.filename + Date.now(),
-                taskId: req.params.taskId,
+                taskId: taskId,
                 filename: file.filename,
                 beforeAfter: false,
                 productImage: false //Skal fjernes
@@ -103,7 +113,7 @@ exports.uploadTasks = async (req, res) => {
         for (let file of afterPictures) {
             await Picture.pictureUpload({
                 id: file.filename + Date.now(),
-                taskId: req.params.taskId,
+                taskId: taskId,
                 filename: file.filename,
                 beforeAfter: true,
                 productImage: false //Skal fjernes
@@ -113,11 +123,14 @@ exports.uploadTasks = async (req, res) => {
         // Gem produkter 
         for (let product of parsedProducts) {
             ProductTask.create({
-                taskId: task.id,
+                taskId: taskId,
                 productId: product.id,
                 amount: product.amount
             });
         }
+
+        ProductTask.create(taskData);
+        Picture.create(taskData);
 
         return res.redirect(`/completedTask/${task.id}`);
 

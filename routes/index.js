@@ -24,7 +24,7 @@ router.get("/admin/products", adminListController.adminListProducts);
 router.get("/profile", profileController.profile);
 router.get("/createtaskdata/:taskId", createTaskDataController.taskPageOne);
 router.get("/taskHistorie", taskHistorieController.taskHistorie);
-router.post("/uploadTask", createTaskDataController.uploadMiddleware, createTaskDataController.uploadTasks);
+router.post("/uploadTask/:taskId", createTaskDataController.uploadMiddleware, createTaskDataController.uploadTasks);
 
 router.get("/completedTask/:taskId", createTaskDataController.uploadTasks);
 
