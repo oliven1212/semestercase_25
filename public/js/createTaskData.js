@@ -23,14 +23,12 @@ const selectedProducts = [];
 beforeInput.addEventListener('change', function () {
     const count = this.files.length;
     beforeCount.textContent = count > 0 ? `${count} valgt` : '';
-    checkSubmitButton();
 
 });
 
 afterInput.addEventListener('change', function () {
     const count = this.files.length;
     afterCount.textContent = count > 0 ? `${count} valgt` : '';
-    checkSubmitButton();
 });
 
 // Viser enhed når produkt vælges
@@ -54,7 +52,7 @@ addBtn.addEventListener('click', function () {
 
     // Tilføjer til array
     selectedProducts.push({
-        taskId: req.params.taskId,
+        taskId: 50,
         productId: productId,
         amount: amount
     });
