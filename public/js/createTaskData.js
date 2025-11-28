@@ -54,7 +54,7 @@ addBtn.addEventListener('click', function () {
 
     // Tilføjer til array
     selectedProducts.push({
-        taskId: req.params.taskId,
+        taskId: 50,
         productId: productId,
         amount: amount
     });

@@ -62,7 +62,7 @@ exports.taskPageOne = async (req, res) => {
 
 exports.uploadTasks = async (req, res) => {
     try {
-        const { gasstationId, userId, products } = req.body;
+        const { products } = req.body;
         const beforePictures = req.files['beforePicture'] || []; // || betyder ELLER
         const afterPictures = req.files['afterPicture'] || [];
 
@@ -113,7 +113,7 @@ exports.uploadTasks = async (req, res) => {
         // Gem produkter 
         for (let product of parsedProducts) {
             ProductTask.create({
-                taskId: task.id,
+                taskId: req.params.taskId,
                 productId: product.id,
                 amount: product.amount
             });
