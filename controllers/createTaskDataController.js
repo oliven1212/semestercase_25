@@ -39,7 +39,6 @@ exports.taskPageOne = async (req, res) => {
     });
 
     console.log(task);
-    console.log("jajajajajajajajajjaajajaj");
 
 
 
@@ -61,85 +60,81 @@ exports.taskPageOne = async (req, res) => {
 
 
 exports.uploadTasks = async (req, res) => {
-    console.log(req.body);
-   
-    try {
-        const { products } = req.body;
-        const beforePictures = req.files['beforePicture'] || []; // || betyder ELLER
-        const afterPictures = req.files['afterPicture'] || [];
-console.log(beforePictures);
-console.log(afterPictures);
-        // Valider input
-        if (beforePictures.length === 0 || afterPictures.length === 0) {
-            return res.status(400).json({
-                success: false,
-                error: 'Både før og efter billeder er påkrævet'
-            });
-        }
-        const parsedProducts = JSON.parse(products); //Kan eventuelt undlades
-        if (parsedProducts.length === 0) {
-            return res.status(400).json({
-                success: false,
-                error: 'Mindst ét produkt er påkrævet'
-            });
-        }
-    
+    const body = req.body;
+    const taskId = req.params.taskId;
+    console.log(req.files['beforePicture']);
+    console.log('_______________________________________________________________________________');
+    const beforePictures = req.files['beforePicture'] || []; // || betyder ELLER
+    const afterPictures = req.files['afterPicture'] || [];
+    let products;
 
-        const taskId = req.body.taskId || req.params.taskId;
-        console.log('xaxaxaxaxaxaxaxaxaxaxaxaxaxaxa');
-        
-
-
-        // Opret Task 
-        /* const task = await Task.create({
-             gasstationId: gasstationId,
-             userId: userId,
-             status: 'completed',
-             completedAt: new Date()
-         }); */
-
-        // Gem før-billeder
-        for (let file of beforePictures) {
-            await Picture.pictureUpload({
-                id: file.filename + Date.now(),
-                taskId: taskId,
-                filename: file.filename,
-                beforeAfter: false,
-                productImage: false //Skal fjernes
-            });
-        }
-
-        // Gem efter-billeder
-        for (let file of afterPictures) {
-            await Picture.pictureUpload({
-                id: file.filename + Date.now(),
-                taskId: taskId,
-                filename: file.filename,
-                beforeAfter: true,
-                productImage: false //Skal fjernes
-            });
-        }
-
-        // Gem produkter 
-        for (let product of parsedProducts) {
-            ProductTask.create({
-                taskId: taskId,
-                productId: product.id,
-                amount: product.amount
-            });
-        }
-
-        ProductTask.create(taskData);
-        Picture.create(taskData);
-
-        return res.redirect(`/completedTask/${task.id}`);
-
-    } catch (error) {
-        console.error('Submit task fejl:', error);
-        res.status(500).json({
+    // Valider input
+    if (beforePictures.length === 0 || afterPictures.length === 0) {
+        return res.status(400).json({
             success: false,
-            error: 'Kunne ikke gemme task'
+            error: 'Både før og efter billeder er påkrævet'
         });
     }
 
+    //convert product data into object arrays
+    if(typeof(body.productIdContainer) == 'string'){
+        products = [{
+            id: parseInt(body.productIdContainer),
+            amount: parseFloat(body.productAmountContainer)
+        }];
+    }else{
+        products = body.productIdContainer.map((item, i) => ({
+            id: parseInt(item),
+            amount: parseFloat(body.productAmountContainer[i])
+        }));
+    }
+
+    if (products.length === 0) {
+        return res.status(400).json({
+            success: false,
+            error: 'Mindst ét produkt er påkrævet'
+        });
+    }
+
+    // Gem før-billeder
+    for (let file of beforePictures) {
+        await Picture.create({
+            id: `123456789123456789123456789123456789`, //MAKE UUID!!!
+            taskId: taskId,
+            filename: file.filename,
+            beforeAfter: 0,
+            productImage: 0 //Skal fjernes
+        });
+    }
+
+    // Gem efter-billeder
+    for (let file of afterPictures) {
+        await Picture.create({
+            id: `123456789123456789123456789123456789`,
+            taskId: taskId,
+            filename: file.filename,
+            beforeAfter: 1,
+            productImage: 0 //Skal fjernes
+        });
+    }
+
+    // Gem produkter 
+    for (let product of products) {
+        ProductTask.create({
+            taskId: taskId,
+            productId: product.id,
+            amount: product.amount
+        });
+    }
+
+
+    return res.redirect(`/completedTask/${taskId}`);
+};
+
+
+exports.completedTask = async (req, res) => {
+    //Hent task data, and do it very fancy
+    res.render("home/completedTask", {
+
+    });
 };

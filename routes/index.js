@@ -26,7 +26,7 @@ router.get("/createtaskdata/:taskId", createTaskDataController.taskPageOne);
 router.get("/taskHistorie", taskHistorieController.taskHistorie);
 router.post("/uploadTask/:taskId", createTaskDataController.uploadMiddleware, createTaskDataController.uploadTasks);
 
-router.get("/completedTask/:taskId", createTaskDataController.uploadTasks);
+router.get("/completedTask/:taskId", createTaskDataController.completedTask);
 
 router.post("/createTask", createTaskController.logStart);
 

@@ -14,7 +14,6 @@
 </section>
 
 <form id="taskForm" enctype="multipart/form-data" action="/uploadTask/{{task.id}}" method="post">
-    <input type="hidden" name="taskId" value="{{task.id}}">
 
     <section class="sec1">
         <h4>Upload Billeder</h4>
@@ -83,6 +82,8 @@
             <!-- Her vises de valgte produkter -->
         </div>
     </section>
+    <select name="productIdContainer" id="productIdContainer" multiple class="hidden"></select>
+    <select name="productAmountContainer" id="productAmountContainer" multiple class="hidden"></select>
 </form>
 <div class="submit-container">
     <button type="submit" id="submitAllBtn" form="taskForm" style="display: none;">Gem alle</button>

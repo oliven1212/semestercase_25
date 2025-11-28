@@ -6,6 +6,8 @@ const selectedProductsDiv = document.getElementById('selectedProducts');
 const submitBtn = document.getElementById('submitAllBtn');
 const productSelect = document.getElementById('productId');
 const unitDisplay = document.getElementById('unit-display');
+const productIdContainer = document.getElementById('productIdContainer');
+const productAmountContainer = document.getElementById('productAmountContainer');
 
 //Tilføjer disse variabler til billede håndteringen
 
@@ -52,7 +54,6 @@ addBtn.addEventListener('click', function () {
 
     // Tilføjer til array
     selectedProducts.push({
-        taskId: 50,
         productId: productId,
         amount: amount
     });
@@ -66,6 +67,18 @@ addBtn.addEventListener('click', function () {
     `;
 
     selectedProductsDiv.appendChild(productDiv);
+
+    //Insert hidden data indo product selections
+    const productIdElement = document.createElement('option');
+    productIdElement.value = productId;
+    productIdElement.selected = true;
+    productIdContainer.append(productIdElement);
+    const productAmountElement = document.createElement('option');
+    productAmountElement.value = amount;
+    productAmountElement.selected = true;
+    productAmountContainer.append(productAmountElement);
+
+
 
     // Reset form
     productSelect.value = '';
@@ -88,58 +101,3 @@ selectedProductsDiv.addEventListener('click', function(e) {
         }
     }
 });
-
-// Gem alt (produkter og billeder)
-submitBtn.addEventListener('click', async function () {
-
-    return ;
-    //Her valdieres at alt er udfyldt
-    console.log(beforeInput.files);
-    console.log('_________________________');
-
-    if(beforeInput.files.length === 0){
-        alert('Upload mindst ét før billeder');
-        return;
-    }
-    if(afterInput.files.length === 0){
-        alert('Upload mindst ét efter billede');
-        return;
-
-    }
-    if(selectedProducts.length === 0){ //Denne kan muligvis undlades hvis de skal logge uden produkter
-        alert('Tilføj mindst ét produkt');
-        return;
-    }
-    
-
-
-
-
-
-    const taskData = new FormData();
-
-    //Tilføjer produkter som json 
-    taskData.append('products', JSON.stringify(selectedProducts));
-
-
-        submitBtn.disabled = true;
-        submitBtn.textContent = 'Gemmer...';
-     
-        const response = await fetch(`/uploadTask/${selectedProducts.taskId}`, {
-            method: 'POST',
-            body: taskData
-
-        }); 
-
-        const result = await response.json();
-
-         if (result.success) {
-            // Redirect til bekræftelsesside
-            window.location.href = `/completedTask/${result.taskId}`;
-        } else {
-            alert('Fejl: ' + result.error);
-            submitBtn.disabled = false;
-            submitBtn.textContent = 'Gem alle';
-        
-    };
- });

@@ -17,14 +17,19 @@ module.exports = (sequelize, DataTypes) => {
             beforeAfter,
             productImage
         }){
-            const pictures = await Picture.create({
-                //id: taskData.id
-                taskId: taskData.taskId,
-                fileName: taskData.fileName,
-                beforeAfter: taskData.beforeAfter,
-                productImage: taskData.productImage
+            console.log(id);
+            console.log(taskId);
+            console.log(fileName);
+            console.log(beforeAfter);
+            console.log(productImage);
+            const picture = await Picture.create({
+                id: id,
+                taskId: taskId,
+                filename: fileName,
+                beforeAfter: beforeAfter,
+                productImage: productImage
             });
-             return pictures;
+             return picture;
         }
         static associate(models) {
             Picture.belongsTo(models.Task, {foreignKey: "taskId"});

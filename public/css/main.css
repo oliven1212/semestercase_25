@@ -40,10 +40,10 @@ datalist{
 }
 
 .hidden, .hidden *{
-  display: none;
-  border: none;
-  padding: 0;
-  margin: 0;
+  display: none !important;
+  border: none !important;
+  padding: 0 !important;
+  margin: 0 !important;
 }
 
 
