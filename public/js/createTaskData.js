@@ -23,14 +23,12 @@ const selectedProducts = [];
 beforeInput.addEventListener('change', function () {
     const count = this.files.length;
     beforeCount.textContent = count > 0 ? `${count} valgt` : '';
-    checkSubmitButton();
 
 });
 
 afterInput.addEventListener('change', function () {
     const count = this.files.length;
     afterCount.textContent = count > 0 ? `${count} valgt` : '';
-    checkSubmitButton();
 });
 
 // Viser enhed når produkt vælges
