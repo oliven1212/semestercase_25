@@ -87,10 +87,13 @@ exports.createTask = async (req, res) => {
 
 
 exports.logStart = async (req, res) => {
+    const body = req.body;
+    const gasstationIdSelection = parseInt([body['station-OK Plus'], body['station-Shell'], body['station-Circle K'], body['station-Uno X'], body['station-Q8'], body['station-Ukendt']].find(value => value != ''));
     const taskId = await Task.create({
-        gasstationId: req.body.gasstation,
+        gasstationId: gasstationIdSelection,
+        userId: 2, //update to currently logged in user
+        startTime: body.startTime,
     });
-console.log(taskId.toJSON());
     taskId.toJSON();
     res.redirect(`/createtaskdata/${taskId.id}`);
 };

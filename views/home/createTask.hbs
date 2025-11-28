@@ -4,65 +4,62 @@
 </section>
 
 
+<form action="/createTask" method="post" id="startLog">
 
-<section>
-    <!-- Trigger/Open The Modal -->
-    <button id="myBtn">Open Modal</button>
+    <section>
+        <!-- Trigger/Open The Modal -->
+        <button id="myBtn" type="button">Open Modal</button>
 
-    <!-- The Modal -->
-    <div id="myModal" class="modal">
+        <!-- The Modal -->
+        <div id="myModal" class="modal">
 
-        <!-- Modal content -->
-        <div class="modal-content">
-            <span class="close">&times;</span>
-            <h1>Vælg tankstation</h1>
+            <!-- Modal content -->
+            <div class="modal-content">
+                <span class="close">&times;</span>
+                <h1>Vælg tankstation</h1>
 
-            {{!-- loop over hver branch --}}
-            {{#each branchDropdowns}}
-            <div class="branch-dropdown">
-                {{!-- <label for="station-{{name}}">{{name}}</label>--}}
-                <select id="station-{{name}}" name="station-{{name}}" class="station-select">
-                    <option value="">{{name}}</option>
+                {{!-- loop over hver branch --}}
+                {{#each branchDropdowns}}
+                <div class="branch-dropdown">
+                    {{!-- <label for="station-{{name}}">{{name}}</label>--}}
+                    <select id="station-{{name}}" name="station-{{name}}" class="station-select">
+                        <option value="">{{name}}</option>
 
-                    {{!-- loop over stationer under denne branch --}}
-                    {{#each stations}}
-                    <option value="{{id}}" data-address="{{address}}">
-                        {{address}}
-                    </option>
-                    {{/each}}
-                </select>
+                        {{!-- loop over stationer under denne branch --}}
+                        {{#each stations}}
+                        <option value="{{id}}" data-address="{{address}}">
+                            {{address}}
+                        </option>
+                        {{/each}}
+                    </select>
+                </div>
+                {{/each}}
+
+
+                <!-- Knap til at vælge station -->
+                <button id="selectStationBtn" type="button">Vælg station</button>
             </div>
-            {{/each}}
-
-
-            <!-- Knap til at vælge station -->
-            <button id="selectStationBtn" type="button">Vælg station</button>
         </div>
-    </div>
-</section>
+    </section>
 
-<section>
-    <!-- start rengøring ved (valgte tankstation) -->
-    <p>start rengøring ved <span id="selected-station"></span></p>
-</section>
-
-
-<section>
-    <div id="calendar" style="max-width:900px;margin:20px auto;"></div>
-    <label for="startTime">Dato & tid</label>
-    <input id="startTime" name="startTime" type="datetime-local" required />
-</section>
+    <section>
+        <!-- start rengøring ved (valgte tankstation) -->
+        <p>start rengøring ved <span id="selected-station"></span></p>
+    </section>
 
 
-<section></section>
-<!--start log-->
-<button>start log</button>
-</section>
+    <section>
+        <div id="calendar" style="max-width:900px;margin:20px auto;"></div>
+        <label for="startTime">Dato & tid</label>
+        <input id="startTime" name="startTime" type="datetime-local" required />
+    </section>
 
-  <form action="/createTask" method="post" id="deleteGasstation">
-  <input type="number" name="gasstation" id="gasstation" value="1">
-  <button type="submit">helt rigtig <data value=""></data></button>
-  </form>
+
+    <section>
+    <!--start log-->
+    <button form="startLog" type="submit">start log</button>
+    </section>
+</form>
 
 
 <link href="https://cdn.jsdelivr.net/npm/@fullcalendar/core@6.1.7/main.min.css" rel="stylesheet" />
