@@ -23,9 +23,6 @@ exports.profile = async (req, res) => {
 
 
 
-
-
-
 exports.adminUser = async (req, res) => {
     const user = await User.findAll({
         where: { id: req.params.userId },
@@ -44,7 +41,6 @@ exports.adminUser = async (req, res) => {
     const cities = await City.findAll({
         attributes:['zipCode','name'],
         raw: true
-
     });
     const roles = await Role.findAll({
         raw: true,
@@ -74,7 +70,6 @@ exports.updateUser = async (req, res) => {
 
     }
 
-//---------------------------------------------------------------------------------------------------
     await Gasstation.updateGasstation({
         id: req.params.userId,
         branchId: req.body.branchId,
