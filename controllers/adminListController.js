@@ -36,8 +36,8 @@ exports.adminListGasstations = async (req, res) => {
 
     // Map over users array to add name property to each user
     const stationsMap = stations.map(gasstation => ({
-        ...gasstation,
-        name: `${gasstation.address}, ${gasstation['City.name']}`,
+        ...gasstation, // ... spread operator
+        name: `${gasstation.address}, ${gasstation['City.name']}`, // ` ` template literal
         contact: `Email: ${gasstation.contactEmail}  Telefon: ${gasstation.contactPhone}`,
         //.replace(/\/$/, "") is regex to remove any trailing "/"
         link: `${req.originalUrl.replace(/\/$/, "")}/${gasstation.id}`

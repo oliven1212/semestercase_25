@@ -22,9 +22,6 @@ module.exports = {
             beforeAfter: {
                 type: Sequelize.BOOLEAN
             },
-            productImage: {
-                type: Sequelize.BOOLEAN
-            },
             createdAt: {
                 allowNull: false,
                 type: Sequelize.DATE
