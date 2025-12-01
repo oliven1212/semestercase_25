@@ -70,13 +70,13 @@ exports.updateUser = async (req, res) => {
 
     }
 
-    await Gasstation.updateGasstation({
+    await User.updateUser({
         id: req.params.userId,
-        branchId: req.body.branchId,
+        firstName: req.body.firstName,
+        lastName: req.body.lastName,
+        email: req.body.email,
+        phone: req.body.phone,
         address: req.body.address,
-        contactEmail: req.body.contactEmail,
-        contactPhone: req.body.contactPhone,
-        frontSpace: req.body.frontSpace,
         cityCode: zipCode,
     });
     
