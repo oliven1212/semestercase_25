@@ -13,7 +13,7 @@ router.get("/login", isNotAuthenticated, (res, req) => {
 });
 
 //Post/auth/login
-router.post("/login", isNotAuthenticated, (req, res) => {
+router.post("/login", isNotAuthenticated, async (req, res) => {
   try {
     const { email, password } = req.body;
     //validering
@@ -25,11 +25,10 @@ router.post("/login", isNotAuthenticated, (req, res) => {
     const user = users.find((u) => u.email === email);
     if (!user) {
       req.session.error = "forkert email eller adgangskode";
-      return res.render("/login");
+      return res.render("login");
     }
     //verificere adgangskode
-    const isValidPassword = await;
-    bcrypt.compare(password, user.password);
+    const isValidPassword = await bcrypt.compare(password, user.password);
     if (!isValidPassword) {
       req.session.error = "forkert email eller adgangskode";
       return res.redirect("/login");
@@ -38,7 +37,7 @@ router.post("/login", isNotAuthenticated, (req, res) => {
     req.session.user = {
       id: user.id,
       userName: user.firstname + user.lastname,
-      email: user.mail,
+      email: user.email,
     };
     res.redirect("/createTask");
   } catch (error) {
