@@ -39,6 +39,13 @@ section.modifySection form div {
     height: 20%;
 
 }
+.functionButtons button {
+    border: none;
+    background-color: transparent;
+}
+.functionButtons button:hover {
+    cursor: pointer;
+}
 .functionButtons button:first-child {
     justify-self: start;
 }
