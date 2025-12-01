@@ -24,7 +24,7 @@ exports.profile = async (req, res) => {
 
 
 exports.adminUser = async (req, res) => {
-    const user = await User.findAll({
+    const user = await User.findOne({
         where: { id: req.params.userId },
         include: [
             {

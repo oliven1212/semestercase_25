@@ -2,30 +2,30 @@
 
 
 <section class="modifySection">
-    <form action="/admin/users/{{user.[0].id}}/update" method="post" id="updateUser">
+    <form action="/admin/users/{{user.id}}/update" method="post" id="updateUser">
     <div>
         <label for="firstName">For navn:</label>
-        <input type="text" id="firstName" name="firstName" value="{{user.[0].firstName}}">
+        <input type="text" id="firstName" name="firstName" value="{{user.firstName}}">
     </div>
     <div>
         <label for="lastName">Efter navn:</label>
-        <input type="text" id="lastName" name="lastName" value="{{user.[0].lastName}}">
+        <input type="text" id="lastName" name="lastName" value="{{user.lastName}}">
     </div>
     <div>
         <label for="email">Email:</label>
-        <input type="email" id="email" name="email" value="{{user.[0].email}}">
+        <input type="email" id="email" name="email" value="{{user.email}}">
     </div>
     <div>
         <label for="phone">Telefon:</label>
-        <input type="text" id="phone" name="phone" value="{{user.[0].phone}}">
+        <input type="text" id="phone" name="phone" value="{{user.phone}}">
     </div>
     <div>
         <label for="address">Address:</label>
-        <input type="text" id="address" name="address" value="{{user.[0].address}}">
+        <input type="text" id="address" name="address" value="{{user.address}}">
     </div>
     <div>
         <label for="city">By:</label>
-        <input list="cities" id="city" name="city" value="{{#if user.[0].[City.zipCode]}}{{user.[0].[City.name]}} ({{user.[0].[City.zipCode]}}){{/if}}" autocomplete="off">
+        <input list="cities" id="city" name="city" value="{{#if user.[City.zipCode]}}{{user.[City.name]}} ({{user.[City.zipCode]}}){{/if}}" autocomplete="off">
     
         <datalist id="cities">
             {{#each cities}}
@@ -38,7 +38,7 @@
         <label for="roleId">Rolle:</label>
         <select name="roleId" id="roleId">
             {{#each roles}}
-                <option value="{{this.id}}" {{#ifEq this.id ../user.[0].roleId}}selected{{/ifEq}}>{{this.name}}</option>
+                <option value="{{this.id}}" {{#ifEq this.id ../user.roleId}}selected{{/ifEq}}>{{this.name}}</option>
             {{/each}}
         </select>
     </div>
@@ -63,5 +63,5 @@
         </button>
     </div>
     </form>
-    <form class="hidden" action="/admin/users/{{user.[0].id}}/delete" method="post" id="deleteUser" onsubmit="return confirm('Slet nuværende tankstation?');"/>
+    <form class="hidden" action="/admin/users/{{user.id}}/delete" method="post" id="deleteUser" onsubmit="return confirm('Slet nuværende tankstation?');"/>
 </section>
