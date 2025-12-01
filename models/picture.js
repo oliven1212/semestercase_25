@@ -14,20 +14,17 @@ module.exports = (sequelize, DataTypes) => {
             id,
             taskId,
             fileName,
-            beforeAfter,
-            productImage
+            beforeAfter
         }){
             console.log(id);
             console.log(taskId);
             console.log(fileName);
             console.log(beforeAfter);
-            console.log(productImage);
             const picture = await Picture.create({
                 id: id,
                 taskId: taskId,
                 filename: fileName,
-                beforeAfter: beforeAfter,
-                productImage: productImage
+                beforeAfter: beforeAfter
             });
              return picture;
         }
@@ -40,8 +37,7 @@ module.exports = (sequelize, DataTypes) => {
     Picture.init({
         taskId: DataTypes.INTEGER,
         filename: DataTypes.STRING,
-        beforeAfter: DataTypes.BOOLEAN,
-        productImage: DataTypes.BOOLEAN
+        beforeAfter: DataTypes.BOOLEAN
     }, {
         sequelize,
         modelName: 'Picture',
