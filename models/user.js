@@ -8,9 +8,6 @@ const {
     Model
 } = require('sequelize');
 
-<<<<<<< Updated upstream
->>>>>>> Stashed changes
-=======
 >>>>>>> Stashed changes
 module.exports = (sequelize, DataTypes) => {
   class User extends Model {
