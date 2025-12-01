@@ -66,7 +66,7 @@ document.addEventListener('DOMContentLoaded', function () {
         // Skriv adressen ind i <span id="selected-station">
         selectedStationText.textContent = address;
 
-        // (Valgfrit) Luk modalen, hvis du har kode til det
+        // Luk modalen
         const modal = document.getElementById('myModal');
         if (modal) {
             modal.style.display = 'none';

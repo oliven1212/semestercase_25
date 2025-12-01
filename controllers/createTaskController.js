@@ -9,23 +9,23 @@ exports.createTask = async (req, res) => {
             raw: true
         });
 
-        // 1) Hent alle gasstationer + deres branch
+        //  Hent alle gasstationer + deres branch
         const gasstationsRaw = await Gasstation.findAll({
-            attributes: ['id', 'address'], // skift 'address' hvis feltet hedder noget andet
+            attributes: ['id', 'address'], 
             include: [
                 {
                     model: Branch,
-                    attributes: ['name'] // fx Q8, Shell, osv.
+                    attributes: ['name'] 
                 }
             ]
-            // VIGTIGT: ingen raw: true her, ellers findes gs.get(...) ikke
+            
         });
 
-        // 2) Lav dem om til plain JS-objekter
+        // Lav dem om til plain JS-objekter
         const gasstations = gasstationsRaw.map(gs => gs.get({ plain: true }));
 
 
-        // 3) Gruppér efter branch-navn
+        // Gruppér efter branch-navn
         const stationsByBranch = {};
         gasstations.forEach(gs => {
             const branchName = gs.Branch ? gs.Branch.name : 'Ukendt';
@@ -42,7 +42,7 @@ exports.createTask = async (req, res) => {
 
 //console.log('stationsByBranch:', JSON.stringify(stationsByBranch, null, 2));
 
-        // 4) Lav array til Handlebars: [{ name: 'Q8', stations: [...] }, ...]
+        // Lav array til Handlebars
         const branchDropdowns = Object.keys(stationsByBranch).map(name => ({
             name,
             stations: stationsByBranch[name]
@@ -50,10 +50,10 @@ exports.createTask = async (req, res) => {
 
 //console.log('branchDropdowns:', JSON.stringify(branchDropdowns, null, 2));
 
-        const userId = 3; // hvis du er hårdkodet til dev — men helst: req.user.id
-        // Hvis du har req her (typisk i Express controller), brug req.user.id
+        const userId = 3; 
+       
         const tasksRaw = await Task.findAll({
-            where: { userId }, // tilpas hvis du bruger req.user.id
+            where: { userId }, 
             order: [['startTime', 'ASC']]
             });
         const tasks = tasksRaw.map(t => t.get({ plain: true }));

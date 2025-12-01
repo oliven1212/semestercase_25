@@ -1,6 +1,14 @@
+<<<<<<< Updated upstream
 "use strict";
 const bcrypt = require("bcrypt");
 const { Model } = require("sequelize");
+=======
+'use strict';
+const {
+    Model
+} = require('sequelize');
+
+>>>>>>> Stashed changes
 module.exports = (sequelize, DataTypes) => {
   class User extends Model {
     static async getAllUserIds() {
@@ -11,6 +19,7 @@ module.exports = (sequelize, DataTypes) => {
       return allUsers.map((user) => user.id);
     }
 
+<<<<<<< Updated upstream
     static async updateUser({
       id,
       firstName,
@@ -89,3 +98,23 @@ module.exports = (sequelize, DataTypes) => {
   });
   return User;
 };
+=======
+    User.init({
+        firstName: DataTypes.STRING,
+        lastName: DataTypes.STRING,
+        email: DataTypes.STRING,
+        roleId: DataTypes.INTEGER,
+        password: DataTypes.STRING,
+        phone: DataTypes.STRING,
+        address: DataTypes.STRING
+    }, {
+        sequelize,
+        modelName: 'User',
+        defaultScope: {
+            attributes: { exclude: ['password'] },
+        }
+    });
+    
+    return User;
+};
+>>>>>>> Stashed changes
