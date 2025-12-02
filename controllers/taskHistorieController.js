@@ -64,6 +64,7 @@ exports.taskHistorie = async (req, res) => {
 
     raw: true,
   });
+
   const timeStamp = {
     date: `${task[0].startTime.getDate()}/${task[0].startTime.getMonth()}/${task[0].startTime.getFullYear()}`,
     time: `${task[0].startTime.getHours()}:${task[0].startTime.getMinutes()}`,
