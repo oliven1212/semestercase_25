@@ -1,5 +1,5 @@
 const { User } = require("../models");
-const { hashPassword, comparePassword } = require("../utility/auth");
+const { hashPassword, comparePassword, saltRounds} = require("../utility/auth");
 
 
 const bcrypt = require("bcrypt");
