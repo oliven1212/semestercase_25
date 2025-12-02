@@ -114,14 +114,6 @@ exports.imageUpload = async (req, res) => {
     const beforePictures = req.files['beforePicture'] || []; // || betyder ELLER
     const afterPictures = req.files['afterPicture'] || [];
 
-    // Valider input
-    if (beforePictures.length === 0 || afterPictures.length === 0) {
-        return res.status(400).json({
-            success: false,
-            error: 'Både før og efter billeder er påkrævet'
-        });
-    }
-
 
     // Gem før-billeder
     for (let file of beforePictures) {
@@ -145,7 +137,7 @@ exports.imageUpload = async (req, res) => {
         });
     }
 
-    return res.redirect(`/createtaskdata/${taskId}/images`);
+    return res.redirect(`/createtaskdata/${taskId}`);
 };
 
 exports.viewImages = async (req, res) => {
