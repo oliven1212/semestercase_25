@@ -2,20 +2,21 @@
 
 section {
     gap: 8px;
-        color: var(--lightBlue)!important;
-
+    color: var(--lightBlue)!important;
+    margin-left: var(--sideMargin);
+    margin-right: var(--sideMargin);
+    width: var(--sectionWidth);
+    box-sizing: border-box;
 
 }
 
-.sec1 {
+.sec1 form {
     background-color: var(--darkBlue);
-    margin-left: 30px;
-    margin-right: 30px;
     border-radius: 5px;
     padding: 20px;
     text-align: center;
     display: grid;
-    grid-template-columns: 1fr 1fr;
+    grid-template-columns: 1fr;
     gap: 10px;
     align-items: start;
     color: var(--lightBlue) !important; 
@@ -27,12 +28,27 @@ section {
     color: var(--lightBlue);
 }
 
-.pic-upload,
 .sec1>div:nth-child(3) {
     display: flex;
     flex-direction: column;
     align-items: center;
     gap: 10px;
+}
+.pic-upload{
+    text-align: center;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+    align-items: start;
+
+}
+.pic-upload div{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.pic-upload div *{
+    display: block;
 }
 
 .camera {
@@ -53,15 +69,13 @@ section {
 }
 
 .uploadet {
-    grid-column: 1 / -1;
-    background-color: var(--darkBlue);
     border: none;
     color: var(--lightBlue);
     text-decoration: underline;
     font-size: 16px;
     font-weight: 700;
     cursor: pointer;
-    margin-top: 10px;
+    padding-top: 10px;
     font-style: italic;
 }
 
@@ -73,8 +87,7 @@ h2 {
 
 .sec2 {
     background-color: var(--darkBlue);
-    margin-left: 30px;
-    margin-right: 30px;
+
     border-radius: 5px;
     padding: 20px;
     padding-bottom: 0px !important;
@@ -257,7 +270,7 @@ h2 {
     color: var(--green);
     font-size: 14px;
     font-weight: bold;
-    margin-left: 10px;
+    padding-bottom: 10px;
 }
 
 .taskImages {
