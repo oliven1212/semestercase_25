@@ -23,13 +23,6 @@ router.get("/admin/products", adminListController.adminListProducts);
 router.get("/profile", profileController.profile);
 router.get("/createtaskdata/:taskId", createTaskDataController.taskPageOne);
 router.get("/taskHistorie", taskHistorieController.taskHistorie);
-<<<<<<< HEAD
-router.post(
-  "/uploadTask/:taskId",
-  createTaskDataController.uploadMiddleware,
-  createTaskDataController.uploadTasks,
-);
-=======
 
 
 router.post("/uploadTask/:taskId", createTaskDataController.uploadTasks);
@@ -37,7 +30,6 @@ router.post("/uploadTaskImage/:taskId", createTaskDataController.uploadMiddlewar
 
 router.get("/createtaskdata/:taskId/images", createTaskDataController.viewImages);
 router.post("/createtaskdata/:taskId/images", createTaskDataController.deleteImage);
->>>>>>> 67f8c4a6cf6dab28509ce3dffb9ac32b9e62c8a4
 
 router.get("/completedTask/:taskId", createTaskDataController.completedTask);
 
