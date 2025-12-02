@@ -138,7 +138,7 @@ exports.imageUpload = async (req, res) => {
         }
     }
 console.log(`AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAh`);
-    return res.redirect(`/completedTask/${taskId}`);
+    return res.redirect(`/createtaskdata/${taskId}`);
 };
 
 
