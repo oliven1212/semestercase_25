@@ -62,27 +62,16 @@ exports.taskPageOne = async (req, res) => {
 exports.uploadTasks = async (req, res) => {
     const body = req.body;
     const taskId = req.params.taskId;
-    console.log(req.files['beforePicture']);
-    console.log('_______________________________________________________________________________');
-    const beforePictures = req.files['beforePicture'] || []; // || betyder ELLER
-    const afterPictures = req.files['afterPicture'] || [];
     let products;
 
-    // Valider input
-    if (beforePictures.length === 0 || afterPictures.length === 0) {
-        return res.status(400).json({
-            success: false,
-            error: 'Både før og efter billeder er påkrævet'
-        });
-    }
 
     //convert product data into object arrays
-    if(typeof(body.productIdContainer) == 'string'){
+    if (typeof (body.productIdContainer) == 'string') {
         products = [{
             id: parseInt(body.productIdContainer),
             amount: parseFloat(body.productAmountContainer)
         }];
-    }else{
+    } else {
         products = body.productIdContainer.map((item, i) => ({
             id: parseInt(item),
             amount: parseFloat(body.productAmountContainer[i])
@@ -95,6 +84,44 @@ exports.uploadTasks = async (req, res) => {
             error: 'Mindst ét produkt er påkrævet'
         });
     }
+
+
+
+    // Gem produkter 
+    for (let product of products) {
+        ProductTask.create({
+            taskId: taskId,
+            productId: product.id,
+            amount: product.amount
+        });
+    }
+
+
+    return res.redirect(`/completedTask/${taskId}`);
+};
+
+
+exports.completedTask = async (req, res) => {
+    //Hent task data, and do it very fancy
+    res.render("home/completedTask", {
+
+    });
+};
+
+exports.imageUpload = async (req, res) => {
+    const taskId = req.params.taskId;
+
+    const beforePictures = req.files['beforePicture'] || []; // || betyder ELLER
+    const afterPictures = req.files['afterPicture'] || [];
+
+    // Valider input
+    if (beforePictures.length === 0 || afterPictures.length === 0) {
+        return res.status(400).json({
+            success: false,
+            error: 'Både før og efter billeder er påkrævet'
+        });
+    }
+
 
     // Gem før-billeder
     for (let file of beforePictures) {
@@ -118,23 +145,17 @@ exports.uploadTasks = async (req, res) => {
         });
     }
 
-    // Gem produkter 
-    for (let product of products) {
-        ProductTask.create({
-            taskId: taskId,
-            productId: product.id,
-            amount: product.amount
-        });
-    }
-
-
-    return res.redirect(`/completedTask/${taskId}`);
+    return res.redirect(`/createtaskdata/${taskId}/images`);
 };
 
+exports.viewImages = async (req, res) => {
+    const taskId = req.params.taskId;   
+    const pictures = await Picture.findAll({    
+        where: { taskId: taskId },
+        raw: true
+    });
 
-exports.completedTask = async (req, res) => {
-    //Hent task data, and do it very fancy
-    res.render("home/completedTask", {
-
+    res.render("home/taskImages", {
+        pictures: pictures
     });
 };

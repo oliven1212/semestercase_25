@@ -11,7 +11,6 @@ const productAmountContainer = document.getElementById('productAmountContainer')
 
 //Tilføjer disse variabler til billede håndteringen
 
-const taskForm = document.getElementById('taskForm');
 const beforeInput = document.getElementById('beforeInput');
 const afterInput = document.getElementById('afterInput');
 const beforeCount = document.getElementById('beforeCount');

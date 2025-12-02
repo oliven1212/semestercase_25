@@ -1,0 +1,19 @@
+<h2>Før billeder</h2>
+{{#each pictures}}
+{{#ifEq this.beforeAfter 0}}
+
+<img class="taskImages" src="/imgUploads/{{this.filename}}" alt="Before image">
+{{/ifEq}}
+{{/each}}
+
+<h2>Efter billeder</h2>
+{{#each pictures}}
+{{#ifEq this.beforeAfter 1}}
+<img class="taskImages" src="/imgUploads/{{this.filename}}" alt="After image">
+{{/ifEq}}
+{{/each}}
+
+
+<link rel="stylesheet" type="text/css" href="/css/taskPO.css">
+
+ 
