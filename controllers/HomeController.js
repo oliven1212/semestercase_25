@@ -15,8 +15,9 @@ exports.loginSend = async (req, res) => {
 
   const user = await User.findOne({
     where: { email: email },
+    attributes: ["id", "email", "password"],
+    raw: true,
   });
-  const valid = await comparePassword(password, user.password, saltRounds);
-
-  console.log(valid, email, password, user);
+  console.log(email, user.password, user);
+  const valid = await comparePassword(password, user.password);
 };

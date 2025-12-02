@@ -6,11 +6,12 @@ function isNotAuthenticated(req, res, next) {
   }
   next();
 }
-function isAuthenticated(req, res, next) {
-  if (req.session.user.roleId === "1") {
+function rolePermission(req, res, next) {
+  console.log("-------------------------");
+  console.log(req.session);
+  if (req.session.user.roleId === 1) {
     return res.redirect("/admin/list");
-  }
-  if (req.session.user.roleId === "2") {
+  } else if (req.session.user.roleId === 2) {
     return res.redirect("/gasstation");
   } else {
     return res.redirect("/createtask");
@@ -19,6 +20,6 @@ function isAuthenticated(req, res, next) {
 }
 
 module.exports = {
-  isAuthenticated,
+  rolePermission,
   isNotAuthenticated,
 };

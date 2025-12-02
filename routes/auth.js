@@ -3,7 +3,7 @@ const bcrypt = require("bcrypt");
 const router = express.Router();
 const {
   isNotAuthenticated,
-  isAuthenticated,
+  rolePermission,
 } = require("../middleware/authentication");
 const { User } = require("../models");
 
@@ -15,18 +15,21 @@ router.get("/login", isNotAuthenticated, (req, res) => {
 });
 
 //admin-only
-router.get("/admin/list", isAuthenticated(1), (req, res) => {
+router.get("/admin/list", rolePermission(1), (req, res) => {
   res.render("admin/list", { user: req.session.user });
 });
-router.get("/gasstation", isAuthenticated(2), (req, res) => {
+router.get("/gasstation", rolePermission(2), (req, res) => {
   res.render("/gasstation", { user: req.session.user });
 });
-router.get("/createTask", isAuthenticated(3), (req, res) => {
+router.get("/createTask", rolePermission(3), (req, res) => {
   res.render("/createTask", { user: req.session.user });
 });
 
 //Post/auth/login
-router.post("/login", isNotAuthenticated, isAuthenticated, async (req, res) => {
+router.post("/login", rolePermission, async (req, res) => {
+  console.log("lllllllllllllllllllllllllllllllllllllllllllllllllllllllll");
+  console.log(req.session.user);
+
   try {
     const { email, password } = req.body;
     //validering
@@ -59,4 +62,3 @@ router.post("/login", isNotAuthenticated, isAuthenticated, async (req, res) => {
     res.redirect("/login");
   }
 });
-console.log(req.session.user);
