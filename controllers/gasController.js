@@ -13,8 +13,6 @@ exports.gasstation = async (req, res) => {
   });
   const gasstationIds = gasstationId.map(link => link.gasstationId);
 
-
-
   const gasstations = await Gasstation.findAll({
     attributes: ['id', 'branchId', 'address', 'contactEmail', 'contactPhone', 'frontSpace'],
     where: { id: gasstationIds },

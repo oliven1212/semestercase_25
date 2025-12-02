@@ -68,7 +68,7 @@ addBtn.addEventListener('click', function () {
 
     selectedProductsDiv.appendChild(productDiv);
 
-    //Insert hidden data indo product selections
+    //Insert hidden data into product selections
     const productIdElement = document.createElement('option');
     productIdElement.value = productId;
     productIdElement.selected = true;
@@ -86,7 +86,7 @@ addBtn.addEventListener('click', function () {
     unitDisplay.textContent = '';
 
     // Vis submit knap
-    submitBtn.style.display = 'block';
+
 });
 
 // Fjern produkt fra listen (delegeret event listener)
@@ -96,8 +96,5 @@ selectedProductsDiv.addEventListener('click', function(e) {
         selectedProducts.splice(index, 1);
         e.target.parentElement.remove();
 
-        if (selectedProducts.length === 0) {
-            submitBtn.style.display = 'none';
-        }
     }
 });
