@@ -17,10 +17,10 @@ exports.loginSend = async (req, res) => {
   const { email, password } = req.body;
   console.log(req.body);
 
-  comparePassword(password, await hashPassword(password, saltRounds));
   const user = await User.findOne({
     where: { email: email },
   });
+  const valid = await comparePassword(password, user.password);
 
   console.log(email, password, user);
 };
