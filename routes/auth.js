@@ -8,7 +8,7 @@ const {
 const { User } = require("../models");
 
 //get auth login
-router.get("/login", isNotAuthenticated, (res, req) => {
+router.get("/login", isNotAuthenticated, (req, res) => {
   res.render("login", {
     error: req.session.error,
   });
