@@ -1,12 +1,12 @@
 //middleware
 
-function isAuthenticated(req, res, next) {
+function isNotAuthenticated(req, res, next) {
   if (!req.session.user) {
     return res.redirect("/home/login");
   }
   next();
 }
-function isNotAuthenticated(req, res, next) {
+function isAuthenticated(req, res, next) {
   if (req.session.user.roleId === "1") {
     return res.redirect("/admin/list");
   }
