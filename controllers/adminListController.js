@@ -19,18 +19,13 @@ exports.adminListUsers = async (req, res) => {
         title: 'Liste af brugere',
         message: 'Opret ny bruger',
         createNew: `/admin/users/new`,
-        content: usersMap,
-        type: 'users'
+        content: usersMap
     });
 };
 
 exports.newUserStart = async (req, res) => {
     // Create a new user with minimal required fields
     const newUser = await User.create({
-        firstName: '',
-        lastName: '',
-        email: '',
-        phone: ''
     });
     res.redirect(`/admin/users/${newUser.id}`);
 };
@@ -43,7 +38,6 @@ exports.adminListGasstations = async (req, res) => {
         }],
         raw: true
     });
-    console.log(stations);
 
     // Map over users array to add name property to each user
     const stationsMap = stations.map(gasstation => ({
@@ -57,8 +51,16 @@ exports.adminListGasstations = async (req, res) => {
     res.render("home/adminList", {
         title: 'Liste af tankstationer',
         message: 'Opret ny tankstation',
-        content: stationsMap
+        content: stationsMap,
+        createNew: `/admin/gasstations/new`,
     });
+};
+
+exports.newGasstationStart = async (req, res) => {
+    // Create a new user with minimal required fields
+    const newStation = await Gasstation.create({
+    });
+    res.redirect(`/admin/gasstations/${newStation.id}`);
 };
 
 exports.adminListProducts = async (req, res) => {
@@ -80,6 +82,13 @@ exports.adminListProducts = async (req, res) => {
         title: 'Liste af produkter',
         message: 'Opret nyt produkt',
         content: productsMap,
-        type: 'products'
+        createNew: `/admin/products/new`
     });
+};
+
+exports.newProductStart = async (req, res) => {
+    // Create a new user with minimal required fields
+    const newProduct = await Product.create({
+    });
+    res.redirect(`/admin/products/${newProduct.id}`);
 };

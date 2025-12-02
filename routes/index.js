@@ -35,18 +35,10 @@ router.get("/completedTask/:taskId", createTaskDataController.completedTask);
 
 router.post("/createTask", createTaskController.logStart);
 
-router.get(
-  "/admin/gasstations/:gasId",
-  modifyGasstationController.adminGasstation,
-);
-router.post(
-  "/admin/gasstations/:gasId/update",
-  modifyGasstationController.updateGasstation,
-);
-router.post(
-  "/admin/gasstations/:gasId/delete",
-  modifyGasstationController.deleteGasstation,
-);
+router.get("/admin/gasstations/:gasId", modifyGasstationController.adminGasstation,);
+router.post("/admin/gasstations/new", adminListController.newGasstationStart);
+router.post("/admin/gasstations/:gasId/update", modifyGasstationController.updateGasstation,);
+router.post("/admin/gasstations/:gasId/delete", modifyGasstationController.deleteGasstation,);
 
 router.get("/admin/users/:userId", profileController.adminUser);
 router.post("/admin/users/new", adminListController.newUserStart);
@@ -56,14 +48,9 @@ router.get("/admin/users/:userId/tasks", profileController.tasks);
 router.get("/admin/users/:userId/gasstations", profileController.gasstations);
 
 router.get("/admin/products/:productId", productController.adminProducts);
-router.post(
-  "/admin/products/:productId/update",
-  productController.updateProduct,
-);
-router.post(
-  "/admin/products/:productId/delete",
-  productController.deleteProduct,
-);
+router.post("/admin/products/new", adminListController.newProductStart);
+router.post("/admin/products/:productId/update", productController.updateProduct,);
+router.post("/admin/products/:productId/delete", productController.deleteProduct,);
 
 //router.get("/admin/tasks/:taskId", taskController);
 //router.post("/admin/tasks/:taskId/update", taskController);
