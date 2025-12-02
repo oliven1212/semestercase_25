@@ -1,9 +1,5 @@
 const { User } = require("../models");
-const {
-  hashPassword,
-  comparePassword,
-  saltRounds,
-} = require("../utility/auth");
+const { comparePassword, saltRounds } = require("../utility/auth");
 
 const bcrypt = require("bcrypt");
 
@@ -20,7 +16,7 @@ exports.loginSend = async (req, res) => {
   const user = await User.findOne({
     where: { email: email },
   });
-  const valid = await comparePassword(password, user.password);
+  const valid = await comparePassword(password, user.password, saltRounds);
 
   console.log(valid, email, password, user);
 };
