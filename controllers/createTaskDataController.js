@@ -156,7 +156,8 @@ exports.viewImages = async (req, res) => {
     });
 
     res.render("home/taskImages", {
-        pictures: pictures
+        pictures: pictures,
+        lastPage: '.'
     });
 };
 
