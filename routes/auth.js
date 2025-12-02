@@ -59,3 +59,4 @@ router.post("/login", isNotAuthenticated, isAuthenticated, async (req, res) => {
     res.redirect("/login");
   }
 });
+console.log(req.session.user);

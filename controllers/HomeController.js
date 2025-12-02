@@ -19,7 +19,7 @@ exports.loginSend = async (req, res) => {
 
   comparePassword(password, await hashPassword(password, saltRounds));
   const user = await User.findOne({
-    where: { email: email, password: password },
+    where: { email: email },
   });
 
   console.log(email, password, user);
