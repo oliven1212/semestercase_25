@@ -14,12 +14,12 @@ exports.login = (req, res) => {
   });
 };
 exports.loginSend = async (req, res) => {
-  const { email, password, roleId } = req.body;
+  const { email, password } = req.body;
   console.log(req.body);
 
   comparePassword(password, await hashPassword(password, saltRounds));
   const user = await User.findOne({
-    where: { email: email, password: password, roleId: roleId },
+    where: { email: email, password: password },
   });
 
   console.log(email, password, user);
