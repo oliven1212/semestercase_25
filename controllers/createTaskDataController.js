@@ -96,6 +96,36 @@ exports.uploadTasks = async (req, res) => {
         });
     }
 
+
+
+    // Gem produkter 
+    for (let product of products) {
+        ProductTask.create({
+            taskId: taskId,
+            productId: product.id,
+            amount: product.amount
+        });
+    }
+
+
+    return res.redirect(`/completedTask/${taskId}`);
+};
+
+
+exports.completedTask = async (req, res) => {
+    //Hent task data, and do it very fancy
+    res.render("home/completedTask", {
+
+    });
+};
+
+exports.imageUpload = async (req, res) => {
+    const taskId = req.params.taskId;
+
+    const beforePictures = req.files['beforePicture'] || []; // || betyder ELLER
+    const afterPictures = req.files['afterPicture'] || [];
+
+
     // Gem før-billeder
     for (let file of beforePictures) {
         await Picture.create({
@@ -137,4 +167,14 @@ exports.completedTask = async (req, res) => {
     res.render("home/completedTask", {
 
     });
+};
+
+exports.deleteImage = async (req, res) => {
+    await Picture.destroy({
+        where: { 
+            filename: req.body.fileName,
+            taskId: req.params.taskId,
+        }, 
+    });
+    res.redirect(`/createtaskdata/${req.params.taskId}/images`);
 };

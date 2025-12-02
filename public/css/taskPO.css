@@ -247,3 +247,9 @@ h2 {
     font-weight: bold;
     margin-left: 10px;
 }
+
+.taskImages {
+   aspect-ratio: 1 / 1;
+   max-width: 150px;
+   
+}
