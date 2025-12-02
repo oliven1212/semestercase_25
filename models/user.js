@@ -19,6 +19,7 @@ module.exports = (sequelize, DataTypes) => {
       phone,
       address,
       cityCode,
+      roleId
     }) {
 
       const originalUser = await User.findByPk(id, { raw: true });
@@ -28,6 +29,7 @@ module.exports = (sequelize, DataTypes) => {
       const Phone = phone || originalUser.phone;
       const Address = address || originalUser.address;
       const CityCode = cityCode || originalUser.cityCode;
+      const RoleId = roleId || originalUser.roleId;
 
       const user = await User.update(
         {
@@ -37,6 +39,7 @@ module.exports = (sequelize, DataTypes) => {
           phone: `${Phone}`,
           address: `${Address}`,
           cityCode: parseInt(CityCode),
+          roleId: RoleId
         },
         {
           where: { id: id },

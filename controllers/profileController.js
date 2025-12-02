@@ -78,6 +78,7 @@ exports.updateUser = async (req, res) => {
         phone: req.body.phone,
         address: req.body.address,
         cityCode: zipCode,
+        roleId: req.body.roleId,
     });
     
     res.redirect(`/admin/users/${req.params.userId}`);
