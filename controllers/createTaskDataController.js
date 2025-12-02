@@ -159,3 +159,13 @@ exports.viewImages = async (req, res) => {
         pictures: pictures
     });
 };
+
+exports.deleteImage = async (req, res) => {
+    await Picture.destroy({
+        where: { 
+            filename: req.body.fileName,
+            taskId: req.params.taskId,
+        }, 
+    });
+    res.redirect(`/createtaskdata/${req.params.taskId}/images`);
+};

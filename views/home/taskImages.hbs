@@ -1,19 +1,26 @@
 <h2>Før billeder</h2>
 {{#each pictures}}
 {{#ifEq this.beforeAfter 0}}
-
-<img class="taskImages" src="/imgUploads/{{this.filename}}" alt="Before image">
+<form action="/createtaskdata/7/images" method="post">
+    <input type="hidden" name="fileName" id="fileName" value="{{this.filename}}">
+    <button type="submit">
+        <img class="taskImages" src="/imgUploads/{{this.filename}}" alt="Before image">
+    </button>
+</form>
 {{/ifEq}}
 {{/each}}
 
 <h2>Efter billeder</h2>
 {{#each pictures}}
 {{#ifEq this.beforeAfter 1}}
-<img class="taskImages" src="/imgUploads/{{this.filename}}" alt="After image">
+<form action="/createtaskdata/7/images" method="post">
+    <input type="hidden" name="fileName" id="fileName" value="{{this.filename}}">
+    <button type="submit">
+        <img class="taskImages" src="/imgUploads/{{this.filename}}" alt="After image">
+    </button>
+</form>
 {{/ifEq}}
 {{/each}}
 
 
 <link rel="stylesheet" type="text/css" href="/css/taskPO.css">
-
- 
