@@ -168,6 +168,18 @@ exports.completedTask = async (req, res) => {
 
     });
 };
+exports.viewImages = async (req, res) => {
+    const taskId = req.params.taskId;
+    const pictures = await Picture.findAll({
+        where: { taskId: taskId },
+        raw: true
+    });
+
+    res.render("home/taskImages", {
+        pictures: pictures,
+        lastPage: '.'
+    });
+};
 
 exports.deleteImage = async (req, res) => {
     await Picture.destroy({
