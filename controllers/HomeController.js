@@ -22,5 +22,5 @@ exports.loginSend = async (req, res) => {
   });
   const valid = await comparePassword(password, user.password);
 
-  console.log(email, password, user);
+  console.log(valid, email, password, user);
 };
