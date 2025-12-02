@@ -6,7 +6,6 @@ section {
     margin-left: var(--sideMargin);
     margin-right: var(--sideMargin);
     width: var(--sectionWidth);
-    box-sizing: border-box;
 
 }
 
