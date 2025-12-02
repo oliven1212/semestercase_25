@@ -12,4 +12,4 @@ async function comparePassword(password, hashedpassword) {
   });
 }
 
-module.exports = { hashPassword, comparePassword };
+module.exports = { hashPassword, comparePassword, saltRounds };
