@@ -20,7 +20,7 @@
 
 <section class="sec1">
     <form id="uploadImageForm" enctype="multipart/form-data" action="/uploadTaskImage/{{task.id}}" method="post">
-    <h4>Upload Billeder</h4>
+        <h4>Upload Billeder</h4>
 
 
         <div class="pic-upload">
@@ -63,36 +63,36 @@
 
     </section>
 
-    <section class="sec2">
-        <form id="taskForm" action="/uploadTask/{{task.id}}" method="post"></form>
-        <h4>Opfyldning af produkter</h4>
+<section class="sec2">
+    <form id="taskForm" action="/uploadTask/{{task.id}}" method="post"></form>
+    <h4>Opfyldning af produkter</h4>
 
-        <div class="product-selector">
-            <label for="productId">Vælg produkt</label>
+    <div class="product-selector">
+        <label for="productId">Vælg produkt</label>
 
 
-            <select name="productId" id="productId">
-                <option value="">-- Vælg et produkt --</option>
-                {{#each product}}
-                <option value="{{this.id}}" data-unit="{{this.[Unit.name]}}">{{this.name}}</option>
-                {{/each}}
-            </select>
+        <select name="productId" id="productId">
+            <option value="">-- Vælg et produkt --</option>
+            {{#each product}}
+            <option value="{{this.id}}" data-unit="{{this.[Unit.name]}}">{{this.name}}</option>
+            {{/each}}
+        </select>
 
-            <label for="amount">Mængde</label>
-            <div class="input-unit">
-                <input type="number" id="amount" name="amount" placeholder="Indtast mængde">
-                <span id="unit-display"></span>
-            </div>
-
-            <button type="button" id="addProductBtn">Tilføj produkt</button>
+        <label for="amount">Mængde</label>
+        <div class="input-unit">
+            <input type="number" id="amount" name="amount" placeholder="Indtast mængde">
+            <span id="unit-display"></span>
         </div>
 
-        <div id="selectedProducts">
-            <!-- Her vises de valgte produkter -->
-        </div>
-    </section>
-    <select name="productIdContainer" id="productIdContainer" multiple class="hidden"></select>
-    <select name="productAmountContainer" id="productAmountContainer" multiple class="hidden"></select>
+        <button type="button" id="addProductBtn">Tilføj produkt</button>
+    </div>
+
+    <div id="selectedProducts">
+        <!-- Her vises de valgte produkter -->
+    </div>
+</section>
+<select name="productIdContainer" id="productIdContainer" multiple class="hidden"></select>
+<select name="productAmountContainer" id="productAmountContainer" multiple class="hidden"></select>
 </form>
 <div class="submit-container">
     <button type="submit" id="submitAllBtn" form="taskForm">Gem alle</button>
