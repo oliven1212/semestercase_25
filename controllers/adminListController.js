@@ -1,27 +1,38 @@
-const {User, Gasstation, City, Product} = require("../models");
+const {User, Gasstation, City, Product, Task} = require("../models");
 
 exports.adminListUsers = async (req, res) => {
     const users = await User.findAll({
-        order: [['lastName', 'ASC']],
+        order: [['firstName', 'ASC']],
         raw: true
     });
 
     // Map over users array to add name property to each user
     const usersMap = users.map(user => ({
         ...user,
-        name: `${user.lastName}, ${user.firstName}`,
+        name: `${user.firstName}, ${user.lastName}`,
         contact: `Email: ${user.email}  Telefon: ${user.phone}`,
         //.replace(/\/$/, "") is regex to remove any trailing "/"
         link: `${req.originalUrl.replace(/\/$/, "")}/${user.id}`
-
     }));
 
     res.render("home/adminList", {
         title: 'Liste af brugere',
         message: 'Opret ny bruger',
+        createNew: `/admin/users/new`,
         content: usersMap,
         type: 'users'
     });
+};
+
+exports.newUserStart = async (req, res) => {
+    // Create a new user with minimal required fields
+    const newUser = await User.create({
+        firstName: '',
+        lastName: '',
+        email: '',
+        phone: ''
+    });
+    res.redirect(`/admin/users/${newUser.id}`);
 };
 
 exports.adminListGasstations = async (req, res) => {

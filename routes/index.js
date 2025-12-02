@@ -49,6 +49,7 @@ router.post(
 );
 
 router.get("/admin/users/:userId", profileController.adminUser);
+router.post("/admin/users/new", adminListController.newUserStart);
 router.post("/admin/users/:userId/update", profileController.updateUser);
 router.post("/admin/users/:userId/delete", profileController.deleteUser);
 router.get("/admin/users/:userId/tasks", profileController.tasks);
