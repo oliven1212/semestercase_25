@@ -20,6 +20,7 @@ module.exports = (sequelize, DataTypes) => {
       address,
       cityCode,
     }) {
+
       const originalUser = await User.findByPk(id, { raw: true });
       const FirstName = firstName || originalUser.firstName;
       const LastName = lastName || originalUser.lastName;
@@ -33,7 +34,7 @@ module.exports = (sequelize, DataTypes) => {
           firstName: `${FirstName}`,
           lastName: `${LastName}`,
           email: `${Email}`,
-          Phone: `${Phone}`,
+          phone: `${Phone}`,
           address: `${Address}`,
           cityCode: parseInt(CityCode),
         },
