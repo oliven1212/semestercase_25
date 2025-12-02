@@ -38,13 +38,6 @@ exports.taskPageOne = async (req, res) => {
         raw: true
     });
 
-
-
-
-
-
-
-
     res.render("home/taskPageOne", {
         title: 'Log din rengøring',
         user: user,
@@ -102,12 +95,15 @@ exports.uploadTasks = async (req, res) => {
 exports.completedTask = async (req, res) => {
     //Hent task data, and do it very fancy
     res.render("home/completedTask", {
+        taskId: req.params.taskId,
+        user: req.user,
+        address: req.address,
+
 
     });
 };
 
 exports.imageUpload = async (req, res) => {
-    console.log(`_____________________________________________________________?`);
     const taskId = req.params.taskId;
 
     if (req.files['beforePicture']) {
@@ -137,14 +133,31 @@ exports.imageUpload = async (req, res) => {
             });
         }
     }
-console.log(`AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAh`);
     return res.redirect(`/createtaskdata/${taskId}`);
 };
 
 
 exports.completedTask = async (req, res) => {
     //Hent task data, and do it very fancy
+    const task = await Task.findByPk(req.params.taskId, {
+        include: [{
+            model: Gasstation,
+            include: [{
+                model: Branch,
+            }, {
+                model: City,
+            },
+        {model: User}],
+
+        }],
+        raw: true
+    });
+
+    console.log(task);
+
+
     res.render("home/completedTask", {
+        task: task,
 
     });
 };

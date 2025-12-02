@@ -1,8 +1,6 @@
-
-
 section {
     gap: 8px;
-    color: var(--lightBlue)!important;
+    color: var(--lightBlue) !important;
     margin-left: var(--sideMargin);
     margin-right: var(--sideMargin);
     width: var(--sectionWidth);
@@ -17,7 +15,7 @@ section {
     grid-template-columns: 1fr;
     gap: 10px;
     align-items: start;
-    color: var(--lightBlue) !important; 
+    color: var(--lightBlue) !important;
 }
 
 .sec1 h4 {
@@ -32,7 +30,8 @@ section {
     align-items: center;
     gap: 10px;
 }
-.pic-upload{
+
+.pic-upload {
     text-align: center;
     display: grid;
     grid-template-columns: 1fr 1fr;
@@ -40,12 +39,14 @@ section {
     align-items: start;
 
 }
-.pic-upload div{
+
+.pic-upload div {
     display: flex;
     flex-direction: column;
     align-items: center;
 }
-.pic-upload div *{
+
+.pic-upload div * {
     display: block;
 }
 
@@ -99,11 +100,13 @@ h2 {
 .sec2 h4 {
     color: var(--lightBlue);
     margin-top: 0;
-    margin-bottom: 5px; /* rem for at skaler rigtigt */
+    margin-bottom: 5px;
+    /* rem for at skaler rigtigt */
 }
 
 .product-selector {
-    background-color: transparent; /* Fjern den gennemsigtige baggrund */
+    background-color: transparent;
+    /* Fjern den gennemsigtige baggrund */
     padding: 5px;
     border-radius: 5px;
     margin-bottom: 10px;
@@ -111,7 +114,7 @@ h2 {
 
 
 .frontspace-warning {
-    color: red;
+    color:#F71735;
     font-weight: bold;
     font-style: italic;
     text-align: center;
@@ -121,7 +124,8 @@ h2 {
 }
 
 .product-selector {
-    background-color: rgba(30, 30, 80, 0.3); /* Mørkere og mindre gennemsigtig */
+    background-color: rgba(30, 30, 80, 0.3);
+    /* Mørkere og mindre gennemsigtig */
     border-radius: 5px;
     padding-bottom: 20px;
     margin-bottom: 10px;
@@ -162,16 +166,16 @@ h2 {
     margin-top: 20px;
     margin-bottom: 0px !important;
     padding: 10px 20px;
-    background-color: #4CAF50;
+    background-color: #4F9D69;
     border: none;
     border-radius: 5px;
     cursor: pointer;
-    
+
 }
 
 .remove-btn {
     padding: 5px 10px;
-    background-color: #f44336;
+    background-color: #F71735;
     color: white;
     border: none;
     border-radius: 3px;
@@ -191,16 +195,16 @@ h2 {
     cursor: pointer;
 }
 
-.input-unit input{
+.input-unit input {
     width: 70%;
-    
+
 }
 
-.input-unit span{
+.input-unit span {
     width: 20%;
-    font-size: large!important;
+    font-size: large !important;
     font-weight: 600;
-    
+
 }
 
 .product-row {
@@ -222,7 +226,7 @@ h2 {
 
 .remove-btn {
     padding: 8px 15px;
-    background-color: #f44336;
+    background-color: #F71735;
     color: white;
     border: none;
     border-radius: 5px;
@@ -232,7 +236,7 @@ h2 {
 }
 
 .remove-btn:hover {
-    background-color: #d32f2f;
+    background-color: #F71735;
 }
 
 .submit-container {
@@ -272,8 +276,8 @@ h2 {
 }
 
 .taskImages {
-   aspect-ratio: 1 / 1;
-   max-width: 150px;
+    aspect-ratio: 1 / 1;
+    max-width: 100%;
 
 }
 
@@ -284,12 +288,48 @@ h2 {
     font-size: 16px;
     font-weight: 700;
     cursor: pointer;
-    margin-top: 10px;
     margin-top: 20px;
     margin-bottom: 0px !important;
     padding: 10px 20px;
-    background-color: #4CAF50;
+    background-color: #4F9D69;
     border: none;
     border-radius: 5px;
     cursor: pointer;
+}
+
+.imageContainer {
+    display: grid;
+    grid-template-areas:
+        "stack";
+    aspect-ratio: 1 / 1;
+    max-width: 150px;
+;
+}
+
+.imageContainer img {
+    grid-area: stack;
+    border-radius: 4px;
+
+}
+
+.imageContainer svg {
+    grid-area: stack;
+    width: 30%;
+    justify-self: right;
+    filter: drop-shadow(2px 2px 2px black);
+}
+
+.removeImageButton {
+    border: 5px;
+    background-color: var(--darkBlue);
+    margin: none;
+    padding: 5px;
+    border-radius: 4px;
+}
+
+.imageGrid{
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+    row-gap: 10px;
 }
