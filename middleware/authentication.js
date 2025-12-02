@@ -1,6 +1,7 @@
 //middleware
 
 function isNotAuthenticated(req, res, next) {
+  console.log(req.session);
   if (!req.session.user) {
     return res.redirect("/home/login");
   }
@@ -9,12 +10,12 @@ function isNotAuthenticated(req, res, next) {
 function rolePermission(req, res, next) {
   console.log("-------------------------");
   console.log(req.session);
-  if (req.session.user.roleId === 1) {
-    return res.redirect("/admin/list");
-  } else if (req.session.user.roleId === 2) {
-    return res.redirect("/gasstation");
+  if (req.session && req.session.user.roleId === 1) {
+    res.redirect("/admin/list");
+  } else if (req.session && req.session.user.roleId === 2) {
+    res.redirect("/gasstation");
   } else {
-    return res.redirect("/createtask");
+    res.redirect("/createtask");
   }
   next();
 }

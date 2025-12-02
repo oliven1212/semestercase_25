@@ -1,5 +1,7 @@
 const express = require("express");
 const exphbs = require("express-handlebars");
+const session = require("express-session");
+
 const path = require("path");
 
 const routes = require("./routes");
@@ -9,6 +11,8 @@ const app = express();
 // Middleware
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
+
+
 
 // Static files
 app.use(express.static(path.join(__dirname, "public")));
@@ -29,6 +33,25 @@ app.engine(".hbs", exphbs.engine({
 
 app.set("view engine", ".hbs");
 app.set("views", path.join(__dirname, "views"));
+
+
+app.use(
+  session({
+    secret: "12345",
+    cookie: {
+      secure: "false",
+      maxAge: 1000 * 60 * 60 * 24,
+    },
+  }),
+);
+
+app.use((req, res, next) => {
+  res.locals.user = req.session.user || null;
+  console.log(req.session);
+  next();
+});
+
+
 
 // Routes
 app.use("/", routes);

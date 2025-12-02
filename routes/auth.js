@@ -1,35 +1,32 @@
 const express = require("express");
+const session = require("express-session");
 const bcrypt = require("bcrypt");
 const router = express.Router();
-const {
-  isNotAuthenticated,
-  rolePermission,
-} = require("../middleware/authentication");
+const { isNotAuthenticated, rolePermission } = require("../middleware/authentication");
 const { User } = require("../models");
 
 //get auth login
 router.get("/login", isNotAuthenticated, (req, res) => {
-  res.render("login", {
+  res.render("home/login", {
     error: req.session.error,
   });
 });
 
 //admin-only
-router.get("/admin/list", rolePermission(1), (req, res) => {
+router.get("/admin/list", rolePermission, (req, res) => {
   res.render("admin/list", { user: req.session.user });
 });
-router.get("/gasstation", rolePermission(2), (req, res) => {
+router.get("/gasstation", rolePermission, (req, res) => {
   res.render("/gasstation", { user: req.session.user });
 });
-router.get("/createTask", rolePermission(3), (req, res) => {
+router.get("/createTask", rolePermission, (req, res) => {
   res.render("/createTask", { user: req.session.user });
 });
 
 //Post/auth/login
-router.post("/login", rolePermission, async (req, res) => {
+router.post("/login", async (req, res) => {
   console.log("lllllllllllllllllllllllllllllllllllllllllllllllllllllllll");
-  console.log(req.session.user);
-
+  console.log(req.session);
   try {
     const { email, password } = req.body;
     //validering
@@ -37,8 +34,14 @@ router.post("/login", rolePermission, async (req, res) => {
       req.session.error = "Email og adgangskode skal udfyldes;";
       return res.render("/login");
     }
+    console.log(password);
     //find bruger
-    const user = User.find((user) => user.email === email);
+    const user = await User.findOne({
+      where: { email: email },
+      attributes:['id','email','password'],
+        raw: true
+    });
+    console.log(user)
     if (!user) {
       req.session.error = "forkert email eller adgangskode";
       return res.render("login");
@@ -47,7 +50,7 @@ router.post("/login", rolePermission, async (req, res) => {
     const isValidPassword = await bcrypt.compare(password, user.password);
     if (!isValidPassword) {
       req.session.error = "forkert email eller adgangskode";
-      return res.redirect("/login");
+      return res.redirect("/");
     }
     //gem bruger data i session (uden adgangskode)
     req.session.user = {
@@ -59,6 +62,8 @@ router.post("/login", rolePermission, async (req, res) => {
   } catch (error) {
     console.error("login fejl:", error);
     req.session.error = "der opstod en fejl prøv igen.";
-    res.redirect("/login");
+    res.redirect("/");
   }
 });
+
+module.exports = router;

@@ -11,6 +11,7 @@ const taskController = require("../controllers/tasksController");
 const productController = require("../controllers/productController");
 const upload = require("../multer");
 
+const authRoutes = require("../routes/auth");
 const router = express.Router();
 
 router.get("/createTask", createTaskController.createTask);
@@ -66,5 +67,6 @@ router.post("/admin/products/:productId/delete", productController.deleteProduct
 //router.post("/admin/tasks/:taskId/update", taskController);
 router.post("/admin/tasks/:taskId/delete", taskController.deleteTask);
 //router.get("/admin/tasks/:taskId/historie", taskController);
+router.use("/", authRoutes);
 
 module.exports = router;
