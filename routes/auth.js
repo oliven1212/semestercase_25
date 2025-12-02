@@ -5,6 +5,8 @@ const {
   isNotAuthenticated,
   isAuthenticated,
 } = require("../middleware/authentication");
+const { User } = require("../models");
+
 //get auth login
 router.get("/login", isNotAuthenticated, (res, req) => {
   res.render("login", {
@@ -22,7 +24,7 @@ router.post("/login", isNotAuthenticated, async (req, res) => {
       return res.render("/login");
     }
     //find bruger
-    const user = users.find((u) => u.email === email);
+    const user = User.find((user) => user.email === email);
     if (!user) {
       req.session.error = "forkert email eller adgangskode";
       return res.render("login");
@@ -36,7 +38,6 @@ router.post("/login", isNotAuthenticated, async (req, res) => {
     //gem bruger data i session (uden adgangskode)
     req.session.user = {
       id: user.id,
-      userName: user.firstname + user.lastname,
       email: user.email,
     };
     res.redirect("/createTask");

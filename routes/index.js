@@ -9,8 +9,7 @@ const taskHistorieController = require("../controllers/taskHistorieController");
 const modifyGasstationController = require("../controllers/modifyGasstationController");
 const taskController = require("../controllers/tasksController");
 const productController = require("../controllers/productController");
-const upload  = require('../multer');
-
+const upload = require("../multer");
 
 const router = express.Router();
 
@@ -24,15 +23,28 @@ router.get("/admin/products", adminListController.adminListProducts);
 router.get("/profile", profileController.profile);
 router.get("/createtaskdata/:taskId", createTaskDataController.taskPageOne);
 router.get("/taskHistorie", taskHistorieController.taskHistorie);
-router.post("/uploadTask/:taskId", createTaskDataController.uploadMiddleware, createTaskDataController.uploadTasks);
+router.post(
+  "/uploadTask/:taskId",
+  createTaskDataController.uploadMiddleware,
+  createTaskDataController.uploadTasks,
+);
 
 router.get("/completedTask/:taskId", createTaskDataController.completedTask);
 
 router.post("/createTask", createTaskController.logStart);
 
-router.get("/admin/gasstations/:gasId", modifyGasstationController.adminGasstation);
-router.post("/admin/gasstations/:gasId/update", modifyGasstationController.updateGasstation);
-router.post("/admin/gasstations/:gasId/delete", modifyGasstationController.deleteGasstation);
+router.get(
+  "/admin/gasstations/:gasId",
+  modifyGasstationController.adminGasstation,
+);
+router.post(
+  "/admin/gasstations/:gasId/update",
+  modifyGasstationController.updateGasstation,
+);
+router.post(
+  "/admin/gasstations/:gasId/delete",
+  modifyGasstationController.deleteGasstation,
+);
 
 router.get("/admin/users/:userId", profileController.adminUser);
 router.post("/admin/users/:userId/update", profileController.updateUser);
@@ -41,13 +53,18 @@ router.get("/admin/users/:userId/tasks", profileController.tasks);
 router.get("/admin/users/:userId/gasstations", profileController.gasstations);
 
 router.get("/admin/products/:productId", productController.adminProducts);
-router.post("/admin/products/:productId/update", productController.updateProduct);
-router.post("/admin/products/:productId/delete", productController.deleteProduct);
+router.post(
+  "/admin/products/:productId/update",
+  productController.updateProduct,
+);
+router.post(
+  "/admin/products/:productId/delete",
+  productController.deleteProduct,
+);
 
 //router.get("/admin/tasks/:taskId", taskController);
 //router.post("/admin/tasks/:taskId/update", taskController);
 router.post("/admin/tasks/:taskId/delete", taskController.deleteTask);
 //router.get("/admin/tasks/:taskId/historie", taskController);
-
 
 module.exports = router;
