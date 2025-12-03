@@ -9,6 +9,31 @@
         margin-right: var(--sideMargin);
     }
 }
+.adminMain {
+    display: grid;
+    grid-template-rows: 3rem 1fr;
+    place-items: center;
+    row-gap: 1em;
+
+    @media screen and (min-width: 426px) {
+        margin-left: var(--sideMargin);
+        margin-right: var(--sideMargin);
+    }
+}
+
+.mainCard {
+    margin: 1rem;
+    padding: 2rem;
+    width: 100%;
+    background-color: --darkBlue;
+    color: --lightBlue;
+button {
+    border: none;
+    padding: 0;
+    background: none;
+    cursor: pointer;
+}
+}
 
 .createNew {
 }

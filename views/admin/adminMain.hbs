@@ -1,3 +1,15 @@
-<section>
-    <p>Velkommen {{users.firstName}}
-</section>
+<link rel="stylesheet" type="text/css" href="/css/list.css">
+
+<div class="adminMain">
+    <h1>Velkommen {{user.firstName}}</h1>
+
+    <h2>Vælg liste:</h2>
+
+    <section>
+    {{#each content}}
+        <div class="mainCard">
+            <a href="{{this.reference}}"><button>{{this.name}}</button></a>
+        </div>
+    {{/each}}
+    </section>
+</div>

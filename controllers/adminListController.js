@@ -1,5 +1,32 @@
 const {User, Gasstation, City, Product, Task} = require("../models");
 
+exports.adminMain = async (req, res) => {
+    const user = await User.findOne({
+        where: { id: 1 },
+        raw: true
+    });
+    res.render("admin/adminMain", {
+        title: 'Admin information',
+        user: user,
+        content: [{
+            name: 'Brugere',
+            reference: 'users'
+        },
+            {
+                name: 'Tankstationer',
+                reference: 'gasstations'
+            },
+            {
+                name: 'Rengøringer',
+                reference: 'tasks'
+            },
+            {
+                name: 'Produkter',
+                reference: 'products'
+            },]
+    });
+}
+
 exports.adminListUsers = async (req, res) => {
     const users = await User.findAll({
         order: [['firstName', 'ASC']],
@@ -18,7 +45,7 @@ exports.adminListUsers = async (req, res) => {
     res.render("home/adminList", {
         title: 'Liste af brugere',
         message: 'Opret ny bruger',
-        createNew: `/admin/users/new`,
+        createNew: '/admin/users/new',
         content: usersMap
     });
 };
