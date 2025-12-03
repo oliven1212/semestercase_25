@@ -2,7 +2,10 @@ const express = require("express");
 const session = require("express-session");
 const bcrypt = require("bcrypt");
 const router = express.Router();
-const { isNotAuthenticated, rolePermission } = require("../middleware/authentication");
+const {
+  isNotAuthenticated,
+  rolePermission,
+} = require("../middleware/authentication");
 const { User } = require("../models");
 
 //get auth login
@@ -14,7 +17,7 @@ router.get("/login", isNotAuthenticated, (req, res) => {
 
 //admin-only
 router.get("/admin/list", rolePermission, (req, res) => {
-  res.render("admin/list", { user: req.session.user });
+  res.redirect("admin/users", { user: req.session.user });
 });
 router.get("/gasstation", rolePermission, (req, res) => {
   res.render("/gasstation", { user: req.session.user });
@@ -25,8 +28,6 @@ router.get("/createTask", rolePermission, (req, res) => {
 
 //Post/auth/login
 router.post("/login", async (req, res) => {
-  console.log("lllllllllllllllllllllllllllllllllllllllllllllllllllllllll");
-  console.log(req.session);
   try {
     const { email, password } = req.body;
     //validering
@@ -38,10 +39,10 @@ router.post("/login", async (req, res) => {
     //find bruger
     const user = await User.findOne({
       where: { email: email },
-      attributes:['id','email','password'],
-        raw: true
+      attributes: ["id", "email", "password", "roleId"],
+      raw: true,
     });
-    console.log(user)
+    console.log(user);
     if (!user) {
       req.session.error = "forkert email eller adgangskode";
       return res.render("login");
@@ -58,6 +59,8 @@ router.post("/login", async (req, res) => {
       email: user.email,
       role: user.roleId,
     };
+    console.log("?????????????????");
+    console.log(req.session.user);
     res.redirect("/createTask");
   } catch (error) {
     console.error("login fejl:", error);
