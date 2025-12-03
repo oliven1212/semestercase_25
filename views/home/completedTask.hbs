@@ -1,3 +1,17 @@
-{{user}}
+<h2>Tak, {{task.[Gasstation.Users.firstName]}}!</h2>
 
-{}
+<p>Din rengøring hos</p>
+<h4>{{task.[Gasstation.Branch.name]}}, {{task.[Gasstation.address]}}, {{task.[Gasstation.City.zipCode]}}
+    {{task.[Gasstation.City.name]}} </h4>
+
+<h4>{{task.startTime}}</h4>
+
+<p>er nu blevet logget, i vores system!</p>
+
+
+<p>Bekræftelse mail er sendt
+    tankstationsejer </p>
+
+<button>Start ny log</button>
+
+<link rel="stylesheet" type="text/css" href="/css/completedTask.css">

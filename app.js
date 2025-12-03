@@ -3,6 +3,11 @@ const exphbs = require("express-handlebars");
 const session = require("express-session");
 
 const path = require("path");
+const nodeMailer = require("nodemailer");
+
+// const multer = require("multer");
+// const upload = multer({ dest: "public/uploads/" });
+// const fs = require("fs");
 
 const routes = require("./routes");
 
