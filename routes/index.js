@@ -42,6 +42,8 @@ router.get("/completedTask/:taskId", createTaskDataController.completedTask);
 
 router.post("/createTask", createTaskController.logStart);
 
+router.get("/admin/main", adminListController.adminMain);
+
 router.get("/admin/gasstations", adminListController.adminListGasstations);
 router.get("/admin/gasstations/:gasId", modifyGasstationController.adminGasstation,);
 router.post("/admin/gasstations/new", adminListController.newGasstationStart);
