@@ -19,5 +19,4 @@ exports.loginSend = async (req, res) => {
     raw: true,
   });
   console.log(email, user.password, user);
-  const valid = await comparePassword(password, user.password);
 };
