@@ -1,9 +1,13 @@
 require('dotenv').config();
 
 const nodeMailer = require("nodemailer");
+const { v4: uuidv4 } = require('uuid');
+
 
 const GMAIL_USER = process.env.GMAIL_USER;
 const GMAIL_PASS = process.env.GMAIL_APP_PASSWORD;
+
+//const controller = require('/controller/createTaskDataController');
 
 if (!GMAIL_USER || !GMAIL_PASS) {
     console.error('Missing env vars: GMAIL_USER or GMAIL_APP_PASSWORD');
@@ -11,12 +15,18 @@ if (!GMAIL_USER || !GMAIL_PASS) {
     process.exit(1);
 }
 
-const html = `
-<h1>Test Email</h1>
-<p>This is a test email sent from the taskEmail.js module.</p>
-`;
+//const whatever = controller.imageUpload.uniqueId; // Bare for at bruge controlleren uden fejl
+//console.log(whatever, 'hahahahahahahha');
+//Linket -> hvor den skal hen (til owner fra task gasstation)
 
-async function main() {
+
+
+async function sendTaskEmail(imageUuid, toEmail) {
+    const html = `
+        <h1>Test Email</h1>
+    <p>This is a test email sent from the taskEmail.js module.</p>
+    <a href="http://localhost:3000/images/task/${imageUuid}">Se billeder for opgaven her</a>`;
+
     // Brug eksplicit SMTP med secure port
     const transporter = nodeMailer.createTransport({
         host: 'smtp.gmail.com',
@@ -30,7 +40,7 @@ async function main() {
 
     const mailOptions = {
         from: GMAIL_USER,
-        to: 'ngni74305@gmail.com', //Put din egen email her for at teste
+        to: toEmail, //Put din egen email her for at teste
         subject: 'Test Email from taskEmail.js',
         html: html,
     };
@@ -44,4 +54,6 @@ async function main() {
     }
 }
 
-main();
+module.exports = { sendTaskEmail };
+
+//sendTaskEmail();

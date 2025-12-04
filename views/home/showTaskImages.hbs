@@ -1,0 +1,35 @@
+
+<link rel="stylesheet" type="text/css" href="./css/taskHistorie.css">
+<section class="task-historie">
+<h1>Task Historie</h1>
+
+<div class="text-container">
+    <p>rengøring hos:</p>
+    <h2>{{task.[0].[Gasstation.address]}}, {{task.[0].[Gasstation.cityCode]}} {{task.[0].[Gasstation.City.name]}}</h2>
+
+</div>
+
+<div class="text-container">
+    <p>din rengøring er logget den:</p>
+    <h3>{{timeStamp.date}} {{timeStamp.time}}</h3>
+</div>
+
+    <ul class="product-list" style="list-style-type: none;">
+    <h3>Producter opfyldt</h3>
+    {{#each task}}
+        <div class="product-item">
+
+            <label class="product-name">{{[Products.name]}}
+                 </label>
+                 <p class="unit-name">{{this.[Products.Unit.name]}} </p>
+            <input class="product-amount" type="text" value='{{[Products.ProductTask.amount]}}' readonly>
+
+        </div>
+    {{/each}}
+    <li>{{timeStamp.date}} {{timeStamp.time}} </li>
+</ul>
+<div class="user-info">
+<p>rengøring udført af:{{user.firstName}} {{user.lastName}} </p>
+<p>Telefon: {{user.phone}} </p>
+</div>
+</section>

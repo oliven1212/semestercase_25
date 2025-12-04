@@ -2,6 +2,7 @@ const { User, Gasstation, GasstationUser, Task, Unit, Product, Picture, ProductT
 const upload = require('../multer');
 const path = require('path');
 const { gasstation } = require('./gasController');
+const  { sendTaskEmail } = require('../taskEmail');
 
 exports.uploadMiddleware = upload.fields([
     { name: 'beforePicture', maxCount: 100 },
@@ -76,8 +77,6 @@ exports.uploadTasks = async (req, res) => {
             });
         }
 
-
-
         // Gem produkter 
         for (let product of products) {
             ProductTask.create({
@@ -87,7 +86,27 @@ exports.uploadTasks = async (req, res) => {
             });
         }
 
+
+
     }
+    const uuid = await Task.findOne({
+        where: { id: taskId },
+        include: [],
+        include: [{ model: Picture, 
+        attributes: ['id']
+         },{
+            model: Gasstation,
+            include: [{
+                model: User,
+                through: GasstationUser,
+            }],
+         }
+        ],
+        raw: true
+    }); 
+    console.log(uuid, 'this is the uuid');
+    // Send email with link to images
+    await sendTaskEmail(uuid.pictureId, req.user.email);
     return res.redirect(`/completedTask/${taskId}`);
 };
 
@@ -105,13 +124,24 @@ exports.completedTask = async (req, res) => {
 
 exports.imageUpload = async (req, res) => {
     const taskId = req.params.taskId;
+    const {v4: uuidv4} = require('uuid');
+
+    // Hvis der allerede findes billeder for denne task, genbrug samme uuid (fra first picture.id)
+    // ellers generér en ny uuid
+    const existingPicture = await Picture.findOne({
+        where: { taskId: taskId },
+        attributes: ['id'],
+        raw: true
+    });
+
+    const uniqueId = existingPicture && existingPicture.id ? existingPicture.id : uuidv4();
 
     if (req.files['beforePicture']) {
         const beforePictures = req.files['beforePicture']; // || betyder ELLER
         // Gem før-billeder
         for (let file of beforePictures) {
             await Picture.create({
-                id: `123456789123456789123456789123456789`, //MAKE UUID!!!
+                id: uniqueId, //MAKE UUID!!!
                 taskId: taskId,
                 filename: file.filename,
                 beforeAfter: 0,
@@ -125,7 +155,7 @@ exports.imageUpload = async (req, res) => {
         // Gem efter-billeder
         for (let file of afterPictures) {
             await Picture.create({
-                id: `123456789123456789123456789123456789`,
+                id: uniqueId,
                 taskId: taskId,
                 filename: file.filename,
                 beforeAfter: 1,
@@ -182,4 +212,11 @@ exports.deleteImage = async (req, res) => {
         },
     });
     res.redirect(`/createtaskdata/${req.params.taskId}/images`);
+};
+
+exports.showTaskImages = async (req, res) => {
+    res.render("home/taskImages", {
+
+    });
+
 };

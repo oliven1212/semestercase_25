@@ -9,6 +9,7 @@ const taskHistorieController = require("../controllers/taskHistorieController");
 const modifyGasstationController = require("../controllers/modifyGasstationController");
 const taskController = require("../controllers/tasksController");
 const productController = require("../controllers/productController");
+
 const upload = require("../multer");
 
 const authRoutes = require("../routes/auth");
@@ -33,12 +34,15 @@ router.get(
   "/createtaskdata/:taskId/images",
   createTaskDataController.viewImages,
 );
+
 router.post(
   "/createtaskdata/:taskId/images",
   createTaskDataController.deleteImage,
 );
 
 router.get("/completedTask/:taskId", createTaskDataController.completedTask);
+router.get("/showTaskImages/:imageUuid", createTaskDataController.showTaskImages);
+
 
 router.post("/createTask", createTaskController.logStart);
 
