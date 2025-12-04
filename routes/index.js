@@ -46,7 +46,7 @@ router.get("/showTaskImages/:imageUuid", createTaskDataController.showTaskImages
 
 router.post("/createTask", createTaskController.logStart);
 
-router.get("/admin/main", adminListController.adminMain);
+router.get("/admin", adminListController.adminMain);
 
 router.get("/admin/gasstations", adminListController.adminListGasstations);
 router.get("/admin/gasstations/:gasId", modifyGasstationController.adminGasstation,);
