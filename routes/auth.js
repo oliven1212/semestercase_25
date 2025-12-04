@@ -21,7 +21,7 @@ router.get("/admin/main", rolePermission, (req, res) => {
   // res.render("admin/users", { user: req.session.user });
 
   // eller hvis du vil redirecte til en anden route/URL:
-  return res.redirect("/admin/users");
+  return res.redirect("/admin/main");
 });
 
 router.get("/gasstation", rolePermission, (req, res) => {
@@ -68,6 +68,9 @@ router.post("/login", async (req, res) => {
     };
 
     // redirect efter succesfuldt login
+    console.log(
+      rolePermission("our user has the role :", req.session.user.role),
+    );
     return res.redirect("/admin/main"); // eller "/admin/list" afhængigt af rolle
   } catch (error) {
     console.error("login fejl:", error);
