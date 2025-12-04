@@ -12,6 +12,7 @@ exports.login = (req, res) => {
 exports.loginSend = async (req, res) => {
   const { email, password } = req.body;
   console.log(req.body);
+  console.log("llllllllllllllllllllll");
 
   const user = await User.findOne({
     where: { email: email },

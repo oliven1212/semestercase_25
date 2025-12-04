@@ -35,14 +35,12 @@ router.post("/login", async (req, res) => {
       req.session.error = "Email og adgangskode skal udfyldes;";
       return res.render("/login");
     }
-    console.log(password);
     //find bruger
     const user = await User.findOne({
       where: { email: email },
       attributes: ["id", "email", "password", "roleId"],
       raw: true,
     });
-    console.log(user);
     if (!user) {
       req.session.error = "forkert email eller adgangskode";
       return res.render("login");
@@ -59,8 +57,6 @@ router.post("/login", async (req, res) => {
       email: user.email,
       role: user.roleId,
     };
-    console.log("?????????????????");
-    console.log(req.session.user);
     res.redirect("/createTask");
   } catch (error) {
     console.error("login fejl:", error);
