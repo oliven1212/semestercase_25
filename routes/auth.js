@@ -1,5 +1,5 @@
 const express = require("express");
-const session = require("express-session");
+// const session = require("express-session");
 const bcrypt = require("bcrypt");
 const router = express.Router();
 const {
@@ -61,13 +61,19 @@ router.post("/login", async (req, res) => {
     }
 
     // gem bruger i session (uden password)
-    req.session.user = {
-      id: user.id,
-      email: user.email,
-      role: user.roleId,
-    };
-
+    if (user && user.password === password) {
+      req.session.user = {
+        id: user.id,
+        email: user.email,
+        role: user.roleId,
+      };
+    }
+    console.log(
+      "this is our session after we saved user in session:",
+      req.session.user,
+    );
     // redirect efter succesfuldt login
+    console.log("this is our user:", req.session.user);
     console.log(
       rolePermission("our user has the role :", req.session.user.role),
     );

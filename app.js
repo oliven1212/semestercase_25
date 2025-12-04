@@ -45,7 +45,7 @@ app.use(
   session({
     secret: "12345",
     cookie: {
-      secure: "false",
+      secure: false,
       maxAge: 1000 * 60 * 60 * 24,
     },
   }),

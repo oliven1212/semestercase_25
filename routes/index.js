@@ -41,18 +41,29 @@ router.post(
 );
 
 router.get("/completedTask/:taskId", createTaskDataController.completedTask);
-router.get("/showTaskImages/:imageUuid", createTaskDataController.showTaskImages);
-
+router.get(
+  "/showTaskImages/:imageUuid",
+  createTaskDataController.showTaskImages,
+);
 
 router.post("/createTask", createTaskController.logStart);
 
 router.get("/admin", adminListController.adminMain);
 
 router.get("/admin/gasstations", adminListController.adminListGasstations);
-router.get("/admin/gasstations/:gasId", modifyGasstationController.adminGasstation,);
+router.get(
+  "/admin/gasstations/:gasId",
+  modifyGasstationController.adminGasstation,
+);
 router.post("/admin/gasstations/new", adminListController.newGasstationStart);
-router.post("/admin/gasstations/:gasId/update", modifyGasstationController.updateGasstation,);
-router.post("/admin/gasstations/:gasId/delete", modifyGasstationController.deleteGasstation,);
+router.post(
+  "/admin/gasstations/:gasId/update",
+  modifyGasstationController.updateGasstation,
+);
+router.post(
+  "/admin/gasstations/:gasId/delete",
+  modifyGasstationController.deleteGasstation,
+);
 
 router.get("/admin/users", adminListController.adminListUsers);
 router.get("/admin/users/:userId", profileController.adminUser);
@@ -65,8 +76,14 @@ router.get("/admin/users/:userId/gasstations", profileController.gasstations);
 router.get("/admin/products", adminListController.adminListProducts);
 router.get("/admin/products/:productId", productController.adminProducts);
 router.post("/admin/products/new", adminListController.newProductStart);
-router.post("/admin/products/:productId/update", productController.updateProduct,);
-router.post("/admin/products/:productId/delete", productController.deleteProduct,);
+router.post(
+  "/admin/products/:productId/update",
+  productController.updateProduct,
+);
+router.post(
+  "/admin/products/:productId/delete",
+  productController.deleteProduct,
+);
 
 //router.get("/admin/tasks", adminListController.adminListTasks);
 //router.get("/admin/tasks/:taskId", taskController);

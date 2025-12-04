@@ -1,30 +1,29 @@
 //middleware
-
 function isNotAuthenticated(req, res, next) {
-  console.log(req.session.user);
+  console.log("this is our user session in middleware:", req.session.user);
   if (!req.session.user) {
     return res.redirect("/home/login");
   }
   next();
 }
 function rolePermission(req, res, next) {
-  const user = req.session.user;
-  console.log(req.session.user);
-  if (!user) {
-    return res.redirect("/home/login");
+  console.log("this is where we find role permission:", req.session.user);
+  console.log("this is our user session in rolePermission:", req.session.user);
+  if (!req.session.user) {
+    return res.redirect("/login");
   }
 
   // redirect baseret på rolle
-  if (user.role === 1) {
+  if (req.session.user.role === 1) {
     return res.redirect("/admin/main");
   }
   console.log("admin");
 
-  if (user.role === 2) {
+  if (req.session.user.role === 2) {
     return res.redirect("/gasstation");
   }
   console.log("ejer");
-  if (user.role === 3) {
+  if (req.session.user.role === 3) {
     return res.redirect("/createTask");
   }
   console.log("rengøringmedarbejder");
