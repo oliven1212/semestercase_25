@@ -2,7 +2,8 @@ const { User, Gasstation, GasstationUser, Task, Unit, Product, Picture, ProductT
 const upload = require('../multer');
 const path = require('path');
 const { gasstation } = require('./gasController');
-const  { sendTaskEmail } = require('../taskEmail');
+const { sendTaskEmail } = require('../taskEmail');
+const { where } = require('sequelize');
 
 exports.uploadMiddleware = upload.fields([
     { name: 'beforePicture', maxCount: 100 },
@@ -89,24 +90,32 @@ exports.uploadTasks = async (req, res) => {
 
 
     }
-    const uuid = await Task.findOne({
+    const emailData = await Task.findOne({
         where: { id: taskId },
-        include: [],
-        include: [{ model: Picture, 
-        attributes: ['id']
-         },{
-            model: Gasstation,
-            include: [{
-                model: User,
-                through: GasstationUser,
-            }],
-         }
+        attributes: [],
+        include: [
+            {
+                model: Picture,
+                attributes: ['id']
+            },
+            {
+                model: Gasstation,
+                attributes: [],
+                include: [{
+                    model: User,
+                    attributes:['email'],
+                    through: {
+                        where: {
+                            isOwner: 1
+                        },
+                        attributes:[],
+                    },
+                }],
+            }
         ],
         raw: true
-    }); 
-    console.log(uuid, 'this is the uuid');
-    // Send email with link to images
-    await sendTaskEmail(uuid.pictureId, req.user.email);
+    });
+    await sendTaskEmail(emailData['Pictures.id'], emailData['Gasstation.Users.email']);
     return res.redirect(`/completedTask/${taskId}`);
 };
 
@@ -124,7 +133,7 @@ exports.completedTask = async (req, res) => {
 
 exports.imageUpload = async (req, res) => {
     const taskId = req.params.taskId;
-    const {v4: uuidv4} = require('uuid');
+    const { v4: uuidv4 } = require('uuid');
 
     // Hvis der allerede findes billeder for denne task, genbrug samme uuid (fra first picture.id)
     // ellers generér en ny uuid
@@ -177,7 +186,7 @@ exports.completedTask = async (req, res) => {
             }, {
                 model: City,
             },
-        {model: User}],
+            { model: User }],
 
         }],
         raw: true
