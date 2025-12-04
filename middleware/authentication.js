@@ -10,9 +10,9 @@ function isNotAuthenticated(req, res, next) {
 function rolePermission(req, res, next) {
   console.log("-------------------------");
   console.log(req.session);
-  if (req.session && req.session.user.roleId === 1) {
+  if (req.session && req.session.user.role === 1) {
     res.redirect("/admin/main");
-  } else if (req.session && req.session.user.roleId === 2) {
+  } else if (req.session && req.session.user.role === 2) {
     res.redirect("/gasstation");
   } else {
     res.redirect("/createtask");

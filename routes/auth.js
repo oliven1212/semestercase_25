@@ -68,7 +68,7 @@ router.post("/login", async (req, res) => {
     };
 
     // redirect efter succesfuldt login
-    return res.redirect("/admin/main"); // eller "/admin/list" afhængigt af rolle
+    return res.redirect("/gasstation"); // eller "/admin/list" afhængigt af rolle
   } catch (error) {
     console.error("login fejl:", error);
     req.session.error = "Der opstod en fejl, prøv igen.";
