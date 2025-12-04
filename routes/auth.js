@@ -8,60 +8,71 @@ const {
 } = require("../middleware/authentication");
 const { User } = require("../models");
 
-//get auth login
+// GET login page
 router.get("/login", isNotAuthenticated, (req, res) => {
-  res.render("home/login", {
-    error: req.session.error,
-  });
+  const error = req.session.error;
+  delete req.session.error; // ryd fejlen efter visning
+  res.render("home/login", { error });
 });
 
-//admin-only
-router.get("/admin/list", rolePermission, (req, res) => {
-  res.redirect("admin/users", { user: req.session.user });
+// protected routes (defineres en gang)
+router.get("/admin/main", rolePermission, (req, res) => {
+  // hvis du vil vise en template:
+  // res.render("admin/users", { user: req.session.user });
+
+  // eller hvis du vil redirecte til en anden route/URL:
+  return res.redirect("/admin/users");
 });
+
 router.get("/gasstation", rolePermission, (req, res) => {
-  res.render("/gasstation", { user: req.session.user });
-});
-router.get("/createTask", rolePermission, (req, res) => {
-  res.render("/createTask", { user: req.session.user });
+  // render view navngivet uden foranstillet slash
+  res.render("gasstation", { user: req.session.user });
 });
 
-//Post/auth/login
+router.get("/createTask", rolePermission, (req, res) => {
+  res.render("createTask", { user: req.session.user });
+});
+
+// POST login
 router.post("/login", async (req, res) => {
   try {
     const { email, password } = req.body;
-    //validering
+
     if (!email || !password) {
-      req.session.error = "Email og adgangskode skal udfyldes;";
-      return res.render("/login");
+      req.session.error = "Email og adgangskode skal udfyldes.";
+      return res.redirect("/login"); // redirect for at vise login siden med fejl
     }
-    //find bruger
+
     const user = await User.findOne({
-      where: { email: email },
+      where: { email },
       attributes: ["id", "email", "password", "roleId"],
       raw: true,
     });
+
     if (!user) {
-      req.session.error = "forkert email eller adgangskode";
-      return res.render("login");
+      req.session.error = "Forkert email eller adgangskode.";
+      return res.redirect("/login");
     }
-    //verificere adgangskode
+
     const isValidPassword = await bcrypt.compare(password, user.password);
     if (!isValidPassword) {
-      req.session.error = "forkert email eller adgangskode";
-      return res.redirect("/");
+      req.session.error = "Forkert email eller adgangskode.";
+      return res.redirect("/login");
     }
-    //gem bruger data i session (uden adgangskode)
+
+    // gem bruger i session (uden password)
     req.session.user = {
       id: user.id,
       email: user.email,
       role: user.roleId,
     };
-    res.redirect("/createTask");
+
+    // redirect efter succesfuldt login
+    return res.redirect("/gasstation"); // eller "/admin/list" afhængigt af rolle
   } catch (error) {
     console.error("login fejl:", error);
-    req.session.error = "der opstod en fejl prøv igen.";
-    res.redirect("/");
+    req.session.error = "Der opstod en fejl, prøv igen.";
+    return res.redirect("/login");
   }
 });
 
