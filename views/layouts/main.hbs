@@ -8,25 +8,41 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300..800;1,300..800&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300..800;1,300..800&display=swap"
+    rel="stylesheet">
 </head>
 
 <body>
 
   <header>
     {{#if lastPage}}
-    <a href="{{lastPage}}">last page</a>
+    <a href="{{lastPage}}">
+      <svg width="75" height="67" viewBox="3 0 69 60" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <rect x="5.5" y="1.5" width="64" height="56" rx="2" stroke="var(--lightBlue)" stroke-width="3" style="fill:transparent;"/>
+          <path d="M55.5 31.5C56.6046 31.5 57.5 30.6046 57.5 29.5C57.5 28.3954 56.6046 27.5 55.5 27.5V29.5V31.5ZM18.0858 28.0858C17.3047 28.8668 17.3047 30.1332 18.0858 30.9142L30.8137 43.6421C31.5948 44.4232 32.8611 44.4232 33.6421 43.6421C34.4232 42.8611 34.4232 41.5948 33.6421 40.8137L22.3284 29.5L33.6421 18.1863C34.4232 17.4052 34.4232 16.1389 33.6421 15.3579C32.8611 14.5768 31.5948 14.5768 30.8137 15.3579L18.0858 28.0858ZM55.5 29.5V27.5L19.5 27.5V29.5V31.5L55.5 31.5V29.5Z" fill="var(--lightBlue)" />
+      </svg>
+    </a>
     {{/if}}
-    <a href="/">Login page</a> |
-    <a href="/createTask">create task</a> |
-    <a href="/gasstation">Tankstationsejer</a>
-    <a href="/admin/users">Admin list</a>
-    <a href="/profile">profile</a>
-    <a href="/createtaskdata/7">Create Task Data</a>
-    <a href="/taskHistorie">Task historie</a>
-    <a href="/admin/gasstations/7">Modify Gasstation</a>
-    <a href="/admin/users/7">Modify User</a>
-    <a href="/admin/products/2">Modify product 2</a>
+    <a href="/profile">
+      <svg width="75" height="67" viewBox="3 0 69 60" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <rect x="5.5" y="1.5" width="64" height="56" rx="2" stroke-width="3" style="fill:transparent;"/>
+          <circle cx="38" cy="23" r="14" />
+          <rect x="20" y="36" width="36" height="22" rx="4.5" />
+      </svg>
+    </a>
+
+    <div>
+      <a href="/">Login page</a> |
+      <a href="/createTask">create task</a> |
+      <a href="/gasstation">Tankstationsejer</a>
+      <a href="/admin/users">Admin list</a>
+      <a href="/profile">profile</a>
+      <a href="/createtaskdata/7">Create Task Data</a>
+      <a href="/taskHistorie">Task historie</a>
+      <a href="/admin/gasstations/7">Modify Gasstation</a>
+      <a href="/admin/users/7">Modify User</a>
+      <a href="/admin/products/2">Modify product 2</a>
+    </div>
   </header>
 
   {{{body}}}

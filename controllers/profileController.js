@@ -1,6 +1,7 @@
 const { User, Gasstation, Role, City, Task, Branch, GasstationUser } = require('../models');
 
 exports.profile = async (req, res) => {
+    const previousURL = new URL(await req.get('referer'));
     const currentUser = await User.findByPk(3,{
         raw: true
     });
@@ -9,7 +10,7 @@ exports.profile = async (req, res) => {
         raw: true
     });
     const exampleUser = await User.findOne({ 
-        where: { id: 1 },
+        where: { id: 1 }, //setup current user id
         raw: true 
     });
     res.render("home/profile", {
@@ -17,6 +18,7 @@ exports.profile = async (req, res) => {
         users: users,
         exampleUser: exampleUser,
         currentUser: currentUser,
+        lastPage: previousURL.pathname,
     });
 };
 

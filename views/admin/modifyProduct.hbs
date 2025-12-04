@@ -2,33 +2,41 @@
 
 
 <section class="modifySection">
+    <svg fill="#000000" width="800px" viewBox="0 0 100 100" version="1.1" xml:space="preserve" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" class="bigIcon">
+                <path d="M56,25.2l-3.6-0.7c-0.8-0.2-1.4-0.9-1.4-1.7c0-1.8-1.3-3.3-3-3.7V18c0-1.7-1.3-3-3-3h-1V7c0-1.7-1.3-3-3-3H29    c-1.7,0-3,1.3-3,3v8h-1c-1.7,0-3,1.3-3,3v1.1c-1.7,0.3-3,1.9-3,3.7v69.5c0,2.1,1.7,3.7,3.7,3.7h54.5c2.1,0,3.7-1.7,3.7-3.7V55.7    C81,40.9,70.5,28.1,56,25.2z M28,7c0-0.6,0.4-1,1-1h12c0.6,0,1,0.4,1,1v8H28V7z M24,18c0-0.6,0.4-1,1-1h2h16h2c0.6,0,1,0.4,1,1v1    H24V18z M79,92.3c0,1-0.8,1.7-1.7,1.7H22.7c-1,0-1.7-0.8-1.7-1.7V22.7c0-1,0.8-1.7,1.7-1.7H23h24h0.3c1,0,1.7,0.8,1.7,1.7    c0,1.8,1.3,3.3,3,3.7l3.6,0.7C69.1,29.8,79,41.9,79,55.7V92.3z" />
+                <path d="M54.4,31.7L50.2,31c-0.3,0-0.6,0-0.8,0.2C49.1,31.4,49,31.7,49,32c0,13.8,11.2,25,25,25c0.6,0,1-0.4,1-1    C75,43.9,66.4,33.7,54.4,31.7z M51,33.2l3.1,0.5C64.7,35.5,72.5,44.3,73,55C61.2,54.5,51.6,45,51,33.2z" />
+                <path d="M70,61c-13.8,0-25-11.2-25-25c0-2.8-2.2-5-5-5H30c-2.8,0-5,2.2-5,5v49c0,2.8,2.2,5,5,5h40c2.8,0,5-2.2,5-5V66    C75,63.2,72.8,61,70,61z M73,85c0,1.7-1.3,3-3,3H30c-1.7,0-3-1.3-3-3V36c0-1.7,1.3-3,3-3h10c1.7,0,3,1.3,3,3c0,14.9,12.1,27,27,27    c1.7,0,3,1.3,3,3V85z" />
+    </svg>
     <form action="/admin/products/{{product.[0].id}}/update" method="post" id="updateProduct">
         <div>
             <label for="name">Produkt navn:</label>
             <input type="text" id="name" name="name" value="{{product.[0].name}}">
         </div>
-    <div>
-        <label for="unitId">Enhed:</label>
-        <select name="unitId" id="unitId">
-            {{#each units}}
-                <option value="{{this.id}}" {{#ifEq this.id ../product.[0].unitId}}selected{{/ifEq}}>{{this.name}}</option>
-            {{/each}}
-        </select>
-    </div>
-    <div class="functionButtons">
-        <button type="submit" form="deleteProduct">
-            <svg width="57" height="57" viewBox="5 5 47 47" fill="none" xmlns="http://www.w3.org/2000/svg"
-                title="Slet bruger">
-                <path d="M20.7249 6.22537L19.95 8.5499H11.4C9.82364 8.5499 8.55005 9.8235 8.55005 11.3999C8.55005 12.9763 9.82364 14.2499 11.4 14.2499H45.6C47.1764 14.2499 48.45 12.9763 48.45 11.3999C48.45 9.8235 47.1764 8.5499 45.6 8.5499H37.05L36.2752 6.22537C35.8833 5.05865 34.7968 4.2749 33.5677 4.2749H23.4324C22.2033 4.2749 21.1168 5.05865 20.7249 6.22537ZM45.6 18.5249H11.4L13.2793 47.301C13.4218 49.5543 15.2921 51.2999 17.5454 51.2999H39.4547C41.708 51.2999 43.5783 49.5543 43.7208 47.301L45.6 18.5249Z"/>
-            </svg>
-        </button>
-        <button type="submit" form="updateProduct">
-            <svg xmlns="http://www.w3.org/2000/svg" viewBox="100 100 460 460"
-            title="Gem bruger">
-                <path d="M160 144C151.2 144 144 151.2 144 160L144 480C144 488.8 151.2 496 160 496L480 496C488.8 496 496 488.8 496 480L496 237.3C496 233.1 494.3 229 491.3 226L416 150.6L416 240C416 257.7 401.7 272 384 272L224 272C206.3 272 192 257.7 192 240L192 144L160 144zM240 144L240 224L368 224L368 144L240 144zM96 160C96 124.7 124.7 96 160 96L402.7 96C419.7 96 436 102.7 448 114.7L525.3 192C537.3 204 544 220.3 544 237.3L544 480C544 515.3 515.3 544 480 544L160 544C124.7 544 96 515.3 96 480L96 160zM256 384C256 348.7 284.7 320 320 320C355.3 320 384 348.7 384 384C384 419.3 355.3 448 320 448C284.7 448 256 419.3 256 384z" />
-            </svg>
-        </button>
-    </div>
+        <div>
+            <label for="unitId">Enhed:</label>
+            <select name="unitId" id="unitId">
+                {{#each units}}
+                <option value="{{this.id}}" {{#ifEq this.id ../product.[0].unitId}}selected{{/ifEq}}>{{this.name}}
+                </option>
+                {{/each}}
+            </select>
+        </div>
+        <div class="functionButtons">
+            <button type="submit" form="deleteProduct">
+                <svg width="57" height="57" viewBox="5 5 47 47" fill="none" xmlns="http://www.w3.org/2000/svg"
+                    title="Slet bruger">
+                    <path
+                        d="M20.7249 6.22537L19.95 8.5499H11.4C9.82364 8.5499 8.55005 9.8235 8.55005 11.3999C8.55005 12.9763 9.82364 14.2499 11.4 14.2499H45.6C47.1764 14.2499 48.45 12.9763 48.45 11.3999C48.45 9.8235 47.1764 8.5499 45.6 8.5499H37.05L36.2752 6.22537C35.8833 5.05865 34.7968 4.2749 33.5677 4.2749H23.4324C22.2033 4.2749 21.1168 5.05865 20.7249 6.22537ZM45.6 18.5249H11.4L13.2793 47.301C13.4218 49.5543 15.2921 51.2999 17.5454 51.2999H39.4547C41.708 51.2999 43.5783 49.5543 43.7208 47.301L45.6 18.5249Z" />
+                </svg>
+            </button>
+            <button type="submit" form="updateProduct">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="100 100 460 460" title="Gem bruger">
+                    <path
+                        d="M160 144C151.2 144 144 151.2 144 160L144 480C144 488.8 151.2 496 160 496L480 496C488.8 496 496 488.8 496 480L496 237.3C496 233.1 494.3 229 491.3 226L416 150.6L416 240C416 257.7 401.7 272 384 272L224 272C206.3 272 192 257.7 192 240L192 144L160 144zM240 144L240 224L368 224L368 144L240 144zM96 160C96 124.7 124.7 96 160 96L402.7 96C419.7 96 436 102.7 448 114.7L525.3 192C537.3 204 544 220.3 544 237.3L544 480C544 515.3 515.3 544 480 544L160 544C124.7 544 96 515.3 96 480L96 160zM256 384C256 348.7 284.7 320 320 320C355.3 320 384 348.7 384 384C384 419.3 355.3 448 320 448C284.7 448 256 419.3 256 384z" />
+                </svg>
+            </button>
+        </div>
     </form>
-    <form class="hidden" action="/admin/products/{{product.[0].id}}/delete" method="post" id="deleteProduct" onsubmit="return confirm('Slet nuværende product?');"/>
+    <form class="hidden" action="/admin/products/{{product.[0].id}}/delete" method="post" id="deleteProduct"
+        onsubmit="return confirm('Slet nuværende product?');" />
 </section>

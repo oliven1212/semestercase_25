@@ -57,3 +57,12 @@ section.modifySection form div {
     width: 100%;
     fill: var(--darkBlue);
 }
+.bigIcon{
+    fill: var(--darkBlue);
+    stroke: var(--darkBlue);
+    width: 60%;
+    height: auto;
+    padding-top: 30px;
+    margin-left: 20%;
+    margin-right: 20%;
+}

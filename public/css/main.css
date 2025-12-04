@@ -24,7 +24,9 @@ section {
 
 }
 header{
+  height: 20vh;
   background-color: var(--darkBlue);
+  overflow-y: scroll;
 }
 header *{color: var(--lightBlue);}
 h1, h2, h3, h4, h5, h6 {
@@ -35,6 +37,22 @@ h1 {
   font-weight: bold;
   
 }
+header a{
+  display: flex;
+  height: 100%;
+  width: fit-content;
+}
+header svg{
+  height: 80%;
+  margin-top: 10%;
+  margin-bottom: 10%;
+  width: auto;
+}
+header svg *{
+  stroke: var(--lightBlue);
+  fill: var(--lightBlue);
+}
+
 
 datalist{
   display: none !important;

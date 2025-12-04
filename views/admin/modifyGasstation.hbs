@@ -1,62 +1,71 @@
 <link rel="stylesheet" type="text/css" href="/css/modifyPages.css">
 <section class="modifySection">
+    <svg width="152" height="134" viewBox="0 0 152 134" fill="none" xmlns="http://www.w3.org/2000/svg" class="bigIcon">
+        <rect x="1.5" y="1.5" width="148.965" height="130.719" rx="3.5" stroke-width="3" style="fill: transparent;" />
+        <path d="M29.3548 26.5C29.3548 19.0539 35.3726 13 42.7742 13H76.3226C83.7242 13 89.7419 19.0539 89.7419 26.5V67H91.4193C101.61 67 109.871 75.3109 109.871 85.5625V92.3125C109.871 95.118 112.115 97.375 114.903 97.375C117.692 97.375 119.935 95.118 119.935 92.3125V59.8281C114.148 58.3305 109.871 53.0359 109.871 46.75V34.1992L104.461 28.2297C102.595 26.1625 102.742 22.9563 104.797 21.0789C106.852 19.2016 110.039 19.3492 111.905 21.4164L126.939 38.0383C128.91 40.2109 130 43.0375 130 45.9906V92.3125C130 100.708 123.248 107.5 114.903 107.5C106.558 107.5 99.8064 100.708 99.8064 92.3125V85.5625C99.8064 80.9008 96.0532 77.125 91.4193 77.125H89.7419V111.17C91.6919 111.866 93.0968 113.744 93.0968 115.938C93.0968 118.743 90.8532 121 88.0645 121H31.0323C28.2435 121 26 118.743 26 115.938C26 113.723 27.4048 111.866 29.3548 111.17V26.5ZM42.7742 29.875V50.125C42.7742 51.9813 44.2839 53.5 46.129 53.5H72.9677C74.8129 53.5 76.3226 51.9813 76.3226 50.125V29.875C76.3226 28.0188 74.8129 26.5 72.9677 26.5H46.129C44.2839 26.5 42.7742 28.0188 42.7742 29.875Z"/>
+    </svg>
     <form action="/admin/gasstations/{{gasstation.[0].id}}/update" method="post" id="updateGasstation">
-    <!--Make drop down with list of branch names -->
-    <div>
-        <label for="branchId">Kæde:</label>
-        <select name="branchId" id="branchId">
-            {{#each branches}}
-                <option value="{{this.id}}" {{#ifEq this.id ../gasstation.[0].branchId}}selected{{/ifEq}}>{{this.name}}</option>
-            {{/each}}
-        </select>
-    </div>
-    <div>
-        <label for="address">Address:</label>
-        <input type="text" id="address" name="address" value="{{gasstation.[0].address}}">
-    </div>
-    <div>
-        <label for="city">By:</label>
-        <input list="cities" id="city" name="city" value="{{#if gasstation.[0].[City.zipCode]}}{{gasstation.[0].[City.name]}} ({{gasstation.[0].[City.zipCode]}}){{/if}}" autocomplete="off">
-    
-        <datalist id="cities">
-            {{#each cities}}
-            <option value="{{this.name}} ({{this.zipCode}})"></option>
-            {{/each}}
-        </datalist>
+        <!--Make drop down with list of branch names -->
+        <div>
+            <label for="branchId">Kæde:</label>
+            <select name="branchId" id="branchId">
+                {{#each branches}}
+                <option value="{{this.id}}" {{#ifEq this.id ../gasstation.[0].branchId}}selected{{/ifEq}}>{{this.name}}
+                </option>
+                {{/each}}
+            </select>
+        </div>
+        <div>
+            <label for="address">Address:</label>
+            <input type="text" id="address" name="address" value="{{gasstation.[0].address}}">
+        </div>
+        <div>
+            <label for="city">By:</label>
+            <input list="cities" id="city" name="city"
+                value="{{#if gasstation.[0].[City.zipCode]}}{{gasstation.[0].[City.name]}} ({{gasstation.[0].[City.zipCode]}}){{/if}}"
+                autocomplete="off">
 
-    </div>
-    <div>
-        <label for="contactEmail">Kontakt email:</label>
-        <input type="email" id="contactEmail" name="contactEmail" value="{{gasstation.[0].contactEmail}}">
-    </div>
-    <div>
-        <label for="contactPhone">Kontakt telefon:</label>
-        <input type="text" id="contactPhone" name="contactPhone" value="{{gasstation.[0].contactPhone}}">
-    </div>
-    <div>
-        <label for="frontSpace">Front Space:</label>
-        <select id="frontSpace" name="frontSpace">
-            <option value="1" {{#ifEq gasstation.[0].frontSpace 1}}selected{{/ifEq}}>Ja</option>
-            <option value="0" {{#ifEq gasstation.[0].frontSpace 0}}selected{{/ifEq}}>Nej</option>
-        </select>
-    </div>
-    <div>
-        <a class="btn-white" href="{{currentPath}}/tasks">Rengørings historik</a>
-    </div>
-    <div class="functionButtons">
-        <button type="submit" form="deleteGasstation">
-            <svg width="57" height="57" viewBox="5 5 47 47" fill="none" xmlns="http://www.w3.org/2000/svg"
-                title="Slet bruger">
-                <path d="M20.7249 6.22537L19.95 8.5499H11.4C9.82364 8.5499 8.55005 9.8235 8.55005 11.3999C8.55005 12.9763 9.82364 14.2499 11.4 14.2499H45.6C47.1764 14.2499 48.45 12.9763 48.45 11.3999C48.45 9.8235 47.1764 8.5499 45.6 8.5499H37.05L36.2752 6.22537C35.8833 5.05865 34.7968 4.2749 33.5677 4.2749H23.4324C22.2033 4.2749 21.1168 5.05865 20.7249 6.22537ZM45.6 18.5249H11.4L13.2793 47.301C13.4218 49.5543 15.2921 51.2999 17.5454 51.2999H39.4547C41.708 51.2999 43.5783 49.5543 43.7208 47.301L45.6 18.5249Z"/>
-            </svg>
-        </button>
-        <button type="submit" form="updateGasstation">
-            <svg xmlns="http://www.w3.org/2000/svg" viewBox="100 100 460 460"
-            title="Gem bruger">
-                <path d="M160 144C151.2 144 144 151.2 144 160L144 480C144 488.8 151.2 496 160 496L480 496C488.8 496 496 488.8 496 480L496 237.3C496 233.1 494.3 229 491.3 226L416 150.6L416 240C416 257.7 401.7 272 384 272L224 272C206.3 272 192 257.7 192 240L192 144L160 144zM240 144L240 224L368 224L368 144L240 144zM96 160C96 124.7 124.7 96 160 96L402.7 96C419.7 96 436 102.7 448 114.7L525.3 192C537.3 204 544 220.3 544 237.3L544 480C544 515.3 515.3 544 480 544L160 544C124.7 544 96 515.3 96 480L96 160zM256 384C256 348.7 284.7 320 320 320C355.3 320 384 348.7 384 384C384 419.3 355.3 448 320 448C284.7 448 256 419.3 256 384z" />
-            </svg>
-        </button>
-    </div>
+            <datalist id="cities">
+                {{#each cities}}
+                <option value="{{this.name}} ({{this.zipCode}})"></option>
+                {{/each}}
+            </datalist>
+
+        </div>
+        <div>
+            <label for="contactEmail">Kontakt email:</label>
+            <input type="email" id="contactEmail" name="contactEmail" value="{{gasstation.[0].contactEmail}}">
+        </div>
+        <div>
+            <label for="contactPhone">Kontakt telefon:</label>
+            <input type="text" id="contactPhone" name="contactPhone" value="{{gasstation.[0].contactPhone}}">
+        </div>
+        <div>
+            <label for="frontSpace">Front Space:</label>
+            <select id="frontSpace" name="frontSpace">
+                <option value="1" {{#ifEq gasstation.[0].frontSpace 1}}selected{{/ifEq}}>Ja</option>
+                <option value="0" {{#ifEq gasstation.[0].frontSpace 0}}selected{{/ifEq}}>Nej</option>
+            </select>
+        </div>
+        <div>
+            <a class="btn-white" href="{{currentPath}}/tasks">Rengørings historik</a>
+        </div>
+        <div class="functionButtons">
+            <button type="submit" form="deleteGasstation">
+                <svg width="57" height="57" viewBox="5 5 47 47" fill="none" xmlns="http://www.w3.org/2000/svg"
+                    title="Slet bruger">
+                    <path
+                        d="M20.7249 6.22537L19.95 8.5499H11.4C9.82364 8.5499 8.55005 9.8235 8.55005 11.3999C8.55005 12.9763 9.82364 14.2499 11.4 14.2499H45.6C47.1764 14.2499 48.45 12.9763 48.45 11.3999C48.45 9.8235 47.1764 8.5499 45.6 8.5499H37.05L36.2752 6.22537C35.8833 5.05865 34.7968 4.2749 33.5677 4.2749H23.4324C22.2033 4.2749 21.1168 5.05865 20.7249 6.22537ZM45.6 18.5249H11.4L13.2793 47.301C13.4218 49.5543 15.2921 51.2999 17.5454 51.2999H39.4547C41.708 51.2999 43.5783 49.5543 43.7208 47.301L45.6 18.5249Z" />
+                </svg>
+            </button>
+            <button type="submit" form="updateGasstation">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="100 100 460 460" title="Gem bruger">
+                    <path
+                        d="M160 144C151.2 144 144 151.2 144 160L144 480C144 488.8 151.2 496 160 496L480 496C488.8 496 496 488.8 496 480L496 237.3C496 233.1 494.3 229 491.3 226L416 150.6L416 240C416 257.7 401.7 272 384 272L224 272C206.3 272 192 257.7 192 240L192 144L160 144zM240 144L240 224L368 224L368 144L240 144zM96 160C96 124.7 124.7 96 160 96L402.7 96C419.7 96 436 102.7 448 114.7L525.3 192C537.3 204 544 220.3 544 237.3L544 480C544 515.3 515.3 544 480 544L160 544C124.7 544 96 515.3 96 480L96 160zM256 384C256 348.7 284.7 320 320 320C355.3 320 384 348.7 384 384C384 419.3 355.3 448 320 448C284.7 448 256 419.3 256 384z" />
+                </svg>
+            </button>
+        </div>
     </form>
-    <form class="hidden" action="/admin/gasstations/{{gasstation.[0].id}}/delete" method="post" id="deleteGasstation" onsubmit="return confirm('Slet nuværende tankstation?');"/>
+    <form class="hidden" action="/admin/gasstations/{{gasstation.[0].id}}/delete" method="post" id="deleteGasstation"
+        onsubmit="return confirm('Slet nuværende tankstation?');" />
 </section>

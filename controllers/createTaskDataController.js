@@ -3,7 +3,6 @@ const upload = require('../multer');
 const path = require('path');
 const { gasstation } = require('./gasController');
 const { sendTaskEmail } = require('../taskEmail');
-const { where } = require('sequelize');
 
 exports.uploadMiddleware = upload.fields([
     { name: 'beforePicture', maxCount: 100 },
@@ -223,6 +222,12 @@ exports.deleteImage = async (req, res) => {
 };
 
 exports.showTaskImages = async (req, res) => {
+    const images = await Picture.findAll({
+        where:{id: req.params.imageUuid},
+        raw: true,
+    });
+    console.log(`_______________________________________`);
+    console.log(images);
     res.render("home/taskImages", {
 
     });
