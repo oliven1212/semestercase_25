@@ -17,29 +17,30 @@ const app = express();
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 
-
-
 // Static files
 app.use(express.static(path.join(__dirname, "public")));
 
 // View engine
-app.engine(".hbs", exphbs.engine({
-  extname: ".hbs",
-  partialsDir: path.join(__dirname, "views"),
-  helpers: {
-//Works like the if handlebar helper, but checks if 2 values are equal ( == )
-    ifEq: function (a, b, options) {
-      if (a == b) {
-        return options.fn(this); 
-      }
-    }
-  }
-}));
+app.engine(
+  ".hbs",
+  exphbs.engine({
+    extname: ".hbs",
+    partialsDir: path.join(__dirname, "views"),
+    helpers: {
+      //Works like the if handlebar helper, but checks if 2 values are equal ( == )
+      ifEq: function (a, b, options) {
+        if (a == b) {
+          return options.fn(this);
+        }
+      },
+    },
+  }),
+);
 
 app.set("view engine", ".hbs");
 app.set("views", path.join(__dirname, "views"));
 
-
+//kan være vi skal oprette en ENV. fil til secret
 app.use(
   session({
     secret: "12345",
@@ -55,8 +56,6 @@ app.use((req, res, next) => {
   console.log(req.session);
   next();
 });
-
-
 
 // Routes
 app.use("/", routes);

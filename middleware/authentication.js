@@ -11,7 +11,7 @@ function rolePermission(req, res, next) {
   console.log("-------------------------");
   console.log(req.session);
   if (req.session && req.session.user.roleId === 1) {
-    res.redirect("/admin/users");
+    res.redirect("/admin/main");
   } else if (req.session && req.session.user.roleId === 2) {
     res.redirect("/gasstation");
   } else {

@@ -15,9 +15,10 @@ router.get("/login", isNotAuthenticated, (req, res) => {
   });
 });
 
-//admin-only
+//not admin-only
 router.get("/admin/list", rolePermission, (req, res) => {
   res.redirect("admin/users", { user: req.session.user });
+  console.log("333333333333333333333333333333333333333333");
 });
 router.get("/gasstation", rolePermission, (req, res) => {
   res.render("/gasstation", { user: req.session.user });
@@ -57,7 +58,17 @@ router.post("/login", async (req, res) => {
       email: user.email,
       role: user.roleId,
     };
-    res.redirect("/createTask");
+    router.get("/admin/list", rolePermission, (req, res) => {
+      res.redirect("admin/users", { user: req.session.user });
+      console.log("333333333333333333333333333333333333333333");
+    });
+    router.get("/gasstation", rolePermission, (req, res) => {
+      res.render("/gasstation", { user: req.session.user });
+    });
+    router.get("/createTask", rolePermission, (req, res) => {
+      res.render("/createTask", { user: req.session.user });
+    });
+    // res.redirect("/createTask");
   } catch (error) {
     console.error("login fejl:", error);
     req.session.error = "der opstod en fejl prøv igen.";
