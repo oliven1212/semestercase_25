@@ -192,7 +192,6 @@ exports.completedTask = async (req, res) => {
         raw: true
     });
 
-    console.log(task);
 
 
     res.render("home/completedTask", {

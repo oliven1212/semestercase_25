@@ -24,7 +24,6 @@ exports.gasstation = async (req, res) => {
     ],
     raw: true,
   });
-  console.log(gasstations);
   res.render("home/gasstation", {
     title: 'gasstation',
     message: 'Vælg tankstation',

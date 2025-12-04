@@ -16,10 +16,6 @@ module.exports = (sequelize, DataTypes) => {
             fileName,
             beforeAfter
         }){
-            console.log(id);
-            console.log(taskId);
-            console.log(fileName);
-            console.log(beforeAfter);
             const picture = await Picture.create({
                 id: id,
                 taskId: taskId,

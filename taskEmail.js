@@ -13,8 +13,6 @@ if (!GMAIL_USER || !GMAIL_PASS) {
     process.exit(1);
 }
 
-//const whatever = controller.imageUpload.uniqueId; // Bare for at bruge controlleren uden fejl
-//console.log(whatever, 'hahahahahahahha');
 //Linket -> hvor den skal hen (til owner fra task gasstation)
 
 
