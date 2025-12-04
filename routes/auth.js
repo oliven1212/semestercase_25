@@ -61,13 +61,13 @@ router.post("/login", async (req, res) => {
     }
 
     // gem bruger i session (uden password)
-    if (user && user.password === password) {
-      req.session.user = {
-        id: user.id,
-        email: user.email,
-        role: user.roleId,
-      };
-    }
+
+    req.session.user = {
+      id: user.id,
+      email: user.email,
+      role: user.roleId,
+    };
+
     console.log(
       "this is our session after we saved user in session:",
       req.session.user,
