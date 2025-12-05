@@ -23,16 +23,24 @@
 
 .mainCard {
     margin: 1rem;
-    padding: 2rem;
     width: 100%;
-    background-color: --darkBlue;
-    color: --lightBlue;
-button {
-    border: none;
-    padding: 0;
-    background: none;
-    cursor: pointer;
-}
+
+    a{
+        width: 100%;
+        margin: 0;
+    }
+
+    button{
+        color: var(--lightBlue);
+        background-color: var(--darkBlue);
+        border: none;
+        border-color: var(--darkBlue);
+        font-size: large;
+        font-weight: 600;
+        border-radius: 5px;
+        padding-top: 1rem;
+        padding-bottom: 1rem;
+    }
 }
 
 .createNew {

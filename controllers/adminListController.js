@@ -98,7 +98,7 @@ exports.adminListGasstations = async (req, res) => {
         content: stationsMap,
         createNew: `/admin/gasstations/new`,
         searchQuery: searchQuery,
-        lastPage: '/admin'
+        lastPage: '/admin',
     });
 };
 
