@@ -29,7 +29,7 @@ header{
 /*Remove later */
   height: 12vh;
   overflow-y: scroll;
-
+/**/
 
   background-color: var(--darkBlue);
   display: grid;
@@ -62,10 +62,12 @@ header svg *{
   stroke: var(--lightBlue);
   fill: var(--lightBlue);
 }
-header a:first-of-type {
+header .previousPageLink {
     justify-self: start;
+    grid-column: 1;
 }
-header a:last-of-type {
+header .ProfilePageLink {
+  grid-column: 2;
     justify-self: end;
 }
 
