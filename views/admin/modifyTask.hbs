@@ -20,7 +20,7 @@
         <path
             d="M25.7803 19.7803L19.7803 25.7803C19.6397 25.921 19.4489 26 19.25 26C19.0511 26 18.8603 25.921 18.7197 25.7803L15.7216 22.7823C15.4287 22.4894 15.4287 22.0145 15.7216 21.7216C16.0145 21.4287 16.4894 21.4287 16.7823 21.7216L19.25 24.1893L24.7197 18.7197C25.0126 18.4268 25.4874 18.4268 25.7803 18.7197C26.0732 19.0126 26.0732 19.4874 25.7803 19.7803Z" />
     </svg>
-    <form action="/admin/products/{{product.[0].id}}/update" method="post" id="updateProduct">
+    <form action="/admin/tasks/{{task.id}}/update" method="post" id="updateProduct">
         <div>
             <label for="user">Udført af:</label>
             <input list="users" id="user" name="user"
@@ -42,10 +42,36 @@
             </datalist>
         </div>
         <div>
-            <label for="frontSpace">Enhed:</label>
-            <input type="checkbox" disabled name="frontSpace" id="frontSpace" checked="{{#ifEq this.[Gasstation.frontSpace] 1}}true{{/ifEq}}{{#ifEq this.[Gasstation.frontSpace] 0}}false{{/ifEq}}"/>
+            <label for="frontSpace">Front Space:</label>
+            <input id="frontSpace" name="frontSpace" disabled value="{{#ifEq task.[Gasstation.frontSpace] 1}}Ja{{/ifEq}}{{#ifEq task.[Gasstation.frontSpace] 0}}Nej{{/ifEq}}"/>
         </div>
+        
+        {{!-- Setup images for tasks and the actual logic for the form --}}
+        
+<section class="sectionAfter">
+    <h2>Efter billeder</h2>
+    <div class="imageGrid">
+        {{#each pictures}}
+        {{#ifEq this.beforeAfter 1}}
+        <form action="/createtaskdata/{{this.taskId}}/images" method="post">
+            <input type="hidden" name="fileName" id="fileName" value="{{this.filename}}">
 
+            <button type="submit" class="removeImageButton">
+                <div class="imageContainer">
+                    <img class="taskImages" src="/imgUploads/{{this.filename}}" alt="After image">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 640">
+                        <path fill="#f71735"
+                            d="M504.6 148.5C515.9 134.9 514.1 114.7 500.5 103.4C486.9 92.1 466.7 93.9 455.4 107.5L320 270L184.6 107.5C173.3 93.9 153.1 92.1 139.5 103.4C125.9 114.7 124.1 134.9 135.4 148.5L278.3 320L135.4 491.5C124.1 505.1 125.9 525.3 139.5 536.6C153.1 547.9 173.3 546.1 184.6 532.5L320 370L455.4 532.5C466.7 546.1 486.9 547.9 500.5 536.6C514.1 525.3 515.9 505.1 504.6 491.5L361.7 320L504.6 148.5z" />
+                    </svg>
+
+                </div>
+            </button>
+
+        </form>
+        {{/ifEq}}
+        {{/each}}
+    </div>
+</section>
         <div class="functionButtons">
             <button type="submit" form="deleteProduct">
                 <svg width="57" height="57" viewBox="5 5 47 47" fill="none" xmlns="http://www.w3.org/2000/svg"
