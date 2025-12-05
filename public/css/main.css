@@ -20,11 +20,11 @@ body {
   background-color: var(--lightBlue);
   padding-bottom: 20px;
   overflow-y: scroll;
-  padding-top: 12vh;
+  padding-top: 10vh;
 }
 
 section {
-      box-sizing: border-box;
+  box-sizing: border-box;
 
 }
 header{
