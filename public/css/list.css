@@ -47,14 +47,16 @@ button {
         grid-template-columns: 1fr 1fr;
         column-gap: 2rem;
     }
+    
 }
 
 .listCard {
     background: white;
+    color: var(--darkBlue);
     display: grid;
     grid-template-columns: 2fr 1fr;
     grid-template-rows: 1fr auto;
-    border: 2px solid #bdbdbd;
+    border: 2px solid var(--darkBlue);
     grid-template-areas:
         'name functions'
         'contact contact';
@@ -79,6 +81,7 @@ button {
         svg {
             width: 1.5rem;
             height: 1.5rem;
+            fill: var(--darkBlue);
         }
         button {
 
