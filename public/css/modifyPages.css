@@ -29,6 +29,10 @@ section.modifySection form div select {
         border-color: var(--darkBlue);
         background-color: var(--white);
 }
+section.modifySection input[type="checkbox"]{
+    filter: invert(100%) brightness(1.7);
+}
+
 section.modifySection form div {
     margin-bottom: 15px;
 }

@@ -1,7 +1,10 @@
 // middleware/authentication.js
 
 function ensureAuthenticated(req, res, next) {
-  console.log("ensureAuthenticated session:", !!(req.session && req.session.user));
+  console.log(
+    "ensureAuthenticated session:",
+    !!(req.session && req.session.user),
+  );
   if (!req.session || !req.session.user) {
     // brug /login konsistent
     return res.redirect("/");
@@ -46,5 +49,5 @@ function redirectToRoleHome(req, res, next) {
 module.exports = {
   ensureAuthenticated,
   allowRoles,
-  redirectToRoleHome
+  redirectToRoleHome,
 };
