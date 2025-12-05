@@ -57,7 +57,7 @@ router.post("/admin/products/new", adminListController.newProductStart);
 router.post("/admin/products/:productId/update", productController.updateProduct);
 router.post("/admin/products/:productId/delete", productController.deleteProduct);
 
-//router.get("/admin/tasks", adminListController.adminListTasks);
+router.get("/admin/tasks", adminListController.adminListTasks);
 router.get("/admin/tasks/:taskId", taskController.adminTasks);
 //router.post("/admin/tasks/:taskId/update", taskController);
 router.post("/admin/tasks/:taskId/delete", taskController.deleteTask);
