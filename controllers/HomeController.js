@@ -21,6 +21,6 @@ exports.loginSend = async (req, res) => {
   });
   console.log(email, user.password, user);
 };
-exports.changePassword = async (req, res) => {
-  res.render("home/changePassword", {});
-};
+// exports.changePassword = async (req, res) => {
+//   res.render("home/changePassword", {});
+// };
