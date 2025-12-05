@@ -17,6 +17,7 @@ exports.adminProducts = async (req, res) => {
         product: product,
         units: units,
         currentPath: req.originalUrl.replace(/\/$/, ""),
+        lastPage: '/admin/products',
     });
 };
 

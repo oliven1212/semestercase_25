@@ -30,6 +30,7 @@ exports.adminGasstation = async (req, res) => {
         branches: branches,
         cities: cities,
         currentPath: req.originalUrl.replace(/\/$/, ""),
+        lastPage: '/admin/gasstations',
     });
 };
 

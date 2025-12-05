@@ -52,7 +52,7 @@ exports.adminUser = async (req, res) => {
         cities: cities,
         roles: roles,
         currentPath: req.originalUrl.replace(/\/$/, ""),
-        lastPage: `/admin/users/`,
+        lastPage: `/admin/users`,
     });
 };
 
