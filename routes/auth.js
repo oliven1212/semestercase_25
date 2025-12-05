@@ -7,7 +7,7 @@ const {
   redirectToRoleHome,
 } = require("../middleware/authentication");
 const { User } = require("../models");
-//const HomeController = require("../controllers/HomeController");
+const HomeController = require("../controllers/HomeController");
 
 // GET login page -> fjern isNotAuthenticated (ellers kan ingen nå login)
 router.get("/", (req, res) => {
@@ -85,5 +85,5 @@ router.post("/login", async (req, res) => {
   }
 });
 
-//router.get("/login/reset", HomeController.changePassword);
+router.get("/login/reset", HomeController.changePassword);
 module.exports = router;
