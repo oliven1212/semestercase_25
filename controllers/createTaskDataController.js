@@ -1,15 +1,25 @@
-const { User, Gasstation, GasstationUser, Task, Unit, Product, Picture, ProductTask, Branch, City } = require('../models');
+const {
+    User,
+    Gasstation,
+    GasstationUser,
+    Task,
+    Unit,
+    Product,
+    Picture,
+    ProductTask,
+    Branch,
+    City
+} = require('../models');
 const upload = require('../multer');
 const path = require('path');
 const crypto = require('crypto');
-const { gasstation } = require('./gasController');
-const { sendTaskEmail } = require('../taskEmail');
+const {gasstation} = require('./gasController');
+const {sendTaskEmail} = require('../taskEmail');
 
 exports.uploadMiddleware = upload.fields([
-    { name: 'beforePicture', maxCount: 100 },
-    { name: 'afterPicture', maxCount: 100 }
+    {name: 'beforePicture', maxCount: 100},
+    {name: 'afterPicture', maxCount: 100}
 ]);
-
 
 
 exports.taskPageOne = async (req, res) => {
@@ -27,7 +37,6 @@ exports.taskPageOne = async (req, res) => {
     //Her skal tilføjes taskId så gasstation og user bliver sendt med
 
 
-
     const product = await Product.findAll({
         include: {
             model: Unit,
@@ -36,7 +45,7 @@ exports.taskPageOne = async (req, res) => {
     });
 
     const user = await User.findAll({
-        where: { id: 1 }, // skal ændres!!!!!!!!!!!
+        where: {id: 1}, // skal ændres!!!!!!!!!!!
         raw: true
     });
 
@@ -49,7 +58,6 @@ exports.taskPageOne = async (req, res) => {
     });
 
 };
-
 
 
 exports.uploadTasks = async (req, res) => {
@@ -88,10 +96,9 @@ exports.uploadTasks = async (req, res) => {
         }
 
 
-
     }
     const emailData = await Task.findOne({
-        where: { id: taskId },
+        where: {id: taskId},
         attributes: [],
         include: [
             {
@@ -133,12 +140,12 @@ exports.completedTask = async (req, res) => {
 
 exports.imageUpload = async (req, res) => {
     const taskId = req.params.taskId;
-    const { v4: uuidv4 } = require('uuid');
+    const {v4: uuidv4} = require('uuid');
 
     // Hvis der allerede findes billeder for denne task, genbrug samme uuid (fra first picture.id)
     // ellers generér en ny uuid
     const existingPicture = await Picture.findOne({
-        where: { taskId: taskId },
+        where: {taskId: taskId},
         attributes: ['id'],
         raw: true
     });
@@ -186,12 +193,11 @@ exports.completedTask = async (req, res) => {
             }, {
                 model: City,
             },
-            { model: User }],
+                {model: User}],
 
         }],
         raw: true
     });
-
 
 
     res.render("home/completedTask", {
@@ -202,7 +208,7 @@ exports.completedTask = async (req, res) => {
 exports.viewImages = async (req, res) => {
     const taskId = req.params.taskId;
     const pictures = await Picture.findAll({
-        where: { taskId: taskId },
+        where: {taskId: taskId},
         raw: true
     });
 
@@ -225,21 +231,26 @@ exports.deleteImage = async (req, res) => {
 exports.showTaskImages = async (req, res) => {
     const images = await Picture.findAll(
         {
-            where: { id: req.params.imageUuid },
-            include: [{ model: Task, }],
+            where: {id: req.params.imageUuid},
+            include: {model: Task,},
 
             raw: true,
-        }); 
-        
-        
-        if (!images || images.length === 0) {
-            return res.status(404).render("home/error",
-                { title: 'Ikke fundet', message: 'Ingen billeder fundet' });
-        }
-    
-        const task = images[0].Task; const fortyEightHoursAgo = new Date(Date.now() - 48 * 60 * 60 * 1000);
-    
-    if (task.taskLink === 1 || new Date(task.createdAt) < fortyEightHoursAgo) {
+        });
+
+
+    if (!images || images.length === 0) {
+        return res.status(404).render("home/error",
+            {title: 'Ikke fundet', message: 'Ingen billeder fundet'});
+    }
+
+    const taskLink = images[0]['Task.taskLink'];
+    const fortyEightHoursAgo = new Date(Date.now() - 48 * 60 * 60 * 1000);
+    console.log('ioæjfewnkkjhblsgrhbkjgsrnbkjhgrts');
+    console.log(images[3]);
+    console.log('_________');
+    console.log(taskLink);
+
+    if (taskLink === 1 || images[0].createdAt < fortyEightHoursAgo) {
         return res.render("home/showTaskImages",
             {
                 title: 'Dette link er allerede brugt eller er udløbet',
@@ -247,15 +258,20 @@ exports.showTaskImages = async (req, res) => {
                 content: 'Kontakt venligst din administrator for at få et nyt link',
             }
             ,);
-    } 
-    
-    task.taskLink = 1; await task.save();
-    
-    res.render("home/showTaskImages",
-        {
-            title: 'Rengøringslog',
-            message: 'Her kan du se informationerne fra din tankstations rengøring',
-            content: 'Hej og velkommen til rengøringsloggen for din tankstation. Her kan du finde detaljer om de seneste rengøringsopgaver udført på din station, inklusive billeder før og efter rengøringen samt de anvendte produkter.',
-            images: images, task: task,
-        });
+    }
+    else {
+        res.render("home/showTaskImages",
+            {
+                title: 'Rengøringslog',
+                message: 'Her kan du se informationerne fra din tankstations rengøring',
+                content: 'Hej og velkommen til rengøringsloggen for din tankstation. Her kan du finde detaljer om de seneste rengøringsopgaver udført på din station, inklusive billeder før og efter rengøringen samt de anvendte produkter.',
+                images: images
+            });
+    };
+    // Update the taskLink in the database
+    /*await Task.update(
+        { taskLink: 1 },
+        { where: { id: images[0]['Task.id'] } }
+    );*/
+
 };
