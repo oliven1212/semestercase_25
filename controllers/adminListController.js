@@ -46,7 +46,8 @@ exports.adminListUsers = async (req, res) => {
         title: 'Liste af brugere',
         message: 'Opret ny bruger',
         createNew: '/admin/users/new',
-        content: usersMap
+        content: usersMap,
+        lastPage: '/admin'
     });
 };
 
@@ -80,6 +81,7 @@ exports.adminListGasstations = async (req, res) => {
         message: 'Opret ny tankstation',
         content: stationsMap,
         createNew: `/admin/gasstations/new`,
+        lastPage: '/admin'
     });
 };
 
@@ -109,7 +111,8 @@ exports.adminListProducts = async (req, res) => {
         title: 'Liste af produkter',
         message: 'Opret nyt produkt',
         content: productsMap,
-        createNew: `/admin/products/new`
+        createNew: `/admin/products/new`,
+        lastPage: '/admin'
     });
 };
 
