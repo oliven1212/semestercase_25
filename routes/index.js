@@ -28,7 +28,7 @@ router.post("/uploadTaskImage/:taskId",createTaskDataController.uploadMiddleware
 
 router.get("/createtaskdata/:taskId/images", createTaskDataController.viewImages);
 
-router.post("/createtaskdata/:taskId/images", createTaskDataController.deleteImage);
+router.post("/createtaskdata/:taskId/images", createTaskDataController.deleteImage,);
 
 router.get("/completedTask/:taskId", createTaskDataController.completedTask);
 router.get("/showTaskImages/:imageUuid",createTaskDataController.showTaskImages);
@@ -38,10 +38,10 @@ router.post("/createTask", createTaskController.logStart);
 router.get("/admin", adminListController.adminMain);
 
 router.get("/admin/gasstations", adminListController.adminListGasstations);
-router.get("/admin/gasstations/:gasId", modifyGasstationController.adminGasstation);
+router.get("/admin/gasstations/:gasId",modifyGasstationController.adminGasstation,);
 router.post("/admin/gasstations/new", adminListController.newGasstationStart);
-router.post("/admin/gasstations/:gasId/update", modifyGasstationController.updateGasstation);
-router.post("/admin/gasstations/:gasId/delete", modifyGasstationController.deleteGasstation);
+router.post("/admin/gasstations/:gasId/update", modifyGasstationController.updateGasstation,);
+router.post("/admin/gasstations/:gasId/delete",modifyGasstationController.deleteGasstation,);
 
 router.get("/admin/users", adminListController.adminListUsers);
 router.get("/admin/users/:userId", profileController.adminUser);

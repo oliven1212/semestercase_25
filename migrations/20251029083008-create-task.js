@@ -26,6 +26,9 @@ module.exports = {
                 onUpdate: 'CASCADE',
                 onDelete: 'SET NULL',
             },
+            taskLink: {
+                type: Sequelize.BOOLEAN
+            },
             startTime: {
                 type: Sequelize.DATE
             },

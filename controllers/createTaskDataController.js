@@ -1,6 +1,7 @@
 const { User, Gasstation, GasstationUser, Task, Unit, Product, Picture, ProductTask, Branch, City } = require('../models');
 const upload = require('../multer');
 const path = require('path');
+const crypto = require('crypto');
 const { gasstation } = require('./gasController');
 const { sendTaskEmail } = require('../taskEmail');
 
@@ -102,12 +103,12 @@ exports.uploadTasks = async (req, res) => {
                 attributes: [],
                 include: [{
                     model: User,
-                    attributes:['email'],
+                    attributes: ['email'],
                     through: {
                         where: {
                             isOwner: 1
                         },
-                        attributes:[],
+                        attributes: [],
                     },
                 }],
             }
@@ -222,14 +223,39 @@ exports.deleteImage = async (req, res) => {
 };
 
 exports.showTaskImages = async (req, res) => {
-    const images = await Picture.findAll({
-        where:{id: req.params.imageUuid},
-        raw: true,
-    });
-    console.log(`_______________________________________`);
-    console.log(images);
-    res.render("home/taskImages", {
+    const images = await Picture.findAll(
+        {
+            where: { id: req.params.imageUuid },
+            include: [{ model: Task, }],
 
-    });
-
+            raw: true,
+        }); 
+        
+        
+        if (!images || images.length === 0) {
+            return res.status(404).render("home/error",
+                { title: 'Ikke fundet', message: 'Ingen billeder fundet' });
+        }
+    
+        const task = images[0].Task; const fortyEightHoursAgo = new Date(Date.now() - 48 * 60 * 60 * 1000);
+    
+    if (task.taskLink === 1 || new Date(task.createdAt) < fortyEightHoursAgo) {
+        return res.render("home/showTaskImages",
+            {
+                title: 'Dette link er allerede brugt eller er udløbet',
+                message: 'Dette link er allerede brugt eller er udløbet',
+                content: 'Kontakt venligst din administrator for at få et nyt link',
+            }
+            ,);
+    } 
+    
+    task.taskLink = 1; await task.save();
+    
+    res.render("home/showTaskImages",
+        {
+            title: 'Rengøringslog',
+            message: 'Her kan du se informationerne fra din tankstations rengøring',
+            content: 'Hej og velkommen til rengøringsloggen for din tankstation. Her kan du finde detaljer om de seneste rengøringsopgaver udført på din station, inklusive billeder før og efter rengøringen samt de anvendte produkter.',
+            images: images, task: task,
+        });
 };

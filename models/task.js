@@ -20,6 +20,7 @@ module.exports = (sequelize, DataTypes) => {
         {
             userId: DataTypes.INTEGER,
             gasstationId: DataTypes.INTEGER,
+            taskLink: DataTypes.BOOLEAN,
             startTime: DataTypes.DATE,
         },
         {

@@ -12,6 +12,7 @@ module.exports = {
         tasksArray.push({
           userId: y,
           gasstationId: i,
+          taskLink: 1,
           startTime: new Date(),
           createdAt: new Date(),
           updatedAt: new Date(),
