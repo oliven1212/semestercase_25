@@ -1,8 +1,10 @@
 <link rel="stylesheet" type="text/css" href="/css/list.css">
 <div class="listSite">
+    {{#if createNew}}
     <form action="{{createNew}}" method="post">
         <button type="submit" class="createNew">{{message}}</button>
     </form>
+    {{/if}}
     <search>
         <form>
             <input name="listSearch" id="listSearch" placeholder="Søg efter navn">
