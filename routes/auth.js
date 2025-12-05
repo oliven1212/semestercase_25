@@ -1,35 +1,33 @@
 const express = require("express");
-// const session = require("express-session");
 const bcrypt = require("bcrypt");
 const router = express.Router();
 const {
-  isNotAuthenticated,
-  rolePermission,
+  ensureAuthenticated,
+  allowRoles,
+  redirectToRoleHome,
 } = require("../middleware/authentication");
 const { User } = require("../models");
 
-// GET login page
-router.get("/login", isNotAuthenticated, (req, res) => {
-  const error = req.session.error;
-  delete req.session.error; // ryd fejlen efter visning
+// GET login page -> fjern isNotAuthenticated (ellers kan ingen nå login)
+router.get("/login", (req, res) => {
+  const error = req.session ? req.session.error : null;
+  if (req.session) delete req.session.error;
   res.render("home/login", { error });
 });
 
-// protected routes (defineres en gang)
-router.get("/admin/main", rolePermission, (req, res) => {
-  // hvis du vil vise en template:
-  // res.render("admin/users", { user: req.session.user });
-
-  // eller hvis du vil redirecte til en anden route/URL:
-  return res.redirect("/admin/main");
+// Admin - protected: kræver autentifikation + rolle 1
+router.get("/admin", ensureAuthenticated, allowRoles([1]), (req, res) => {
+  // render admin-side direkte (ikke redirect til samme route)
+  res.render("admin", { user: req.session.user });
 });
 
-router.get("/gasstation", rolePermission, (req, res) => {
-  // render view navngivet uden foranstillet slash
+// Gasstation - kun rolle 2
+router.get("/gasstation", ensureAuthenticated, allowRoles([2]), (req, res) => {
   res.render("gasstation", { user: req.session.user });
 });
 
-router.get("/createTask", rolePermission, (req, res) => {
+// CreateTask - kun rolle 3
+router.get("/createTask", ensureAuthenticated, allowRoles([3]), (req, res) => {
   res.render("createTask", { user: req.session.user });
 });
 
@@ -37,10 +35,9 @@ router.get("/createTask", rolePermission, (req, res) => {
 router.post("/login", async (req, res) => {
   try {
     const { email, password } = req.body;
-
     if (!email || !password) {
       req.session.error = "Email og adgangskode skal udfyldes.";
-      return res.redirect("/login"); // redirect for at vise login siden med fejl
+      return res.redirect("/login");
     }
 
     const user = await User.findOne({
@@ -61,23 +58,25 @@ router.post("/login", async (req, res) => {
     }
 
     // gem bruger i session (uden password)
-
     req.session.user = {
       id: user.id,
       email: user.email,
-      role: user.roleId,
+      role: user.roleId, // matcher middleware som tjekker req.session.user.role
     };
 
-    console.log(
-      "this is our session after we saved user in session:",
-      req.session.user,
-    );
-    // redirect efter succesfuldt login
-    console.log("this is our user:", req.session.user);
-    console.log(
-      rolePermission("our user has the role :", req.session.user.role),
-    );
-    return res.redirect("/admin/main"); // eller "/admin/list" afhængigt af rolle
+    console.log("session sat:", req.session.user);
+
+    // Redirect baseret på rolle (OPKALD IKKE rolePermission direkte)
+    switch (req.session.user.role) {
+      case 1:
+        return res.redirect("/admin");
+      case 2:
+        return res.redirect("/gasstation");
+      case 3:
+        return res.redirect("/createTask");
+      default:
+        return res.redirect("/");
+    }
   } catch (error) {
     console.error("login fejl:", error);
     req.session.error = "Der opstod en fejl, prøv igen.";
