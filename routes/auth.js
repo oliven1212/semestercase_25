@@ -9,7 +9,7 @@ const {
 const { User } = require("../models");
 
 // GET login page -> fjern isNotAuthenticated (ellers kan ingen nå login)
-router.get("/login", (req, res) => {
+router.get("/", (req, res) => {
   const error = req.session ? req.session.error : null;
   if (req.session) delete req.session.error;
   res.render("home/login", { error });
@@ -37,7 +37,7 @@ router.post("/login", async (req, res) => {
     const { email, password } = req.body;
     if (!email || !password) {
       req.session.error = "Email og adgangskode skal udfyldes.";
-      return res.redirect("/login");
+      return res.redirect("/");
     }
 
     const user = await User.findOne({
@@ -48,13 +48,13 @@ router.post("/login", async (req, res) => {
 
     if (!user) {
       req.session.error = "Forkert email eller adgangskode.";
-      return res.redirect("/login");
+      return res.redirect("/");
     }
 
     const isValidPassword = await bcrypt.compare(password, user.password);
     if (!isValidPassword) {
       req.session.error = "Forkert email eller adgangskode.";
-      return res.redirect("/login");
+      return res.redirect("/");
     }
 
     // gem bruger i session (uden password)
@@ -80,7 +80,7 @@ router.post("/login", async (req, res) => {
   } catch (error) {
     console.error("login fejl:", error);
     req.session.error = "Der opstod en fejl, prøv igen.";
-    return res.redirect("/login");
+    return res.redirect("/");
   }
 });
 

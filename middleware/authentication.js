@@ -4,7 +4,7 @@ function ensureAuthenticated(req, res, next) {
   console.log("ensureAuthenticated session:", !!(req.session && req.session.user));
   if (!req.session || !req.session.user) {
     // brug /login konsistent
-    return res.redirect("/login");
+    return res.redirect("/");
   }
   next();
 }
@@ -16,7 +16,7 @@ function ensureAuthenticated(req, res, next) {
 function allowRoles(allowedRoles) {
   return function (req, res, next) {
     if (!req.session || !req.session.user) {
-      return res.redirect("/login");
+      return res.redirect("/");
     }
     const role = req.session.user.role;
     console.log("allowRoles - user role:", role, "allowed:", allowedRoles);
@@ -34,7 +34,7 @@ function allowRoles(allowedRoles) {
  */
 function redirectToRoleHome(req, res, next) {
   if (!req.session || !req.session.user) {
-    return res.redirect("/login");
+    return res.redirect("/");
   }
   const role = req.session.user.role;
   if (role === 1) return res.redirect("/admin");
