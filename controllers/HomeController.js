@@ -24,3 +24,10 @@ exports.loginSend = async (req, res) => {
 exports.changePassword = async (req, res) => {
   res.render("home/changePassword", {});
 };
+
+exports.pEmailConfirm = async (req, res) => {
+  res.render("home/pEmailConf", {});
+};
+exports.passEmailConfirmed = async (req, res) => {
+  res.render("home/passEmailConfirmed", {});
+};
