@@ -1,15 +1,17 @@
 <link rel="stylesheet" type="text/css" href="/css/list.css">
 
 <div class="adminMain">
-    <h1>Velkommen {{user.firstName}}</h1>
+    <h2>Velkommen {{user.firstName}}</h2>
 
-    <h2>Vælg liste:</h2>
+    <h3>Vælg liste:</h3>
 
-    <section>
+    <section class="mainCards">
     {{#each content}}
-        <div class="mainCard">
-            <a href="/admin/{{this.reference}}"><button>{{this.name}}</button></a>
-        </div>
+            <a href="/admin/{{this.reference}}" class="mainCard">
+                <button>
+                    {{this.name}}
+                </button>
+            </a>
     {{/each}}
     </section>
 </div>

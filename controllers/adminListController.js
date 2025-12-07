@@ -159,10 +159,10 @@ exports.adminListTasks = async (req, res) => {
     const whereClause = searchQuery ? {
         [Op.or]: [
             { starTime: { [Op.like]: `%${searchQuery}%` } },
-            { 'User.firstName': { [Op.like]: `%${searchQuery}%` } },
-            { 'User.lastName': { [Op.like]: `%${searchQuery}%` } },
-            { 'Gasstation.address': { [Op.like]: `%${searchQuery}%` } },
-            { 'Gasstation.City.name': { [Op.like]: `%${searchQuery}%` } },
+            { [User.firstName]: { [Op.like]: `%${searchQuery}%` } },
+            { [User.lastName]: { [Op.like]: `%${searchQuery}%` } },
+            { [Gasstation.address]: { [Op.like]: `%${searchQuery}%` } },
+            { [Gasstation[City.name]]: { [Op.like]: `%${searchQuery}%` } },
         ]
     } : {};
 
