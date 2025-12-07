@@ -1,6 +1,6 @@
 <!--velkommen (med tom string der henter fra profil)-->
 <section>
-    <p>Velkommen {{users.firstName}}
+    <h1>Velkommen {{users.firstName}}
 </section>
 
 
@@ -8,7 +8,7 @@
 
     <section>
         <!-- Trigger/Open The Modal -->
-        <button id="myBtn" type="button">Open Modal</button>
+        <button id="myBtn" type="button">Vælg tankstation</button>
 
         <!-- The Modal -->
         <div id="myModal" class="modal">
@@ -16,7 +16,7 @@
             <!-- Modal content -->
             <div class="modal-content">
                 <span class="close">&times;</span>
-                <h1>Vælg tankstation</h1>
+                <p>Vælg tankstation</p>
 
             {{!-- loop over hver branch --}}
             {{#each branchDropdowns}}
@@ -37,27 +37,28 @@
 
 
                 <!-- Knap til at vælge station -->
-                <button id="selectStationBtn" type="button">Vælg station</button>
+                <button class="selectStationBtn" id="selectStationBtn" type="button">Vælg station</button>
             </div>
         </div>
     </section>
 
     <section>
         <!-- start rengøring ved (valgte tankstation) -->
-        <p>start rengøring ved <span id="selected-station"></span></p>
+        <p>start rengøring ved:</p>
+        <span id="selected-station"></span>
     </section>
 
 
     <section>
         <div id="calendar" style="max-width:900px;margin:20px auto;"></div>
-        <label for="startTime">Dato & tid</label>
+        <label class="calenderText" for="startTime">Dato & tid</label>
         <input id="startTime" name="startTime" type="datetime-local" required />
     </section>
 
 
     <section>
     <!--start log-->
-    <button form="startLog" type="submit">start log</button>
+    <button form="startLog" class="startLog" type="submit">start log</button>
     </section>
 </form>
 
@@ -66,6 +67,7 @@
 <link href="https://cdn.jsdelivr.net/npm/@fullcalendar/daygrid@6.1.7/main.min.css" rel="stylesheet" />
 
 <link rel="stylesheet" type="text/css" href="./css/modal.css">
+<link rel="stylesheet" type="text/css" href="./css/createTask.css">
 <script src="/js/modal.js" defer></script>
 <script src="https://cdn.jsdelivr.net/npm/@fullcalendar/core@6.1.7/main.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/@fullcalendar/daygrid@6.1.7/main.min.js"></script>
