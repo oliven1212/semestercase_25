@@ -87,5 +87,5 @@ router.post("/login", async (req, res) => {
 
 router.get("/login/reset", HomeController.changePassword);
 router.get("/login/emailconfirm", HomeController.pEmailConfirm);
-router.get("/login/emailconfirm/true", homeController.passEmailConfirmed);
+router.get("/login/emailconfirm/true", HomeController.passEmailConfirmed);
 module.exports = router;
