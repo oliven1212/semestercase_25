@@ -45,7 +45,7 @@ exports.taskPageOne = async (req, res) => {
     });
 
     const user = await User.findAll({
-        where: {id: 1}, // skal ændres!!!!!!!!!!!
+        where: {id: req.session.user.id},
         raw: true
     });
 
@@ -182,13 +182,13 @@ exports.completedTask = async (req, res) => {
                 model: Branch,
             }, {
                 model: City,
-            },
-                {model: User}],
+            }],
 
-        }],
+        },{
+            model: User,
+        },],
         raw: true
     });
-
 
     res.render("home/completedTask", {
         task: task,
@@ -259,9 +259,9 @@ exports.showTaskImages = async (req, res) => {
             });
     };
     // Update the taskLink in the database
-    /*await Task.update(
+    await Task.update(
         { taskLink: 1 },
         { where: { id: images[0]['Task.id'] } }
-    );*/
+    );
 
 };

@@ -5,7 +5,7 @@ const { gasstation } = require('./gasController');
 exports.createTask = async (req, res) => {
     try {
         const users = await User.findOne({
-            where: { id: 3 }, //Change to currently logged in user
+            where: { id: req.session.user.id }, //Change to currently logged in user
             raw: true
         });
 
@@ -91,7 +91,7 @@ exports.logStart = async (req, res) => {
     const taskId = await Task.create({
         gasstationId: gasstationIdSelection,
         taskLink: 0,
-        userId: 2, //update to currently logged in user
+        userId: req.session.user.id, 
         startTime: body.startTime,
     });
     taskId.toJSON();

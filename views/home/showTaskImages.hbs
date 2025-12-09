@@ -1,8 +1,8 @@
 
-
 <section class="task-showImages">
 <h2>{{message}}</h2>
 <p>{{content}}</p>
+{{#if images}}
 
     <h1>Task Historie</h1>
 
@@ -36,6 +36,7 @@
         <p>rengøring udført af:{{user.firstName}} {{user.lastName}} </p>
         <p>Telefon: {{user.phone}} </p>
     </div>
+    {{/if}}
 </section>
 
 {{#each images}}
