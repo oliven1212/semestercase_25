@@ -1,8 +1,18 @@
-const {User, Task, Gasstation, GastationUser, Product, ProductTask, Unit, Branch, City,} = require("../models");
+const {
+  User,
+  Task,
+  Gasstation,
+  GastationUser,
+  Product,
+  ProductTask,
+  Unit,
+  Branch,
+  City,
+} = require("../models");
 exports.taskHistorie = (req, res) => {
   console.log("routes/taskHistorie rammes!");
 };
-
+//taskhistorieController
 exports.taskHistorie = async (req, res) => {
 
 
