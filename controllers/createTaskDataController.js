@@ -14,7 +14,7 @@ const upload = require('../multer');
 const path = require('path');
 const crypto = require('crypto');
 const {gasstation} = require('./gasController');
-const {sendTaskEmail} = require('../taskEmail');
+const {sendTaskEmail} = require('../utility/taskEmail');
 
 exports.uploadMiddleware = upload.fields([
     {name: 'beforePicture', maxCount: 100},
