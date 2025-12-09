@@ -10,7 +10,7 @@ const modifyGasstationController = require("../controllers/modifyGasstationContr
 const taskController = require("../controllers/tasksController");
 const productController = require("../controllers/productController");
 
-const upload = require("../multer");
+const upload = require("../utility/multer");
 
 const authRoutes = require("../routes/auth");
 const router = express.Router();

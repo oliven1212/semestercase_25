@@ -10,7 +10,7 @@ const {
     Branch,
     City
 } = require('../models');
-const upload = require('../multer');
+const upload = require('../utility/multer');
 const path = require('path');
 const crypto = require('crypto');
 const {gasstation} = require('./gasController');
