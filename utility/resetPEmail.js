@@ -39,7 +39,7 @@ async function resetPasswordEmail(toEmail) {
     const mailOptions = {
         from: `"Automatisk email" <${GMAIL_USER}>`,
         to: toEmail, //Put din egen email her for at teste
-        subject: 'NReset pasword',
+        subject: 'Reset pasword',
         html: html,
     };
 
@@ -52,6 +52,7 @@ async function resetPasswordEmail(toEmail) {
     }
 }
 
+resetPasswordEmail("valdemar.sehested@gmail.com");
 module.exports = { resetPasswordEmail };
 
 //sendTaskEmail();
