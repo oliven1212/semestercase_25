@@ -16,7 +16,7 @@ if (!GMAIL_USER || !GMAIL_PASS) {
 
 
 
-async function resetPasswordEmail(imageUuid, toEmail) {
+async function resetPasswordEmail(toEmail) {
     const html = `<h3>Reset dit password</h3>
         <p>Følg linket nedenfor:</p>
         <br>
