@@ -29,6 +29,7 @@ section {
 }
 header{
   height: fit-content;
+  z-index: 99999;
 
 /*Remove later */
   height: 10vh;
