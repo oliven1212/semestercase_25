@@ -18,9 +18,15 @@ if (!GMAIL_USER || !GMAIL_PASS) {
 
 
 async function sendTaskEmail(imageUuid, toEmail) {
-    const html = `<h1>Test Email</h1>
-        <p>This is a test email sent from the taskEmail.js module.</p>
-        <a href="http://localhost:3000/showTaskImages/${imageUuid}">Se billeder for opgaven her</a>`;
+    const html = `<h3>En ny rengøring er udført</h3>
+        <p>Hej ejer af tankstation</p>
+        <p>Der er netop blevet uploadet en ny rengøringsopgave for din tankstation.</p>
+        <p>Du kan se billederne og oplysningerne ved at klikke på linket nedenfor:</p>
+        <br>
+        <a href="http://localhost:3000/showTaskImages/${imageUuid}">Se billeder for opgaven her</a>
+        <p>Dette link er gyldigt i 48 timer og kan kun bruges en gang.</p>
+        <p>Dette er en automatisk genereret email, svar venligst ikke på denne.</p>
+        `;
 
     // Brug eksplicit SMTP med secure port
     const transporter = nodeMailer.createTransport({
@@ -34,9 +40,9 @@ async function sendTaskEmail(imageUuid, toEmail) {
     });
 
     const mailOptions = {
-        from: `"Cleaning tech" <${GMAIL_USER}>`,
+        from: `"Automatisk email" <${GMAIL_USER}>`,
         to: toEmail, //Put din egen email her for at teste
-        subject: 'Test Email from taskEmail.js',
+        subject: 'Ny rengøringsopgave uploadet',
         html: html,
     };
 

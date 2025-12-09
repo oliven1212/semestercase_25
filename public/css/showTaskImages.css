@@ -1,0 +1,13 @@
+.task-showImages{
+    color: black;
+}
+
+.image-container{
+    
+    display: grid;
+    grid-template-areas:
+        "stack";
+    aspect-ratio: 1 / 1;
+    max-width: 150px;
+
+};

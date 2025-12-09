@@ -6,9 +6,12 @@
 
 <section class="sec2">
 {{#each gasstations}}
+
+<a href="/admin/gasstations/{{this.id}}">  <!-- korrekt route til profile på tankstation uden redigering -->
     <button>
         {{this.address}}
     </button>
+    </a>
 {{/each}}
 </section>
 
