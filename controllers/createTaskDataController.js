@@ -15,6 +15,7 @@ const path = require('path');
 const crypto = require('crypto');
 const {gasstation} = require('./gasController');
 const {sendTaskEmail} = require('../utility/taskEmail');
+const fs = require('fs');
 
 exports.uploadMiddleware = upload.fields([
     {name: 'beforePicture', maxCount: 100},
@@ -215,6 +216,16 @@ exports.deleteImage = async (req, res) => {
             taskId: req.params.taskId,
         },
     });
+
+    fs.unlink(path.join(__dirname, '..', 'public', 'imgUploads', req.body.fileName), (err) => {
+        if (err) {
+            console.error('Fejl ved sletning af fil:', err);
+        } else {
+            console.log('Fil slettet succesfuldt');
+        }
+    });
+
+
     res.redirect(`/createtaskdata/${req.params.taskId}/images`);
 };
 
