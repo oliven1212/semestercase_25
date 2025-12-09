@@ -4,20 +4,12 @@ exports.taskHistorie = (req, res) => {
 };
 
 exports.taskHistorie = async (req, res) => {
-  const user = await User.findOne({
-    attributes: ["id", "firstName", "lastName", "phone"],
-    where: { id: 2 },
-    raw: true,
-  });
 
-  const gasstation = await Gasstation.findAll({
-    where: { branchId: 2 },
-    raw: true,
-  });
+
 
   const task = await Task.findAll({
     where: {
-      id: 2,
+      id: req.params.taskId,
     },
     include: [
       {
@@ -70,6 +62,5 @@ exports.taskHistorie = async (req, res) => {
     },
     task: task,
     timeStamp: timeStamp,
-    gasstation: gasstation,
   });
 };

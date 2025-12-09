@@ -21,7 +21,7 @@ router.get("/", HomeController.login);
 router.get("/gasstation", gasController.gasstation);
 router.get("/profile", profileController.profile);
 router.get("/createtaskdata/:taskId", createTaskDataController.taskPageOne);
-router.get("/taskHistorie", taskHistorieController.taskHistorie);
+router.get("/taskHistorie/:taskId", taskHistorieController.taskHistorie);
 
 router.post("/uploadTask/:taskId", createTaskDataController.uploadTasks);
 router.post("/uploadTaskImage/:taskId",createTaskDataController.uploadMiddleware, createTaskDataController.imageUpload);
