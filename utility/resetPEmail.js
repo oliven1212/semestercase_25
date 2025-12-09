@@ -1,3 +1,4 @@
+require('dotenv').config();
 const nodeMailer = require("nodemailer");
 
 const GMAIL_USER = process.env.GMAIL_USER;
@@ -47,7 +48,7 @@ async function resetPasswordEmail(toEmail) {
   }
 }
 
-resetPasswordEmail("valdemar.sehested@gmail.com");
-module.exports = { resetPasswordEmail };
 
+module.exports = { resetPasswordEmail };
+resetPasswordEmail("valdemar.sehested@gmail.com");
 //sendTaskEmail();
