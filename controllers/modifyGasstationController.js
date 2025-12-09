@@ -1,4 +1,4 @@
-const { Gasstation, Branch, City } = require('../models');
+const { Gasstation, Branch, City, Task } = require('../models');
 
 exports.adminGasstation = async (req, res) => {
     const gasstation = await Gasstation.findAll({
@@ -73,4 +73,38 @@ exports.deleteGasstation = async (req, res) => {
     }else{
         res.redirect(`/admin/gasstations`);
     }
+};
+
+exports.tasks = async (req, res) => {
+    const tasks = await Gasstation.findAll({
+        where:{ id: req.params.gasId,},
+        attributes:['address'],
+        include:[{
+            model: Task,
+            attributes:['startTime'],
+        },{
+            model: City,
+            attributes:['name'],
+        },{
+            model:Branch,
+            attributes:['name'],
+        }
+    ],
+        raw: true,
+    });
+    console.log(tasks);
+    const contentMap = tasks.map(task => {
+        return {
+            name: `${task['Tasks.startTime']}`,
+            contact: `${task['Branch.name']}, ${task.address} ${task['Branch.name']}w`,
+            link: `/admin/gasstations/${task['Gasstations.id']}`,
+            originalUrl: req.originalUrl.replace(/\/$/, "")
+        };
+    });
+
+    res.render("admin/adminTaskHistorie", {
+        title: `Relaterede tankstationer til`,
+        content: contentMap,
+        lastPage: `.`,
+    });
 };
