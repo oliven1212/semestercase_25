@@ -69,7 +69,6 @@ exports.adminListGasstations = async (req, res) => {
     const whereClause = searchQuery ? {
         [Op.or]: [
             { address: { [Op.like]: `%${searchQuery}%` } },
-            { 'city.name' : { [Op.like]: `%${searchQuery}%` } },
             { email: { [Op.like]: `%${searchQuery}%` } },
             { phone: { [Op.like]: `%${searchQuery}%` } }
         ]
@@ -78,7 +77,9 @@ exports.adminListGasstations = async (req, res) => {
         where: whereClause,
         order: [['address', 'ASC']],
         include: [{
-            model: City
+            model: City,
+            where: searchQuery ? {
+                name: { [Op.like]: `%${searchQuery}%` }}: {},
         }],
         raw: true
     });
@@ -159,10 +160,10 @@ exports.adminListTasks = async (req, res) => {
     const whereClause = searchQuery ? {
         [Op.or]: [
             { starTime: { [Op.like]: `%${searchQuery}%` } },
-            { [User.firstName]: { [Op.like]: `%${searchQuery}%` } },
-            { [User.lastName]: { [Op.like]: `%${searchQuery}%` } },
-            { [Gasstation.address]: { [Op.like]: `%${searchQuery}%` } },
-            { [Gasstation[City.name]]: { [Op.like]: `%${searchQuery}%` } },
+            //{ ['User.firstName']: { [Op.like]: `%${searchQuery}%` } },
+            //{ ['User.lastName']: { [Op.like]: `%${searchQuery}%` } },
+            //{ ['Gasstation.address']: { [Op.like]: `%${searchQuery}%` } },
+            { 'Gasstation.City.name': { [Op.like]: `%${searchQuery}%` } },
         ]
     } : {};
 
@@ -183,7 +184,7 @@ exports.adminListTasks = async (req, res) => {
         raw: true
     });
     console.log(tasks);
-    // Map over users array to add name property to each user
+    // Map over users array to add more variables
     const tasksMap = tasks.map(task => ({
         ...task,
         name: `${task['Gasstation.City.name']} ${task['Gasstation.cityCode']}, ${task['Gasstation.address']}`,
