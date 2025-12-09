@@ -17,6 +17,8 @@ module.exports = {
                 onDelete: 'SET NULL',
             },
             filename: {
+                allowNull: false,
+                primaryKey: true,
                 type: Sequelize.STRING
             },
             beforeAfter: {
