@@ -2,7 +2,7 @@ const { User, Gasstation, Role, City, Task, Branch, GasstationUser } = require('
 
 exports.profile = async (req, res) => {
     const previousURL = new URL(await req.get('referer'));
-    const currentUser = await User.findByPk(3,{
+    const currentUser = await User.findByPk(req.session.user.id,{
         raw: true
     });
 

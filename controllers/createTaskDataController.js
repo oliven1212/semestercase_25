@@ -127,16 +127,6 @@ exports.uploadTasks = async (req, res) => {
 };
 
 
-exports.completedTask = async (req, res) => {
-    //Hent task data, and do it very fancy
-    res.render("home/completedTask", {
-        taskId: req.params.taskId,
-        user: req.user,
-        address: req.address,
-
-
-    });
-};
 
 exports.imageUpload = async (req, res) => {
     const taskId = req.params.taskId;

@@ -3,7 +3,7 @@ const { Op } = require('sequelize');
 
 exports.adminMain = async (req, res) => {
     const user = await User.findOne({
-        where: { id: 1 },
+        where: { id: req.session.user.id },
         raw: true
     });
     res.render("admin/adminMain", {
