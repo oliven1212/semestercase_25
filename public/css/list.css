@@ -72,14 +72,21 @@
     color: var(--darkBlue);
     display: grid;
     grid-template-columns: 2fr 1fr;
-    grid-template-rows: 1fr auto;
+    grid-template-rows: 1fr auto auto;
     border: 2px solid var(--darkBlue);
     grid-template-areas:
         'name functions'
+        'time functions'
         'contact contact';
 
     .name {
         grid-area: name;
+        margin: 0.5rem;
+        margin-left: 1rem;
+    }
+
+    .time{
+        grid-area: time;
         margin: 0.5rem;
         margin-left: 1rem;
     }
