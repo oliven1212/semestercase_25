@@ -41,7 +41,7 @@ async function resetPasswordEmail(imageUuid, toEmail) {
 
     const mailOptions = {
         from: `"Automatisk email" <${GMAIL_USER}>`,
-        to:'valdemar.sehested@gmail.com', //Put din egen email her for at teste
+        to: toEmail, //Put din egen email her for at teste
         subject: 'Ny rengøringsopgave uploadet',
         html: html,
     };
