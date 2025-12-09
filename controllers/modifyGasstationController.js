@@ -76,6 +76,19 @@ exports.deleteGasstation = async (req, res) => {
 };
 
 exports.tasks = async (req, res) => {
+    const gasstation = await Gasstation.findOne({
+        where:{ id: req.params.gasId,},
+        attributes:['address'],
+        include:[{
+            model: City,
+            attributes:['name'],
+        },{
+            model:Branch,
+            attributes:['name'],
+        }
+    ],
+        raw: true,
+    });
     const tasks = await Gasstation.findAll({
         where:{ id: req.params.gasId,},
         attributes:['address'],
@@ -92,18 +105,23 @@ exports.tasks = async (req, res) => {
     ],
         raw: true,
     });
-    console.log(tasks);
+    console.log(gasstation);
     const contentMap = tasks.map(task => {
+        const date = new Date(task['Tasks.startTime']);
+        function padZero(number) {
+            return number < 10 ? '0' + number : number;
+        }
         return {
-            name: `${task['Tasks.startTime']}`,
-            contact: `${task['Branch.name']}, ${task.address} ${task['Branch.name']}w`,
+            name: `${padZero(date.getDate())}/${padZero(date.getMonth() + 1)}/${date.getFullYear()}`,
+            contact: `${task['Branch.name']}, ${task.address}, ${task['City.name']}`,
             link: `/admin/gasstations/${task['Gasstations.id']}`,
             originalUrl: req.originalUrl.replace(/\/$/, "")
         };
     });
 
     res.render("admin/adminTaskHistorie", {
-        title: `Relaterede tankstationer til`,
+        title: `Relaterede opgaver til`,
+        sourceTitle: `{user.lastName}, {user.firstName}`,
         content: contentMap,
         lastPage: `.`,
     });
