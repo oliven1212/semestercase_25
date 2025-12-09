@@ -18,9 +18,9 @@ if (!GMAIL_USER || !GMAIL_PASS) {
 
 async function resetPasswordEmail(imageUuid, toEmail) {
     const html = `<h3>Reset dit password</h3>
-        <p>Følg linket nednfor:</p>
+        <p>Følg linket nedenfor:</p>
         <br>
-        <a href="http://localhost:3000/showTaskImages/${imageUuid}">Se billeder for opgaven her</a>
+        <a href="http://localhost:3000/login/reset">Se billeder for opgaven her</a>
         <p>Dette link er gyldigt i 1 time og kan kun bruges en gang.</p>
         <p>Dette er en automatisk genereret email, svar venligst ikke på denne.</p>
         `;
