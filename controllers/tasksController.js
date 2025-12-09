@@ -40,7 +40,7 @@ exports.adminTasks = async (req, res) => {
         raw: true,
     });
 
-    console.log(task);
+    console.log(pictures);
 
     res.render("admin/modifyTask", {
         task: task,
@@ -60,6 +60,13 @@ exports.deleteTask = async (req, res) => {
     console.log(`Deleting task with the ID: ${req.params.taskId}`);
     await Task.destroy({
         where: { id: req.params.taskId, },
+    });
+    res.redirect(`${req.body.link}`);
+};
+
+exports.deleteImage = async (req, res) =>{
+    await Picture.destroy({
+        where: { fileName: req.body.fileName, },
     });
     res.redirect(`${req.body.link}`);
 };
