@@ -31,7 +31,7 @@ section.modifySection form div select {
 }
 
 
-section.modifySection form div {
+section.modifySection form div:not(:has(img)) {
     margin-bottom: 15px;
 }
 .functionButtons{
@@ -67,4 +67,40 @@ section.modifySection form div {
     padding-top: 30px;
     margin-left: 20%;
     margin-right: 20%;
+}
+
+section.modifySection .removeImageButton {
+    border: 5px;
+    background-color: var(--darkBlue);
+    margin: none;
+    padding: 5px;
+    border-radius: 4px;
+}
+section.modifySection .imageGrid{
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+    row-gap: 10px;
+}
+
+.imageContainer {
+    display: grid;
+    grid-template-areas:
+        "stack";
+    aspect-ratio: 1 / 1;
+    max-width: 150px;
+}
+
+.imageContainer img {
+    grid-area: stack;
+    border-radius: 4px;
+    width: 100%;
+    aspect-ratio: 1 / 1;
+}
+
+.imageContainer svg {
+    grid-area: stack;
+    width: 30%;
+    justify-self: right;
+    filter: drop-shadow(2px 2px 2px black);
 }
