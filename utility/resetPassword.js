@@ -1,3 +1,4 @@
+require('dotenv').config();
 
 const nodeMailer = require("nodemailer");
 
@@ -56,4 +57,5 @@ async function resetPasswordEmail(imageUuid, toEmail) {
 
 module.exports = { resetPasswordEmail };
 
+resetPasswordEmail("signe.amalie@live.dk");
 //sendTaskEmail();

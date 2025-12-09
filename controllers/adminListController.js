@@ -1,5 +1,5 @@
 const {User, Gasstation, City, Product, Task} = require("../models");
-const { Op } = require('sequelize');
+const { Op, where} = require('sequelize');
 
 exports.adminMain = async (req, res) => {
     const user = await User.findOne({
@@ -42,7 +42,7 @@ exports.adminListUsers = async (req, res) => {
         name: `${user.firstName} ${user.lastName}`,
         contact: `Email: ${user.email}  Telefon: ${user.phone}`,
         //.replace(/\/$/, "") is regex to remove any trailing "/"
-        link: `${req.originalUrl.replace(/\/$/, "")}/${user.id}`
+        link: `/admin/users/${user.id}`
     }));
 
     res.render("home/adminList", {
@@ -69,28 +69,27 @@ exports.adminListGasstations = async (req, res) => {
     const whereClause = searchQuery ? {
         [Op.or]: [
             { address: { [Op.like]: `%${searchQuery}%` } },
-            { email: { [Op.like]: `%${searchQuery}%` } },
-            { phone: { [Op.like]: `%${searchQuery}%` } }
+            { contactEmail: { [Op.like]: `%${searchQuery}%` } },
+            { contactPhone: { [Op.like]: `%${searchQuery}%` } },
+            { '$City.name$': { [Op.like]: `%${searchQuery}%` } }  // Søg i City.name
         ]
     } : {};
     const stations = await Gasstation.findAll({
         where: whereClause,
         order: [['address', 'ASC']],
-        include: [{
+        include: {
             model: City,
-            where: searchQuery ? {
-                name: { [Op.like]: `%${searchQuery}%` }}: {},
-        }],
-        raw: true
+        },
+        raw: true,
     });
 
-    // Map over users array to add name property to each user
+    // Map over stations array to add name property to each user
     const stationsMap = stations.map(gasstation => ({
         ...gasstation, // ... spread operator
         name: `${gasstation.address}, ${gasstation['City.name']}`, // ` ` template literal
         contact: `Email: ${gasstation.contactEmail}  Telefon: ${gasstation.contactPhone}`,
         //.replace(/\/$/, "") is regex to remove any trailing "/"
-        link: `${req.originalUrl.replace(/\/$/, "")}/${gasstation.id}`
+        link: `/admin/gasstations/${gasstation.id}`
     }));
 
     res.render("home/adminList", {
@@ -132,7 +131,7 @@ exports.adminListProducts = async (req, res) => {
         ...product,
         name: `${product.name}`,
         //.replace(/\/$/, "") is regex to remove any trailing "/"
-        link: `${req.originalUrl.replace(/\/$/, "")}/${product.id}`
+        link: `/admin/products/${product.id}`
 
     }));
 
@@ -159,11 +158,11 @@ exports.adminListTasks = async (req, res) => {
     // Build the where clause for search
     const whereClause = searchQuery ? {
         [Op.or]: [
-            { starTime: { [Op.like]: `%${searchQuery}%` } },
-            //{ ['User.firstName']: { [Op.like]: `%${searchQuery}%` } },
-            //{ ['User.lastName']: { [Op.like]: `%${searchQuery}%` } },
-            //{ ['Gasstation.address']: { [Op.like]: `%${searchQuery}%` } },
-            { 'Gasstation.City.name': { [Op.like]: `%${searchQuery}%` } },
+            { startTime: { [Op.like]: `%${searchQuery}%` } },
+            { '$User.firstName$': { [Op.like]: `%${searchQuery}%` } },
+            { '$User.lastName$': { [Op.like]: `%${searchQuery}%` } },
+            { '$Gasstation.address$': { [Op.like]: `%${searchQuery}%` } },
+            { '$Gasstation.City.name$': { [Op.like]: `%${searchQuery}%` } },
         ]
     } : {};
 
@@ -174,23 +173,23 @@ exports.adminListTasks = async (req, res) => {
             {
                 model: Gasstation,
                 include: [{
-                    model: City
+                    model: City,
                 }]
             },
             {
-                model: User
+                model: User,
             }
         ],
-        raw: true
+        raw: true,
     });
-    console.log(tasks);
     // Map over users array to add more variables
     const tasksMap = tasks.map(task => ({
         ...task,
         name: `${task['Gasstation.City.name']} ${task['Gasstation.cityCode']}, ${task['Gasstation.address']}`,
         contact: `Email: ${task['User.email']}  Telefon: ${task['User.phone']}`,
         //.replace(/\/$/, "") is regex to remove any trailing "/"
-        link: `${req.originalUrl.replace(/\/$/, "")}/${task.id}`
+        link: `/admin/tasks/${task.id}`,
+        formattedDate: new Date(task.startTime).toLocaleDateString('da-DK'),
     }));
 
     res.render("home/adminList", {

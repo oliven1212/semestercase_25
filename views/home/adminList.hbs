@@ -14,6 +14,9 @@
         {{#each content}}
             <div class="listCard">
                 <p class="name">{{this.name}}</p>
+                {{#if this.formattedDate}} <!-- if ../createNew virker også. Synes jeg bare er cool, man kan kalde det som rodelementer -->
+                    <p class="time">Dato: {{this.formattedDate}}</p>
+                {{/if}}
                 <p class="contact">{{this.contact}}</p>
                 <div class="functions">
                     <a href="{{this.link}}"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
