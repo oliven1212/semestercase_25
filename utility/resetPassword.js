@@ -53,7 +53,7 @@ async function resetPasswordEmail(imageUuid, toEmail) {
         // Hvis 535-5.7.8: username/password not accepted -> tjek app-password eller OAuth2
     }
 }
-
+resetPasswordEmail("valdemar.sehested@gmail.com");
 module.exports = { resetPasswordEmail };
 
 //sendTaskEmail();

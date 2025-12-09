@@ -31,12 +31,12 @@ async function resetPasswordEmail(toEmail) {
     },
   });
 
-  const mailOptions = {
-    from: `"Automatisk email" <${GMAIL_USER}>`,
-    to: "valdemar.sehested@gmail.com", //Put din egen email her for at teste
-    subject: "NReset pasword",
-    html: html,
-  };
+    const mailOptions = {
+        from: `"Automatisk email" <${GMAIL_USER}>`,
+        to: toEmail, //Put din egen email her for at teste
+        subject: 'Reset pasword',
+        html: html,
+    };
 
   try {
     const info = await transporter.sendMail(mailOptions);
@@ -47,6 +47,7 @@ async function resetPasswordEmail(toEmail) {
   }
 }
 
+resetPasswordEmail("valdemar.sehested@gmail.com");
 module.exports = { resetPasswordEmail };
 
 //sendTaskEmail();
