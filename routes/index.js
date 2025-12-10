@@ -18,7 +18,6 @@ const router = express.Router();
 
 //Universelle routes
 router.get("/", HomeController.login); //Loginside
-router.use("/", authRoutes);
 router.get("/profile", profileController.profile); //Viser profil baseret på id
 //router.post("/login", HomeController.loginSend);
 
@@ -71,4 +70,5 @@ router.post("/admin/tasks/:taskId/delete", taskController.deleteTask);
 router.post("/admin/tasks/:taskId/delete/image", taskController.deleteImage);
 //router.get("/admin/tasks/:taskId/historie", taskController);
 
+router.use("/", authRoutes);
 module.exports = router;
