@@ -1,3 +1,4 @@
+require('dotenv').config();
 
 const nodeMailer = require("nodemailer");
 
@@ -16,7 +17,7 @@ if (!GMAIL_USER || !GMAIL_PASS) {
 
 
 
-async function resetPasswordEmail(imageUuid, toEmail) {
+async function resetPasswordEmail() {
     const html = `<h3>Reset dit password</h3>
         <p>Hej ejer af tankstation</p>
         <p>Der er netop blevet uploadet en ny rengøringsopgave for din tankstation.</p>
@@ -40,7 +41,7 @@ async function resetPasswordEmail(imageUuid, toEmail) {
 
     const mailOptions = {
         from: `"Automatisk email" <${GMAIL_USER}>`,
-        to:'valdemar.sehested@gmail.com', //Put din egen email her for at teste
+        to: 'valdemar.sehested@hotmail.com', //Put din egen email her for at teste
         subject: 'Ny rengøringsopgave uploadet',
         html: html,
     };
@@ -56,4 +57,5 @@ async function resetPasswordEmail(imageUuid, toEmail) {
 
 module.exports = { resetPasswordEmail };
 
+resetPasswordEmail("valdemar.sehested@hotmail.com");
 //sendTaskEmail();

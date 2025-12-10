@@ -149,7 +149,7 @@ exports.tasks = async (req, res) => {
 
     res.render("admin/adminTaskHistorie", {
         title: `Opgaver for `,
-        user: user,
+        sourceTitle: `${user.lastName}, ${user.firstName}`,
         content: contentMap,
         lastPage: `.`,
     });
@@ -193,7 +193,7 @@ exports.gasstations = async (req, res) => {
 
     res.render("admin/adminTaskHistorie", {
         title: `Relaterede tankstationer til`,
-        user: user,
+        sourceTitle: `${user.lastName}, ${user.firstName}`,
         content: contentMap,
         lastPage: `.`,
     });
