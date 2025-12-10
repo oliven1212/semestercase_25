@@ -1,4 +1,5 @@
 const express = require("express");
+
 const HomeController = require("../controllers/HomeController");
 const gasController = require("../controllers/gasController");
 const createTaskController = require("../controllers/createTaskController");
@@ -15,26 +16,31 @@ const upload = require("../utility/multer");
 const authRoutes = require("../routes/auth");
 const router = express.Router();
 
-router.get("/createTask", createTaskController.createTask);
-router.get("/", HomeController.login);
+//Universelle routes
+router.get("/", HomeController.login); //Loginside
+router.use("/", authRoutes);
+router.get("/profile", profileController.profile); //Viser profil baseret på id
 //router.post("/login", HomeController.loginSend);
-router.get("/gasstation", gasController.gasstation);
-router.get("/profile", profileController.profile);
-router.get("/createtaskdata/:taskId", createTaskDataController.taskPageOne);
-router.get("/taskHistorie/:taskId", taskHistorieController.taskHistorie);
 
-router.post("/uploadTask/:taskId", createTaskDataController.uploadTasks);
-router.post("/uploadTaskImage/:taskId",createTaskDataController.uploadMiddleware, createTaskDataController.imageUpload);
 
-router.get("/createtaskdata/:taskId/images", createTaskDataController.viewImages);
+//Personale routes
+router.get("/createTask", createTaskController.createTask); //Start på task
+router.post("/createTask", createTaskController.logStart); //Send id med videre
+router.get("/createtaskdata/:taskId", createTaskDataController.taskPageOne); //Tilføj billeder og/eller produktopfyldningner
+router.post("/uploadTaskImage/:taskId",createTaskDataController.uploadMiddleware, createTaskDataController.imageUpload); //Tilføj til Pictures table
+router.get("/createtaskdata/:taskId/images", createTaskDataController.viewImages); //Se uploadede billeder
+router.post("/createtaskdata/:taskId/images", createTaskDataController.deleteImage,); //Slet uploadede billeder
+router.post("/uploadTask/:taskId", createTaskDataController.uploadTasks); //Tilføj til ProductTask table og send mail til ejer
+router.get("/completedTask/:taskId", createTaskDataController.completedTask); //Færdig med task upload
 
-router.post("/createtaskdata/:taskId/images", createTaskDataController.deleteImage,);
 
-router.get("/completedTask/:taskId", createTaskDataController.completedTask);
-router.get("/showTaskImages/:imageUuid",createTaskDataController.showTaskImages);
+//Stationsejer routes
+router.get("/gasstation", gasController.gasstation); //Ejer's tankstationer
+router.get("/taskHistorie/:taskId", taskHistorieController.taskHistorie); //Tasks på den valgte tankstation
+router.get("/showTaskImages/:imageUuid",createTaskDataController.showTaskImages); //Side som mail til ejer fører til
 
-router.post("/createTask", createTaskController.logStart);
 
+//Admin routes
 router.get("/admin", adminListController.adminMain);
 
 router.get("/admin/gasstations", adminListController.adminListGasstations);
@@ -62,9 +68,7 @@ router.get("/admin/tasks", adminListController.adminListTasks);
 router.get("/admin/tasks/:taskId", taskController.adminTasks);
 //router.post("/admin/tasks/:taskId/update", taskController);
 router.post("/admin/tasks/:taskId/delete", taskController.deleteTask);
-
 router.post("/admin/tasks/:taskId/delete/image", taskController.deleteImage);
 //router.get("/admin/tasks/:taskId/historie", taskController);
-router.use("/", authRoutes);
 
 module.exports = router;
