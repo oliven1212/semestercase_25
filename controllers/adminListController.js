@@ -45,13 +45,20 @@ exports.adminListUsers = async (req, res) => {
         link: `/admin/users/${user.id}`
     }));
 
+    const role = req.session.user.role;
+    const admin = role === 1;
+
+    console.log(role);
+    console.log(admin);
+
     res.render("home/adminList", {
         title: 'Liste af brugere',
         message: 'Opret ny bruger',
         createNew: '/admin/users/new',
         content: usersMap,
         searchQuery: searchQuery,
-        lastPage: '/admin'
+        lastPage: '/admin',
+        admin: admin
     });
 };
 
