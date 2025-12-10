@@ -1,3 +1,4 @@
+const session = require("express-session");
 const { User } = require("../models");
 const { comparePassword, saltRounds } = require("../utility/auth");
 
@@ -21,6 +22,7 @@ exports.loginSend = async (req, res) => {
   });
   console.log(email, user.password, user);
 };
+
 exports.changePassword = async (req, res) => {
   res.render("home/changePassword", {});
 };
@@ -30,4 +32,25 @@ exports.pEmailConfirm = async (req, res) => {
 };
 exports.passEmailConfirmed = async (req, res) => {
   res.render("home/passEmailConfirmed", {});
+};
+
+exports.logout = (req, res) => {
+  // Hvis der er en session, så ødelæg den
+  if (req.session) {
+    req.session.destroy((err) => {
+      if (err) {
+        console.error("Fejl ved session.destroy:", err);
+        // Send bruger til forside selv ved fejl
+        return res.status(500).redirect("/");
+      }
+      // Fjern session-cookie i browseren.
+      res.clearCookie("connect.sid", { path: "/" });
+      console.log("session fjernet");
+      return res.redirect("/");
+    });
+  } else {
+    // Ingen session => bare redirect
+    console.log("redirect");
+    return res.redirect("/");
+  }
 };
