@@ -66,7 +66,7 @@ async function deleteOldImages() {
 function startCronJob() {
     
     // Kør deleteOldPictures() hver dag kl 03:00
-    const job = new cron.CronJob ('*/5 * * * * *', async () => { //Hvert sekundt * * * * *  --- IGNORE ---
+    const job = new cron.CronJob ('0 3 * * *', async () => { 
       
         
         console.log('🕐 Cron job starter cleanup');
