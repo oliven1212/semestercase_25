@@ -1,4 +1,4 @@
-const { User, Gasstation, GasstationUser, Branch } = require('../models');
+const { User, Gasstation, GasstationUser, Branch, City } = require('../models');
 
 exports.gasstation = async (req, res) => {
 
@@ -14,14 +14,15 @@ exports.gasstation = async (req, res) => {
   const gasstationIds = gasstationId.map(link => link.gasstationId);
 
   const gasstations = await Gasstation.findAll({
-    attributes: ['id', 'branchId', 'address', 'contactEmail', 'contactPhone', 'frontSpace'],
     where: { id: gasstationIds },
-    include: [
-      {
+    include:
+        [{
         model: Branch,
-        attributes: ['name'] // only fetch the branch name
-      }
-    ],
+      },
+        {
+            model: City,
+        }],
+      order: [[City, 'name', 'ASC']],
     raw: true,
   });
   res.render("home/gasstation", {

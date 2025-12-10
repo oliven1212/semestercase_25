@@ -76,17 +76,17 @@ exports.adminListGasstations = async (req, res) => {
     } : {};
     const stations = await Gasstation.findAll({
         where: whereClause,
-        order: [['address', 'ASC']],
         include: {
             model: City,
         },
+        order: [[City, 'name', 'ASC']],
         raw: true,
     });
 
     // Map over stations array to add name property to each user
     const stationsMap = stations.map(gasstation => ({
         ...gasstation, // ... spread operator
-        name: `${gasstation.address}, ${gasstation['City.name']}`, // ` ` template literal
+        name: `${gasstation['City.name']}, ${gasstation.cityCode}, ${gasstation.address}`, // ` ` template literal
         contact: `Email: ${gasstation.contactEmail}  Telefon: ${gasstation.contactPhone}`,
         //.replace(/\/$/, "") is regex to remove any trailing "/"
         link: `/admin/gasstations/${gasstation.id}`
