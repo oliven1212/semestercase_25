@@ -104,3 +104,16 @@ section.modifySection .imageGrid{
     justify-self: right;
     filter: drop-shadow(2px 2px 2px black);
 }
+.removeImageButton {
+    border: 5px;
+    background-color: var(--darkBlue);
+    margin: none;
+    padding: 5px;
+    border-radius: 4px;
+}
+.imageGrid{
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+    row-gap: 10px;
+}

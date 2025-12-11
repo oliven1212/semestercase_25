@@ -20,17 +20,19 @@
         <path
             d="M25.7803 19.7803L19.7803 25.7803C19.6397 25.921 19.4489 26 19.25 26C19.0511 26 18.8603 25.921 18.7197 25.7803L15.7216 22.7823C15.4287 22.4894 15.4287 22.0145 15.7216 21.7216C16.0145 21.4287 16.4894 21.4287 16.7823 21.7216L19.25 24.1893L24.7197 18.7197C25.0126 18.4268 25.4874 18.4268 25.7803 18.7197C26.0732 19.0126 26.0732 19.4874 25.7803 19.7803Z" />
     </svg>
-    <form action="/admin/tasks/{{task.id}}/update" method="post" id="updateProduct">
+    <form action="/admin/tasks/{{task.id}}/update" method="post" id="updateTask">
         <div>
             <label for="user">Udført af:</label>
-            <input list="users" id="user" name="user"
-                value="{{#if task.[User.id]}}{{task.[User.firstName]}} {{task.[User.lastName]}} ({{task.[User.id]}}){{/if}}" autocomplete="off">
-
+            <input list="users" id="user" name="user" value="{{#if task.[User.id]}}{{task.[User.firstName]}} {{task.[User.lastName]}} ({{task.[User.id]}}){{/if}}" autocomplete="off">
             <datalist id="users">
                 {{#each users}}
                 <option value="{{this.firstName}} {{this.lastName}} ({{this.id}})"></option>
                 {{/each}}
             </datalist>
+        </div>
+        <div>
+            <label class="calenderText" for="startTime">Start tidspunkt</label>
+            <input id="startTime" name="startTime" type="datetime-local" value="{{task.startTime}}" />
         </div>
         <div>
             <label for="gasstation">Hos:</label>
@@ -47,25 +49,23 @@
         </div>
     </form>
         {{!-- Setup images for tasks and the actual logic for the form --}}
-</section>  
+</section>
 <section>
     <h2>Før billeder</h2>
     <div class="imageGrid">
         {{#each pictures}}
         {{#ifEq this.[Pictures.beforeAfter] 0}}
-        <form action="/admin/tasks/{{this.taskId}}/delete/image" method="post">
+        <form action="/admin/tasks/{{this.[Pictures.taskId]}}/delete/image" method="post">
             <input type="hidden" name="fileName" id="fileName" value="{{this.[Pictures.filename]}}">
 
             <button type="submit" class="removeImageButton">
                 <div class="imageContainer">
                     <img class="taskImages" src="/imgUploads/{{this.[Pictures.filename]}}" alt="After image">
-                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 640">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 640" title="Fjern billed">
                         <path fill="#f71735" d="M504.6 148.5C515.9 134.9 514.1 114.7 500.5 103.4C486.9 92.1 466.7 93.9 455.4 107.5L320 270L184.6 107.5C173.3 93.9 153.1 92.1 139.5 103.4C125.9 114.7 124.1 134.9 135.4 148.5L278.3 320L135.4 491.5C124.1 505.1 125.9 525.3 139.5 536.6C153.1 547.9 173.3 546.1 184.6 532.5L320 370L455.4 532.5C466.7 546.1 486.9 547.9 500.5 536.6C514.1 525.3 515.9 505.1 504.6 491.5L361.7 320L504.6 148.5z" />
                     </svg>
-
                 </div>
             </button>
-
         </form>
         {{/ifEq}}
         {{/each}}
@@ -75,39 +75,33 @@
     <h2>Efter billeder</h2>
     <div class="imageGrid">
         {{#each pictures}}
-        {{#ifEq this.[Pictures.beforeAfter] 0}}
-        <form action="/admin/tasks/{{this.taskId}}/delete/image" method="post">
+        {{#ifEq this.[Pictures.beforeAfter] 1}}
+        <form action="/admin/tasks/{{this.[Pictures.taskId]}}/delete/image" method="post">
             <input type="hidden" name="fileName" id="fileName" value="{{this.[Pictures.filename]}}">
 
             <button type="submit" class="removeImageButton">
                 <div class="imageContainer">
                     <img class="taskImages" src="/imgUploads/{{this.[Pictures.filename]}}" alt="After image">
-                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 640">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 640" title="Fjern billed">
                         <path fill="#f71735" d="M504.6 148.5C515.9 134.9 514.1 114.7 500.5 103.4C486.9 92.1 466.7 93.9 455.4 107.5L320 270L184.6 107.5C173.3 93.9 153.1 92.1 139.5 103.4C125.9 114.7 124.1 134.9 135.4 148.5L278.3 320L135.4 491.5C124.1 505.1 125.9 525.3 139.5 536.6C153.1 547.9 173.3 546.1 184.6 532.5L320 370L455.4 532.5C466.7 546.1 486.9 547.9 500.5 536.6C514.1 525.3 515.9 505.1 504.6 491.5L361.7 320L504.6 148.5z" />
                     </svg>
-
                 </div>
             </button>
-
         </form>
         {{/ifEq}}
         {{/each}}
     </div>
 </section>
         <div class="functionButtons">
-            <button type="submit" form="deleteProduct">
-                <svg width="57" height="57" viewBox="5 5 47 47" fill="none" xmlns="http://www.w3.org/2000/svg"
-                    title="Slet bruger">
-                    <path
-                        d="M20.7249 6.22537L19.95 8.5499H11.4C9.82364 8.5499 8.55005 9.8235 8.55005 11.3999C8.55005 12.9763 9.82364 14.2499 11.4 14.2499H45.6C47.1764 14.2499 48.45 12.9763 48.45 11.3999C48.45 9.8235 47.1764 8.5499 45.6 8.5499H37.05L36.2752 6.22537C35.8833 5.05865 34.7968 4.2749 33.5677 4.2749H23.4324C22.2033 4.2749 21.1168 5.05865 20.7249 6.22537ZM45.6 18.5249H11.4L13.2793 47.301C13.4218 49.5543 15.2921 51.2999 17.5454 51.2999H39.4547C41.708 51.2999 43.5783 49.5543 43.7208 47.301L45.6 18.5249Z" />
+            <button type="submit" form="deleteTask">
+                <svg width="57" height="57" viewBox="5 5 47 47" fill="none" xmlns="http://www.w3.org/2000/svg" title="Slet opgave">
+                    <path d="M20.7249 6.22537L19.95 8.5499H11.4C9.82364 8.5499 8.55005 9.8235 8.55005 11.3999C8.55005 12.9763 9.82364 14.2499 11.4 14.2499H45.6C47.1764 14.2499 48.45 12.9763 48.45 11.3999C48.45 9.8235 47.1764 8.5499 45.6 8.5499H37.05L36.2752 6.22537C35.8833 5.05865 34.7968 4.2749 33.5677 4.2749H23.4324C22.2033 4.2749 21.1168 5.05865 20.7249 6.22537ZM45.6 18.5249H11.4L13.2793 47.301C13.4218 49.5543 15.2921 51.2999 17.5454 51.2999H39.4547C41.708 51.2999 43.5783 49.5543 43.7208 47.301L45.6 18.5249Z" />
                 </svg>
             </button>
-            <button type="submit" form="updateProduct">
-                <svg xmlns="http://www.w3.org/2000/svg" viewBox="100 100 460 460" title="Gem bruger">
-                    <path
-                        d="M160 144C151.2 144 144 151.2 144 160L144 480C144 488.8 151.2 496 160 496L480 496C488.8 496 496 488.8 496 480L496 237.3C496 233.1 494.3 229 491.3 226L416 150.6L416 240C416 257.7 401.7 272 384 272L224 272C206.3 272 192 257.7 192 240L192 144L160 144zM240 144L240 224L368 224L368 144L240 144zM96 160C96 124.7 124.7 96 160 96L402.7 96C419.7 96 436 102.7 448 114.7L525.3 192C537.3 204 544 220.3 544 237.3L544 480C544 515.3 515.3 544 480 544L160 544C124.7 544 96 515.3 96 480L96 160zM256 384C256 348.7 284.7 320 320 320C355.3 320 384 348.7 384 384C384 419.3 355.3 448 320 448C284.7 448 256 419.3 256 384z" />
+            <button type="submit" form="updateTask">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="100 100 460 460" title="Gem opgave">
+                    <path d="M160 144C151.2 144 144 151.2 144 160L144 480C144 488.8 151.2 496 160 496L480 496C488.8 496 496 488.8 496 480L496 237.3C496 233.1 494.3 229 491.3 226L416 150.6L416 240C416 257.7 401.7 272 384 272L224 272C206.3 272 192 257.7 192 240L192 144L160 144zM240 144L240 224L368 224L368 144L240 144zM96 160C96 124.7 124.7 96 160 96L402.7 96C419.7 96 436 102.7 448 114.7L525.3 192C537.3 204 544 220.3 544 237.3L544 480C544 515.3 515.3 544 480 544L160 544C124.7 544 96 515.3 96 480L96 160zM256 384C256 348.7 284.7 320 320 320C355.3 320 384 348.7 384 384C384 419.3 355.3 448 320 448C284.7 448 256 419.3 256 384z" />
                 </svg>
             </button>
         </div>
-    <form class="hidden" action="/admin/products/{{product.[0].id}}/delete" method="post" id="deleteProduct"
-        onsubmit="return confirm('Slet nuværende product?');" />
+    <form class="hidden" action="/admin/tasks/{{task.id}}/delete" method="post" id="deleteTask" onsubmit="return confirm('Slet nuværende product?');" />
