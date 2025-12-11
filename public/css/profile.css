@@ -41,9 +41,6 @@ section.profile-card .inputField label{
     cursor: pointer;
 }
 
-.logout-button:hover {
-    background: var(--darkBlue);
-}
 
 .logoutSvg {
     fill: var(--darkBlue);
@@ -51,9 +48,6 @@ section.profile-card .inputField label{
     height: 2rem;
 }
 
-.logout-button:hover .logoutSvg {
-    fill: var(--lightBlue);
-}
 
 
 
