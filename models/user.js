@@ -77,6 +77,9 @@ module.exports = (sequelize, DataTypes) => {
       password: DataTypes.STRING,
       phone: DataTypes.STRING,
       address: DataTypes.STRING,
+        passwordCodeUuid: DataTypes.UUID,
+        passwordExpired: DataTypes.DATE,
+
     },
     {
       sequelize,
