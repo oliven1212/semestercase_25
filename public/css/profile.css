@@ -24,16 +24,36 @@ section.profile-card .inputField label{
     display: block;
     margin-bottom: 0px;
 }
-section.language-flags {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  gap: 5px;
+
+
+
+
+.logout-card {
+    display: grid;
+    justify-self: end;
+    margin-right: 5%;
 }
-section.language-flags > * {
-  flex: 0 1 calc(20% - 5px);
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 60px;
+
+.logout-button {
+    background: var(--lightBlue);
+    border: none;
+    padding: 10px 14px;
+    cursor: pointer;
 }
+
+.logout-button:hover {
+    background: var(--darkBlue);
+}
+
+.logoutSvg {
+    fill: var(--darkBlue);
+    width: 2rem;
+    height: 2rem;
+}
+
+.logout-button:hover .logoutSvg {
+    fill: var(--lightBlue);
+}
+
+
+

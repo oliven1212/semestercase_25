@@ -1,5 +1,5 @@
 h1 {
-    color: #03045E;
+    color: var(--darkBlue);
     text-align: center;
     padding-bottom: 0px;
     font-family: var(--sansFont);
@@ -16,7 +16,6 @@ form {
 
 #myBtn {
     margin: 1rem;
-    padding: 1rem;
     width: 100%;
     background-color: var(--darkBlue);
     color: #CAF0F8;
@@ -24,11 +23,13 @@ form {
     font-weight: 600;
     font-size: large;
     border: none;
+    border-radius: 5px;
+    padding-top: 15px;
+    padding-bottom: 15px;
 }
 
 .startLog {
     margin: 1rem;
-    padding: 1rem;
     width: 100%;
     background-color: var(--darkBlue);
     color: #CAF0F8;
@@ -36,6 +37,9 @@ form {
     font-size: large;
     font-family: var(--sansFont);
     border: none;
+    border-radius: 5px;
+    padding-top: 15px;
+    padding-bottom: 15px;
 }
 
 p {
