@@ -53,8 +53,16 @@ app.use(
 );
 
 app.use((req, res, next) => {
-  res.locals.user = req.session.user || null;
+  res.locals.user = req.session.user || 1;
   console.log(req.session);
+  next();
+});
+
+app.use((req, res, next) => {
+  if(req.session.user){
+    const permissionLevel = req.session.user.role;
+    res.locals.permissionLevel = permissionLevel;
+  }
   next();
 });
 

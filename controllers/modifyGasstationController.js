@@ -109,7 +109,6 @@ exports.tasks = async (req, res) => {
     ],
         raw: true,
     });
-    console.log(gasstation);
     const contentMap = tasks.map(task => {
         const date = new Date(task['Tasks.startTime']);
         function padZero(number) {
@@ -126,7 +125,7 @@ exports.tasks = async (req, res) => {
     const permission = req.session.user.role == 1;
     res.render("admin/adminTaskHistorie", {
         title: `Relaterede opgaver til`,
-        sourceTitle: `{user.lastName}, {user.firstName}`,
+        sourceTitle: `${gasstation['Branch.name']}, ${gasstation.address}, ${gasstation['City.name']}`,
         content: contentMap,
         lastPage: `.`,
         admin: permission,
