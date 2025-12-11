@@ -1,4 +1,4 @@
-const { Task, User, Gasstation, Picture, Branch, Product, ProductTask } = require('../models');
+const { Task, User, Gasstation, Picture, Branch, Product, ProductTask, Unit } = require('../models');
 const path = require('path');
 const fs = require('fs');
 const { where } = require('sequelize');
@@ -33,8 +33,21 @@ exports.adminTasks = async (req, res) => {
         raw: true,
     });
 
-    const products = await ProductTask.findAll({
-        where: {taskId: req.params.taskId},
+    const taskProducts = await Task.findAll({
+        where: { id: req.params.taskId },
+        include: [{
+            model: Product,
+            attributes:['name'],
+            through: {
+                model: ProductTask,
+                attributes: ["amount"],
+            },
+            include:[{
+                model: Unit,
+                attributes: ['name'],
+            },],
+
+        }],
         raw: true,
     });
 
@@ -50,15 +63,24 @@ exports.adminTasks = async (req, res) => {
         }],
         raw: true,
     });
+    const products = await Product.findAll({
+        attributes: ['id','name'],
+        include: [{
+            model: Unit,
+        }],
+        raw: true,
+    });
 
-    console.log(products);
+    console.log(taskProducts);
     res.render("admin/modifyTask", {
         task: task,
         pictures: pictures,
+        taskProducts: taskProducts,
         users: users,
         gasstations: gasstations,
+        products: products,
         currentPath: req.originalUrl.replace(/\/$/, ""),
-        lastPage: '/admin/tasks',
+        
     });
 };
 

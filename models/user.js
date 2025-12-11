@@ -19,9 +19,8 @@ module.exports = (sequelize, DataTypes) => {
       phone,
       address,
       cityCode,
-      roleId
+      roleId,
     }) {
-
       const originalUser = await User.findByPk(id, { raw: true });
       const FirstName = firstName || originalUser.firstName;
       const LastName = lastName || originalUser.lastName;
@@ -39,7 +38,7 @@ module.exports = (sequelize, DataTypes) => {
           phone: `${Phone}`,
           address: `${Address}`,
           cityCode: parseInt(CityCode),
-          roleId: RoleId
+          roleId: RoleId,
         },
         {
           where: { id: id },
@@ -77,9 +76,8 @@ module.exports = (sequelize, DataTypes) => {
       password: DataTypes.STRING,
       phone: DataTypes.STRING,
       address: DataTypes.STRING,
-        passwordCodeUuid: DataTypes.UUID,
-        passwordExpired: DataTypes.DATE,
-
+      passwordCodeUuid: DataTypes.UUID,
+      passwordExpired: DataTypes.DATE,
     },
     {
       sequelize,
@@ -89,10 +87,5 @@ module.exports = (sequelize, DataTypes) => {
       },
     },
   );
-  User.beforeBulkCreate(async (users) => {
-    for (const user of users) {
-      user.password = await bcrypt.hash(user.password, 10);
-    }
-  });
   return User;
 };

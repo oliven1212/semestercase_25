@@ -51,6 +51,16 @@
         {{!-- Setup images for tasks and the actual logic for the form --}}
 </section>
 <section>
+    <label>Produkter:</label>
+    {{#each taskProducts}}
+            <select name="product{{this.[Products.ProductTask.productId]}}" id="product{{this.[Products.ProductTask.productId]}}">
+            {{#each ../products}}
+            <option value="{{this.id}}" data-unit="{{this.[Unit.name]}}" {{#ifEq this.id ./this. }}selected{{/ifEq}}>{{this.name}}</option>
+            {{/each}}
+        </select>
+    {{/each}}
+</section>
+<section>
     <h2>Før billeder</h2>
     <div class="imageGrid">
         {{#each pictures}}

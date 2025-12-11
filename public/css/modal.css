@@ -54,7 +54,9 @@
   border: none;
   width: 80%;
   border-radius: 5px;
+  
 }
+
 
 .selectStationBtn {
   display: grid;
@@ -74,4 +76,5 @@
   color: var(--darkBlue);
   font-family: var(--sansFont);
   font-weight: 700;
+
 }
