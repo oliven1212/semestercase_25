@@ -5,11 +5,13 @@
         <button type="submit" class="createNew">{{message}}</button>
     </form>
     {{/if}}
+    {{#unless hideSearch}}
     <search>
         <form>
             <input name="listSearch" id="listSearch" placeholder="Søg efter navn">
         </form>
     </search>
+    {{/unless}}
     <section class="listCards">
         {{#each content}}
             <div class="listCard">
