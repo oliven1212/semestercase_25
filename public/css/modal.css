@@ -49,8 +49,8 @@
   font-family: var(--sansFont);
   color: var(--lightBlue);
   font-weight: 700;
-   border: none;
-   width: 80%;
+  border: none;
+  width: 80%;
 }
 
 .selectStationBtn {
@@ -60,7 +60,7 @@
   color: var(--darkBlue);
   font-family: var(--sansFont);
   font-weight: 700;
-   border: none;
+  border: none;
 }
 
 #selected-station {
