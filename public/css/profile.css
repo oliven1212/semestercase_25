@@ -5,6 +5,8 @@ section.profile-card {
     padding: 20px;
     display: grid;
     place-items: center;
+    color: var(--darkBlue); 
+    font-weight: 600;
 }
 section.profile-card svg {
     width: 50%;
@@ -18,11 +20,17 @@ section.profile-card .inputField:last-of-type {
     margin-bottom: 25px;
 }
 section.profile-card .inputField input{
-    width: 100%;;
+    width: 12rem;
+    padding: 6px;
+    font-size: 1rem;
+    border: 2px solid var(--darkBlue);
+    background-color: white;
+    color: var(--darkBlue)
+
 }
 section.profile-card .inputField label{
     display: block;
-    margin-bottom: 0px;
+    margin-bottom: 0.4rem;
 }
 
 
@@ -55,5 +63,27 @@ section.profile-card .inputField label{
     fill: var(--lightBlue);
 }
 
+.taskHis{
+    color: var(--lightBlue);
+    background-color: var(--darkBlue);
+    border: none;
+    border-color: var(--darkBlue);
+    padding: 8px;
+    font-size: 1rem;
+    font-weight: 600;
+    border-radius: 5px;
+    padding-top: 15px;
+    padding-bottom: 15px;
+    width: 10rem;
+    text-decoration: none;
+    
+}
 
-
+.logout{
+    text-decoration: underline;
+    margin-bottom: 0px;
+    padding-bottom: 0px;
+    color: var(--darkBlue);
+    opacity: 0.33;
+    font-weight: 600; 
+}

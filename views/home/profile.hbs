@@ -19,10 +19,13 @@
         <label for="fullName">Telefonnummer</label>
         <input id="fullName" type="text" value="{{currentUser.phone}}" disabled>
     </div>
-    <a href="/">Rengørings historik</a>
+    
+    {{!-- Manglende rigtig vej til historik --}}
+    <a class="taskHis" href="/">Rengørings historik</a>
    
 </section>
 <section class="logout-card">
+    <p class="logout">Log out</p>
     <form action="/login/logout" method="POST" class="logout-form">
   <button type="submit" class="logout-button" title="Log ud" aria-label="Log ud">
     
