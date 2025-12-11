@@ -181,6 +181,14 @@ exports.gasstations = async (req, res) => {
         }],
         raw: true,
     });
+
+    console.log('kjdfnshkjbsdfnjkdfskjnd   '+gasstations[0]['Gasstations.id']);
+    const gasId = gasstations[0]['Gasstations.id'];
+    console.log(gasId);
+    const noneId = gasId === null;
+    console.log(noneId);
+
+
     const contentMap = gasstations.map(gasstation => {
         return {
             name: `${gasstation['Gasstations.Branch.name']}`,
@@ -191,8 +199,9 @@ exports.gasstations = async (req, res) => {
     });
     res.render("admin/adminTaskHistorie", {
         title: `Relaterede tankstationer til`,
-        sourceTitle: `${user.lastName}, ${user.firstName}`,
+        sourceTitle: `${user.firstName} ${user.lastName}`,
         content: contentMap,
         lastPage: `.`,
+        none: noneId,
     });
 };

@@ -13,6 +13,7 @@
     </search>
     {{/unless}}
     <section class="listCards">
+        {{#unless none}}
         {{#each content}}
             <div class="listCard">
                 <p class="name">{{this.name}}</p>
@@ -37,5 +38,6 @@
                 {{/ifEq}}
             </div>
         {{/each}}
+        {{/unless}}
     </section>
 </div>
