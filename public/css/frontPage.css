@@ -23,3 +23,82 @@ form#login {
     grid-gap: 1em;
     display: grid;
 }
+
+.input-field{
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-gap: 1em;
+    width: 200px;
+}
+
+.loginP{
+    text-align: center;
+    font-size: x-large;
+    font-weight: bold;
+    color: var(--darkBlue);
+    padding-bottom: 0px;
+    padding: 1rem;
+    margin: 0px;
+}
+
+input {
+    padding: 10px;
+    border: none;
+    border-radius: 5px;
+    font-size: 1rem;
+    background-color: var(--lightBlue);
+    color: var(--darkBlue);
+    border: var(--darkBlue) 2px solid;
+    color: var(--darkBlue);
+    font-weight: 600;
+    
+    
+}
+
+::placeholder {
+    color: var(--darkBlue);
+    opacity: 0.33;
+    font-weight: 600;
+    
+}
+
+.forgotP{
+    text-align: center;
+    font-size: small;
+    color: var(--darkBlue);
+    text-decoration: underline;
+    font-style: italic;
+    margin-top: 0px;
+    padding-top: 0px;
+}
+
+.submit-button{
+    margin-top: 1rem;
+    padding: 10px;
+    border: none;
+    border-radius: 5px;
+    font-size: 1rem;
+    background-color: var(--darkBlue);
+    color: var(--lightBlue);
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.kontakt{
+    margin-top: 0.3rem;
+    padding: 10px;
+    border: none;
+    border-radius: 5px;
+    font-size: 1rem;
+    background-color: transparent;
+    color: var(--darkBlue);
+    font-weight: bold;
+    cursor: pointer;
+    border: var(--darkBlue) 2px solid;
+    font-style: italic;
+    
+}
+
+.carwash {
+    margin-top: 1rem;
+}
