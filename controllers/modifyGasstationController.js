@@ -65,6 +65,10 @@ exports.updateGasstation = async (req, res) => {
 };
 
 exports.deleteGasstation = async (req, res) => {
+    const permission = req.session.user.role === 1;
+    if(!permission){
+        return;
+    }
     await Gasstation.destroy({
         where: { id: req.params.gasId,}, 
     });
@@ -119,10 +123,12 @@ exports.tasks = async (req, res) => {
         };
     });
 
+    const permission = req.session.user.role == 1;
     res.render("admin/adminTaskHistorie", {
         title: `Relaterede opgaver til`,
         sourceTitle: `{user.lastName}, {user.firstName}`,
         content: contentMap,
         lastPage: `.`,
+        admin: permission,
     });
 };
