@@ -182,11 +182,8 @@ exports.gasstations = async (req, res) => {
         raw: true,
     });
 
-    console.log('kjdfnshkjbsdfnjkdfskjnd   '+gasstations[0]['Gasstations.id']);
     const gasId = gasstations[0]['Gasstations.id'];
-    console.log(gasId);
     const noneId = gasId === null;
-    console.log(noneId);
 
 
     const contentMap = gasstations.map(gasstation => {
