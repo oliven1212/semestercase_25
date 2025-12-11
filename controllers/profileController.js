@@ -19,6 +19,8 @@ exports.profile = async (req, res) => {
         exampleUser: exampleUser,
         currentUser: currentUser,
         lastPage: previousURL.pathname,
+            hideProfile: true,
+
     });
 };
 

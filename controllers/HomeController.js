@@ -10,6 +10,8 @@ exports.login = (req, res) => {
   res.render("home/login", {
     title: "Login",
     message: "Log ind",
+    hideReturn: true,
+    hideProfile: true,
   });
 };
 exports.loginSend = async (req, res) => {

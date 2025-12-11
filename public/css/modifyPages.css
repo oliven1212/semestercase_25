@@ -10,9 +10,12 @@ section.modifySection form {
     overflow-y: scroll;
     max-height: 80%;
 }
-section.modifySection form div label,
-section.modifySection form div input,
-section.modifySection form div select {
+section.modifySection h2{
+    color: var(--darkBlue);
+}
+section.modifySection div label,
+section.modifySection div input,
+section.modifySection div select{
     display: block;
     width: 100%;
     padding: 0;
@@ -22,8 +25,9 @@ section.modifySection form div select {
     border: none;
     color: var(--darkBlue);
 }
-section.modifySection form div input, 
-section.modifySection form div select {
+section.modifySection  div input, 
+section.modifySection  div select,
+section.modifySection  div option {
         border-style: solid;
         border-width: 1.5px;
         border-color: var(--darkBlue);
@@ -58,6 +62,8 @@ section.modifySection form div:not(:has(img)) {
 .functionButtons button svg{
     width: 100%;
     fill: var(--darkBlue);
+    max-width: 300px;
+    min-width: 50px;
 }
 .bigIcon{
     fill: var(--darkBlue);
@@ -116,4 +122,8 @@ section.modifySection .imageGrid{
     grid-template-columns: 1fr 1fr;
     gap: 10px;
     row-gap: 10px;
+}
+.productItemList{
+    display: grid;
+    grid-template-columns: 7fr 2fr 1fr;
 }
