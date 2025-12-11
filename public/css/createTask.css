@@ -21,7 +21,8 @@ form {
     background-color: var(--darkBlue);
     color: #CAF0F8;
     font-family: var(--sansFont);
-    font-weight: 900;
+    font-weight: 600;
+    font-size: large;
     border: none;
 }
 
@@ -31,7 +32,8 @@ form {
     width: 100%;
     background-color: var(--darkBlue);
     color: #CAF0F8;
-    font-weight: 700;
+    font-weight: 600;
+    font-size: large;
     font-family: var(--sansFont);
     border: none;
 }
