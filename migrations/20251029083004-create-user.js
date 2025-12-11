@@ -31,6 +31,14 @@ module.exports = {
             password: {
                 type: Sequelize.STRING
             },
+            passwordCodeUuid: {
+                type: Sequelize.UUID,
+                allowNull: true,
+            },
+            passwordExpired: {
+                type: Sequelize.DATE,
+                allowNull: true,
+            },
             phone: {
                 type: Sequelize.STRING
             },
