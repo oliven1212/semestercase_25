@@ -11,6 +11,7 @@ form {
     display: grid;
     place-items: center;
     font-family: var(--sansFont);
+    border: none;
 }
 
 #myBtn {
@@ -21,6 +22,7 @@ form {
     color: #CAF0F8;
     font-family: var(--sansFont);
     font-weight: 900;
+    border: none;
 }
 
 .startLog {
@@ -31,6 +33,7 @@ form {
     color: #CAF0F8;
     font-weight: 700;
     font-family: var(--sansFont);
+    border: none;
 }
 
 p {
