@@ -87,7 +87,7 @@ exports.uploadTasks = async (req, res) => {
             });
         }
 
-        // Gem produkter 
+        // Gem produkter //VIRKER IKKE
         for (let product of products) {
             ProductTask.create({
                 taskId: taskId,
@@ -230,10 +230,26 @@ exports.deleteImage = async (req, res) => {
 };
 
 exports.showTaskImages = async (req, res) => {
+    const image = await Picture.findOne({
+        where: {id: req.params.imageUuid},
+        raw: true,
+    });
+    const taskId = image.taskId;
     const images = await Picture.findAll(
         {
             where: {id: req.params.imageUuid},
-            include: {model: Task,},
+            include: { model: Task,
+                include: [{ model: User }, { model: Gasstation }, 
+                    { model: Product,
+                    through: {
+                        where: {
+                            taskId: taskId,
+                        },
+                    },
+                }],
+                
+             },
+             
 
             raw: true,
         });
@@ -246,12 +262,13 @@ exports.showTaskImages = async (req, res) => {
 
     const taskLink = images[0]['Task.taskLink'];
     const fortyEightHoursAgo = new Date(Date.now() - 48 * 60 * 60 * 1000);
-    console.log('ioæjfewnkkjhblsgrhbkjgsrnbkjhgrts');
-    console.log(images[3]);
-    console.log('_________');
-    console.log(taskLink);
+    const task = images[0].Task;
+
+    console.log(task);
+    console.log(images);
 
     if (taskLink === 1 || images[0].createdAt < fortyEightHoursAgo) {
+
         return res.render("home/showTaskImages",
             {
                 title: 'Dette link er allerede brugt eller er udløbet',
@@ -266,13 +283,14 @@ exports.showTaskImages = async (req, res) => {
                 title: 'Rengøringslog',
                 message: 'Her kan du se informationerne fra din tankstations rengøring',
                 content: 'Hej og velkommen til rengøringsloggen for din tankstation. Her kan du finde detaljer om de seneste rengøringsopgaver udført på din station, inklusive billeder før og efter rengøringen samt de anvendte produkter.',
-                images: images
+                images: images,
+                taskInfo: images[0],
             });
     };
     // Update the taskLink in the database
-    await Task.update(
+   /* await Task.update(
         { taskLink: 1 },
         { where: { id: images[0]['Task.id'] } }
-    );
+    ); */
 
 };

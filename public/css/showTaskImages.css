@@ -1,13 +1,48 @@
 .task-showImages{
     color: black;
+    display: grid;
+    gap: 5px;
+    text-align: center; 
+    padding-left: 5px;
+    padding-right: 5px;
+    margin: 0%;
 }
 
-.image-container{
-    
+.task-showImages p {
+    padding: 10px;
+    margin: 0px;
+
+};
+
+
+
+.image-container {
     display: grid;
     grid-template-areas:
         "stack";
     aspect-ratio: 1 / 1;
     max-width: 150px;
+}
 
-};
+.image-container img {
+    grid-area: stack;
+    border-radius: 4px;
+}
+
+.imageGrid{
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+    row-gap: 10px;
+}
+.taskImages {
+    aspect-ratio: 1 / 1;
+    max-width: 100%;
+    width: 100%;
+
+}
+
+.adress{
+    color: black;
+    font-size: 50px;
+}

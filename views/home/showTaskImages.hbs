@@ -1,49 +1,44 @@
-
 <section class="task-showImages">
-<h2>{{message}}</h2>
-<p>{{content}}</p>
-{{#if images}}
-
-    <h1>Task Historie</h1>
+    <h2>{{message}}</h2>
+    {{#if images}}
 
     <div class="text-container">
-        <p>rengøring hos:</p>
-        <h2>{{task.[0].[Gasstation.address]}}, {{task.[0].[Gasstation.cityCode]}} {{task.[0].[Gasstation.City.name]}}
-        </h2>
-
+        <h3>Rengøring udført hos: </h3>
+        <h4>{{taskInfo.[Task.Gasstation.address]}}</h4>
     </div>
-
-    <div class="text-container">
-        <p>din rengøring er logget den:</p>
-        <h3>{{timeStamp.date}} {{timeStamp.time}}</h3>
-    </div>
-
-    <ul class="product-list" style="list-style-type: none;">
-        <h3>Producter opfyldt</h3>
-        {{#each task}}
-            <div class="product-item">
-
-                <label class="product-name">{{[Products.name]}}
-                </label>
-                <p class="unit-name">{{this.[Products.Unit.name]}} </p>
-                <input class="product-amount" type="text" value='{{[Products.ProductTask.amount]}}' readonly>
-
-            </div>
-        {{/each}}
-        <li>{{timeStamp.date}} {{timeStamp.time}} </li>
-    </ul>
-    <div class="user-info">
-        <p>rengøring udført af:{{user.firstName}} {{user.lastName}} </p>
-        <p>Telefon: {{user.phone}} </p>
-    </div>
+    <p>Rengøring udført af: {{taskInfo.[Task.User.firstName]}} {{taskInfo.[Task.User.lastName]}}</p>
+    <p>Kontakt rengøringspersonale: <br>
+        {{taskInfo.[Task.User.phone]}}
+        <br>
+        {{taskInfo.[Task.User.email]}}
+    </p>
     {{/if}}
-</section>
 
-{{#each images}}
+    <h2 class="">Før billeder</h2>
+    <div class="imageGrid">
+
+    {{#each images}}
+    {{#ifEq this.beforeAfter 0}}
     <div class="image-container">
         <img src="/imgUploads/{{this.filename}}" alt="Task Image" class="taskImages">
     </div>
-{{/each}}
+    {{/ifEq}}
+    {{/each}}
+
+    </div>
+
+    <h2 class="">Efter billeder</h2>
+
+<div class="imageGrid">
+    {{#each images}}
+    {{#ifEq this.beforeAfter 1}}
+    <div class="image-container">
+        <img src="/imgUploads/{{this.filename}}" alt="Task Image" class="taskImages">
+    </div>
+    {{/ifEq}}
+    {{/each}}
+</div>
+</section>
 
 
-<link rel="stylesheet" type="text/css" href="./css/showTaskImages.css">
+<link rel="stylesheet" type="text/css" href="/css/showTaskImages.css">
