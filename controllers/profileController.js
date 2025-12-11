@@ -146,7 +146,6 @@ exports.tasks = async (req, res) => {
 
 
     });
-
     res.render("admin/adminTaskHistorie", {
         title: `Opgaver for `,
         sourceTitle: `${user.lastName}, ${user.firstName}`,
@@ -190,7 +189,6 @@ exports.gasstations = async (req, res) => {
             originalUrl: req.originalUrl.replace(/\/$/, "")
         };
     });
-
     res.render("admin/adminTaskHistorie", {
         title: `Relaterede tankstationer til`,
         sourceTitle: `${user.lastName}, ${user.firstName}`,

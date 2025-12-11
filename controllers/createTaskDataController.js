@@ -86,10 +86,9 @@ exports.uploadTasks = async (req, res) => {
                 error: 'Mindst ét produkt er påkrævet'
             });
         }
-
-        // Gem produkter //VIRKER IKKE
+        // Gem produkter
         for (let product of products) {
-            ProductTask.create({
+            await ProductTask.create({
                 taskId: taskId,
                 productId: product.id,
                 amount: product.amount
