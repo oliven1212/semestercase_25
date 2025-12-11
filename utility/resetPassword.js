@@ -1,61 +1,56 @@
-require('dotenv').config();
+require("dotenv").config();
 
 const nodeMailer = require("nodemailer");
-const {Picture} = require("../models");
-
 
 const GMAIL_USER = process.env.GMAIL_USER;
 const GMAIL_PASS = process.env.GMAIL_APP_PASSWORD;
 
-
 if (!GMAIL_USER || !GMAIL_PASS) {
-    console.error('Missing env vars: GMAIL_USER or GMAIL_APP_PASSWORD');
-    console.error('Tjek .env eller dine eksport-variabler');
-    process.exit(1);
+  console.error("Missing env vars: GMAIL_USER or GMAIL_APP_PASSWORD");
+  console.error("Tjek .env eller dine eksport-variabler");
+  process.exit(1);
 }
 
 //Linket -> hvor den skal hen (til owner fra task gasstation)
 
+async function resetPasswordEmail(toEmail, uniqueId) {
+  //TODO: tjek om det virker med homecontrolleren,
 
-
-async function resetPasswordEmail(toEmail,uniqueId) {
-    //TODO: tjek om det virker med homecontrolleren,
-
-    const html = `<h3>Reset dit password</h3>
-        <p>Hej ejer af tankstation</p>
-        <p>Der er netop blevet uploadet en ny rengøringsopgave for din tankstation.</p>
-        <p>Du kan se billederne og oplysningerne ved at klikke på linket nedenfor:</p>
+  const html = `<h3>Reset dit password</h3>
+        <p>Hej</p>
+        <p>Du har anmodet om at nulstille dit password</p>
+        <p>clik på linket nedenfor for at nulstille dit password:</p>
         <br>
-        <a href="http://localhost:3000/login/reset${uniqueId}">Se billeder for opgaven her</a>
-        <p>Dette link er gyldigt i 48 timer og kan kun bruges en gang.</p>
+        <a href="http://localhost:3000/login/reset${uniqueId}">nulstil password her</a>
+        <p>Dette link er gyldigt i en time og kan kun bruges en gang.</p>
         <p>Dette er en automatisk genereret email, svar venligst ikke på denne.</p>
         `;
 
-    // Brug eksplicit SMTP med secure port
-    const transporter = nodeMailer.createTransport({
-        host: 'smtp.gmail.com',
-        port: 465,
-        secure: true,
-        auth: {
-            user: process.env.GMAIL_USER,
-            pass: process.env.GMAIL_APP_PASSWORD
-        }
-    });
+  // Brug eksplicit SMTP med secure port
+  const transporter = nodeMailer.createTransport({
+    host: "smtp.gmail.com",
+    port: 465,
+    secure: true,
+    auth: {
+      user: process.env.GMAIL_USER,
+      pass: process.env.GMAIL_APP_PASSWORD,
+    },
+  });
 
-    const mailOptions = {
-        from: `"Automatisk email" <${GMAIL_USER}>`,
-        to: 'valdemar.sehested@hotmail.com', //Put din egen email her for at teste. Skal erstattes af toEmail
-        subject: 'Ny rengøringsopgave uploadet',
-        html: html,
-    };
+  const mailOptions = {
+    from: `"password reset" <${GMAIL_USER}>`,
+    to: "valdemar.sehested@hotmail.com", //Put din egen email her for at teste. Skal erstattes af toEmail
+    subject: "nulstil dit password",
+    html: html,
+  };
 
-    try {
-        const info = await transporter.sendMail(mailOptions);
-        console.log('Email sendt:', info.messageId);
-    } catch (error) {
-        console.error('Fejl ved afsendelse:', error);
-        // Hvis 535-5.7.8: username/password not accepted -> tjek app-password eller OAuth2
-    }
+  try {
+    const info = await transporter.sendMail(mailOptions);
+    console.log("Email sendt:", info.messageId);
+  } catch (error) {
+    console.error("Fejl ved afsendelse:", error);
+    // Hvis 535-5.7.8: username/password not accepted -> tjek app-password eller OAuth2
+  }
 }
 
 module.exports = { resetPasswordEmail };
