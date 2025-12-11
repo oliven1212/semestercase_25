@@ -1,7 +1,6 @@
 const { Task, User, Gasstation, Picture, Branch, Product, ProductTask, Unit } = require('../models');
 const path = require('path');
 const fs = require('fs');
-const { where } = require('sequelize');
 
 exports.adminTasks = async (req, res) => {
     const task = await Task.findOne({
@@ -33,21 +32,8 @@ exports.adminTasks = async (req, res) => {
         raw: true,
     });
 
-    const taskProducts = await Task.findAll({
-        where: { id: req.params.taskId },
-        include: [{
-            model: Product,
-            attributes:['name'],
-            through: {
-                model: ProductTask,
-                attributes: ["amount"],
-            },
-            include:[{
-                model: Unit,
-                attributes: ['name'],
-            },],
-
-        }],
+    const taskProducts = await ProductTask.findAll({
+        where:{taskId: req.params.taskId},
         raw: true,
     });
 
@@ -71,7 +57,7 @@ exports.adminTasks = async (req, res) => {
         raw: true,
     });
 
-    console.log(taskProducts);
+    console.log(products);
     res.render("admin/modifyTask", {
         task: task,
         pictures: pictures,
@@ -108,6 +94,17 @@ exports.deleteImage = async (req, res) => {
         } else {
             console.log('Fil slettet succesfuldt');
         }
+    });
+    res.redirect(`/admin/tasks/${req.params.taskId}`);
+};
+
+exports.updateTask = async (req, res) => {
+    await Task.updateTask({
+        id: req.params.taskId,
+        startTime: new Date(req.body.startTime),
+        userId: req.body.user.split("(").pop().slice(0, -1),
+        gasstationId: req.body.gasstation.split("(").pop().slice(0, -1),
+
     });
     res.redirect(`/admin/tasks/${req.params.taskId}`);
 };

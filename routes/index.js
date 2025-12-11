@@ -65,10 +65,9 @@ router.post("/admin/products/:productId/delete", productController.deleteProduct
 
 router.get("/admin/tasks", adminListController.adminListTasks);
 router.get("/admin/tasks/:taskId", taskController.adminTasks);
-//router.post("/admin/tasks/:taskId/update", taskController);
+router.post("/admin/tasks/:taskId/update", taskController.updateTask);
 router.post("/admin/tasks/:taskId/delete", taskController.deleteTask);
 router.post("/admin/tasks/:taskId/delete/image", taskController.deleteImage);
-//router.get("/admin/tasks/:taskId/historie", taskController);
 
 router.use("/", authRoutes);
 module.exports = router;
