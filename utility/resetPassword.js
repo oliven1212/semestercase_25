@@ -1,6 +1,7 @@
 require('dotenv').config();
 
 const nodeMailer = require("nodemailer");
+const {Picture} = require("../models");
 
 
 const GMAIL_USER = process.env.GMAIL_USER;
@@ -17,13 +18,15 @@ if (!GMAIL_USER || !GMAIL_PASS) {
 
 
 
-async function resetPasswordEmail() {
+async function resetPasswordEmail(toEmail,uniqueId) {
+    //TODO: tjek om det virker med homecontrolleren,
+
     const html = `<h3>Reset dit password</h3>
         <p>Hej ejer af tankstation</p>
         <p>Der er netop blevet uploadet en ny rengøringsopgave for din tankstation.</p>
         <p>Du kan se billederne og oplysningerne ved at klikke på linket nedenfor:</p>
         <br>
-        <a href="http://localhost:3000/showTaskImages/${imageUuid}">Se billeder for opgaven her</a>
+        <a href="http://localhost:3000/login/reset${uniqueId}">Se billeder for opgaven her</a>
         <p>Dette link er gyldigt i 48 timer og kan kun bruges en gang.</p>
         <p>Dette er en automatisk genereret email, svar venligst ikke på denne.</p>
         `;
@@ -41,7 +44,7 @@ async function resetPasswordEmail() {
 
     const mailOptions = {
         from: `"Automatisk email" <${GMAIL_USER}>`,
-        to: 'valdemar.sehested@hotmail.com', //Put din egen email her for at teste
+        to: 'valdemar.sehested@hotmail.com', //Put din egen email her for at teste. Skal erstattes af toEmail
         subject: 'Ny rengøringsopgave uploadet',
         html: html,
     };
