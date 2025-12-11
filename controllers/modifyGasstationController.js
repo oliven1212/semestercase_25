@@ -122,12 +122,10 @@ exports.tasks = async (req, res) => {
         };
     });
 
-    const permission = req.session.user.role == 1;
     res.render("admin/adminTaskHistorie", {
         title: `Relaterede opgaver til`,
         sourceTitle: `${gasstation['Branch.name']}, ${gasstation.address}, ${gasstation['City.name']}`,
         content: contentMap,
         lastPage: `.`,
-        admin: permission,
     });
 };

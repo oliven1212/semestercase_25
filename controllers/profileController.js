@@ -146,13 +146,11 @@ exports.tasks = async (req, res) => {
 
 
     });
-    const permission = req.session.user.role == 1;
     res.render("admin/adminTaskHistorie", {
         title: `Opgaver for `,
         sourceTitle: `${user.lastName}, ${user.firstName}`,
         content: contentMap,
         lastPage: `.`,
-        admin: permission,
     });
 };
 
@@ -191,12 +189,10 @@ exports.gasstations = async (req, res) => {
             originalUrl: req.originalUrl.replace(/\/$/, "")
         };
     });
-    const permission = req.session.user.role == 1;
     res.render("admin/adminTaskHistorie", {
         title: `Relaterede tankstationer til`,
         sourceTitle: `${user.lastName}, ${user.firstName}`,
         content: contentMap,
         lastPage: `.`,
-        admin: permission,
     });
 };
