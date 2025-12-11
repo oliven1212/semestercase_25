@@ -1,5 +1,5 @@
 h1 {
-    color: var(--darkBlue);
+    color: black;
     text-align: center;
     padding-bottom: 0px;
     font-family: var(--sansFont);
@@ -19,6 +19,7 @@ form {
 
 #myBtn {
     margin: 1rem;
+    margin-bottom: 0px;
     width: 100%;
     background-color: var(--darkBlue);
     color: #CAF0F8;
@@ -61,12 +62,19 @@ p {
     font-weight: 700;
     font-size: larger;
     align-self: center;
+
+}
+
+.calender {
+    margin-top: 20px;
 }
 
 .start{
     color: var(--darkBlue);
     font-weight: 700;
     font-family: var(--sansFont);
+    margin-top: 0px;
+   
 }
 
 
