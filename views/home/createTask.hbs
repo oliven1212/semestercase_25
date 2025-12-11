@@ -1,6 +1,6 @@
 <!--velkommen (med tom string der henter fra profil)-->
 <section>
-    <h1>Velkommen {{users.firstName}}
+    <h1>Velkommen {{users.firstName}}!</h1>
 </section>
 
 
@@ -42,17 +42,18 @@
         </div>
     </section>
 
-    <section>
+    <section class="start" >
         <!-- start rengøring ved (valgte tankstation) -->
-        <p>Start rengøring ved:</p>
+        <p >Start rengøring ved:</p>
         <span id="selected-station"></span>
     </section>
 
 
-    <section>
-        <div id="calendar" style="max-width:900px;margin:20px auto;"></div>
-        <label class="calenderText" for="startTime">Dato & tid</label>
-        <input id="startTime" name="startTime" type="datetime-local" required />
+    <section class="startTime">
+        <div id="calendar" >
+        <label class="calenderText" for="startTime">Dato & tid:</label> <br>
+        <input id="startTime" name="startTime" type="datetime-local" required >
+        </div>
     </section>
 
 

@@ -3,6 +3,9 @@ h1 {
     text-align: center;
     padding-bottom: 0px;
     font-family: var(--sansFont);
+    font-size: x-large;
+    
+    padding-top: 20px;
     
 }
 
@@ -26,6 +29,7 @@ form {
     border-radius: 5px;
     padding-top: 15px;
     padding-bottom: 15px;
+    margin-left: 0px;
 }
 
 .startLog {
@@ -38,14 +42,16 @@ form {
     font-family: var(--sansFont);
     border: none;
     border-radius: 5px;
-    padding-top: 15px;
-    padding-bottom: 15px;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    width: 140px;
 }
 
 p {
     color: var(--darkBlue);
     text-align: center;
     font-weight: 700;
+    font-size: larger;
     font-family: var(--sansFont);
 }
 
@@ -53,5 +59,27 @@ p {
     color: var(--darkBlue);
     font-family: var(--sansFont);
     font-weight: 700;
+    font-size: larger;
+    align-self: center;
 }
 
+.start{
+    color: var(--darkBlue);
+    font-weight: 700;
+    font-family: var(--sansFont);
+}
+
+
+
+.startTime input{
+    color: var(--darkBlue);
+    font-weight: 700;
+    font-family: var(--sansFont);
+    background-color: white;
+    border: 1px solid var(--darkBlue);
+    width: 140px;
+    padding: 5px;
+    border-radius: 5px;
+    margin-top: 10px;
+    padding-left: 20px;
+}

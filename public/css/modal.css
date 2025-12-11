@@ -10,6 +10,7 @@
   overflow: auto; /* Enable scroll if needed */
   background-color: rgb(0,0,0); /* Fallback color */
   background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+  margin-top: 40px;
 }
 
 /* Modal Content*/
@@ -41,6 +42,7 @@
   place-items: center;
   margin: 7%;
   color: var(--lightBlue);
+  margin-right: 15px;
 }
 
 .station-select {
@@ -51,6 +53,7 @@
   font-weight: 700;
   border: none;
   width: 80%;
+  border-radius: 5px;
 }
 
 .selectStationBtn {
@@ -61,6 +64,8 @@
   font-family: var(--sansFont);
   font-weight: 700;
   border: none;
+  padding: 10px;
+  border-radius: 5px;
 }
 
 #selected-station {
