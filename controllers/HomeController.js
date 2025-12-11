@@ -6,8 +6,8 @@ const bcrypt = require("bcrypt");
 
 exports.login = (req, res) => {
   res.render("home/login", {
-    title: "login",
-    message: "skriv dit brugernavn og kodeord her",
+    title: "Login",
+    message: "Log ind",
   });
 };
 exports.loginSend = async (req, res) => {
