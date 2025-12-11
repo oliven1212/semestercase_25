@@ -36,6 +36,7 @@ exports.passEmailConfirmed = async (req, res) => {
 
 exports.logout = (req, res) => {
   // Hvis der er en session, så ødelæg den
+  console.log('logout');
   if (req.session) {
     req.session.destroy((err) => {
       if (err) {
