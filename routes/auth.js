@@ -10,6 +10,7 @@ const { v4: uuidv4 } = require("uuid");
 const { Op } = require("sequelize");
 const { User } = require("../models");
 const HomeController = require("../controllers/HomeController");
+const { resetPasswordEmail } = require("../utility/resetPassword");
 
 // GET login page -> fjern isNotAuthenticated (ellers kan ingen nå login)
 router.get("/", (req, res) => {
@@ -87,26 +88,26 @@ router.post("/login", async (req, res) => {
   }
 });
 //================ password reset routes======================
-router.get("/login/forgot-password", (req, res) => {
+router.get("/login/forgotPassword", (req, res) => {
   const error = req.session ? req.session.error : null;
   const success = req.session ? req.session.success : null;
   if (req.session) {
     delete req.session.error;
     delete req.session.success;
   }
-  res.render("forgot-password", { error, success });
+  res.render("home/forgotPassword", { error, success });
 });
-router.post("/login/forgot-password", async (req, res) => {
+router.post("/login/forgotPassword", async (req, res) => {
   const { email } = req.body;
   if (!email) {
     req.session.error = "email skal udfyldes";
-    return res.redirect("/login/forgot-password");
+    return res.redirect("/login/forgotPassword");
   }
   //hvad er unscoped
   const user = await User.unscoped().findOne({ where: { email } });
   if (!user) {
     req.session.error = "Brugeren findes ikke";
-    return res.redirect("/login/forgot-password");
+    return res.redirect("/login/forgotPassword");
   }
   //generate uuid token
   const uniqueId = uuidv4();
@@ -122,41 +123,43 @@ router.post("/login/forgot-password", async (req, res) => {
   } else {
     req.session.error = "der skete en fejl ved afsendelse af email";
   }
-  res.redirect("/login/forgot-password");
+  res.redirect("/login/forgotPassword");
 });
 
 router.get("/login/reset/:uniqueId", async (req, res) => {
   const { uniqueId } = req.params;
 
   const user = await User.unscoped().findOne({
-    where: uniqueId,
-    passwordExpired: {
-      [Op.gt]: new Date(),
+    where: {
+      passwordCodeUuid: uniqueId,
+      passwordCodeExpires: {
+        [Op.gt]: new Date(),
+      },
     },
   });
   if (!user) {
     req.session.error = "password reset línket er ugyldigt eller udløbet";
-    return res.redirect("/login/forgot-password");
+    return res.redirect("/login/forgotPassword");
   }
   const error = req.session ? req.session.error : null;
   if (req.session) delete req.session.error;
   res.render("home/changePassword", { uniqueId, error });
 });
 
-router.post("login/reset/:uniqueId", async (req, res) => {
+router.post("/login/reset/:uniqueId", async (req, res) => {
   const { uniqueId } = req.params;
   const { password, confirmPassword } = req.body;
   if (!password || !confirmPassword) {
     req.session.error = "begge felter skal udfyldes";
-    return res.redirect(`login/reset/${uniqueId}`);
+    return res.redirect(`/login/reset/${uniqueId}`);
   }
   if (password !== confirmPassword) {
     req.session.error = "password skal være identiske";
-    return res.redirect(`login/reset/${uniqueId}`);
+    return res.redirect(`/login/reset/${uniqueId}`);
   }
   if (password.length < 8) {
     req.session.error = "password skal være længere end 8 tegn";
-    return res.redirect(`login/reset/${uniqueId}`);
+    return res.redirect(`/login/reset/${uniqueId}`);
   }
 
   const user = await User.unscoped().findOne({
@@ -169,21 +172,21 @@ router.post("login/reset/:uniqueId", async (req, res) => {
   });
   if (!user) {
     req.session.error = "Password reset link er ugyldigt eller udløbet";
-    return res.redirect("/login/forgot-password");
+    return res.redirect("/login/forgotPassword");
   }
 
-  const hashedPassword = await bCrypt.hash(password, 10);
+  const hashedPassword = await bcrypt.hash(password, 10);
   user.password = hashedPassword;
   user.passwordCodeUuid = null;
   user.passwordExpired = null;
   await user.save();
 
-  req.session.succes = "dit password er blevet opdateret, du kan nu logge ind";
+  req.session.success = "dit password er blevet opdateret, du kan nu logge ind";
   res.redirect("/");
 });
 
 router.get("/login/reset", HomeController.changePassword);
-router.get("/login/forgot-password", HomeController.pEmailConfirm);
+//router.get("/login/forgotPassword", HomeController.forgotPassword);
 router.get("/login/emailconfirm/true", HomeController.passEmailConfirmed);
 router.post("/login/logout", HomeController.logout);
 router.get("/login/logout", HomeController.logout);

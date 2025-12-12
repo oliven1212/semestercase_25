@@ -17,7 +17,6 @@ exports.login = (req, res) => {
 exports.loginSend = async (req, res) => {
   const { email, password } = req.body;
   console.log(req.body);
-  console.log("llllllllllllllllllllll");
 
   const user = await User.findOne({
     where: { email: email },
@@ -43,8 +42,8 @@ exports.changePassword = async (req, res) => {
   res.render("home/changePassword", {});
 };
 
-exports.pEmailConfirm = async (req, res) => {
-  res.render("home/forget-login", {});
+exports.forgotPassword = async (req, res) => {
+  res.render("home/forgotPassword", {});
 };
 exports.passEmailConfirmed = async (req, res) => {
   res.render("home/passEmailConfirmed", {});
