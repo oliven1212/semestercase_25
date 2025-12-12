@@ -1,10 +1,10 @@
 const session = require("express-session");
 const { User } = require("../models");
 const { comparePassword, saltRounds } = require("../utility/auth");
-const { resetPasswordEmail } = require('../utility/resetPassword');
+const { resetPasswordEmail } = require("../utility/resetPassword");
 
 const bcrypt = require("bcrypt");
-const {sendTaskEmail} = require("../utility/taskEmail");
+const { sendTaskEmail } = require("../utility/taskEmail");
 
 exports.login = (req, res) => {
   res.render("home/login", {
@@ -28,7 +28,7 @@ exports.loginSend = async (req, res) => {
 };
 
 exports.changePassword = async (req, res) => {
-    /* TODO:
+  /* TODO:
     const {v4: uuidv4} = require('uuid');
 
     const uniqueId = uuidv4();
@@ -44,7 +44,7 @@ exports.changePassword = async (req, res) => {
 };
 
 exports.pEmailConfirm = async (req, res) => {
-  res.render("home/pEmailConf", {});
+  res.render("home/forget-login", {});
 };
 exports.passEmailConfirmed = async (req, res) => {
   res.render("home/passEmailConfirmed", {});
@@ -52,7 +52,7 @@ exports.passEmailConfirmed = async (req, res) => {
 
 exports.logout = (req, res) => {
   // Hvis der er en session, så ødelæg den
-  console.log('logout');
+  console.log("logout");
   if (req.session) {
     req.session.destroy((err) => {
       if (err) {

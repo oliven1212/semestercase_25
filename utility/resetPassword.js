@@ -15,13 +15,13 @@ if (!GMAIL_USER || !GMAIL_PASS) {
 
 async function resetPasswordEmail(toEmail, uniqueId) {
   //TODO: tjek om det virker med homecontrolleren,
-
+  const resetUrl = `http://localhost:3000/login/reset/${uniqueId}`;
   const html = `<h3>Reset dit password</h3>
         <p>Hej</p>
         <p>Du har anmodet om at nulstille dit password</p>
         <p>clik på linket nedenfor for at nulstille dit password:</p>
         <br>
-        <a href="http://localhost:3000/login/reset${uniqueId}">nulstil password her</a>
+        <a href=${resetUrl}>nulstil password her</a>
         <p>Dette link er gyldigt i en time og kan kun bruges en gang.</p>
         <p>Dette er en automatisk genereret email, svar venligst ikke på denne.</p>
         `;
