@@ -287,9 +287,9 @@ exports.showTaskImages = async (req, res) => {
             });
     };
     // Update the taskLink in the database
-   /* await Task.update(
+    await Task.update(
         { taskLink: 1 },
         { where: { id: images[0]['Task.id'] } }
-    ); */
+    ); 
 
 };
