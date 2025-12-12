@@ -16,12 +16,25 @@ h4{
     color: black;
     text-align: center;
     font-style: italic;
-    font-weight: 200;
+    font-weight: 400;
 }
 
 button{
     display: grid;
     justify-self: center;
     align-self: center;
+     color: var(--lightBlue);
+    background-color: var(--darkBlue);
+    border: none;
+    border-color: var(--darkBlue);
+    padding: 8px;
+    font-size: large;
+    font-weight: 600;
+    border-radius: 5px;
+    padding-top: 15px;
+    padding-bottom: 15px;
+    margin-top: 40px;
+    width: 50%;
+    text-decoration: none;
 
 }
