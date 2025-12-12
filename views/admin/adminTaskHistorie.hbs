@@ -2,5 +2,19 @@
     <h3>{{title}}</h3>
     <h2>{{sourceTitle}}</h2>
 </div>
-
+{{#if linkUrl}}
+<form action="{{linkUrl}}" method="post" id="linkData">
+    {{#if allGasstations}}
+    <div>
+        <input list="gasstations" id="gasstation" name="gasstation" value="" autocomplete="off" placeholder="Gasstation addresse">
+        <datalist id="gasstations">
+            {{#each allGasstations}}
+            <option value="{{this.[Branch.name]}}, {{this.address}}, {{this.[City.name]}} ({{this.id}})"></option>
+            {{/each}}
+        </datalist>
+    </div>
+    <button type="submit" form="linkData">Link gasstation</button>
+    {{/if}}
+</form>
+{{/if}}
 {{> home/adminList}}

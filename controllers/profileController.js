@@ -1,17 +1,18 @@
+const { where } = require('sequelize');
 const { User, Gasstation, Role, City, Task, Branch, GasstationUser } = require('../models');
 
 exports.profile = async (req, res) => {
     const previousURL = new URL(await req.get('referer'));
-    const currentUser = await User.findByPk(req.session.user.id,{
+    const currentUser = await User.findByPk(req.session.user.id, {
         raw: true
     });
 
     const users = await User.findAll({
         raw: true
     });
-    const exampleUser = await User.findOne({ 
+    const exampleUser = await User.findOne({
         where: { id: 1 }, //setup current user id
-        raw: true 
+        raw: true
     });
     res.render("home/profile", {
         title: 'login',
@@ -19,7 +20,7 @@ exports.profile = async (req, res) => {
         exampleUser: exampleUser,
         currentUser: currentUser,
         lastPage: previousURL.pathname,
-            hideProfile: true,
+        hideProfile: true,
 
     });
 };
@@ -33,7 +34,7 @@ exports.adminUser = async (req, res) => {
         include: [
             {
                 model: City,
-                attributes:['zipCode','name'],
+                attributes: ['zipCode', 'name'],
             },
             {
                 model: Role,
@@ -43,7 +44,7 @@ exports.adminUser = async (req, res) => {
     });
     //retreives all branches so you can pick the one you need
     const cities = await City.findAll({
-        attributes:['zipCode','name'],
+        attributes: ['zipCode', 'name'],
         raw: true
     });
     const roles = await Role.findAll({
@@ -60,17 +61,17 @@ exports.adminUser = async (req, res) => {
 
 exports.updateUser = async (req, res) => {
     let zipCode = req.body.city;
-    if(zipCode.lastIndexOf('(') == -1 || zipCode.lastIndexOf(')') == -1 || zipCode.lastIndexOf('(') > zipCode.lastIndexOf(')')){
-//Error handling format not correct: [city name] ([zip code])
+    if (zipCode.lastIndexOf('(') == -1 || zipCode.lastIndexOf(')') == -1 || zipCode.lastIndexOf('(') > zipCode.lastIndexOf(')')) {
+        //Error handling format not correct: [city name] ([zip code])
 
     }
     zipCode = parseInt(zipCode.slice(zipCode.lastIndexOf('(') + 1, zipCode.lastIndexOf(')')));
     const city = await City.findOne({
-        where:{zipCode: zipCode},
-        raw:true
+        where: { zipCode: zipCode },
+        raw: true
     });
-    if(!city){
-//Error handling city not found based on zip code
+    if (!city) {
+        //Error handling city not found based on zip code
 
     }
 
@@ -84,18 +85,18 @@ exports.updateUser = async (req, res) => {
         cityCode: zipCode,
         roleId: req.body.roleId,
     });
-    
+
     res.redirect(`/admin/users/${req.params.userId}`);
 };
 
 exports.deleteUser = async (req, res) => {
     await User.destroy({
-        where: { id: req.params.userId,},
+        where: { id: req.params.userId, },
     });
-    
-    if(req.body.link){
+
+    if (req.body.link) {
         res.redirect(req.body.link);
-    }else{
+    } else {
         res.redirect(`/admin/users`);
     }
 };
@@ -103,19 +104,19 @@ exports.deleteUser = async (req, res) => {
 exports.tasks = async (req, res) => {
     const user = await User.findOne({
         where: { id: req.params.userId },
-        attributes: ['firstName','lastName'],
+        attributes: ['firstName', 'lastName'],
         raw: true,
     });
     const relatedTasks = await Task.findAll({
-        where:{userId: req.params.userId,},
-        attributes:['id','startTime'],
-        include:[
+        where: { userId: req.params.userId, },
+        attributes: ['id', 'startTime'],
+        include: [
             {
                 model: Gasstation,
-                include:[{
+                include: [{
                     model: Branch,
                 },
-                
+
                 {
                     model: City,
                 }
@@ -126,18 +127,18 @@ exports.tasks = async (req, res) => {
         raw: true,
     });
     //sorts so the oldest task is at the end and newest first
-    relatedTasks.sort((a, b) =>{
+    relatedTasks.sort((a, b) => {
         return new Date(b.startTime) - new Date(a.startTime);
     });
     const contentMap = relatedTasks.map(task => {
-        if(task['Gasstation.id']){
+        if (task['Gasstation.id']) {
             return {
                 name: `${task['Gasstation.Branch.name']} - ${task.startTime.toLocaleDateString("en-GB")}`,
                 contact: `${task['Gasstation.City.name']}, ${task['Gasstation.address']}`,
                 link: `/admin/tasks/${task.id}`,
                 originalUrl: req.originalUrl.replace(/\/$/, ""),
             };
-        }else{
+        } else {
             return {
                 name: `${task.startTime.toLocaleDateString("en-GB")}`,
                 contact: ` `,
@@ -160,30 +161,38 @@ exports.tasks = async (req, res) => {
 exports.gasstations = async (req, res) => {
     const user = await User.findOne({
         where: { id: req.params.userId },
-        attributes: ['firstName','lastName'],
+        attributes: ['firstName', 'lastName'],
         raw: true,
     });
 
+    const allGasstations = await Gasstation.findAll({
+        attributes: ['id', 'address'],
+        include: [{
+            model: Branch,
+        }, {
+            model: City,
+        }],
+        raw: true,
+    });
 
     const gasstations = await User.findAll({
-        where:{id: req.params.userId,},
-        attributes:[],
-        include:[{
+        where: { id: req.params.userId, },
+        attributes: [],
+        include: [{
             model: Gasstation,
-            attributes:['id','address'],
-            include:[{
+            attributes: ['id', 'address'],
+            include: [{
                 model: City,
-                attributes:['name']
+                attributes: ['name']
             },
             {
                 model: Branch,
-                attributes:['name'],
+                attributes: ['name'],
             }],
             raw: true,
         }],
         raw: true,
     });
-
     const gasId = gasstations[0]['Gasstations.id'];
     const noneId = gasId === null;
 
@@ -202,5 +211,24 @@ exports.gasstations = async (req, res) => {
         content: contentMap,
         lastPage: `.`,
         none: noneId,
+        allGasstations: allGasstations,
+        linkUrl: `/admin/users/${req.params.userId}/gasstations/new`,
     });
+};
+
+exports.linkGasstation = async (req, res) => {
+    const alreadyConnected = await GasstationUser.findOne({
+        where: {
+            userId: req.params.userId,
+            gasstationId: req.body.gasstation.split("(").pop().slice(0, -1),
+        },
+        raw: true,
+    });
+    if (!alreadyConnected) {
+        await GasstationUser.create({
+            userId: req.params.userId,
+            gasstationId: req.body.gasstation.split("(").pop().slice(0, -1),
+        });
+    }
+    res.redirect(`/admin/users/${req.params.userId}/gasstations`);
 };

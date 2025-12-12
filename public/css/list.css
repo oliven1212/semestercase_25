@@ -143,3 +143,32 @@
     font-weight: 600;
     
 }
+#linkData{
+    display: grid;
+    align-items: center;
+    justify-content: center;
+}
+#linkData div input{
+    padding: 10px;
+    border: none;
+    border-radius: 5px;
+    font-size: 1rem;
+    background-color: var(--lightBlue);
+    color: var(--darkBlue);
+    border: var(--darkBlue) 2px solid;
+    color: var(--darkBlue);
+    font-weight: 600;   
+}
+
+#linkData{
+    padding-bottom: 15px;
+}
+#linkData button{
+    margin-top: 3px;
+    background: var(--darkBlue);
+    color: var(--lightBlue);
+    border: none;
+    padding: 10px 14px;
+    cursor: pointer;
+    border-radius: 5px;
+}

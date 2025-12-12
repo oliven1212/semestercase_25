@@ -56,6 +56,8 @@ router.post("/admin/users/:userId/update", profileController.updateUser);
 router.post("/admin/users/:userId/delete", profileController.deleteUser);
 router.get("/admin/users/:userId/tasks", profileController.tasks);
 router.get("/admin/users/:userId/gasstations", profileController.gasstations);
+router.post("/admin/users/:userId/gasstations/new",profileController.linkGasstation);
+
 
 router.get("/admin/products", adminListController.adminListProducts);
 router.get("/admin/products/:productId", productController.adminProducts);
