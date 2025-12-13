@@ -113,7 +113,7 @@ router.post("/login/forgotPassword", async (req, res) => {
   const uniqueId = uuidv4();
 
   user.passwordCodeUuid = uniqueId;
-  user.passwordCodeExpires = Date.now() + 3600000; // 1 hour from now
+  user.passwordExpired = new Date(Date.now() + 3600000); // 1 hour from now
   await user.save();
 
   const emailSent = await resetPasswordEmail(email, uniqueId);
@@ -132,7 +132,7 @@ router.get("/login/reset/:uniqueId", async (req, res) => {
   const user = await User.unscoped().findOne({
     where: {
       passwordCodeUuid: uniqueId,
-      passwordCodeExpires: {
+      passwordExpired: {
         [Op.gt]: new Date(),
       },
     },
