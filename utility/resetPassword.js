@@ -39,7 +39,7 @@ async function resetPasswordEmail(toEmail, uniqueId) {
 
   const mailOptions = {
     from: `"Password reset" <${GMAIL_USER}>`,
-    to: "valdemar.sehested@hotmail.com", //Put din egen email her for at teste. Skal erstattes af toEmail
+    to: toEmail, //Put din egen email her for at teste. Skal erstattes af toEmail
     subject: "Nulstil dit password",
     html: html,
   };
@@ -55,5 +55,4 @@ async function resetPasswordEmail(toEmail, uniqueId) {
 
 module.exports = { resetPasswordEmail };
 
-resetPasswordEmail("valdemar.sehested@hotmail.com");
 //sendTaskEmail();
