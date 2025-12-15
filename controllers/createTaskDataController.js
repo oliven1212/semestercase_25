@@ -204,7 +204,6 @@ exports.viewImages = async (req, res) => {
 
     res.render("home/taskImages", {
         pictures: pictures,
-        lastPage: '.'
     });
 };
 
