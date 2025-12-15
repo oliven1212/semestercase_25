@@ -19,7 +19,6 @@ exports.profile = async (req, res) => {
         users: users,
         exampleUser: exampleUser,
         currentUser: currentUser,
-        lastPage: previousURL.pathname,
         hideProfile: true,
 
     });
@@ -55,7 +54,6 @@ exports.adminUser = async (req, res) => {
         cities: cities,
         roles: roles,
         currentPath: req.originalUrl.replace(/\/$/, ""),
-        lastPage: `/admin/users`,
     });
 };
 
@@ -153,7 +151,6 @@ exports.tasks = async (req, res) => {
         title: `Opgaver for `,
         sourceTitle: `${user.lastName}, ${user.firstName}`,
         content: contentMap,
-        lastPage: `.`,
     });
 };
 
@@ -209,7 +206,6 @@ exports.gasstations = async (req, res) => {
         title: `Relaterede tankstationer til`,
         sourceTitle: `${user.firstName} ${user.lastName}`,
         content: contentMap,
-        lastPage: `.`,
         none: noneId,
         allGasstations: allGasstations,
         linkUrl: `/admin/users/${req.params.userId}/gasstations/new`,

@@ -47,17 +47,12 @@ exports.adminListUsers = async (req, res) => {
         link: `/admin/users/${user.id}`
     }));
 
-    const role = req.session.user.role;
-    const admin = role === 1;
-
     res.render("home/adminList", {
         title: 'Liste af brugere',
         message: 'Opret ny bruger',
         createNew: '/admin/users/new',
         content: usersMap,
         searchQuery: searchQuery,
-        lastPage: '/admin',
-        admin: admin
     });
 };
 
@@ -98,9 +93,6 @@ exports.adminListGasstations = async (req, res) => {
         link: `/admin/gasstations/${gasstation.id}`
     }));
 
-    const role = req.session.user.role;
-    const admin = role === 1;
-
 
     res.render("home/adminList", {
         title: 'Liste af tankstationer',
@@ -108,8 +100,6 @@ exports.adminListGasstations = async (req, res) => {
         content: stationsMap,
         createNew: `/admin/gasstations/new`,
         searchQuery: searchQuery,
-        lastPage: '/admin',
-        admin: admin
     });
 };
 
@@ -145,9 +135,6 @@ exports.adminListProducts = async (req, res) => {
         link: `/admin/products/${product.id}`
     }));
 
-    const role = req.session.user.role;
-    const admin = role === 1;
-
 
     res.render("home/adminList", {
         title: 'Liste af produkter',
@@ -155,8 +142,6 @@ exports.adminListProducts = async (req, res) => {
         content: productsMap,
         createNew: `/admin/products/new`,
         searchQuery: searchQuery,
-        lastPage: '/admin',
-        admin: admin
     });
 };
 
@@ -207,15 +192,11 @@ exports.adminListTasks = async (req, res) => {
         formattedDate: new Date(task.startTime).toLocaleDateString('da-DK'),
     }));
 
-    const role = req.session.user.role;
-    const admin = role === 1;
 
 
     res.render("home/adminList", {
         title: 'Liste af rengøringer',
         content: tasksMap,
         searchQuery: searchQuery,
-        lastPage: '/admin',
-        admin: admin
     });
 };

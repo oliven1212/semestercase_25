@@ -46,8 +46,4 @@ function redirectToRoleHome(req, res, next) {
   return res.redirect("/");
 }
 
-module.exports = {
-  ensureAuthenticated,
-  allowRoles,
-  redirectToRoleHome,
-};
+module.exports = {ensureAuthenticated, allowRoles, redirectToRoleHome};

@@ -31,7 +31,6 @@ exports.adminGasstation = async (req, res) => {
         branches: branches,
         cities: cities,
         currentPath: req.originalUrl.replace(/\/$/, ""),
-        lastPage: '/admin/gasstations',
     });
 };
 
@@ -127,7 +126,6 @@ exports.tasks = async (req, res) => {
         title: `Relaterede opgaver til`,
         sourceTitle: `${gasstation['Branch.name']}, ${gasstation.address}, ${gasstation['City.name']}`,
         content: contentMap,
-        lastPage: `.`,
     });
 };
 
