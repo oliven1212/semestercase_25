@@ -48,7 +48,7 @@ router.post("/admin/gasstations/new", adminListController.newGasstationStart);
 router.post("/admin/gasstations/:gasId/update", modifyGasstationController.updateGasstation,);
 router.post("/admin/gasstations/:gasId/delete",modifyGasstationController.deleteGasstation,);
 router.get("/admin/gasstations/:gasId/tasks", modifyGasstationController.tasks);
-router.get("/admin/gasstations/:gasId/users", modifyGasstationController.tasks);
+router.get("/admin/gasstations/:gasId/users", modifyGasstationController.users);
 
 router.get("/admin/users", adminListController.adminListUsers);
 router.get("/admin/users/:userId", profileController.adminUser);

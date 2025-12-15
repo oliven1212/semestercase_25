@@ -129,3 +129,54 @@ exports.tasks = async (req, res) => {
         lastPage: `.`,
     });
 };
+
+exports.users = async (req, res) => {
+    const gasstation = await Gasstation.findOne({
+        where:{ id: req.params.gasId,},
+        attributes:['address'],
+        include:[{
+            model: City,
+            attributes:['name'],
+        },{
+            model:Branch,
+            attributes:['name'],
+        }
+    ],
+        raw: true,
+    });
+    const tasks = await Gasstation.findAll({
+        where:{ id: req.params.gasId,},
+        attributes:['address'],
+        include:[{
+            model: Task,
+            attributes:['startTime'],
+        },{
+            model: City,
+            attributes:['name'],
+        },{
+            model:Branch,
+            attributes:['name'],
+        }
+    ],
+        raw: true,
+    });
+    const contentMap = tasks.map(task => {
+        const date = new Date(task['Tasks.startTime']);
+        function padZero(number) {
+            return number < 10 ? '0' + number : number;
+        }
+        return {
+            name: `${padZero(date.getDate())}/${padZero(date.getMonth() + 1)}/${date.getFullYear()}`,
+            contact: `${task['Branch.name']}, ${task.address}, ${task['City.name']}`,
+            link: `/admin/gasstations/${task['Gasstations.id']}`,
+            originalUrl: req.originalUrl.replace(/\/$/, "")
+        };
+    });
+
+    res.render("admin/adminTaskHistorie", {
+        title: `Relaterede opgaver til`,
+        sourceTitle: `${gasstation['Branch.name']}, ${gasstation.address}, ${gasstation['City.name']}`,
+        content: contentMap,
+        lastPage: `.`,
+    });
+};
