@@ -13,13 +13,13 @@ const {
 const upload = require('../utility/multer');
 const path = require('path');
 const crypto = require('crypto');
-const {gasstation} = require('./gasController');
-const {sendTaskEmail} = require('../utility/taskEmail');
+const { gasstation } = require('./gasController');
+const { sendTaskEmail } = require('../utility/taskEmail');
 const fs = require('fs');
 
 exports.uploadMiddleware = upload.fields([
-    {name: 'beforePicture', maxCount: 100},
-    {name: 'afterPicture', maxCount: 100}
+    { name: 'beforePicture', maxCount: 100 },
+    { name: 'afterPicture', maxCount: 100 }
 ]);
 
 
@@ -46,7 +46,7 @@ exports.taskPageOne = async (req, res) => {
     });
 
     const user = await User.findAll({
-        where: {id: req.session.user.id},
+        where: { id: req.session.user.id },
         raw: true
     });
 
@@ -98,7 +98,7 @@ exports.uploadTasks = async (req, res) => {
 
     }
     const emailData = await Task.findOne({
-        where: {id: taskId},
+        where: { id: taskId },
         attributes: [],
         include: [
             {
@@ -130,12 +130,12 @@ exports.uploadTasks = async (req, res) => {
 
 exports.imageUpload = async (req, res) => {
     const taskId = req.params.taskId;
-    const {v4: uuidv4} = require('uuid');
+    const { v4: uuidv4 } = require('uuid');
 
     // Hvis der allerede findes billeder for denne task, genbrug samme uuid (fra first picture.id)
     // ellers generér en ny uuid
     const existingPicture = await Picture.findOne({
-        where: {taskId: taskId},
+        where: { taskId: taskId },
         attributes: ['id'],
         raw: true
     });
@@ -184,7 +184,7 @@ exports.completedTask = async (req, res) => {
                 model: City,
             }],
 
-        },{
+        }, {
             model: User,
         },],
         raw: true
@@ -198,7 +198,7 @@ exports.completedTask = async (req, res) => {
 exports.viewImages = async (req, res) => {
     const taskId = req.params.taskId;
     const pictures = await Picture.findAll({
-        where: {taskId: taskId},
+        where: { taskId: taskId },
         raw: true
     });
 
@@ -230,41 +230,55 @@ exports.deleteImage = async (req, res) => {
 
 exports.showTaskImages = async (req, res) => {
     const image = await Picture.findOne({
-        where: {id: req.params.imageUuid},
+        where: { id: req.params.imageUuid },
         raw: true,
     });
     const taskId = image.taskId;
     const images = await Picture.findAll(
         {
-            where: {id: req.params.imageUuid},
-            include: { model: Task,
-                include: [{ model: User }, { model: Gasstation }, 
-                    { model: Product,
-                    through: {
-                        where: {
-                            taskId: taskId,
-                        },
-                    },
-                }],
+            where: { id: req.params.imageUuid },
+            include: {
+                model: Task,
+                include: [{ 
+                    model: User },
+                { model: Gasstation },
                 
-             },
-             
+                ],
+
+            },
+
 
             raw: true,
         });
+    const products = await Task.findAll({
+        where: {
+            id: taskId
+        },
+         include: [{
+            model: Product,
+            include: [{
+                model: Unit,
+            }],
+         }], 
+        raw: true,
 
+
+    });
+
+   
 
     if (!images || images.length === 0) {
         return res.status(404).render("home/error",
-            {title: 'Ikke fundet', message: 'Ingen billeder fundet'});
+            { title: 'Ikke fundet', message: 'Ingen billeder fundet' });
     }
 
     const taskLink = images[0]['Task.taskLink'];
     const fortyEightHoursAgo = new Date(Date.now() - 48 * 60 * 60 * 1000);
     const task = images[0].Task;
 
-    console.log(task);
+    console.log(products);
     console.log(images);
+   
 
     if (taskLink === 1 || images[0].createdAt < fortyEightHoursAgo) {
 
@@ -284,12 +298,14 @@ exports.showTaskImages = async (req, res) => {
                 content: 'Hej og velkommen til rengøringsloggen for din tankstation. Her kan du finde detaljer om de seneste rengøringsopgaver udført på din station, inklusive billeder før og efter rengøringen samt de anvendte produkter.',
                 images: images,
                 taskInfo: images[0],
+                products: products,
+                
             });
     };
     // Update the taskLink in the database
-    await Task.update(
-        { taskLink: 1 },
+     await Task.update(
+     { taskLink: 1 },
         { where: { id: images[0]['Task.id'] } }
-    ); 
+      ); 
 
 };
