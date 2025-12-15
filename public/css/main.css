@@ -31,11 +31,8 @@ header{
   height: fit-content;
   z-index: 99999;
 
-/*Remove later */
-  height: 10vh;
-  overflow-y: scroll;
-/**/
-
+  min-height: 10vh;
+  width: 100%;
   background-color: var(--darkBlue);
   display: grid;
   grid-template-columns: 1fr 1fr;
