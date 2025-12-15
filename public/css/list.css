@@ -76,6 +76,7 @@
     grid-template-columns: 2fr 1fr;
     grid-template-rows: 1fr auto auto;
     border: 2px solid var(--darkBlue);
+    text-decoration: none;
     grid-template-areas:
         'name functions'
         'time functions'
@@ -110,7 +111,8 @@
             fill: var(--darkBlue);
         }
         button {
-
+            width: 1.5rem;
+            height: 1.5rem;
             border: none;
             padding: 0;
             background: none;
