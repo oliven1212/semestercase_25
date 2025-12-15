@@ -1,5 +1,5 @@
 // controllers/createTaskController.js
-const { User, Gasstation, Branch, Task } = require('../models');
+const { User, Gasstation, Branch, Task, City } = require('../models');
 const { gasstation } = require('./gasController');
 
 exports.createTask = async (req, res) => {
@@ -16,6 +16,10 @@ exports.createTask = async (req, res) => {
                 {
                     model: Branch,
                     attributes: ['name'] 
+                },
+                {
+                    model: City,
+                    attributes: ['name']
                 }
             ]
             
@@ -36,7 +40,9 @@ exports.createTask = async (req, res) => {
 
             stationsByBranch[branchName].push({
                 id: gs.id,
-                address: gs.address
+                address: gs.address,
+                city: gs.City ? gs.City.name : 'Ukendt by',
+                zipCode: gs.City ? gs.City.zipCode : ''
             });
         });
 
@@ -50,10 +56,9 @@ exports.createTask = async (req, res) => {
 
 //console.log('branchDropdowns:', JSON.stringify(branchDropdowns, null, 2));
 
-        const userId = 3; 
-       
+      
         const tasksRaw = await Task.findAll({
-            where: { userId }, 
+            where: { userId: req.session.user.id }, 
             order: [['startTime', 'ASC']]
             });
         const tasks = tasksRaw.map(t => t.get({ plain: true }));

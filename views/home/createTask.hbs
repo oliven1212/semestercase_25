@@ -28,7 +28,7 @@
                         {{!-- loop over stationer under denne branch --}}
                         {{#each stations}}
                         <option value="{{id}}" data-address="{{address}}">
-                            {{address}}
+                              {{address}} – {{zipCode}} {{city}}
                         </option>
                         {{/each}}
                     </select>
