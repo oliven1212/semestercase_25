@@ -5,17 +5,33 @@
     <div class="text-container">
         <h3>Rengøring udført hos: </h3>
         <h4>{{taskInfo.[Task.Gasstation.address]}}</h4>
-    </div>
-    <p>Rengøring udført af: {{taskInfo.[Task.User.firstName]}} {{taskInfo.[Task.User.lastName]}}</p>
-    <p>Kontakt rengøringspersonale: <br>
-        {{taskInfo.[Task.User.phone]}}
-        <br>
-        {{taskInfo.[Task.User.email]}}
-    </p>
+   
+
+
+    <h3>Rengøring udført af: </h3>
+    <h4>{{taskInfo.[Task.User.firstName]}} {{taskInfo.[Task.User.lastName]}}</h4>
+    <h3>Kontakt rengøringspersonale:</h3>
+       <h4> {{taskInfo.[Task.User.phone]}}</h4>
+        
+       <h4> {{taskInfo.[Task.User.email]}}</h4>
+    
+ </div>
+    
     {{/if}}
 
+    {{#if images}}
+    <h2>Produkter brugt:</h2>
+    
+    {{#each products}}
+    <h4>{{this.[Products.name]}} {{this.[Products.ProductTask.amount]}} {{this.[Products.Unit.name]}}</h4>
+
+
+    {{/each}}
+
+  {{/if}} 
+
 {{#if images}}
-    <h2 class="">Før billeder</h2>
+    <h2 class="">Før billeder:</h2>
     <div class="imageGrid">
 
     {{#each images}}
@@ -28,15 +44,18 @@
 
     </div>
 
-    <h2 class="">Efter billeder</h2>
+    <h2 class="">Efter billeder:</h2>
 
 <div class="imageGrid">
+    
     {{#each images}}
+    
     {{#ifEq this.beforeAfter 1}}
     <div class="image-container">
         <img src="/imgUploads/{{this.filename}}" alt="Task Image" class="taskImages">
     </div>
     {{/ifEq}}
+   
     {{/each}}
 </div>
 </section>

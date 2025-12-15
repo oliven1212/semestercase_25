@@ -3,7 +3,7 @@
     <div class="imageGrid">
         {{#each pictures}}
         {{#ifEq this.beforeAfter 0}}
-        <form action="/createtaskdata/{{this.taskId}}/images" method="post" onsubmit="return confirm('Slet billed?');">
+        <form action="/createtaskdata/{{this.taskId}}/images" method="post" onsubmit="return confirm('Slet billede?');">
 
             <input type="hidden" name="fileName" id="fileName" value="{{this.filename}}">
             <button type="submit" class="removeImageButton">
