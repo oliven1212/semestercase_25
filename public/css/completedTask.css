@@ -38,3 +38,39 @@ button{
     text-decoration: none;
 
 }
+
+.logout{
+    text-decoration: underline;
+    margin-bottom: 0px;
+    padding-bottom: 0px;
+    color: var(--darkBlue);
+    opacity: 0.33;
+    font-weight: 600; 
+}
+
+
+.logout-card {
+    display: grid;
+    justify-self: end;
+    margin-right: 5%;
+}
+
+.logout-card button {
+    padding: 0px !important;
+    margin: 0px !important;
+    margin-top: 10px !important;
+}
+
+.logout-button {
+    background: var(--lightBlue);
+    border: none;
+    padding: 10px 14px;
+    cursor: pointer;
+}
+
+
+.logoutSvg {
+    fill: var(--darkBlue);
+    width: 2rem;
+    height: 2rem;
+}
