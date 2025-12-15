@@ -1,4 +1,5 @@
-const { Gasstation, Branch, City, Task } = require('../models');
+const { where } = require('sequelize');
+const { Gasstation, Branch, City, Task, User } = require('../models');
 
 exports.adminGasstation = async (req, res) => {
     const gasstation = await Gasstation.findAll({
@@ -144,31 +145,37 @@ exports.users = async (req, res) => {
     ],
         raw: true,
     });
-    const tasks = await Gasstation.findAll({
-        where:{ id: req.params.gasId,},
-        attributes:['address'],
+    const users = await Gasstation.findAll({
+        where: {id: req.params.gasId},
+        attributes:[],
         include:[{
-            model: Task,
-            attributes:['startTime'],
-        },{
-            model: City,
-            attributes:['name'],
-        },{
-            model:Branch,
-            attributes:['name'],
-        }
-    ],
+            model: User,
+            attributes:['firstName', 'lastName', 'email', 'phone'],
+            through: {
+                attributes:['isOwner'],
+            }
+        }],
         raw: true,
     });
-    const contentMap = tasks.map(task => {
-        const date = new Date(task['Tasks.startTime']);
-        function padZero(number) {
-            return number < 10 ? '0' + number : number;
-        }
+        const owner = await Gasstation.findOne({
+        where: {id: req.params.gasId},
+        attributes:[],
+        include:[{
+            model: User,
+            attributes:['id','firstName', 'lastName', 'email', 'phone'],
+            through: {
+                where: {isOwner: 1},
+                attributes:['isOwner'],
+            }
+        }],
+        raw: true,
+    });
+    console.log(owner);
+    const contentMap = users.map(user => {
         return {
-            name: `${padZero(date.getDate())}/${padZero(date.getMonth() + 1)}/${date.getFullYear()}`,
-            contact: `${task['Branch.name']}, ${task.address}, ${task['City.name']}`,
-            link: `/admin/gasstations/${task['Gasstations.id']}`,
+            name: `${user['Users.firstName']} ${user['Users.lastName']}`,
+            contact: `Email: ${user['Users.email']} <br/> Telefon: ${user['Users.phone']}`,
+            link: `/admin/users/${user['Users.id']}`,
             originalUrl: req.originalUrl.replace(/\/$/, "")
         };
     });
@@ -177,6 +184,8 @@ exports.users = async (req, res) => {
         title: `Relaterede opgaver til`,
         sourceTitle: `${gasstation['Branch.name']}, ${gasstation.address}, ${gasstation['City.name']}`,
         content: contentMap,
-        lastPage: `.`,
+        owner: `${owner['Users.firstName']} ${owner['Users.lastName']}`
     });
 };
+
+

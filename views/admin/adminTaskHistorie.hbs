@@ -1,6 +1,9 @@
 <div class="listTitle">
     <h3>{{title}}</h3>
     <h2>{{sourceTitle}}</h2>
+    {{#if owner}}
+    <h3>Ejet af {{owner}}</h3>
+    {{/if}}
 </div>
 {{#if linkUrl}}
 <form action="{{linkUrl}}" method="post" id="linkData">
