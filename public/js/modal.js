@@ -30,17 +30,27 @@ document.addEventListener('DOMContentLoaded', function () {
     const selectedStationText = document.getElementById('selected-station');
 
     // 1) Kun én valgt dropdown ad gangen
-    selects.forEach(function (select) {
-        select.addEventListener('change', function () {
-            if (this.value !== '') {
-                selects.forEach(function (otherSelect) {
-                    if (otherSelect !== select) {
-                        otherSelect.value = '';
-                    }
-                });
-            }
+   selects.forEach(function (select) {
+    select.addEventListener('change', function () {
+
+        // 1) Fjern markering fra alle dropdowns
+        selects.forEach(function (otherSelect) {
+            otherSelect.classList.remove('selected');
         });
+
+        // 2) Hvis der er valgt en station, marker dropdown
+        if (this.value !== '') {
+            this.classList.add('selected');
+
+            // Tøm de andre dropdowns
+            selects.forEach(function (otherSelect) {
+                if (otherSelect !== select) {
+                    otherSelect.value = '';
+                }
+            });
+        }
     });
+});
 
     // 2) Når man klikker "Vælg station"
     selectStationBtn.addEventListener('click', function () {

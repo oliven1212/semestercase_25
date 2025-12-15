@@ -80,3 +80,10 @@
   font-weight: 700;
 
 }
+
+
+.station-select.selected {
+  background-color: #0077b6; /* tydelig farve */
+  color: #ffffff;
+  border: 2px solid #03045E;
+}
