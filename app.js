@@ -31,8 +31,9 @@ app.engine(
       //Works like the if handlebar helper, but checks if 2 values are equal ( == )
       ifEq: function (a, b, options) {
         if (a == b) {
-          return options.fn(this);
+          return options.fn(this);        // true block
         }
+        return options.inverse(this);     // else block
       },
     },
   }),
@@ -59,7 +60,7 @@ app.use((req, res, next) => {
 });
 
 app.use((req, res, next) => {
-  if(req.session.user){
+  if (req.session.user) {
     const permissionLevel = req.session.user.role;
     res.locals.permissionLevel = permissionLevel;
   }
