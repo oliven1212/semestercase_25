@@ -275,9 +275,6 @@ exports.showTaskImages = async (req, res) => {
     const fortyEightHoursAgo = new Date(Date.now() - 48 * 60 * 60 * 1000);
     const task = images[0].Task;
 
-    console.log(products);
-    console.log(images);
-   
 
     if (taskLink === 1 || images[0].createdAt < fortyEightHoursAgo) {
 

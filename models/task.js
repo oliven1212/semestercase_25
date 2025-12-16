@@ -9,7 +9,6 @@ module.exports = (sequelize, DataTypes) => {
       taskLink,
       startTime,
     }) {
-        console.log(id||'',userId||'',gasstationId||'',taskLink||'',startTime||'');
       const originalTask = await Task.findByPk(id, { raw: true });
       const UserId = userId || originalTask.userId;
       const GasstationId = gasstationId || originalTask.gasstationId;

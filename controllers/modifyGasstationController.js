@@ -212,7 +212,6 @@ exports.createLinkUser = async (req, res) => {
 };
 
 exports.removeLinkUser = async (req, res) => {
-    console.log(`Removing connection for userId: ${req.params.userId} and gasId: ${req.params.gasId}`);
     await GasstationUser.destroy({
         where: {
             gasstationId: req.params.gasId,

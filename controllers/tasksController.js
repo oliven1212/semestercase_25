@@ -57,7 +57,6 @@ exports.adminTasks = async (req, res) => {
         raw: true,
     });
 
-    console.log(products);
     res.render("admin/modifyTask", {
         task: task,
         pictures: pictures,
