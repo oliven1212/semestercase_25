@@ -53,7 +53,7 @@
                     </svg>
                     <div>
                         <input type="file" id="afterInput" name="afterPicture" accept="image/*" multiple
-                            style="display: none;">
+                            style="display: none;" >
                         Efter billeder
                 </button>
                 <span id="afterCount" class="file-count"></span>
@@ -61,8 +61,10 @@
         </div>
 
 
-
-        <button type="submit" form="uploadImageForm" class="savePic">Upload billeder</button>
+        <div>
+        <button  type="submit" form="uploadImageForm" class="savePic" >Upload billeder</button>
+        
+        </div>
                 <a href="/createtaskdata/{{task.id}}/images" class="uploadet">Se uploadet billeder</a>
 
     </form>

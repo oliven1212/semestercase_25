@@ -62,6 +62,9 @@ async function deleteOldImages() {
 
 }
 
+//cron.schedule('0 3 * * *', () => {
+    //KIG HVOR GAMLE DE ER, SLET FOR GAMLE BILLEDER
+    // }); Burde køres i en anden mappe
 
 function startCronJob() {
     
