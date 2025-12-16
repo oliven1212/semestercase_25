@@ -86,7 +86,6 @@ function startCronJob() {
     console.log('✓ Cron job er sat op');
     console.log('  Kører hver dag kl 03:00');
 }
-startCronJob();
 
 module.exports = {deleteOldImages, startCronJob};
 

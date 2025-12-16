@@ -1,6 +1,7 @@
 const express = require("express");
 const exphbs = require("express-handlebars");
 const session = require("express-session");
+const { startCronJob } = require("./utility/deleteOldImgs");
 
 const path = require("path");
 const nodeMailer = require("nodemailer");
@@ -68,5 +69,8 @@ app.use((req, res, next) => {
 
 // Routes
 app.use("/", routes);
+
+startCronJob();
+
 
 module.exports = app;
