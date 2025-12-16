@@ -5,7 +5,7 @@ const { gasstation } = require('./gasController');
 exports.createTask = async (req, res) => {
     try {
         const users = await User.findOne({
-            where: { id: req.session.user.id }, //Change to currently logged in user
+            where: { id: req.session.user.id }, 
             raw: true
         });
 
@@ -46,15 +46,12 @@ exports.createTask = async (req, res) => {
             });
         });
 
-//console.log('stationsByBranch:', JSON.stringify(stationsByBranch, null, 2));
 
         // Lav array til Handlebars
         const branchDropdowns = Object.keys(stationsByBranch).map(name => ({
             name,
             stations: stationsByBranch[name]
         }));
-
-//console.log('branchDropdowns:', JSON.stringify(branchDropdowns, null, 2));
 
       
         const tasksRaw = await Task.findAll({
@@ -71,9 +68,6 @@ exports.createTask = async (req, res) => {
             branchDropdowns,
             tasks
         });
-
-
-
 
 
     } catch (err) {
