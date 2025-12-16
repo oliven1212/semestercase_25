@@ -16,14 +16,12 @@ exports.login = (req, res) => {
 };
 exports.loginSend = async (req, res) => {
   const { email, password } = req.body;
-  console.log(req.body);
 
   const user = await User.findOne({
     where: { email: email },
     attributes: ["id", "email", "password"],
     raw: true,
   });
-  console.log(email, user.password, user);
 };
 
 exports.changePassword = async (req, res) => {

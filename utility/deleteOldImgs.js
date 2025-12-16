@@ -62,6 +62,9 @@ async function deleteOldImages() {
 
 }
 
+//cron.schedule('0 3 * * *', () => {
+    //KIG HVOR GAMLE DE ER, SLET FOR GAMLE BILLEDER
+    // }); Burde køres i en anden mappe
 
 function startCronJob() {
     
@@ -83,6 +86,7 @@ function startCronJob() {
     console.log('✓ Cron job er sat op');
     console.log('  Kører hver dag kl 03:00');
 }
+startCronJob();
 
 module.exports = {deleteOldImages, startCronJob};
 

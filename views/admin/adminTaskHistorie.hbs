@@ -1,7 +1,11 @@
 <div class="listTitle">
     <h3>{{title}}</h3>
     <h2>{{sourceTitle}}</h2>
+    {{#if owner}}
+    <h3>Ejet af {{owner}}</h3>
+    {{/if}}
 </div>
+{{#ifEq permissionLevel 1}}
 {{#if linkUrl}}
 <form action="{{linkUrl}}" method="post" id="linkData">
     {{#if allGasstations}}
@@ -13,8 +17,20 @@
             {{/each}}
         </datalist>
     </div>
-    <button type="submit" form="linkData">Link tankstation</button>
+    <button type="submit" form="linkData">Link tankstation til bruger</button>
+    {{/if}}
+    {{#if allUsers}}
+    <div>
+        <input list="users" id="user" name="user" value="" autocomplete="off" placeholder="Bruger navn">
+        <datalist id="users">
+            {{#each allUsers}}
+            <option value="{{this.firstName}} {{this.lastName}}, {{this.email}} ({{this.id}})"></option>
+            {{/each}}
+        </datalist>
+    </div>
+    <button type="submit" form="linkData">Link bruger til tankstationen</button>
     {{/if}}
 </form>
 {{/if}}
+{{/ifEq}}
 {{> home/adminList}}

@@ -42,13 +42,10 @@ exports.adminListUsers = async (req, res) => {
     const usersMap = users.map(user => ({
         ...user,
         name: `${user.firstName} ${user.lastName}`,
-        contact: `Email: ${user.email}  Telefon: ${user.phone}`,
+        contact: `Email: ${user.email} <br> Telefon: ${user.phone}`,
         //.replace(/\/$/, "") is regex to remove any trailing "/"
         link: `/admin/users/${user.id}`
     }));
-
-    const role = req.session.user.role;
-    const admin = role === 1;
 
     res.render("home/adminList", {
         title: 'Liste af brugere',
@@ -56,8 +53,6 @@ exports.adminListUsers = async (req, res) => {
         createNew: '/admin/users/new',
         content: usersMap,
         searchQuery: searchQuery,
-        lastPage: '/admin',
-        admin: admin
     });
 };
 
@@ -93,13 +88,10 @@ exports.adminListGasstations = async (req, res) => {
     const stationsMap = stations.map(gasstation => ({
         ...gasstation, // ... spread operator
         name: `${gasstation['City.name']}, ${gasstation.cityCode}, ${gasstation.address}`, // ` ` template literal
-        contact: `Email: ${gasstation.contactEmail}  Telefon: ${gasstation.contactPhone}`,
+        contact: `Email: ${gasstation.contactEmail} <br> Telefon: ${gasstation.contactPhone}`,
         //.replace(/\/$/, "") is regex to remove any trailing "/"
         link: `/admin/gasstations/${gasstation.id}`
     }));
-
-    const role = req.session.user.role;
-    const admin = role === 1;
 
 
     res.render("home/adminList", {
@@ -108,8 +100,6 @@ exports.adminListGasstations = async (req, res) => {
         content: stationsMap,
         createNew: `/admin/gasstations/new`,
         searchQuery: searchQuery,
-        lastPage: '/admin',
-        admin: admin
     });
 };
 
@@ -145,9 +135,6 @@ exports.adminListProducts = async (req, res) => {
         link: `/admin/products/${product.id}`
     }));
 
-    const role = req.session.user.role;
-    const admin = role === 1;
-
 
     res.render("home/adminList", {
         title: 'Liste af produkter',
@@ -155,8 +142,6 @@ exports.adminListProducts = async (req, res) => {
         content: productsMap,
         createNew: `/admin/products/new`,
         searchQuery: searchQuery,
-        lastPage: '/admin',
-        admin: admin
     });
 };
 
@@ -201,21 +186,17 @@ exports.adminListTasks = async (req, res) => {
     const tasksMap = tasks.map(task => ({
         ...task,
         name: `${task['Gasstation.City.name']} ${task['Gasstation.cityCode']}, ${task['Gasstation.address']}`,
-        contact: `Email: ${task['User.email']}  Telefon: ${task['User.phone']}`,
+        contact: `Email: ${task['User.email']} <br> Telefon: ${task['User.phone']}`,
         //.replace(/\/$/, "") is regex to remove any trailing "/"
         link: `/admin/tasks/${task.id}`,
         formattedDate: new Date(task.startTime).toLocaleDateString('da-DK'),
     }));
 
-    const role = req.session.user.role;
-    const admin = role === 1;
 
 
     res.render("home/adminList", {
         title: 'Liste af rengøringer',
         content: tasksMap,
         searchQuery: searchQuery,
-        lastPage: '/admin',
-        admin: admin
     });
 };

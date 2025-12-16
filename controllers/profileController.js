@@ -19,7 +19,6 @@ exports.profile = async (req, res) => {
         users: users,
         exampleUser: exampleUser,
         currentUser: currentUser,
-        lastPage: previousURL.pathname,
         hideProfile: true,
 
     });
@@ -55,7 +54,6 @@ exports.adminUser = async (req, res) => {
         cities: cities,
         roles: roles,
         currentPath: req.originalUrl.replace(/\/$/, ""),
-        lastPage: `/admin/users`,
     });
 };
 
@@ -153,7 +151,6 @@ exports.tasks = async (req, res) => {
         title: `Opgaver for `,
         sourceTitle: `${user.lastName}, ${user.firstName}`,
         content: contentMap,
-        lastPage: `.`,
     });
 };
 
@@ -199,9 +196,11 @@ exports.gasstations = async (req, res) => {
 
     const contentMap = gasstations.map(gasstation => {
         return {
+            id: gasstation['Gasstations.id'],
             name: `${gasstation['Gasstations.Branch.name']}`,
             contact: `${gasstation['Gasstations.City.name']}, ${gasstation['Gasstations.address']}`,
-            link: `/admin/gasstations/${gasstation['Gasstations.id']}`,
+            link: `/admin/users/${req.params.userId}/gasstations/${gasstation['Gasstations.id']}`,
+            editLink: `/admin/gasstations/${gasstation['Gasstations.id']}`,
             originalUrl: req.originalUrl.replace(/\/$/, "")
         };
     });
@@ -209,7 +208,6 @@ exports.gasstations = async (req, res) => {
         title: `Relaterede tankstationer til`,
         sourceTitle: `${user.firstName} ${user.lastName}`,
         content: contentMap,
-        lastPage: `.`,
         none: noneId,
         allGasstations: allGasstations,
         linkUrl: `/admin/users/${req.params.userId}/gasstations/new`,
@@ -230,5 +228,15 @@ exports.linkGasstation = async (req, res) => {
             gasstationId: req.body.gasstation.split("(").pop().slice(0, -1),
         });
     }
+    res.redirect(`/admin/users/${req.params.userId}/gasstations`);
+};
+
+exports.removeLinkGasstation = async (req, res) => {
+    await GasstationUser.destroy({
+        where: {
+            gasstationId: req.params.gasId,
+            userId: req.params.userId,
+        },
+    });
     res.redirect(`/admin/users/${req.params.userId}/gasstations`);
 };
