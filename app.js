@@ -1,7 +1,6 @@
 const express = require("express");
 const exphbs = require("express-handlebars");
 const session = require("express-session");
-const { deleteOldImages, startCronJob } = require("./utility/deleteOldImgs");
 
 const path = require("path");
 const nodeMailer = require("nodemailer");
