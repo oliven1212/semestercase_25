@@ -196,9 +196,11 @@ exports.gasstations = async (req, res) => {
 
     const contentMap = gasstations.map(gasstation => {
         return {
+            id: gasstation['Gasstations.id'],
             name: `${gasstation['Gasstations.Branch.name']}`,
             contact: `${gasstation['Gasstations.City.name']}, ${gasstation['Gasstations.address']}`,
-            link: `/admin/gasstations/${gasstation['Gasstations.id']}`,
+            link: `/admin/users/${req.params.userId}/gasstations/${gasstation['Gasstations.id']}`,
+            editLink: `/admin/gasstations/${gasstation['Gasstations.id']}`,
             originalUrl: req.originalUrl.replace(/\/$/, "")
         };
     });
@@ -226,5 +228,15 @@ exports.linkGasstation = async (req, res) => {
             gasstationId: req.body.gasstation.split("(").pop().slice(0, -1),
         });
     }
+    res.redirect(`/admin/users/${req.params.userId}/gasstations`);
+};
+
+exports.removeLinkGasstation = async (req, res) => {
+    await GasstationUser.destroy({
+        where: {
+            gasstationId: req.params.gasId,
+            userId: req.params.userId,
+        },
+    });
     res.redirect(`/admin/users/${req.params.userId}/gasstations`);
 };

@@ -5,7 +5,7 @@ const { ensureAuthenticated, allowRoles, redirectToRoleHome } = require("../midd
 const { v4: uuidv4 } = require("uuid");
 const { Op } = require("sequelize");
 const { User } = require("../models");
-const HomeController = require("../controllers/HomeController");
+const loginController = require("../controllers/loginController");
 const { resetPasswordEmail } = require("../utility/resetPassword");
 
 // GET login page -> fjern isNotAuthenticated (ellers kan ingen nå login)
@@ -181,9 +181,9 @@ router.post("/login/reset/:uniqueId", async (req, res) => {
   res.redirect("/");
 });
 
-router.get("/login/reset", HomeController.changePassword);
-//router.get("/login/forgotPassword", HomeController.forgotPassword);
-router.get("/login/emailconfirm/true", HomeController.passEmailConfirmed);
-router.post("/login/logout", HomeController.logout);
-router.get("/login/logout", HomeController.logout);
+router.get("/login/reset", loginController.changePassword);
+//router.get("/login/forgotPassword", loginController.forgotPassword);
+router.get("/login/emailconfirm/true", loginController.passEmailConfirmed);
+router.post("/login/logout", loginController.logout);
+router.get("/login/logout", loginController.logout);
 module.exports = router;

@@ -1,5 +1,4 @@
-const { where } = require('sequelize');
-const { Gasstation, Branch, City, Task, User } = require('../models');
+const { Gasstation, Branch, City, Task, User, GasstationUser } = require('../models');
 
 exports.adminGasstation = async (req, res) => {
     const gasstation = await Gasstation.findAll({
@@ -148,7 +147,7 @@ exports.users = async (req, res) => {
         attributes:[],
         include:[{
             model: User,
-            attributes:['firstName', 'lastName', 'email', 'phone'],
+            attributes:['id','firstName', 'lastName', 'email', 'phone'],
             through: {
                 attributes:['isOwner'],
             }
@@ -168,13 +167,19 @@ exports.users = async (req, res) => {
         }],
         raw: true,
     });
-    console.log(owner);
+
+    const allUsers = await User.findAll({
+        attributes:['id','firstName','lastName', 'email'],
+        raw: true,
+    })
     const contentMap = users.map(user => {
         return {
+            id: user['Users.id'],
             name: `${user['Users.firstName']} ${user['Users.lastName']}`,
             contact: `Email: ${user['Users.email']} <br/> Telefon: ${user['Users.phone']}`,
-            link: `/admin/users/${user['Users.id']}`,
-            originalUrl: req.originalUrl.replace(/\/$/, "")
+            link: `/admin/gasstations/${req.params.gasId}/users/${user['Users.id']}`,
+            editLink: `/admin/users/${user['Users.id']}`,
+            originalUrl: req.originalUrl.replace(/\/$/, ""),
         };
     });
 
@@ -182,8 +187,47 @@ exports.users = async (req, res) => {
         title: `Relaterede opgaver til`,
         sourceTitle: `${gasstation['Branch.name']}, ${gasstation.address}, ${gasstation['City.name']}`,
         content: contentMap,
-        owner: `${owner['Users.firstName']} ${owner['Users.lastName']}`
+        owner: `${owner['Users.firstName']} ${owner['Users.lastName']}`,
+        linkUrl: `/admin/gasstations/${req.params.gasId}/users/new`,
+        allUsers: allUsers,
     });
 };
 
+exports.createLinkUser = async (req, res) => {
+    const alreadyConnected = await GasstationUser.findOne({
+        where: {
+            gasstationId: req.params.gasId,
+            userId: req.body.user.split("(").pop().slice(0, -1),
+        },
+        raw: true,
+    });
+    if (!alreadyConnected) {
+        await GasstationUser.create({
+            gasstationId: req.params.gasId,
+            userId: req.body.user.split("(").pop().slice(0, -1),
+            isOwner: 0,
+        });
+    }
+    res.redirect(`/admin/gasstations/${req.params.gasId}/users`);
+};
 
+exports.removeLinkUser = async (req, res) => {
+    console.log(`Removing connection for userId: ${req.params.userId} and gasId: ${req.params.gasId}`);
+    await GasstationUser.destroy({
+        where: {
+            gasstationId: req.params.gasId,
+            userId: req.params.userId,
+        },
+    });
+    res.redirect(`/admin/gasstations/${req.params.gasId}/users`);
+};
+
+exports.removeLinkUser = async (req, res) => {
+    await GasstationUser.destroy({
+        where: {
+            gasstationId: req.params.gasId,
+            userId: req.params.userId,
+        },
+    });
+    res.redirect(`/admin/gasstations/${req.params.gasId}/users`);
+};

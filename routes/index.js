@@ -1,6 +1,6 @@
 const express = require("express");
 
-const HomeController = require("../controllers/HomeController");
+const loginController = require("../controllers/loginController");
 const gasController = require("../controllers/gasController");
 const createTaskController = require("../controllers/createTaskController");
 const adminListController = require("../controllers/adminListController");
@@ -17,9 +17,8 @@ const authRoutes = require("../routes/auth");
 const router = express.Router();
 
 //Universelle routes
-router.get("/", HomeController.login); //Loginside
+router.get("/", loginController.login); //Loginside
 router.get("/profile", allowRoles([1,2,3]), profileController.profile); //Viser profil baseret på id
-//router.post("/login", HomeController.loginSend);
 
 
 //Personale routes
@@ -49,7 +48,8 @@ router.post("/admin/gasstations/:gasId/update", allowRoles([1]), modifyGasstatio
 router.post("/admin/gasstations/:gasId/delete", allowRoles([1]), modifyGasstationController.deleteGasstation,);
 router.get("/admin/gasstations/:gasId/tasks", allowRoles([1,2]), modifyGasstationController.tasks);
 router.get("/admin/gasstations/:gasId/users", allowRoles([1,2]), modifyGasstationController.users);
-router.get("/admin/gasstations/:gasId/users/new", allowRoles([1,2]), modifyGasstationController.linkUser);
+router.post("/admin/gasstations/:gasId/users/new", allowRoles([1]), modifyGasstationController.createLinkUser);
+router.post("/admin/gasstations/:gasId/users/:userId/delete", allowRoles([1]), modifyGasstationController.removeLinkUser);
 
 
 router.get("/admin/users", allowRoles([1]), adminListController.adminListUsers);
@@ -60,6 +60,7 @@ router.post("/admin/users/:userId/delete", allowRoles([1]), profileController.de
 router.get("/admin/users/:userId/tasks", allowRoles([1]), profileController.tasks);
 router.get("/admin/users/:userId/gasstations", allowRoles([1]), profileController.gasstations);
 router.post("/admin/users/:userId/gasstations/new", allowRoles([1]), profileController.linkGasstation);
+router.post("/admin/users/:userId/gasstations/:gasId/delete", allowRoles([1]), profileController.removeLinkGasstation);
 
 
 router.get("/admin/products", allowRoles([1]), adminListController.adminListProducts);

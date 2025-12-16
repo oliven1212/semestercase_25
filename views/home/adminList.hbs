@@ -16,7 +16,11 @@
     <section class="listCards">
         {{#unless none}}
         {{#each content}}
+            {{#if editLink}}
+            <a href="{{this.editLink}}" class="listCard">
+            {{else}}
             <a href="{{this.link}}" class="listCard">
+            {{/if}}
                 <p class="name">{{this.name}}</p>
                 {{#if this.formattedDate}}
                     <p class="time">Dato: {{this.formattedDate}}</p>
