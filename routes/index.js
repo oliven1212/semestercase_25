@@ -49,6 +49,8 @@ router.post("/admin/gasstations/:gasId/update", allowRoles([1]), modifyGasstatio
 router.post("/admin/gasstations/:gasId/delete", allowRoles([1]), modifyGasstationController.deleteGasstation,);
 router.get("/admin/gasstations/:gasId/tasks", allowRoles([1,2]), modifyGasstationController.tasks);
 router.get("/admin/gasstations/:gasId/users", allowRoles([1,2]), modifyGasstationController.users);
+router.get("/admin/gasstations/:gasId/users/new", allowRoles([1,2]), modifyGasstationController.linkUser);
+
 
 router.get("/admin/users", allowRoles([1]), adminListController.adminListUsers);
 router.get("/admin/users/:userId", allowRoles([1]), profileController.adminUser);
