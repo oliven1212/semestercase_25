@@ -286,6 +286,8 @@ exports.showTaskImages = async (req, res) => {
                 title: 'Dette link er allerede brugt eller er udløbet',
                 message: 'Dette link er allerede brugt eller er udløbet',
                 content: 'Kontakt venligst din administrator for at få et nyt link',
+                hideReturn: true,
+                hideProfile: true,
             }
             ,);
     }
@@ -298,6 +300,8 @@ exports.showTaskImages = async (req, res) => {
                 images: images,
                 taskInfo: images[0],
                 products: products,
+                hideReturn: true,
+                hideProfile: true,
                 
             });
     };
