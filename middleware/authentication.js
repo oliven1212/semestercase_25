@@ -1,10 +1,7 @@
 // middleware/authentication.js
 
 function ensureAuthenticated(req, res, next) {
-  console.log(
-    "ensureAuthenticated session:",
-    !!(req.session && req.session.user),
-  );
+  console.log("ensureAuthenticated session:", !!(req.session && req.session.user));
   if (!req.session || !req.session.user) {
     // brug /login konsistent
     return res.redirect("/");
@@ -22,7 +19,6 @@ function allowRoles(allowedRoles) {
       return res.redirect("/");
     }
     const role = req.session.user.role;
-    console.log("allowRoles - user role:", role, "allowed:", allowedRoles);
     if (allowedRoles.includes(role)) {
       return next();
     }

@@ -9,9 +9,7 @@ const {
   Branch,
   City,
 } = require("../models");
-exports.taskHistorie = (req, res) => {
-  console.log("routes/taskHistorie rammes!");
-};
+
 //taskhistorieController
 exports.taskHistorie = async (req, res) => {
 
@@ -61,7 +59,6 @@ exports.taskHistorie = async (req, res) => {
     date: `${task[0].startTime.getDate()}/${task[0].startTime.getMonth()}/${task[0].startTime.getFullYear()}`,
     time: `${task[0].startTime.getHours()}:${task[0].startTime.getMinutes()}`,
   };
-  console.log(task);
 
   //response til ens http kald som der åbner taskhistoriefilen
   res.render("home/taskHistorie", {

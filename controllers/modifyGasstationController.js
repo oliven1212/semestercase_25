@@ -113,7 +113,6 @@ exports.tasks = async (req, res) => {
         function padZero(number) {
             return number < 10 ? '0' + number : number;
         }
-        console.log(task);
         return {
             name: `${padZero(date.getDate())}/${padZero(date.getMonth() + 1)}/${date.getFullYear()}`,
             contact: `${task['Branch.name']}, ${task.address}, ${task['City.name']}`,

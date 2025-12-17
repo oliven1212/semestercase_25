@@ -64,7 +64,6 @@ exports.logout = (req, res) => {
     });
   } else {
     // Ingen session => bare redirect
-    console.log("redirect");
     return res.redirect("/");
   }
 };
