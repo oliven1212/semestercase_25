@@ -3,12 +3,6 @@
 module.exports = {
   async up(queryInterface, Sequelize) {
     await queryInterface.createTable('GasstationUsers', {
-      id: {
-        allowNull: false,
-        autoIncrement: true,
-        primaryKey: true,
-        type: Sequelize.INTEGER
-      },
       userId: {
         type: Sequelize.INTEGER,
           references: {
@@ -39,6 +33,12 @@ module.exports = {
         allowNull: false,
         type: Sequelize.DATE
       }
+    });
+    await queryInterface.addConstraint('GasstationUsers', {
+      fields: ['userId', 'gasstationId'],
+      type: 'primary key',
+      name: 'gasstationusers_pkey'
+
     });
   },
   async down(queryInterface, Sequelize) {
