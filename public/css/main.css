@@ -123,3 +123,22 @@ datalist{
     margin-bottom: 5px;
     color: var(--darkBlue);
 }
+.btn-blue{
+    color: var(--lightBlue);
+    background-color: var(--darkBlue);
+    border: none;
+    border-color: var(--darkBlue);
+    padding: 8px;
+    font-size: large;
+    font-weight: 600;
+    border-radius: 5px;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    width: 90%;
+    text-decoration: none;
+    margin-left: 5px;
+    display: grid;
+    gap: 10px;
+    justify-content: center;
+
+}
