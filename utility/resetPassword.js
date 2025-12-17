@@ -15,7 +15,7 @@ if (!GMAIL_USER || !GMAIL_PASS) {
 
 async function resetPasswordEmail(toEmail, uniqueId) {
   //TODO: tjek om det virker med homecontrolleren,
-  const resetUrl = `http://localhost:3000/login/reset/${uniqueId}`;
+  const resetUrl = `http://91.98.73.200:3000/login/reset/${uniqueId}`;
   const html = `<h3>Reset dit password</h3>
         <p>Hej!</p>
         <p>Du har anmodet om at nulstille dit password</p>
@@ -29,8 +29,8 @@ async function resetPasswordEmail(toEmail, uniqueId) {
   // Brug eksplicit SMTP med secure port
   const transporter = nodeMailer.createTransport({
     host: "smtp.gmail.com",
-    port: 465,
-    secure: true,
+    port: 587,
+    secure: false,
     auth: {
       user: process.env.GMAIL_USER,
       pass: process.env.GMAIL_APP_PASSWORD,
