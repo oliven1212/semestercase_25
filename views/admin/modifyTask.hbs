@@ -101,7 +101,7 @@
     <div class="imageGrid">
         {{#each pictures}}
         {{#ifEq this.[Pictures.beforeAfter] 1}}
-        <form action="/admin/tasks/{{this.[Pictures.taskId]}}/delete/image" method="post">
+        <form action="/admin/tasks/{{this.[Pictures.taskId]}}/delete/image" method="post" onsubmit="return confirm('Slet billede?');">
             <input type="hidden" name="fileName" id="fileName" value="{{this.[Pictures.filename]}}">
 
             <button type="submit" class="removeImageButton">
@@ -118,6 +118,7 @@
         {{/each}}
     </div>
 </section>
+{{#ifEq permissionLevel 1}}
 <div class="functionButtons">
     <button type="submit" form="deleteTask">
         <svg width="57" height="57" viewBox="5 5 47 47" fill="none" xmlns="http://www.w3.org/2000/svg"
@@ -135,3 +136,4 @@
 </div>
 <form class="hidden" action="/admin/tasks/{{task.id}}/delete" method="post" id="deleteTask"
     onsubmit="return confirm('Slet nuværende opgave?');" />
+{{/ifEq}}

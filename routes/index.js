@@ -25,11 +25,11 @@ router.get("/profile", allowRoles([1,2,3]), profileController.profile); //Viser 
 router.get("/createTask", allowRoles([1,3]), createTaskController.createTask); //Start på task
 router.post("/createTask", allowRoles([1,3]), createTaskController.logStart); //Send id med videre
 router.get("/createtaskdata/:taskId", allowRoles([1,3]), createTaskDataController.taskPageOne); //Tilføj billeder og/eller produktopfyldningner
-router.post("/uploadTaskImage/:taskId", allowRoles([1,3]), createTaskDataController.uploadMiddleware, createTaskDataController.imageUpload); //Tilføj til Pictures table
+router.post("/uploadtaskimage/:taskId", allowRoles([1,3]), createTaskDataController.uploadMiddleware, createTaskDataController.imageUpload); //Tilføj til Pictures table
 router.get("/createtaskdata/:taskId/images", allowRoles([1,3]), createTaskDataController.viewImages); //Se uploadede billeder
 router.post("/createtaskdata/:taskId/images", allowRoles([1,3]), createTaskDataController.deleteImage,); //Slet uploadede billeder
-router.post("/uploadTask/:taskId", allowRoles([1,3]), createTaskDataController.uploadTasks); //Tilføj til ProductTask table og send mail til ejer
-router.get("/completedTask/:taskId", allowRoles([1,3]), createTaskDataController.completedTask); //Færdig med task upload
+router.post("/uploadtask/:taskId", allowRoles([1,3]), createTaskDataController.uploadTasks); //Tilføj til ProductTask table og send mail til ejer
+router.get("/completedtask/:taskId", allowRoles([1,3]), createTaskDataController.completedTask); //Færdig med task upload
 
 
 //Stationsejer routes
@@ -70,7 +70,7 @@ router.post("/admin/products/:productId/update", allowRoles([1]), productControl
 router.post("/admin/products/:productId/delete", allowRoles([1]), productController.deleteProduct);
 
 router.get("/admin/tasks", allowRoles([1]), adminListController.adminListTasks);
-router.get("/admin/tasks/:taskId", allowRoles([1]), taskController.adminTasks);
+router.get("/admin/tasks/:taskId", allowRoles([1,2]), taskController.adminTasks);
 router.post("/admin/tasks/:taskId/update", allowRoles([1]), taskController.updateTask);
 router.post("/admin/tasks/:taskId/delete", allowRoles([1]), taskController.deleteTask);
 router.post("/admin/tasks/:taskId/delete/image", allowRoles([1]), taskController.deleteImage);
