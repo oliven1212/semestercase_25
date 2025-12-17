@@ -33,7 +33,7 @@ header{
 
   min-height: 10vh;
   width: 100%;
-  background-color: var(--darkBlue);
+  background-color: transparent;
   display: grid;
   grid-template-columns: 1fr 1fr;
   position: fixed;
