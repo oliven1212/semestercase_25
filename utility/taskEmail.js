@@ -23,7 +23,7 @@ async function sendTaskEmail(imageUuid, toEmail) {
         <p>Der er netop blevet uploadet en ny rengøringsopgave for din tankstation.</p>
         <p>Du kan se billederne og oplysningerne ved at klikke på linket nedenfor:</p>
         <br>
-        <a href="http://localhost:3000/showTaskImages/${imageUuid}">Se billeder for opgaven her</a>
+        <a href="http://91.98.73.200:3000/showTaskImages/${imageUuid}">Se billeder for opgaven her</a>
         <p>Dette link er gyldigt i 48 timer og kan kun bruges en gang.</p>
         <p>Dette er en automatisk genereret email, svar venligst ikke på denne.</p>
         `;
