@@ -32,8 +32,9 @@ header{
   z-index: 99999;
 
   min-height: 10vh;
+  max-height: 20vh;
   width: 100%;
-  background-color: transparent;
+  background-color: var(--lightBlue);
   display: grid;
   grid-template-columns: 1fr 1fr;
   position: fixed;
