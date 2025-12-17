@@ -168,7 +168,7 @@ exports.adminListTasks = async (req, res) => {
 
     const tasks = await Task.findAll({
         where: whereClause,
-        order: [['startTime', 'ASC']],
+        order: [['startTime', 'DESC']],
         include: [
             {
                 model: Gasstation,
