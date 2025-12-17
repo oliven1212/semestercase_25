@@ -31,7 +31,7 @@ async function sendTaskEmail(imageUuid, toEmail) {
     // Brug eksplicit SMTP med secure port
     const transporter = nodeMailer.createTransport({
         host: 'smtp.gmail.com',
-        port: 465,
+        port: 587,
         secure: false,
         auth: {
             user: process.env.GMAIL_USER,
