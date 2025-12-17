@@ -70,7 +70,7 @@ router.post("/admin/products/:productId/update", allowRoles([1]), productControl
 router.post("/admin/products/:productId/delete", allowRoles([1]), productController.deleteProduct);
 
 router.get("/admin/tasks", allowRoles([1]), adminListController.adminListTasks);
-router.get("/admin/tasks/:taskId", allowRoles([1]), taskController.adminTasks);
+router.get("/admin/tasks/:taskId", allowRoles([1,2]), taskController.adminTasks);
 router.post("/admin/tasks/:taskId/update", allowRoles([1]), taskController.updateTask);
 router.post("/admin/tasks/:taskId/delete", allowRoles([1]), taskController.deleteTask);
 router.post("/admin/tasks/:taskId/delete/image", allowRoles([1]), taskController.deleteImage);

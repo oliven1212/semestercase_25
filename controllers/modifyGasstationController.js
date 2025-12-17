@@ -97,7 +97,7 @@ exports.tasks = async (req, res) => {
         attributes:['address'],
         include:[{
             model: Task,
-            attributes:['startTime'],
+            attributes:['startTime','id'],
         },{
             model: City,
             attributes:['name'],
@@ -113,10 +113,11 @@ exports.tasks = async (req, res) => {
         function padZero(number) {
             return number < 10 ? '0' + number : number;
         }
+        console.log(task);
         return {
             name: `${padZero(date.getDate())}/${padZero(date.getMonth() + 1)}/${date.getFullYear()}`,
             contact: `${task['Branch.name']}, ${task.address}, ${task['City.name']}`,
-            link: `/admin/gasstations/${task['Gasstations.id']}`,
+            link: `/admin/tasks/${task['Tasks.id']}`,
             originalUrl: req.originalUrl.replace(/\/$/, "")
         };
     });
