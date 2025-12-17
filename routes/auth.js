@@ -40,7 +40,7 @@ router.post("/login", async (req, res) => {
   try {
     const { email, password } = req.body;
     if (!email || !password) {
-      req.session.error = "Email og adgangskode skal udfyldes.";
+      req.session.error = "Email and password is required";
       return res.redirect("/");
     }
 
@@ -51,13 +51,13 @@ router.post("/login", async (req, res) => {
     });
 
     if (!user) {
-      req.session.error = "Forkert email eller adgangskode.";
+      req.session.error = "Wrong email or password.";
       return res.redirect("/");
     }
 
     const isValidPassword = await bcrypt.compare(password, user.password);
     if (!isValidPassword) {
-      req.session.error = "Forkert email eller adgangskode.";
+      req.session.error = "Wrong email or password.";
       return res.redirect("/");
     }
 
@@ -83,7 +83,7 @@ router.post("/login", async (req, res) => {
     }
   } catch (error) {
     console.error("login fejl:", error);
-    req.session.error = "Der opstod en fejl, prøv igen.";
+    req.session.error = "An error happened, try again.";
     return res.redirect("/");
   }
 });
@@ -100,13 +100,13 @@ router.get("/login/forgotPassword", (req, res) => {
 router.post("/login/forgotPassword", async (req, res) => {
   const { email } = req.body;
   if (!email) {
-    req.session.error = "mail needs to be filled";
+    req.session.error = "Mail needs to be filled";
     return res.redirect("/login/forgotPassword");
   }
   //hvad er unscoped
   const user = await User.unscoped().findOne({ where: { email } });
   if (!user) {
-    req.session.error = "user does not exist";
+    req.session.error = "User does not exist";
     return res.redirect("/login/forgotPassword");
   }
   //generate uuid token
@@ -119,9 +119,9 @@ router.post("/login/forgotPassword", async (req, res) => {
   const emailSent = await resetPasswordEmail(email, uniqueId);
   if (emailSent) {
     req.session.success =
-      "et link til at nulstille din adgangskode er sendt til din email";
+      "Et link til at nulstille din adgangskode er sendt til din email";
   } else {
-    req.session.error = "der skete en fejl ved afsendelse af email";
+    req.session.error = "An error happened while sending the email";
   }
   res.redirect("/login/forgotPassword");
 });
@@ -138,7 +138,7 @@ router.get("/login/reset/:uniqueId", async (req, res) => {
     },
   });
   if (!user) {
-    req.session.error = "password reset línket er ugyldigt eller udløbet";
+    req.session.error = "Password reset is invaled or expired";
     return res.redirect("/login/forgotPassword");
   }
   const error = req.session ? req.session.error : null;
@@ -150,15 +150,15 @@ router.post("/login/reset/:uniqueId", async (req, res) => {
   const { uniqueId } = req.params;
   const { password, confirmPassword } = req.body;
   if (!password || !confirmPassword) {
-    req.session.error = "both input fields must be filled";
+    req.session.error = "Both input fields must be filled";
     return res.redirect(`/login/reset/${uniqueId}`);
   }
   if (password !== confirmPassword) {
-    req.session.error = "password need to be identical";
+    req.session.error = "Password need to be identical";
     return res.redirect(`/login/reset/${uniqueId}`);
   }
   if (password.length < 8) {
-    req.session.error = "password need to be at least 8 characters long";
+    req.session.error = "Password need to be at least 8 characters long";
     return res.redirect(`/login/reset/${uniqueId}`);
   }
 
@@ -181,7 +181,7 @@ router.post("/login/reset/:uniqueId", async (req, res) => {
   user.passwordExpired = null;
   await user.save();
 
-  req.session.success = "your password has been updated u can now login";
+  req.session.success = "Your password has been updated you can now login";
   res.redirect("/");
 });
 
