@@ -30,6 +30,8 @@ section.modifySection  div select,
 section.modifySection  div option {
         border-style: solid;
         border-width: 1.5px;
+        box-sizing: border-box;
+        border-radius: 0;
         border-color: var(--darkBlue);
         background-color: var(--white);
 }
