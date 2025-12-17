@@ -1,7 +1,11 @@
 const express = require("express");
 const bcrypt = require("bcrypt");
 const router = express.Router();
-const { ensureAuthenticated, allowRoles, redirectToRoleHome } = require("../middleware/authentication");
+const {
+  ensureAuthenticated,
+  allowRoles,
+  redirectToRoleHome,
+} = require("../middleware/authentication");
 const { v4: uuidv4 } = require("uuid");
 const { Op } = require("sequelize");
 const { User } = require("../models");
@@ -96,13 +100,13 @@ router.get("/login/forgotPassword", (req, res) => {
 router.post("/login/forgotPassword", async (req, res) => {
   const { email } = req.body;
   if (!email) {
-    req.session.error = "email skal udfyldes";
+    req.session.error = "mail needs to be filled";
     return res.redirect("/login/forgotPassword");
   }
   //hvad er unscoped
   const user = await User.unscoped().findOne({ where: { email } });
   if (!user) {
-    req.session.error = "Brugeren findes ikke";
+    req.session.error = "user does not exist";
     return res.redirect("/login/forgotPassword");
   }
   //generate uuid token
@@ -146,15 +150,15 @@ router.post("/login/reset/:uniqueId", async (req, res) => {
   const { uniqueId } = req.params;
   const { password, confirmPassword } = req.body;
   if (!password || !confirmPassword) {
-    req.session.error = "begge felter skal udfyldes";
+    req.session.error = "both input fields must be filled";
     return res.redirect(`/login/reset/${uniqueId}`);
   }
   if (password !== confirmPassword) {
-    req.session.error = "password skal være identiske";
+    req.session.error = "password need to be identical";
     return res.redirect(`/login/reset/${uniqueId}`);
   }
   if (password.length < 8) {
-    req.session.error = "password skal være længere end 8 tegn";
+    req.session.error = "password need to be at least 8 characters long";
     return res.redirect(`/login/reset/${uniqueId}`);
   }
 
@@ -167,7 +171,7 @@ router.post("/login/reset/:uniqueId", async (req, res) => {
     },
   });
   if (!user) {
-    req.session.error = "Password reset link er ugyldigt eller udløbet";
+    req.session.error = "Password link is invalid or expired";
     return res.redirect("/login/forgotPassword");
   }
 
@@ -177,7 +181,7 @@ router.post("/login/reset/:uniqueId", async (req, res) => {
   user.passwordExpired = null;
   await user.save();
 
-  req.session.success = "dit password er blevet opdateret, du kan nu logge ind";
+  req.session.success = "your password has been updated u can now login";
   res.redirect("/");
 });
 
