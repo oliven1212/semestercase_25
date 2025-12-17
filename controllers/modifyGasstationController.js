@@ -184,7 +184,7 @@ exports.users = async (req, res) => {
     });
 
     res.render("admin/adminTaskHistorie", {
-        title: `Relaterede opgaver til`,
+        title: `Relaterede tankstationer til`,
         sourceTitle: `${gasstation['Branch.name']}, ${gasstation.address}, ${gasstation['City.name']}`,
         content: contentMap,
         owner: `${owner['Users.firstName']} ${owner['Users.lastName']}`,
@@ -221,12 +221,3 @@ exports.removeLinkUser = async (req, res) => {
     res.redirect(`/admin/gasstations/${req.params.gasId}/users`);
 };
 
-exports.removeLinkUser = async (req, res) => {
-    await GasstationUser.destroy({
-        where: {
-            gasstationId: req.params.gasId,
-            userId: req.params.userId,
-        },
-    });
-    res.redirect(`/admin/gasstations/${req.params.gasId}/users`);
-};
