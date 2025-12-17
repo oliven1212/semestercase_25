@@ -32,7 +32,7 @@ async function sendTaskEmail(imageUuid, toEmail) {
     const transporter = nodeMailer.createTransport({
         host: 'smtp.gmail.com',
         port: 465,
-        secure: true,
+        secure: false,
         auth: {
             user: process.env.GMAIL_USER,
             pass: process.env.GMAIL_APP_PASSWORD
