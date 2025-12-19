@@ -12,14 +12,12 @@
 <p>Bekræftelse mail er sendt
     tankstationsejer </p>
 
-<a href="/createTask"> 
-<button >Start ny log</button>
-</a>
+<a href="/createTask" class="darkBtn"> Start ny log</a>
 
 <section class="logout-card">
-    <p class="logout">Log out</p>
     <form action="/login/logout" method="POST" class="logout-form">
-  <button type="submit" class="logout-button" title="Log ud" aria-label="Log ud">
+    <p>Log out</p>
+    <button type="submit" class="logout-button" title="Log ud" aria-label="Log ud">
     
     {{!-- Indsæt SVG her --}}
     <svg class="logoutSvg" xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24">

@@ -1,5 +1,5 @@
 h2 {
-    color: black;
+    color: var(--darkBlue);
     text-align: center;
     padding-bottom: 0px;
     font-family: var(--sansFont);
@@ -7,36 +7,31 @@ h2 {
 }
 
 p {
-    color: black;
+    color: var(--darkBlue);
     text-align: center;
     font-weight: 700;
 }
 
 h4{
-    color: black;
+    color: var(--darkBlue);
     text-align: center;
     font-style: italic;
     font-weight: 400;
 }
-
-button{
-    display: grid;
-    justify-self: center;
-    align-self: center;
-     color: var(--lightBlue);
+.darkBtn{
+    display: block;
+    margin: auto;
+    color: var(--lightBlue);
     background-color: var(--darkBlue);
-    border: none;
     border-color: var(--darkBlue);
-    padding: 8px;
+    padding: 15px 8px;
     font-size: large;
     font-weight: 600;
     border-radius: 5px;
-    padding-top: 15px;
-    padding-bottom: 15px;
     margin-top: 40px;
     width: 50%;
     text-decoration: none;
-
+    text-align: center;
 }
 
 .logout{
@@ -61,16 +56,21 @@ button{
     margin-top: 10px !important;
 }
 
-.logout-button {
-    background: var(--lightBlue);
-    border: none;
-    padding: 10px 14px;
-    cursor: pointer;
-}
-
-
 .logoutSvg {
     fill: var(--darkBlue);
     width: 2rem;
     height: 2rem;
+}
+.logout-form{
+    width: fit-content;
+    margin-left: auto;
+}
+.logout-form *{
+    fill: var(--darkBlue);
+    color: var(--darkBlue);
+    background-color: transparent;
+    border: none;
+}
+.logout-form p{
+    margin-bottom: 0;
 }

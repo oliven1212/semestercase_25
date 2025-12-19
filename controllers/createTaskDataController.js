@@ -192,6 +192,7 @@ exports.completedTask = async (req, res) => {
 
     res.render("home/completedTask", {
         task: task,
+        hideReturn: true,
 
     });
 };
