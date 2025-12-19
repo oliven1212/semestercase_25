@@ -25,18 +25,6 @@ exports.loginSend = async (req, res) => {
 };
 
 exports.changePassword = async (req, res) => {
-  /* TODO:
-    const {v4: uuidv4} = require('uuid');
-
-    const uniqueId = uuidv4();
-
-    const user = await User.findOne({
-        where: {email: toEmail},
-        raw: true
-    });
-
-    await sendTaskEmail(emailData['Pictures.id'], emailData['Gasstation.Users.email']);*/
-
   res.render("home/changePassword", {});
 };
 

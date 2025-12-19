@@ -30,7 +30,8 @@ router.get("/createtaskdata/:taskId/images", allowRoles([1,3]), createTaskDataCo
 router.post("/createtaskdata/:taskId/images", allowRoles([1,3]), createTaskDataController.deleteImage,); //Slet uploadede billeder
 router.post("/uploadtask/:taskId", allowRoles([1,3]), createTaskDataController.uploadTasks); //Tilføj til ProductTask table og send mail til ejer
 router.get("/completedtask/:taskId", allowRoles([1,3]), createTaskDataController.completedTask); //Færdig med task upload
-
+router.get("/tasks", allowRoles([1,3]), taskController.userListTasks); //Færdig med task upload
+router.get("/tasks/:taskId", allowRoles([1,3]), taskController.userTasks); //Færdig med task upload
 
 //Stationsejer routes
 router.get("/gasstation", allowRoles([1,2]), gasController.gasstation); //Ejer's tankstationer

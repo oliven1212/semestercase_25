@@ -14,7 +14,6 @@ if (!GMAIL_USER || !GMAIL_PASS) {
 //Linket -> hvor den skal hen (til owner fra task gasstation)
 
 async function resetPasswordEmail(toEmail, uniqueId) {
-  //TODO: tjek om det virker med homecontrolleren,
   const resetUrl = `http://91.98.73.200:3000/login/reset/${uniqueId}`;
   const html = `<h3>Reset dit password</h3>
         <p>Hej!</p>
