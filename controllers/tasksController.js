@@ -202,5 +202,6 @@ exports.userListTasks = async (req, res) => {
     res.render("home/adminList", {
         title: 'Liste af rengøringer',
         content: tasksMap,
+        hideSearch: true,
     });
 };

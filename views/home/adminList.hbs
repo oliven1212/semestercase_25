@@ -12,6 +12,13 @@
             <input name="listSearch" id="listSearch" placeholder="Søg efter navn">
         </form>
     </search>
+    {{else}}
+    <style>
+        .listSite{
+            grid-template-rows: 1fr;
+            padding-top: 1rem;
+        }
+    </style>
     {{/unless}}
     <section class="listCards">
         {{#unless none}}
