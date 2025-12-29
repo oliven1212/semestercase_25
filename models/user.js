@@ -59,6 +59,7 @@ module.exports = (sequelize, DataTypes) => {
       User.belongsTo(models.Role, { foreignKey: "roleId" });
       User.belongsTo(models.City, { foreignKey: "cityCode" });
       User.hasMany(models.Task, { foreignKey: "userId", onDelete: "SET NULL" });
+      User.hasMany(models.Issue, { foreignKey: "userId" });
       User.belongsToMany(models.Gasstation, {
         through: models.GasstationUser,
         foreignKey: "userId",
