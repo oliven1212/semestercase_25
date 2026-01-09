@@ -211,15 +211,15 @@ router.post(
 router.get(
   "/admin/tasks/:taskId/issueHistory",
   allowRoles([1]),
-  issueController.issueTaskHistory,
+  issueController.getIssueHistory,
 );
 router.get(
-  "/admin/tasks/:taskId/:issueId",
+  "/admin/tasks/:taskId/issue/:issueId",
   allowRoles([1]),
-  issueController.issueTaskHistory,
+  issueController.getIssue,
 );
 router.delete(
-  "/admin/tasks/:taskId/issue",
+  "/admin/tasks/:taskId/issue/:issueId",
   allowRoles([1]),
   issueController.issueDelete,
 );
