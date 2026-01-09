@@ -1,4 +1,4 @@
-const {User, Gasstation, City, Product, Task} = require("../models");
+const {User, Gasstation, City, Product, Task, Issue} = require("../models");
 const { Op, where} = require('sequelize');
 
 exports.adminMain = async (req, res) => {
@@ -191,6 +191,27 @@ exports.adminListTasks = async (req, res) => {
         link: `/admin/tasks/${task.id}`,
         formattedDate: new Date(task.startTime).toLocaleDateString('da-DK'),
     }));
+
+    exports.adminListIssues = async (req, res) => {
+
+      const issue = await issue.findAll({
+        where: {
+          id: req.params.issueId
+        },
+        include: [
+          {
+            model: User,
+            attributes: ['id', 'firstName', 'lastName'],
+            include :
+
+          }
+        ]
+      })
+
+
+
+
+    }
 
 
 

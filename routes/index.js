@@ -10,6 +10,7 @@ const taskHistorieController = require("../controllers/taskHistorieController");
 const modifyGasstationController = require("../controllers/modifyGasstationController");
 const taskController = require("../controllers/tasksController");
 const productController = require("../controllers/productController");
+const issueController = require("../controllers/issueController");
 
 const upload = require("../utility/multer");
 const { allowRoles } = require("../middleware/authentication");
@@ -211,7 +212,7 @@ router.post(
 router.get(
   "/admin/tasks/:taskId/issueHistory",
   allowRoles([1]),
-  issueController.getIssueHistory,
+  issueController.adminListIssues,
 );
 router.get(
   "/admin/tasks/:taskId/issue/:issueId",
