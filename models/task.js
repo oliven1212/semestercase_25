@@ -41,7 +41,7 @@ module.exports = (sequelize, DataTypes) => {
         through: models.ProductTask,
         foreignKey: "taskId",
       });
-      Task.hasMany(models.Issue, { foreignKey: "taskId" });
+      Task.belongsTo(models.Issue, { foreignKey: "taskId" });
     }
   }
 

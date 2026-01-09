@@ -10,22 +10,16 @@ module.exports = (sequelize, DataTypes) => {
     static associate(models) {
       Issue.belongsTo(models.Task, {
         foreignKey: "taskId",
-        onDelete: "SET NULL",
-      });
-      Issue.belongsTo(models.User, {
-        foreignKey: "userId",
-        onDelete: "SET NULL",
+        onDelete: "CASCADE",
       });
       // define association here
     }
   }
   Issue.init(
     {
-      Id: DataTypes.INTEGER,
       taskId: DataTypes.INTEGER,
-      userId: DataTypes.INTEGER,
       status: DataTypes.BOOLEAN,
-      description: DataTypes.STRING,
+      description: DataTypes.TEXT,
     },
     {
       sequelize,

@@ -3,7 +3,7 @@
 module.exports = {
   async up(queryInterface, Sequelize) {
     await queryInterface.createTable("Issues", {
-      Id: {
+      id: {
         autoIncrement: true,
         type: Sequelize.INTEGER,
         allowNull: false,
@@ -16,18 +16,11 @@ module.exports = {
           key: "id",
         },
       },
-      userId: {
-        type: Sequelize.INTEGER,
-        references: {
-          model: "Users",
-          key: "id",
-        },
-      },
       status: {
         type: Sequelize.BOOLEAN,
       },
       description: {
-        type: Sequelize.STRING,
+        type: Sequelize.TEXT,
       },
       createdAt: {
         allowNull: false,
