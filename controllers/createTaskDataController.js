@@ -1,18 +1,6 @@
-const {
-    User,
-    Gasstation,
-    GasstationUser,
-    Task,
-    Unit,
-    Product,
-    Picture,
-    ProductTask,
-    Branch,
-    City
-} = require('../models');
+const { User, Gasstation, Task, Unit, Product, Picture, ProductTask, Branch, City } = require('../models');
 const upload = require('../utility/multer');
 const path = require('path');
-const crypto = require('crypto');
 const { gasstation } = require('./gasController');
 const { sendTaskEmail } = require('../utility/taskEmail');
 const fs = require('fs');
@@ -70,11 +58,19 @@ exports.addProduct = async (req, res) => {
             taskId: parseInt(req.body.taskId),
             amount: parseFloat(req.body.amount),
         });
+        
         const productTasks = await ProductTask.findAll({
                 where: { taskId: parseInt(req.body.taskId) },
+                include:{
+                    model: Product,
+                    attributes:["name"],
+                    include:{
+                        model: Unit,
+                        attributes:["name"],
+                    }
+                },
                 raw: true
             });
-        console.log(productTasks);
 
         res.json(productTasks);
     } catch (err) {
@@ -82,6 +78,31 @@ exports.addProduct = async (req, res) => {
         res.status(500).send("Failed to add product");
     }
 };
+
+exports.removeProduct = async (req, res) =>{
+    await ProductTask.destroy({
+        where: {
+            taskId: req.body.taskId,
+            productId: req.body.productId,
+        },
+    });
+
+    //Get all related products
+    const productTasks = await ProductTask.findAll({
+        where: { taskId: parseInt(req.body.taskId) },
+        include:{
+            model: Product,
+            attributes:["name"],
+            include:{
+                model: Unit,
+                attributes:["name"],
+            }
+        },
+        raw: true
+    });
+
+    res.json(productTasks);
+}
 
 
 exports.uploadTasks = async (req, res) => {

@@ -44,15 +44,15 @@ productSelect.addEventListener('input', function () {
 addBtn.addEventListener('click', async function () {
 
     const productId = productSelect.value;
-    const productName = productSelect.options[productSelect.selectedIndex].text;
     const amount = amountInput.value;
-    const unit = unitDisplay.textContent;
 
     if (!productId || !amount) {
         alert('Vælg et produkt og indtast mængde');
         return;
     }
 
+
+    //Post http call med det nye produkt som retunere alle produkter forbundet med opgaven
     const res = await fetch("/createTask/upload/product", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
@@ -64,35 +64,14 @@ addBtn.addEventListener('click', async function () {
     });    
     const products = await res.json();
 
-    //Makes sure the selectedProducts and the divs are cleared
-    let selectedProducts = [];
-    selectedProductsDiv.innerHTML = "";
 
-    //looper over alle produkter vi får tilbage fra http kaldet
-    products.forEach(product => {
-            console.log(product);
-
-        // Tilføjer til array
-        selectedProducts.push({
-            productId: productId,
-            amount: amount
-        });
-
-    });
+    updateProductDiv(products);
 
 
 
 
 
-    // Opretter HTML element
-    const productDiv = document.createElement('div');
-    productDiv.className = 'product-row';
-    productDiv.innerHTML = `
-        <span class="product-display">${productName}: ${amount} ${unit}</span>
-        <button type="button" class="remove-btn" data-index="${selectedProducts.length - 1}">Fjern</button>
-    `;
 
-    selectedProductsDiv.appendChild(productDiv);
 
     //Insert hidden data into product selections
     const productIdElement = document.createElement('option');
@@ -115,12 +94,37 @@ addBtn.addEventListener('click', async function () {
 
 });
 
-// Fjern produkt fra listen (delegeret event listener)
-selectedProductsDiv.addEventListener('click', function(e) {
-    if (e.target.classList.contains('remove-btn')) {
-        const index = e.target.getAttribute('data-index');
-        selectedProducts.splice(index, 1);
-        e.target.parentElement.remove();
+async function removeProduct (taskId, productId){
+    const res = await fetch("/createTask/remove/product", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+        taskId: taskId,
+        productId: productId
+        }),
+    });    
+    const products = await res.json();
+    updateProductDiv(products);
+}
 
-    }
-});
+function updateProductDiv (products){
+    //Makes sure the selectedProducts and the divs er tomme
+    let selectedProducts = [];
+    selectedProductsDiv.innerHTML = "";
+    console.log(selectedProducts);
+    
+    //looper over alle produkter og opretter dem som html elementer
+    products.forEach(product => {
+            console.log(product);
+
+        // Opretter HTML element
+        const productDiv = document.createElement('div');
+        productDiv.className = 'product-row';
+        productDiv.innerHTML = `
+            <span class="product-display">${product['Product.name']}: ${product.amount} ${product['Product.Unit.name']}</span>
+            <button type="button" class="remove-btn" onclick="removeProduct(${product.taskId},${product.productId})">Fjern</button>`;
+        selectedProductsDiv.appendChild(productDiv);
+
+
+    });
+}
