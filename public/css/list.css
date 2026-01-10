@@ -3,7 +3,7 @@
     grid-template-rows: 3rem 1fr;
     place-items: center;
     row-gap: 1em;
-    
+
     @media screen and (min-width: 426px) {
         margin-left: var(--sideMargin);
         margin-right: var(--sideMargin);
@@ -25,7 +25,6 @@
         margin-left: var(--sideMargin);
         margin-right: var(--sideMargin);
     }
-
 }
 
 .mainCards {
@@ -46,7 +45,7 @@
         text-decoration: none;
     }
 
-    button{
+    button {
         color: var(--lightBlue);
         background-color: var(--darkBlue);
         border: none;
@@ -55,7 +54,6 @@
         cursor: pointer;
     }
 }
-
 
 .listCards {
     display: grid;
@@ -66,7 +64,6 @@
         grid-template-columns: 1fr 1fr;
         column-gap: 2rem;
     }
-    
 }
 
 .listCard {
@@ -78,9 +75,9 @@
     border: 2px solid var(--darkBlue);
     text-decoration: none;
     grid-template-areas:
-        'name functions'
-        'time functions'
-        'contact contact';
+        "name functions"
+        "time functions"
+        "contact contact";
 
     .name {
         grid-area: name;
@@ -88,7 +85,7 @@
         margin-left: 1rem;
     }
 
-    .time{
+    .time {
         grid-area: time;
         margin: 0.5rem;
         margin-left: 1rem;
@@ -100,7 +97,7 @@
         margin-top: 0;
         margin-left: 1rem;
     }
-    .functions{
+    .functions {
         display: flex;
         justify-content: space-around;
         align-items: flex-end;
@@ -121,8 +118,8 @@
     }
 }
 
-.createNew{
-      color: var(--lightBlue);
+.createNew {
+    color: var(--lightBlue);
     background-color: var(--darkBlue);
     border: none;
     border-color: var(--darkBlue);
@@ -134,7 +131,7 @@
     margin-top: 10px;
 }
 
-.listSearchForm input  {
+.listSearchForm input {
     padding: 10px;
     border: none;
     border-radius: 5px;
@@ -144,14 +141,13 @@
     border: var(--darkBlue) 2px solid;
     color: var(--darkBlue);
     font-weight: 600;
-    
 }
-#linkData{
+#linkData {
     display: grid;
     align-items: center;
     justify-content: center;
 }
-#linkData div input{
+#linkData div input {
     padding: 10px;
     border: none;
     border-radius: 5px;
@@ -160,13 +156,13 @@
     color: var(--darkBlue);
     border: var(--darkBlue) 2px solid;
     color: var(--darkBlue);
-    font-weight: 600;   
+    font-weight: 600;
 }
 
-#linkData{
+#linkData {
     padding-bottom: 15px;
 }
-#linkData button{
+#linkData button {
     margin-top: 3px;
     background: var(--darkBlue);
     color: var(--lightBlue);
@@ -174,4 +170,17 @@
     padding: 10px 14px;
     cursor: pointer;
     border-radius: 5px;
+}
+.issue-unsolved {
+    color: #dc2626;
+    font-weight: bold;
+    font-size: 0.95em;
+    padding: 10px 14px;
+}
+
+.issue-solved {
+    color: #16a34a;
+    font-weight: bold;
+    font-size: 0.95em;
+    padding: 10px 14px;
 }

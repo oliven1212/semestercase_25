@@ -20,17 +20,26 @@ exports.adminListIssues = async (req, res) => {
       },
     ],
     raw: true,
-    order: [["status", "DESC"]],
+    order: [["status", "ASC"]],
   });
   console.log(issues);
-  const issuesMap = issues.map((issue) => ({
-    ...issue,
-    name: issue.description.substring(0, 50),
-    contact: `Tankstation: ${issue["Task.Gasstation.address"]} <br> Kontakt: ${issue["Task.Gasstation.contactEmail"]}`,
-    //.replace(/\/$/, "") is regex to remove any trailing "/"
-    link: `/admin/issues/${issue.id}`,
-  }));
-
+  const issuesMap = issues.map((issue) => {
+    const issueSolved = issue.status === 1;
+    const statusDisplay = issueSolved
+      ? { text: "løst", class: "issue-solved" }
+      : { text: "ikke løst", class: "issue-unsolved" };
+    return {
+      ...issue,
+      title: "problemer",
+      name: issue.description.substring(0, 50),
+      contact: `Tankstation: ${issue["Task.Gasstation.address"]} <br> Kontakt: ${issue["Task.Gasstation.contactEmail"]}`,
+      link: `/admin/issues/${issue.id}`,
+      statusText: statusDisplay.text,
+      statusClass: statusDisplay.class,
+      issueSolved: issueSolved,
+    };
+  });
+  console.log(issuesMap);
   res.render("home/adminList", {
     title: "Liste af problemer",
     message: "Liste af problemer",
