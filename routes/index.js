@@ -25,6 +25,7 @@ router.get("/profile", allowRoles([1,2,3]), profileController.profile); //Viser 
 router.get("/createTask", allowRoles([1,3]), createTaskController.createTask); //Start på task
 router.post("/createTask", allowRoles([1,3]), createTaskController.logStart); //Send id med videre
 router.get("/createtaskdata/:taskId", allowRoles([1,3]), createTaskDataController.taskPageOne); //Tilføj billeder og/eller produktopfyldningner
+router.post("/createTask/upload/product", allowRoles([1,3]), createTaskDataController.addProduct);
 router.post("/uploadtaskimage/:taskId", allowRoles([1,3]), createTaskDataController.uploadMiddleware, createTaskDataController.imageUpload); //Tilføj til Pictures table
 router.get("/createtaskdata/:taskId/images", allowRoles([1,3]), createTaskDataController.viewImages); //Se uploadede billeder
 router.post("/createtaskdata/:taskId/images", allowRoles([1,3]), createTaskDataController.deleteImage,); //Slet uploadede billeder

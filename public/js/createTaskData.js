@@ -8,6 +8,7 @@ const productSelect = document.getElementById('productId');
 const unitDisplay = document.getElementById('unit-display');
 const productIdContainer = document.getElementById('productIdContainer');
 const productAmountContainer = document.getElementById('productAmountContainer');
+const taskId = document.getElementById('taskId').value;
 
 //Tilføjer disse variabler til billede håndteringen
 
@@ -19,7 +20,6 @@ const afterCount = document.getElementById('afterCount');
 
 
 
-const selectedProducts = [];
 
 //Viser antal valgte før billeder
 beforeInput.addEventListener('change', function () {
@@ -41,7 +41,8 @@ productSelect.addEventListener('input', function () {
 });
 
 // Tilføjer produkt til listen
-addBtn.addEventListener('click', function () {
+addBtn.addEventListener('click', async function () {
+
     const productId = productSelect.value;
     const productName = productSelect.options[productSelect.selectedIndex].text;
     const amount = amountInput.value;
@@ -52,11 +53,36 @@ addBtn.addEventListener('click', function () {
         return;
     }
 
-    // Tilføjer til array
-    selectedProducts.push({
+    const res = await fetch("/createTask/upload/product", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+        taskId: taskId,
         productId: productId,
         amount: amount
+        }),
+    });    
+    const products = await res.json();
+
+    //Makes sure the selectedProducts and the divs are cleared
+    let selectedProducts = [];
+    selectedProductsDiv.innerHTML = "";
+
+    //looper over alle produkter vi får tilbage fra http kaldet
+    products.forEach(product => {
+            console.log(product);
+
+        // Tilføjer til array
+        selectedProducts.push({
+            productId: productId,
+            amount: amount
+        });
+
     });
+
+
+
+
 
     // Opretter HTML element
     const productDiv = document.createElement('div');

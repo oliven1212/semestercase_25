@@ -60,6 +60,29 @@ exports.taskPageOne = async (req, res) => {
 
 };
 
+exports.addProduct = async (req, res) => {
+    try {
+
+        console.log(`addProduct ran`, req.body);
+        //upsert updates the row if it excist or creates it if it does not excist based on the PK
+        await ProductTask.upsert({
+            productId: parseInt(req.body.productId),
+            taskId: parseInt(req.body.taskId),
+            amount: parseFloat(req.body.amount),
+        });
+        const productTasks = await ProductTask.findAll({
+                where: { taskId: parseInt(req.body.taskId) },
+                raw: true
+            });
+        console.log(productTasks);
+
+        res.json(productTasks);
+    } catch (err) {
+        console.error(err);
+        res.status(500).send("Failed to add product");
+    }
+};
+
 
 exports.uploadTasks = async (req, res) => {
     const body = req.body;
