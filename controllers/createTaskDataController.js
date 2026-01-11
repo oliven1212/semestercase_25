@@ -38,11 +38,24 @@ exports.taskPageOne = async (req, res) => {
         raw: true
     });
 
+    const picturesBefore = await Picture.findAll({
+        where: { taskId: parseInt(req.params.taskId), beforeAfter: 0 },
+        attributes: ['id'],
+        raw: true
+    });
+        const picturesAfter = await Picture.findAll({
+        where: { taskId: parseInt(req.params.taskId), beforeAfter: 1 },
+        attributes: ['id'],
+        raw: true
+    });
+
     res.render("home/taskPageOne", {
         title: 'Log din rengøring',
         user: user,
         task: task,
         product: product,
+        picturesBeforeCount: picturesBefore.length,
+        picturesAfterCount: picturesAfter.length
 
     });
 
@@ -102,6 +115,58 @@ exports.removeProduct = async (req, res) =>{
     });
 
     res.json(productTasks);
+}
+
+exports.uploadImages = async (req, res) =>{
+const taskId = parseInt(req.params.taskId);
+    const { v4: uuidv4 } = require('uuid');
+
+    // Hvis der allerede findes billeder for denne task, genbrug samme uuid (fra first picture.id)
+    // ellers generér en ny uuid
+    const existingPicture = await Picture.findOne({
+        where: { taskId: taskId },
+        attributes: ['id'],
+        raw: true
+    });
+
+    const uniqueId = existingPicture && existingPicture.id ? existingPicture.id : uuidv4();
+
+    if (req.files['beforePicture']) {
+        const beforePictures = req.files['beforePicture'];
+        // Gem før-billeder
+        for (let file of beforePictures) {
+            await Picture.create({
+                id: uniqueId,
+                taskId: taskId,
+                filename: file.filename,
+                beforeAfter: 0,
+                productImage: 0
+            });
+        }
+    }
+
+    if (req.files['afterPicture']) {
+        const afterPictures = req.files['afterPicture'];
+        // Gem efter-billeder
+        for (let file of afterPictures) {
+            await Picture.create({
+                id: uniqueId,
+                taskId: taskId,
+                filename: file.filename,
+                beforeAfter: 1,
+                productImage: 0
+            });
+        }
+    }
+    
+    
+    
+    const imageCount = await Picture.findAll({
+        where: { taskId: parseInt(taskId), beforeAfter: parseInt(req.params.beforeAfter) },
+        attributes: ['id'],
+        raw: true
+    });
+    res.json(imageCount.length);
 }
 
 
@@ -172,49 +237,14 @@ exports.uploadTasks = async (req, res) => {
 
 
 
-exports.imageUpload = async (req, res) => {
-    const taskId = req.params.taskId;
-    const { v4: uuidv4 } = require('uuid');
-
-    // Hvis der allerede findes billeder for denne task, genbrug samme uuid (fra first picture.id)
-    // ellers generér en ny uuid
-    const existingPicture = await Picture.findOne({
-        where: { taskId: taskId },
+exports.getImageTypeCount = async (req,res) =>{
+    const imageCount = await Picture.findAll({
+        where: { taskId: parseInt(req.params.taskId), beforeAfter: parseInt(req.params.beforeAfter) },
         attributes: ['id'],
         raw: true
     });
-
-    const uniqueId = existingPicture && existingPicture.id ? existingPicture.id : uuidv4();
-
-    if (req.files['beforePicture']) {
-        const beforePictures = req.files['beforePicture']; // || betyder ELLER
-        // Gem før-billeder
-        for (let file of beforePictures) {
-            await Picture.create({
-                id: uniqueId, //MAKE UUID!!!
-                taskId: taskId,
-                filename: file.filename,
-                beforeAfter: 0,
-                productImage: 0 //Skal fjernes
-            });
-        }
-    }
-
-    if (req.files['afterPicture']) {
-        const afterPictures = req.files['afterPicture'];
-        // Gem efter-billeder
-        for (let file of afterPictures) {
-            await Picture.create({
-                id: uniqueId,
-                taskId: taskId,
-                filename: file.filename,
-                beforeAfter: 1,
-                productImage: 0 //Skal fjernes
-            });
-        }
-    }
-    return res.redirect(`/createtaskdata/${taskId}`);
-};
+    res.json(imageCount.length);
+}
 
 
 exports.completedTask = async (req, res) => {

@@ -27,7 +27,8 @@ router.post("/createTask", allowRoles([1,3]), createTaskController.logStart); //
 router.get("/createtaskdata/:taskId", allowRoles([1,3]), createTaskDataController.taskPageOne); //Tilføj billeder og/eller produktopfyldningner
 router.post("/createTask/upload/product", allowRoles([1,3]), createTaskDataController.addProduct);
 router.post("/createTask/remove/product", allowRoles([1,3]), createTaskDataController.removeProduct);
-router.post("/uploadtaskimage/:taskId", allowRoles([1,3]), createTaskDataController.uploadMiddleware, createTaskDataController.imageUpload); //Tilføj til Pictures table
+router.get("/uploadtaskimage/:taskId/:beforeAfter", allowRoles([1,3]), createTaskDataController.getImageTypeCount); //Få mængden af biller på opgaven af den specefikke type
+router.post("/uploadtaskimage/:taskId/:beforeAfter", allowRoles([1,3]), createTaskDataController.uploadMiddleware, createTaskDataController.uploadImages); //Upload specefik beforeAfter billed/billeder
 router.get("/createtaskdata/:taskId/images", allowRoles([1,3]), createTaskDataController.viewImages); //Se uploadede billeder
 router.post("/createtaskdata/:taskId/images", allowRoles([1,3]), createTaskDataController.deleteImage,); //Slet uploadede billeder
 router.post("/uploadtask/:taskId", allowRoles([1,3]), createTaskDataController.uploadTasks); //Tilføj til ProductTask table og send mail til ejer

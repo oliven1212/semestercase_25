@@ -1,9 +1,5 @@
-
-
 const amountInput = document.getElementById('amount');
-const addBtn = document.getElementById('addProductBtn');
 const selectedProductsDiv = document.getElementById('selectedProducts');
-const submitBtn = document.getElementById('submitAllBtn');
 const productSelect = document.getElementById('productId');
 const unitDisplay = document.getElementById('unit-display');
 const productIdContainer = document.getElementById('productIdContainer');
@@ -19,29 +15,60 @@ const beforeCount = document.getElementById('beforeCount');
 const afterCount = document.getElementById('afterCount');
 
 
-
-
 //Viser antal valgte før billeder
-beforeInput.addEventListener('change', function () {
-    const count = this.files.length;
-    beforeCount.textContent = count > 0 ? `${count} valgt` : '';
+beforeInput.addEventListener('change', async function () {
+
+
+    const fd = new FormData();
+
+    //Tilføjer alle filer til FormData
+    for (const file of this.files) {
+        fd.append("beforePicture", file);
+    }
+
+    const res = await fetch("/uploadtaskimage/"+taskId+"/0", {
+        method: "POST",
+        body: fd
+    });    
+    console.log();
+    this.value = "";
+
+    const count = await res.json();
+    beforeCount.textContent = count > 0 ? `${count} uploadet` : '';
+});
+
+afterInput.addEventListener('change', async function () {
+    const fd = new FormData();
+
+    //Tilføjer alle filer til FormData
+    for (const file of this.files) {
+        fd.append("afterPicture", file);
+    }
+
+    const res = await fetch("/uploadtaskimage/"+taskId+"/1", {
+        method: "POST",
+        body: fd
+    });    
+    console.log();
+    this.value = "";
+
+    const count = await res.json();
+    afterCount.textContent = count > 0 ? `${count} uploadet` : '';
+    
+
 
 });
 
-afterInput.addEventListener('change', function () {
-    const count = this.files.length;
-    afterCount.textContent = count > 0 ? `${count} valgt` : '';
-});
-
-// Viser enhed når produkt vælges
+//Removes a product from the selected products on the view and database
 productSelect.addEventListener('input', function () {
     const selectedOption = this.options[this.selectedIndex];
     const unit = selectedOption.getAttribute('data-unit');
     unitDisplay.textContent = unit || '';
 });
 
-// Tilføjer produkt til listen
-addBtn.addEventListener('click', async function () {
+
+//Adds a product from the selected products on the view and database
+async function addProduct () {
 
     const productId = productSelect.value;
     const amount = amountInput.value;
@@ -68,11 +95,6 @@ addBtn.addEventListener('click', async function () {
     updateProductDiv(products);
 
 
-
-
-
-
-
     //Insert hidden data into product selections
     const productIdElement = document.createElement('option');
     productIdElement.value = productId;
@@ -90,10 +112,9 @@ addBtn.addEventListener('click', async function () {
     amountInput.value = '';
     unitDisplay.textContent = '';
 
-    // Vis submit knap
+}
 
-});
-
+//Removes a product from the selected products on the view and database
 async function removeProduct (taskId, productId){
     const res = await fetch("/createTask/remove/product", {
         method: "POST",
@@ -107,6 +128,8 @@ async function removeProduct (taskId, productId){
     updateProductDiv(products);
 }
 
+
+//updates the element that shows the selected products with the given products
 function updateProductDiv (products){
     //Makes sure the selectedProducts and the divs er tomme
     let selectedProducts = [];
