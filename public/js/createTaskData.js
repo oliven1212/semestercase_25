@@ -17,8 +17,6 @@ const afterCount = document.getElementById('afterCount');
 
 //Viser antal valgte før billeder
 beforeInput.addEventListener('change', async function () {
-
-
     const fd = new FormData();
 
     //Tilføjer alle filer til FormData
@@ -30,7 +28,6 @@ beforeInput.addEventListener('change', async function () {
         method: "POST",
         body: fd
     });    
-    console.log();
     this.value = "";
 
     const count = await res.json();
@@ -49,14 +46,11 @@ afterInput.addEventListener('change', async function () {
         method: "POST",
         body: fd
     });    
-    console.log();
     this.value = "";
 
     const count = await res.json();
     afterCount.textContent = count > 0 ? `${count} uploadet` : '';
     
-
-
 });
 
 //Removes a product from the selected products on the view and database
@@ -134,11 +128,9 @@ function updateProductDiv (products){
     //Makes sure the selectedProducts and the divs er tomme
     let selectedProducts = [];
     selectedProductsDiv.innerHTML = "";
-    console.log(selectedProducts);
     
     //looper over alle produkter og opretter dem som html elementer
     products.forEach(product => {
-            console.log(product);
 
         // Opretter HTML element
         const productDiv = document.createElement('div');
