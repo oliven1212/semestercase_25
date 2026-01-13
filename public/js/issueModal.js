@@ -2,6 +2,7 @@ document.addEventListener("DOMContentLoaded", () => {
   const issueDialog = document.getElementById("issueDialog");
   const closeBtn = document.querySelector(".closeDialog");
   const openBtn = document.getElementById("openIssueDialog");
+  const form = document.getElementById("issueForm");
 
   if (openBtn) {
     openBtn.addEventListener("click", () => {
@@ -18,9 +19,9 @@ document.addEventListener("DOMContentLoaded", () => {
       e.preventDefault();
 
       const description = document.getElementById("description").value;
-
+      const taskId = document.getElementById("taskId").value;
       try {
-        const response = await fetch("/issues", {
+        const response = await fetch("/tasks/" + taskId + "/issue", {
           method: "POST",
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify({ description }),
