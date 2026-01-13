@@ -102,6 +102,28 @@
 <select name="productIdContainer" id="productIdContainer" multiple class="hidden"></select>
 <select name="productAmountContainer" id="productAmountContainer" multiple class="hidden"></select>
 </form>
+
+<!-- Kommentarfelt til task -->
+<section class="kommentarSektion">
+    <h4>Kommentarer</h4>
+
+    <!-- Liste over eksisterende kommentarer -->
+    <ul class="comment-list">
+        {{#each issues}}
+        <li>
+            <strong>{{this.User.name}}:</strong> {{this.comment}}
+            <em>({{this.createdAt}})</em>
+        </li>
+        {{/each}}
+    </ul>
+
+    <!-- Formular til at indsætte ny kommentar -->
+    <form id="commentForm" action="/issues/add/{{task.id}}" method="POST">
+        <textarea name="comment" placeholder="Skriv din kommentar her..." required></textarea>
+        <button type="submit">Tilføj kommentar</button>
+    </form>
+</section>
+
 <div class="submit-container">
     <button type="submit" id="submitAllBtn" form="taskForm">Gem og aflsut rengøring</button>
 </div>

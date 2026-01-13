@@ -89,6 +89,10 @@ exports.logStart = async (req, res) => {
       body["station-Ukendt"],
     ].find((value) => value != ""),
   );
+
+  console.log('gasstationIdSelection:', gasstationIdSelection);
+console.log('userId:', req.session.user ? req.session.user.id : 'NO SESSION USER');
+console.log('startTime:', body.startTime);
   const taskId = await Task.create({
     gasstationId: gasstationIdSelection,
     taskLink: 0,

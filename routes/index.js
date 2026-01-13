@@ -10,6 +10,7 @@ const taskHistorieController = require("../controllers/taskHistorieController");
 const modifyGasstationController = require("../controllers/modifyGasstationController");
 const taskController = require("../controllers/tasksController");
 const productController = require("../controllers/productController");
+const issueLogController = require('../controllers/issueLogController');
 
 const upload = require("../utility/multer");
 const { allowRoles } = require("../middleware/authentication");
@@ -29,6 +30,7 @@ router.post("/uploadtaskimage/:taskId", allowRoles([1,3]), createTaskDataControl
 router.get("/createtaskdata/:taskId/images", allowRoles([1,3]), createTaskDataController.viewImages); //Se uploadede billeder
 router.post("/createtaskdata/:taskId/images", allowRoles([1,3]), createTaskDataController.deleteImage,); //Slet uploadede billeder
 router.post("/uploadtask/:taskId", allowRoles([1,3]), createTaskDataController.uploadTasks); //Tilføj til ProductTask table og send mail til ejer
+router.post('/issues/add/:taskId', allowRoles([1, 3]), issueLogController.addCommentToTask); //send kommenatr med videre
 router.get("/completedtask/:taskId", allowRoles([1,3]), createTaskDataController.completedTask); //Færdig med task upload
 router.get("/tasks", allowRoles([1,3]), taskController.userListTasks); //Færdig med task upload
 router.get("/tasks/:taskId", allowRoles([1,3]), taskController.userTasks); //Færdig med task upload

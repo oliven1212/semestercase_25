@@ -8,6 +8,7 @@ module.exports = (sequelize, DataTypes) => {
         foreignKey: "taskId",
         onDelete: "CASCADE",
       });
+      Issue.belongsTo(models.User, { foreignKey: 'userId' });
     }
   }
 

@@ -8,8 +8,12 @@ const {
     Picture,
     ProductTask,
     Branch,
-    City
+    City,
+    issue
 } = require('../models');
+
+const { getIssuesForTask } = require('./issueLogController');
+
 const upload = require('../utility/multer');
 const path = require('path');
 const crypto = require('crypto');
@@ -24,6 +28,7 @@ exports.uploadMiddleware = upload.fields([
 
 
 exports.taskPageOne = async (req, res) => {
+    const taskId = req.params.taskId; 
     const task = await Task.findByPk(req.params.taskId, {
         include: [{
             model: Gasstation,
@@ -50,11 +55,14 @@ exports.taskPageOne = async (req, res) => {
         raw: true
     });
 
+    const issues = await getIssuesForTask(taskId);
+
     res.render("home/taskPageOne", {
         title: 'Log din rengøring',
         user: user,
         task: task,
         product: product,
+        issues
 
     });
 
