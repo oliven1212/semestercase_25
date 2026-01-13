@@ -9,10 +9,12 @@ module.exports = (sequelize, DataTypes) => {
      * This method is not a part of Sequelize lifecycle.
      * The `models/index` file will call this method automatically.
      */
-    static associate(models) {
-      // define association here
-    }
-  }
+  static associate(models) {
+  Issue.belongsTo(models.Task, {
+    foreignKey: "taskId",
+    onDelete: "CASCADE"
+  });
+}
   Issue.init({
     taskId: DataTypes.INTEGER,
     status: DataTypes.BOOLEAN,
