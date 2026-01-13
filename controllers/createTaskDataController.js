@@ -9,7 +9,6 @@ const {
     ProductTask,
     Branch,
     City,
-    issue
 } = require('../models');
 
 const { getIssuesForTask } = require('./issueLogController');
