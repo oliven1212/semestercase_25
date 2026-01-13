@@ -209,7 +209,7 @@ router.post(
   taskController.deleteImage,
 );
 //----------------ISSUE---------------
-router.get("/admin/issues", issueController.adminListIssues);
+router.get("/admin/issues", allowRoles([1]), issueController.adminListIssues);
 //router.get("/admin/issues/:issueId", issueController.getIssue);
 /*
 router.delete(
@@ -217,11 +217,12 @@ router.delete(
   allowRoles([1]),
   issueController.issueDelete,
 );
+*/
 router.post(
-  "/admin/tasks/:taskId/issue",
+  "/tasks/:taskId/issue",
   allowRoles([1, 2, 3]),
   issueController.issueCreate,
 );
-*/
+
 router.use("/", authRoutes);
 module.exports = router;

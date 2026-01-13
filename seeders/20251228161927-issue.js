@@ -9,14 +9,79 @@ module.exports = {
         {
           taskId: 1,
           description:
-            "Generelle rengøringsfejl Støv og snavs er ikke fjernet fra vandrette overflader. Synligt snavs langs paneler og i hjørner. Overflader fremstår ujævnt rengjorte med striber. Rengøringen er ikke udført i henhold til aftalt standard. Gamle pletter er ikke forsøgt fjernet. Gulve Gulvet er ikke vasket grundigt og fremstår plettet. Synligt snavs i kanter og under inventar. Der er rester af rengøringsmiddel på gulvoverfladen. Gulvet er ikke støvsuget før gulvvask. Pletter og skjolder er ikke fjernet. Badeværelse og toilet Kalkaflejringer på armaturer og i bruseniche. Sæbe- og fedtrester på fliser. Toilet er ikke rengjort tilfredsstillende, især under kanten. Afløb fremstår urenset. Spejle er ikke pudset korrekt og har synlige striber. Køkken Fedt og snavs på køkkenlåger og greb. Bordplader er ikke aftørret grundigt.",
+            "Afløb i vaskehallen er delvist stoppet og kan ikke renses med almindeligt udstyr.",
           status: true,
           createdAt: new Date(),
           updatedAt: new Date(),
         },
         {
           taskId: 2,
-          description: "Description for issue 2",
+          description:
+            "Der er konstante sæberester på gulvet, selv efter gentagen afskylning.",
+          status: true,
+          createdAt: new Date(),
+          updatedAt: new Date(),
+        },
+        {
+          taskId: 3,
+          description:
+            "Vaskebørster er meget slidte og bør udskiftes for at undgå skader på biler.",
+          status: false,
+          createdAt: new Date(),
+          updatedAt: new Date(),
+        },
+        {
+          taskId: 4,
+          description:
+            "Forvaskemiddel løber hurtigt tør, mulig fejl på doseringsanlæg.",
+          status: true,
+          createdAt: new Date(),
+          updatedAt: new Date(),
+        },
+        {
+          taskId: 5,
+          description:
+            "Der står tomme kemidunke i serviceområdet uden mulighed for bortskaffelse.",
+          status: false,
+          createdAt: new Date(),
+          updatedAt: new Date(),
+        },
+        {
+          taskId: 6,
+          description:
+            "Gulvet er meget glat i vaskehallen, selv efter rengøring.",
+          status: true,
+          createdAt: new Date(),
+          updatedAt: new Date(),
+        },
+        {
+          taskId: 7,
+          description:
+            "Der mangler tydelig mærkning på kemibeholderne i teknikrummet.",
+          status: true,
+          createdAt: new Date(),
+          updatedAt: new Date(),
+        },
+        {
+          taskId: 8,
+          description:
+            "Sensor ved indkørsel er dækket af snavs, men kan ikke nås sikkert.",
+          status: false,
+          createdAt: new Date(),
+          updatedAt: new Date(),
+        },
+        {
+          taskId: 9,
+          description:
+            "Der er gentagne lækager fra slanger under vask, årsag ukendt.",
+          status: true,
+          createdAt: new Date(),
+          updatedAt: new Date(),
+        },
+        {
+          taskId: 10,
+          description:
+            "Vandtryk virker ujævnt under vask og påvirker rengøringsresultatet.",
           status: false,
           createdAt: new Date(),
           updatedAt: new Date(),

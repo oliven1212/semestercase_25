@@ -22,6 +22,7 @@ exports.adminListIssues = async (req, res) => {
     raw: true,
     order: [["status", "ASC"]],
   });
+
   console.log(issues);
   const issuesMap = issues.map((issue) => {
     const issueSolved = issue.status === 1;
@@ -39,10 +40,22 @@ exports.adminListIssues = async (req, res) => {
       issueSolved: issueSolved,
     };
   });
+
   console.log(issuesMap);
   res.render("home/adminList", {
     title: "Liste af problemer",
     message: "Liste af problemer",
     content: issuesMap,
   });
+};
+exports.issueCreate = async (req, res) => {
+  const { description } = req.body;
+  const { taskId } = req.params;
+
+  await Issue.create({
+    description: description,
+    status: 0,
+    taskId: taskId,
+  });
+  res.redirect("/tasks/" + taskId);
 };
