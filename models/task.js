@@ -39,7 +39,7 @@ module.exports = (sequelize, DataTypes) => {
         static associate(models) {
             // define association here
             Task.hasMany(models.Picture, {foreignKey: "taskId"});
-            Task.hasMany(models.Issue, { foreignKey: "taskId" });
+            Task.hasMany(models.Issue, { foreignKey: "taskId", onDelete: "CASCADE" });
 
             Task.belongsTo(models.Gasstation, {foreignKey: "gasstationId"});
             Task.belongsTo(models.User, {foreignKey: "userId",onDelete: "SET NULL",});
