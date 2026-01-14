@@ -1,9 +1,9 @@
 const { User, Gasstation, Task, Unit, Product, Picture, ProductTask, Branch, City } = require('../models');
 const upload = require('../utility/multer');
 const path = require('path');
-const { gasstation } = require('./gasController');
 const { sendTaskEmail } = require('../utility/taskEmail');
 const fs = require('fs');
+const { v4: uuidv4 } = require('uuid');
 
 exports.uploadMiddleware = upload.fields([
     { name: 'beforePicture', maxCount: 100 },
@@ -119,8 +119,6 @@ exports.removeProduct = async (req, res) =>{
 
 exports.uploadImages = async (req, res) =>{
 const taskId = parseInt(req.params.taskId);
-    const { v4: uuidv4 } = require('uuid');
-
     // Hvis der allerede findes billeder for denne task, genbrug samme uuid (fra first picture.id)
     // ellers generér en ny uuid
     const existingPicture = await Picture.findOne({
@@ -144,7 +142,6 @@ const taskId = parseInt(req.params.taskId);
             });
         }
     }
-
     if (req.files['afterPicture']) {
         const afterPictures = req.files['afterPicture'];
         // Gem efter-billeder
@@ -158,8 +155,6 @@ const taskId = parseInt(req.params.taskId);
             });
         }
     }
-    
-    
     
     const imageCount = await Picture.findAll({
         where: { taskId: parseInt(taskId), beforeAfter: parseInt(req.params.beforeAfter) },
