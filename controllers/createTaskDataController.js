@@ -162,7 +162,7 @@ const taskId = parseInt(req.params.taskId);
         raw: true
     });
     res.json(imageCount.length);
-}
+};
 
 
 exports.uploadTasks = async (req, res) => {
