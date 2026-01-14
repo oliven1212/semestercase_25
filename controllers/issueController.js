@@ -48,6 +48,39 @@ exports.adminListIssues = async (req, res) => {
     content: issuesMap,
   });
 };
+
+exports.issueShow = async (req, res) => {
+  const issue = await Issue.findOne({
+    where: {
+      id: req.params.issueId,
+    },
+    attributes: ["id", "description", "status"],
+    include: [
+      {
+        model: Task,
+        attributes: ["id"],
+        include: [
+          {
+            model: User,
+            attributes: ["id", "firstName", "lastName"],
+          },
+          {
+            model: Gasstation,
+            attributes: ["contactPhone", "contactEmail", "address"],
+          },
+        ],
+      },
+    ],
+    raw: true,
+  });
+
+  res.render("admin/adminIssue", {
+    title: "Problemdetaljer",
+    message: "Problemdetaljer",
+    issue,
+  });
+};
+
 exports.issueCreate = async (req, res) => {
   const { description } = req.body;
   const { taskId } = req.params;
@@ -58,4 +91,11 @@ exports.issueCreate = async (req, res) => {
     taskId: taskId,
   });
   res.redirect("/tasks/" + taskId);
+};
+
+exports.issueUpdate = async (req, res) => {
+  const { taskId } = req.params;
+  const { status } = req.body;
+  await Issue.update({ status }, { where: { id } });
+  res.redirect(`/admin/issues/${issue.id}`);
 };

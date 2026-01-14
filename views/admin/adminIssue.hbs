@@ -1,0 +1,15 @@
+<h1>Issue #{{issue.id}}</h1>
+
+    <p>Status: <span class="{{issue.statusClass}}">{{issue.statusText}}</span></p>
+
+    <h2>Beskrivelse</h2>
+    <p>{{issue.description}}</p>
+
+<h2>Opgave info</h2>
+    <p>Task ID: {{issue.Task.id}}</p>
+    <p>Bruger: {{issue.Task.User.firstName}} {{issue.Task.User.lastName}}</p>
+    <p>Tankstation: {{issue.Task.Gasstation.address}}</p>
+    <p>Kontakt: {{issue.Task.Gasstation.contactEmail}}</p>
+    <p>Telefon: {{issue.Task.Gasstation.contactPhone}}</p>
+
+<p><a href="/admin/issues">Tilbage til liste</a></p>

@@ -38,6 +38,17 @@
                 {{#if this.formattedDate}}
                     <p class="time">Dato: {{this.formattedDate}}</p>
                 {{/if}}
+                <select
+                  class="issue-status"
+                  data-issue-id="{{id}}"
+                >
+                  <option value="0" {{#unless issueSolved}}selected{{/unless}}>
+                    Ikke løst
+                  </option>
+                  <option value="1" {{#if issueSolved}}selected{{/if}}>
+                    Løst
+                  </option>
+                </select>
 
                 <p class="contact">{{{this.contact}}}</p>
 
