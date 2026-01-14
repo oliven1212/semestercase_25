@@ -15,7 +15,7 @@ const beforeCount = document.getElementById('beforeCount');
 const afterCount = document.getElementById('afterCount');
 
 
-//Viser antal valgte før billeder
+//Viser antal valgte før billeder og uploader billeder til server og database
 beforeInput.addEventListener('change', async function () {
     const fd = new FormData();
 
@@ -34,6 +34,7 @@ beforeInput.addEventListener('change', async function () {
     beforeCount.textContent = count > 0 ? `${count} uploadet` : '';
 });
 
+//Viser antal valgte før billeder og uploader billeder til server og database
 afterInput.addEventListener('change', async function () {
     const fd = new FormData();
 
