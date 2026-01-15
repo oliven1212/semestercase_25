@@ -1,4 +1,4 @@
-const { Gasstation, User, Issue, Task } = require("../models");
+const { Gasstation, User, Issue, Task, Branch, City } = require("../models");
 
 exports.adminListIssues = async (req, res) => {
   const issues = await Issue.findAll({
@@ -15,6 +15,14 @@ exports.adminListIssues = async (req, res) => {
           {
             model: Gasstation,
             attributes: ["contactPhone", "contactEmail", "address"],
+            include: [
+              {
+                model: Branch,
+              },
+              {
+                model: City,
+              },
+            ],
           },
         ],
       },
@@ -23,7 +31,6 @@ exports.adminListIssues = async (req, res) => {
     order: [["status", "ASC"]],
   });
 
-  console.log(issues);
   const issuesMap = issues.map((issue) => {
     const issueSolved = issue.status === 1;
     const statusDisplay = issueSolved
@@ -41,9 +48,9 @@ exports.adminListIssues = async (req, res) => {
     };
   });
 
-  console.log(issuesMap);
   res.render("home/adminList", {
     title: "Liste af problemer",
+    hideDelete: true,
     message: "Liste af problemer",
     content: issuesMap,
   });
@@ -67,17 +74,32 @@ exports.issueShow = async (req, res) => {
           {
             model: Gasstation,
             attributes: ["contactPhone", "contactEmail", "address"],
+            include: [
+              {
+                model: Branch,
+              },
+              {
+                model: City,
+              },
+            ],
           },
         ],
       },
     ],
     raw: true,
   });
+  const issueSolved = issue.status === 1;
+  const statusDisplay = issueSolved
+    ? { text: "Løst", class: "issue-solved" }
+    : { text: "Ikke løst", class: "issue-unsolved" };
 
   res.render("admin/adminIssue", {
     title: "Problemdetaljer",
     message: "Problemdetaljer",
     issue,
+    issueSolved,
+    statusText: statusDisplay.text,
+    statusClass: statusDisplay.class,
   });
 };
 
@@ -90,12 +112,15 @@ exports.issueCreate = async (req, res) => {
     status: 0,
     taskId: taskId,
   });
+
   res.redirect("/tasks/" + taskId);
 };
 
 exports.issueUpdate = async (req, res) => {
-  const { taskId } = req.params;
+  const { issueId } = req.params;
   const { status } = req.body;
-  await Issue.update({ status }, { where: { id } });
-  res.redirect(`/admin/issues/${issue.id}`);
+
+  await Issue.update({ status }, { where: { id: issueId } });
+
+  res.redirect(`/admin/issues/${issueId}`);
 };

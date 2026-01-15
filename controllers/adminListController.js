@@ -14,7 +14,7 @@ exports.adminMain = async (req, res) => {
       { name: "Tankstationer", reference: "gasstations" },
       { name: "Rengøringer", reference: "tasks" },
       { name: "Produkter", reference: "products" },
-      { name: "problemer", reference: "issues" },
+      { name: "Problemer", reference: "issues" },
     ],
     hideReturn: true,
   });

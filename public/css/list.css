@@ -172,14 +172,14 @@
     border-radius: 5px;
 }
 .issue-unsolved {
-    color: #dc2626;
+    color: #bf0603;
     font-weight: bold;
     font-size: 0.95em;
     padding: 10px 14px;
 }
 
 .issue-solved {
-    color: #16a34a;
+    color: #4a7c59;
     font-weight: bold;
     font-size: 0.95em;
     padding: 10px 14px;

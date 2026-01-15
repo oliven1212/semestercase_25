@@ -2,7 +2,7 @@ section {
     padding-left: var(--sideMargin);
     padding-right: var(--sideMargin);
 }
-section.modifySection{
+section.modifySection {
     height: auto;
 }
 section.modifySection form {
@@ -10,12 +10,12 @@ section.modifySection form {
     overflow-y: scroll;
     max-height: 80%;
 }
-section.modifySection h2{
+section.modifySection h2 {
     color: var(--darkBlue);
 }
 section.modifySection div label,
 section.modifySection div input,
-section.modifySection div select{
+section.modifySection div select {
     display: block;
     width: calc(100% - 3px);
     padding: 0;
@@ -25,27 +25,25 @@ section.modifySection div select{
     border: none;
     color: var(--darkBlue);
 }
-section.modifySection  div input, 
-section.modifySection  div select,
-section.modifySection  div option {
-        border-style: solid;
-        border-width: 1.5px;
-        box-sizing: border-box;
-        border-radius: 0;
-        border-color: var(--darkBlue);
-        background-color: var(--white);
+section.modifySection div input,
+section.modifySection div select,
+section.modifySection div option {
+    border-style: solid;
+    border-width: 1.5px;
+    box-sizing: border-box;
+    border-radius: 0;
+    border-color: var(--darkBlue);
+    background-color: var(--white);
 }
-
 
 section.modifySection form div:not(:has(img)) {
     margin-bottom: 15px;
 }
-.functionButtons{
+.functionButtons {
     display: grid;
-    grid-template-columns: 1fr 1fr;
+    grid-template-columns: 3fr "1" fr;
     margin-top: auto;
     height: 20%;
-
 }
 .functionButtons button {
     border: none;
@@ -56,18 +54,18 @@ section.modifySection form div:not(:has(img)) {
     cursor: pointer;
 }
 .functionButtons button:first-child {
-    justify-self: start;
-}
-.functionButtons button:last-child {
     justify-self: end;
 }
-.functionButtons button svg{
+.functionButtons button:last-child {
+    justify-self: right;
+}
+.functionButtons button svg {
     width: 100%;
     fill: var(--darkBlue);
-    max-width: 300px;
+    max-width: 200px;
     min-width: 50px;
 }
-.bigIcon{
+.bigIcon {
     fill: var(--darkBlue);
     stroke: var(--darkBlue);
     width: 60%;
@@ -84,7 +82,7 @@ section.modifySection .removeImageButton {
     padding: 5px;
     border-radius: 4px;
 }
-section.modifySection .imageGrid{
+section.modifySection .imageGrid {
     display: grid;
     grid-template-columns: 1fr 1fr;
     gap: 10px;
@@ -93,8 +91,7 @@ section.modifySection .imageGrid{
 
 .imageContainer {
     display: grid;
-    grid-template-areas:
-        "stack";
+    grid-template-areas: "stack";
     aspect-ratio: 1 / 1;
     max-width: 150px;
 }
@@ -119,18 +116,29 @@ section.modifySection .imageGrid{
     padding: 5px;
     border-radius: 4px;
 }
-.imageGrid{
+.imageGrid {
     display: grid;
     grid-template-columns: 1fr 1fr;
     gap: 10px;
     row-gap: 10px;
 }
-.productItemList{
+.productItemList {
     display: grid;
     grid-template-columns: 7fr 2fr 1fr;
 }
 
-.imageGrid form{
+.imageGrid form {
     overflow: hidden !important;
     max-height: 100% !important;
+}
+.issue-unsolved {
+    color: #bf0603;
+    font-weight: bold;
+    padding: 10px 14px;
+}
+
+.issue-solved {
+    color: #4a7c59;
+    font-weight: bold;
+    padding: 10px 14px;
 }
