@@ -95,7 +95,6 @@ exports.issueShow = async (req, res) => {
 
   res.render("admin/adminIssue", {
     title: "Problemdetaljer",
-    message: "Problemdetaljer",
     issue,
     issueSolved,
     statusText: statusDisplay.text,
@@ -113,7 +112,7 @@ exports.issueCreate = async (req, res) => {
     taskId: taskId,
   });
 
-  res.redirect("/tasks/" + taskId);
+  res.redirect(`/tasks/${taskId}`);
 };
 
 exports.issueUpdate = async (req, res) => {

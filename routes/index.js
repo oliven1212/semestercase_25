@@ -210,6 +210,7 @@ router.post(
 );
 //----------------ISSUE---------------
 router.get("/admin/issues", allowRoles([1]), issueController.adminListIssues);
+
 router.get(
   "/admin/issues/:issueId",
   allowRoles([1]),
@@ -230,7 +231,7 @@ router.delete(
 */
 router.post(
   "/tasks/:taskId/issue",
-  allowRoles([1, 2, 3]),
+  allowRoles([1, 3]),
   issueController.issueCreate,
 );
 
