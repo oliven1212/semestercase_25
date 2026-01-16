@@ -39,7 +39,7 @@ exports.taskPageOne = async (req, res) => {
         }],
         raw: true
     });
-    //Her skal tilføjes taskId så gasstation og user bliver sendt med
+    
 
 
     const product = await Product.findAll({

@@ -1,4 +1,4 @@
-const { Task, User, Gasstation, Picture, Branch, Product, ProductTask, Unit, City } = require('../models');
+const { Task, User, Gasstation, Picture, Branch, Product, ProductTask, Unit, City, Issue } = require('../models');
 const path = require('path');
 const fs = require('fs');
 
@@ -57,6 +57,16 @@ exports.adminTasks = async (req, res) => {
         raw: true,
     });
 
+    const issues = await Issue.findAll({
+        where: { taskId: req.params.taskId },
+        include: [{
+        model: User,
+        attributes: ['firstName', 'lastName']
+         }],
+            order: [['createdAt', 'ASC']],
+            raw: true,
+        });
+
     res.render("admin/modifyTask", {
         task: task,
         pictures: pictures,
@@ -64,6 +74,7 @@ exports.adminTasks = async (req, res) => {
         users: users,
         gasstations: gasstations,
         products: products,
+        issues: issues,
         currentPath: req.originalUrl.replace(/\/$/, ""),
         
     });

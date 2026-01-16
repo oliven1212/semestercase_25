@@ -1,6 +1,6 @@
 const { Issue, Task, User } = require('../models');
 
-// Hent alle issues for en task
+// Hent issues for en task
 exports.getIssuesForTask = async (taskId) => {
   return await Issue.findAll({
     where: { taskId },
@@ -14,7 +14,7 @@ exports.getIssuesForTask = async (taskId) => {
 exports.addCommentToTask = async (req, res) => {
     const { taskId } = req.params;
     const { comment } = req.body;
-    const userId = req.session.user.id; // Antager du har session med user.id
+    const userId = req.session.user.id; 
 
     if (!comment || comment.trim() === '') {
         return res.status(400).send('Kommentarfeltet kan ikke være tomt');
@@ -24,7 +24,7 @@ exports.addCommentToTask = async (req, res) => {
         await Issue.create({
             taskId,
             comment,
-            status: false, // Du kan sætte default status til false
+            status: false, 
             userId
         });
 

@@ -4,6 +4,7 @@ section {
 }
 section.modifySection{
     height: auto;
+    color: var(--darkBlue);
 }
 section.modifySection form {
     display: block;

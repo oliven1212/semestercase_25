@@ -104,22 +104,12 @@
 </form>
 
 <!-- Kommentarfelt til task -->
-<section class="kommentarSektion">
-    <h4>Kommentarer</h4>
-
-    <!-- Liste over eksisterende kommentarer -->
-    <ul class="comment-list">
-        {{#each issues}}
-        <li>
-            <strong>{{this.User.name}}:</strong> {{this.comment}}
-            <em>({{this.createdAt}})</em>
-        </li>
-        {{/each}}
-    </ul>
-
+<section class="comment">
+    <h4 class="title">Kommentarer</h4>
+   
     <!-- Formular til at indsætte ny kommentar -->
     <form id="commentForm" action="/issues/add/{{task.id}}" method="POST">
-        <textarea name="comment" placeholder="Skriv din kommentar her..." required></textarea>
+        <textarea name="comment" placeholder="Skriv fejl og mangler her" required></textarea>
         <button type="submit">Tilføj kommentar</button>
     </form>
 </section>
@@ -129,3 +119,4 @@
 </div>
 
 <script src="/js/createTaskData.js"></script>
+

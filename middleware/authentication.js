@@ -10,7 +10,7 @@ function ensureAuthenticated(req, res, next) {
 }
 
 /**
- * allowRoles([1,2]) -> middleware som KUN lader disse roller passere (kalder next).
+ * allowRoles([1,2]) middleware som KUN lader disse roller passere (kalder next).
  * Ellers redirect eller 403.
  */
 function allowRoles(allowedRoles) {
@@ -23,14 +23,11 @@ function allowRoles(allowedRoles) {
       return next();
     }
     // Hvis ikke tilladt:
-    return res.status(403).send("Adgang nægtet"); // eller redirect til '/' hvis UI foretrækkes
+    return res.status(403).send("Adgang nægtet"); // eller redirect til '/' 
   };
 }
 
-/**
- * Optional: redirect users to their role-home (kald den kun på fx '/')
- * Denne må ALDRIG bruges på de destinations-routes som den redirecter til.
- */
+
 function redirectToRoleHome(req, res, next) {
   if (!req.session || !req.session.user) {
     return res.redirect("/");

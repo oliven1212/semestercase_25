@@ -126,6 +126,26 @@
         {{/each}}
     </div>
 </section>
+
+<section class="modifySection">
+    <h2>Kommentarer</h2>
+
+    {{#if issues.length}}
+        <div class="commentList">
+            {{#each issues}}
+                <div class="commentItem">
+                    <p class="commentText">
+                        {{this.comment}}
+                    </p>
+                </div>
+            {{/each}}
+        </div>
+    {{else}}
+        <p>Der er ingen kommentarer til denne rengøring.</p>
+    {{/if}}
+</section>
+
+
 {{#ifEq permissionLevel 1}}
 <div class="functionButtons">
     <button type="submit" form="deleteTask">
