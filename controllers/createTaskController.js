@@ -1,6 +1,6 @@
 // controllers/createTaskController.js
-const { User, Gasstation, Branch, Task, City } = require("../models");
-const { gasstation } = require("./gasController");
+const { User, Gasstation, Branch, Task, City } = require('../models');
+const { gasstation } = require('./gasController');
 
 exports.createTask = async (req, res) => {
   try {
@@ -11,15 +11,15 @@ exports.createTask = async (req, res) => {
 
     //  Hent alle gasstationer + deres branch
     const gasstationsRaw = await Gasstation.findAll({
-      attributes: ["id", "address"],
+      attributes: ['id', 'address'],
       include: [
         {
           model: Branch,
-          attributes: ["name"],
+          attributes: ['name'],
         },
         {
           model: City,
-          attributes: ["name"],
+          attributes: ['name'],
         },
       ],
     });
@@ -30,7 +30,7 @@ exports.createTask = async (req, res) => {
     // Gruppér efter branch-navn
     const stationsByBranch = {};
     gasstations.forEach((gs) => {
-      const branchName = gs.Branch ? gs.Branch.name : "Ukendt";
+      const branchName = gs.Branch ? gs.Branch.name : 'Ukendt';
 
       if (!stationsByBranch[branchName]) {
         stationsByBranch[branchName] = [];
@@ -39,8 +39,8 @@ exports.createTask = async (req, res) => {
       stationsByBranch[branchName].push({
         id: gs.id,
         address: gs.address,
-        city: gs.City ? gs.City.name : "Ukendt by",
-        zipCode: gs.City ? gs.City.zipCode : "",
+        city: gs.City ? gs.City.name : 'Ukendt by',
+        zipCode: gs.City ? gs.City.zipCode : '',
       });
     });
 
@@ -52,28 +52,28 @@ exports.createTask = async (req, res) => {
 
     const tasksRaw = await Task.findAll({
       where: { userId: req.session.user.id },
-      order: [["startTime", "ASC"]],
+      order: [['startTime', 'ASC']],
     });
     const tasks = tasksRaw.map((t) => t.get({ plain: true }));
 
-    res.render("home/createTask", {
-      title: "velkommen",
-      message: "Vælg tankstation",
+    res.render('home/createTask', {
+      title: 'velkommen',
+      message: 'Vælg tankstation',
       users: users,
       gasstation: gasstations,
       branchDropdowns,
       tasks,
     });
   } catch (err) {
-    console.error("error in create task:");
-    console.error("Sequelize name:", err.name);
-    console.error("Sequelize message:", err.message);
+    console.error('error in create task:');
+    console.error('Sequelize name:', err.name);
+    console.error('Sequelize message:', err.message);
     if (err.original) {
-      console.error("MySQL message:", err.original.message);
-      console.error("MySQL code:", err.original.code);
-      console.error("MySQL sql:", err.original.sql);
+      console.error('MySQL message:', err.original.message);
+      console.error('MySQL code:', err.original.code);
+      console.error('MySQL sql:', err.original.sql);
     }
-    res.status(500).send("der opstod en fejl på serveren");
+    res.status(500).send('der opstod en fejl på serveren');
   }
 };
 
@@ -81,13 +81,13 @@ exports.logStart = async (req, res) => {
   const body = req.body;
   const gasstationIdSelection = parseInt(
     [
-      body["station-OK Plus"],
-      body["station-Shell"],
-      body["station-Circle K"],
-      body["station-Uno X"],
-      body["station-Q8"],
-      body["station-Ukendt"],
-    ].find((value) => value != ""),
+      body['station-OK Plus'],
+      body['station-Shell'],
+      body['station-Circle K'],
+      body['station-Uno X'],
+      body['station-Q8'],
+      body['station-Ukendt'],
+    ].find((value) => value != ''),
   );
   const taskId = await Task.create({
     gasstationId: gasstationIdSelection,

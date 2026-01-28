@@ -8,7 +8,7 @@ const {
   Unit,
   Branch,
   City,
-} = require("../models");
+} = require('../models');
 
 //taskhistorieController
 exports.taskHistorie = async (req, res) => {
@@ -22,11 +22,11 @@ exports.taskHistorie = async (req, res) => {
     include: [
       {
         model: Gasstation,
-        attributes: ["address", "cityCode"],
+        attributes: ['address', 'cityCode'],
         include: [
           {
             model: Branch,
-            attributes: ["name"],
+            attributes: ['name'],
           },
           {
             model: City,
@@ -36,18 +36,18 @@ exports.taskHistorie = async (req, res) => {
       },
       {
         model: User,
-        attributes: ["firstName", "lastName", "phone"],
+        attributes: ['firstName', 'lastName', 'phone'],
       },
       {
         model: Product,
-        attributes: ["name"],
+        attributes: ['name'],
         through: {
           model: ProductTask,
-          attributes: ["amount"],
+          attributes: ['amount'],
         },
         include: {
           model: Unit,
-          attributes: ["name"],
+          attributes: ['name'],
         },
       },
     ],
@@ -61,11 +61,11 @@ exports.taskHistorie = async (req, res) => {
   };
 
   //response til ens http kald som der åbner taskhistoriefilen
-  res.render("home/taskHistorie", {
+  res.render('home/taskHistorie', {
     user: {
-      firstName: task[0]["User.firstName"],
-      lastName: task[0]["User.lastName"],
-      phone: task[0]["User.phone"],
+      firstName: task[0]['User.firstName'],
+      lastName: task[0]['User.lastName'],
+      phone: task[0]['User.phone'],
     },
     task: task,
     timeStamp: timeStamp,

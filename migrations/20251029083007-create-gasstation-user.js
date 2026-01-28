@@ -5,43 +5,43 @@ module.exports = {
     await queryInterface.createTable('GasstationUsers', {
       userId: {
         type: Sequelize.INTEGER,
-          references: {
-              model: 'Users',
-              key: 'id',
-          },
-          onUpdate: 'CASCADE',
-          onDelete: 'CASCADE',
+        references: {
+          model: 'Users',
+          key: 'id',
+        },
+        onUpdate: 'CASCADE',
+        onDelete: 'CASCADE',
       },
       gasstationId: {
         type: Sequelize.INTEGER,
-          references: {
-              model: 'Gasstations',
-              key: 'id',
-          },
-          onUpdate: 'CASCADE',
-          onDelete: 'CASCADE',
+        references: {
+          model: 'Gasstations',
+          key: 'id',
+        },
+        onUpdate: 'CASCADE',
+        onDelete: 'CASCADE',
 
       },
       isOwner: {
-        type: Sequelize.BOOLEAN
+        type: Sequelize.BOOLEAN,
       },
       createdAt: {
         allowNull: false,
-        type: Sequelize.DATE
+        type: Sequelize.DATE,
       },
       updatedAt: {
         allowNull: false,
-        type: Sequelize.DATE
-      }
+        type: Sequelize.DATE,
+      },
     });
     await queryInterface.addConstraint('GasstationUsers', {
       fields: ['userId', 'gasstationId'],
       type: 'primary key',
-      name: 'gasstationusers_pkey'
+      name: 'gasstationusers_pkey',
 
     });
   },
   async down(queryInterface, Sequelize) {
     await queryInterface.dropTable('GasstationUsers');
-  }
+  },
 };

@@ -5,6 +5,8 @@
   "scripts": {
     "dev": "nodemon server.js",
     "start": "node server.js",
+    "lint": "eslint . --ext .js",
+    "lint:watch":"nodemon --watch . --ext js --exec \"npm run lint\"",
     "db:drop": "npx sequelize-cli db:drop",
     "db:create": "npx sequelize-cli db:create",
     "db:migrate": "npx sequelize-cli db:migrate",
@@ -40,6 +42,12 @@
     "uuid": "^8.3.2"
   },
   "devDependencies": {
+    "@eslint/css": "^0.14.1",
+    "@eslint/js": "^9.39.2",
+    "@eslint/json": "^0.14.0",
+    "@eslint/markdown": "^7.5.1",
+    "eslint": "^9.39.2",
+    "globals": "^17.1.0",
     "nodemon": "^3.1.10",
     "sequelize-cli": "^6.6.3"
   },

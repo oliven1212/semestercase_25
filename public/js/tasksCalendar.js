@@ -6,7 +6,7 @@ document.addEventListener('DOMContentLoaded', () => {
     headerToolbar: {
       left: 'prev,next today',
       center: 'title',
-      right: 'dayGridMonth,dayGridWeek,dayGridDay'
+      right: 'dayGridMonth,dayGridWeek,dayGridDay',
     },
     selectable: true,
     eventClick: (info) => {
@@ -27,7 +27,7 @@ document.addEventListener('DOMContentLoaded', () => {
     datesSet: (dateInfo) => {
       // hent events for synligt interval
       loadEvents(dateInfo.startStr, dateInfo.endStr);
-    }
+    },
   });
 
   calendar.render();
@@ -61,7 +61,7 @@ document.addEventListener('DOMContentLoaded', () => {
       const res = await fetch('/api/tasks', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(payload)
+        body: JSON.stringify(payload),
       });
 
       if (res.ok) {

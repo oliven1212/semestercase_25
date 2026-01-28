@@ -1,16 +1,16 @@
-const express = require("express");
-const exphbs = require("express-handlebars");
-const session = require("express-session");
-const { startCronJob } = require("./utility/deleteOldImgs");
+const express = require('express');
+const exphbs = require('express-handlebars');
+const session = require('express-session');
+const { startCronJob } = require('./utility/deleteOldImgs');
 
-const path = require("path");
-const nodeMailer = require("nodemailer");
+const path = require('path');
+const nodeMailer = require('nodemailer');
 
 // const multer = require("multer");
 // const upload = multer({ dest: "public/uploads/" });
 // const fs = require("fs");
 
-const routes = require("./routes");
+const routes = require('./routes');
 
 const app = express();
 
@@ -19,14 +19,14 @@ app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 
 // Static files
-app.use(express.static(path.join(__dirname, "public")));
+app.use(express.static(path.join(__dirname, 'public')));
 
 // View engine
 app.engine(
-  ".hbs",
+  '.hbs',
   exphbs.engine({
-    extname: ".hbs",
-    partialsDir: path.join(__dirname, "views"),
+    extname: '.hbs',
+    partialsDir: path.join(__dirname, 'views'),
     helpers: {
       //Works like the if handlebar helper, but checks if 2 values are equal ( == )
       ifEq: function (a, b, options) {
@@ -39,13 +39,13 @@ app.engine(
   }),
 );
 
-app.set("view engine", ".hbs");
-app.set("views", path.join(__dirname, "views"));
+app.set('view engine', '.hbs');
+app.set('views', path.join(__dirname, 'views'));
 
 //kan være vi skal oprette en ENV. fil til secret
 app.use(
   session({
-    secret: "12345",
+    secret: '12345',
     cookie: {
       secure: false,
       maxAge: 1000 * 60 * 60 * 24,
@@ -68,7 +68,7 @@ app.use((req, res, next) => {
 });
 
 // Routes
-app.use("/", routes);
+app.use('/', routes);
 
 startCronJob();
 

@@ -1,6 +1,6 @@
 'use strict';
 const {
-  Model
+  Model,
 } = require('sequelize');
 module.exports = (sequelize, DataTypes) => {
   class ProductTask extends Model {
@@ -12,15 +12,15 @@ module.exports = (sequelize, DataTypes) => {
 
     static associate(models) {
       // define association here
-      ProductTask.belongsTo(models.Product, { foreignKey: "productId" });
-      ProductTask.belongsTo(models.Task, { foreignKey: "taskId" });
+      ProductTask.belongsTo(models.Product, { foreignKey: 'productId' });
+      ProductTask.belongsTo(models.Task, { foreignKey: 'taskId' });
 
     }
   }
   ProductTask.init({
     productId: DataTypes.INTEGER,
     taskId: DataTypes.INTEGER,
-    amount: DataTypes.FLOAT
+    amount: DataTypes.FLOAT,
   }, {
     sequelize,
     modelName: 'ProductTask',

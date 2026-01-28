@@ -1,42 +1,42 @@
 'use strict';
 const {
-    Model
+  Model,
 } = require('sequelize');
 
 module.exports = (sequelize, DataTypes) => {
-    class Picture extends Model {
-        /**
+  class Picture extends Model {
+    /**
          * Helper method for defining associations.
          * This method is not a part of Sequelize lifecycle.
          * The `models/index` file will call this method automatically.
          */
-        static async pictureUpload({
-            id,
-            taskId,
-            fileName,
-            beforeAfter
-        }){
-            const picture = await Picture.create({
-                id: id,
-                taskId: taskId,
-                filename: fileName,
-                beforeAfter: beforeAfter
-            });
-             return picture;
-        }
-        static associate(models) {
-            Picture.belongsTo(models.Task, {foreignKey: "taskId"});
-        }
-        
+    static async pictureUpload({
+      id,
+      taskId,
+      fileName,
+      beforeAfter,
+    }){
+      const picture = await Picture.create({
+        id: id,
+        taskId: taskId,
+        filename: fileName,
+        beforeAfter: beforeAfter,
+      });
+      return picture;
+    }
+    static associate(models) {
+      Picture.belongsTo(models.Task, {foreignKey: 'taskId'});
     }
 
-    Picture.init({
-        taskId: DataTypes.INTEGER,
-        filename: DataTypes.STRING,
-        beforeAfter: DataTypes.BOOLEAN
-    }, {
-        sequelize,
-        modelName: 'Picture',
-    });
-    return Picture;
+  }
+
+  Picture.init({
+    taskId: DataTypes.INTEGER,
+    filename: DataTypes.STRING,
+    beforeAfter: DataTypes.BOOLEAN,
+  }, {
+    sequelize,
+    modelName: 'Picture',
+  });
+  return Picture;
 };

@@ -1,6 +1,6 @@
 'use strict';
 const {
-  Model
+  Model,
 } = require('sequelize');
 module.exports = (sequelize, DataTypes) => {
   class Unit extends Model {
@@ -10,18 +10,18 @@ module.exports = (sequelize, DataTypes) => {
      * The `models/index` file will call this method automatically.
      */
     static associate(models) {
-        Unit.hasMany(models.Product, {foreignKey: 'unitId'});
+      Unit.hasMany(models.Product, {foreignKey: 'unitId'});
 
     }
   }
   Unit.init({
-    name: DataTypes.STRING
+    name: DataTypes.STRING,
   }, {
     sequelize,
     modelName: 'Unit',
     defaultScope: {
-        attributes: { exclude: ['createdAt','updatedAt'] },
-    }
+      attributes: { exclude: ['createdAt','updatedAt'] },
+    },
   });
   return Unit;
 };

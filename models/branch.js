@@ -1,28 +1,28 @@
 'use strict';
 const {
-    Model
+  Model,
 } = require('sequelize');
 module.exports = (sequelize, DataTypes) => {
-    class Branch extends Model {
-        /**
+  class Branch extends Model {
+    /**
          * Helper method for defining associations.
          * This method is not a part of Sequelize lifecycle.
          * The `models/index` file will call this method automatically.
          */
-        static associate(models) {
-            // define association here
-            Branch.hasMany(models.Gasstation, {foreignKey: 'branchId'});
-        }
+    static associate(models) {
+      // define association here
+      Branch.hasMany(models.Gasstation, {foreignKey: 'branchId'});
     }
+  }
 
-    Branch.init({
-        name: DataTypes.STRING
-    }, {
-        sequelize,
-        modelName: 'Branch',
-        defaultScope: {
-            attributes: { exclude: ['createdAt','updatedAt'] },
-        }
-    });
-    return Branch;
+  Branch.init({
+    name: DataTypes.STRING,
+  }, {
+    sequelize,
+    modelName: 'Branch',
+    defaultScope: {
+      attributes: { exclude: ['createdAt','updatedAt'] },
+    },
+  });
+  return Branch;
 };

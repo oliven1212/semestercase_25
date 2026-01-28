@@ -17,7 +17,7 @@ module.exports = {
         name: 'Admin',
         createdAt: new Date(),
         updatedAt: new Date(),
-      },      
+      },
       {
         name: 'Ejer',
         createdAt: new Date(),
@@ -39,5 +39,5 @@ module.exports = {
     * await queryInterface.bulkDelete('People', null, {});
     */
     await queryInterface.bulkDelete('Roles', null, {});
-  }
+  },
 };

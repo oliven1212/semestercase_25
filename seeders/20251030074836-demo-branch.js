@@ -28,7 +28,7 @@ module.exports = {
         name: 'Q8',
         createdAt: new Date(),
         updatedAt: new Date(),
-      }
+      },
     ], {});
   },
 
@@ -41,5 +41,5 @@ module.exports = {
      * Example:
      * await queryInterface.bulkDelete('People', null, {});
      */
-  }
+  },
 };

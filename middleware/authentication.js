@@ -1,10 +1,10 @@
 // middleware/authentication.js
 
 function ensureAuthenticated(req, res, next) {
-  console.log("ensureAuthenticated session:", !!(req.session && req.session.user));
+  console.log('ensureAuthenticated session:', !!(req.session && req.session.user));
   if (!req.session || !req.session.user) {
     // brug /login konsistent
-    return res.redirect("/");
+    return res.redirect('/');
   }
   next();
 }
@@ -16,14 +16,14 @@ function ensureAuthenticated(req, res, next) {
 function allowRoles(allowedRoles) {
   return function (req, res, next) {
     if (!req.session || !req.session.user) {
-      return res.redirect("/");
+      return res.redirect('/');
     }
     const role = req.session.user.role;
     if (allowedRoles.includes(role)) {
       return next();
     }
     // Hvis ikke tilladt:
-    return res.status(403).send("Adgang nægtet"); // eller redirect til '/' hvis UI foretrækkes
+    return res.status(403).send('Adgang nægtet'); // eller redirect til '/' hvis UI foretrækkes
   };
 }
 
@@ -33,13 +33,13 @@ function allowRoles(allowedRoles) {
  */
 function redirectToRoleHome(req, res, next) {
   if (!req.session || !req.session.user) {
-    return res.redirect("/");
+    return res.redirect('/');
   }
   const role = req.session.user.role;
-  if (role === 1) return res.redirect("/admin");
-  if (role === 2) return res.redirect("/gasstation");
-  if (role === 3) return res.redirect("/createTask");
-  return res.redirect("/");
+  if (role === 1) return res.redirect('/admin');
+  if (role === 2) return res.redirect('/gasstation');
+  if (role === 3) return res.redirect('/createTask');
+  return res.redirect('/');
 }
 
 module.exports = {ensureAuthenticated, allowRoles, redirectToRoleHome};

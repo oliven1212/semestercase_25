@@ -1,11 +1,11 @@
-"use strict";
-const bcrypt = require("bcrypt");
-const { Model } = require("sequelize");
+'use strict';
+const bcrypt = require('bcrypt');
+const { Model } = require('sequelize');
 module.exports = (sequelize, DataTypes) => {
   class User extends Model {
     static async getAllUserIds() {
       const allUsers = await User.findAll({
-        attributes: ["id"],
+        attributes: ['id'],
         raw: true,
       });
       return allUsers.map((user) => user.id);
@@ -56,13 +56,13 @@ module.exports = (sequelize, DataTypes) => {
 
     static associate(models) {
       // define association here
-      User.belongsTo(models.Role, { foreignKey: "roleId" });
-      User.belongsTo(models.City, { foreignKey: "cityCode" });
-      User.hasMany(models.Task, { foreignKey: "userId", onDelete: "SET NULL" });
+      User.belongsTo(models.Role, { foreignKey: 'roleId' });
+      User.belongsTo(models.City, { foreignKey: 'cityCode' });
+      User.hasMany(models.Task, { foreignKey: 'userId', onDelete: 'SET NULL' });
       User.belongsToMany(models.Gasstation, {
         through: models.GasstationUser,
-        foreignKey: "userId",
-        onDelete: "CASCADE",
+        foreignKey: 'userId',
+        onDelete: 'CASCADE',
       });
     }
   }
@@ -81,9 +81,9 @@ module.exports = (sequelize, DataTypes) => {
     },
     {
       sequelize,
-      modelName: "User",
+      modelName: 'User',
       defaultScope: {
-        attributes: { exclude: ["password"] },
+        attributes: { exclude: ['password'] },
       },
     },
   );

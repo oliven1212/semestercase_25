@@ -17,130 +17,130 @@ const afterCount = document.getElementById('afterCount');
 
 //Viser antal valgte før billeder og uploader billeder til server og database
 beforeInput.addEventListener('change', async function () {
-    const fd = new FormData();
+  const fd = new FormData();
 
-    //Tilføjer alle filer til FormData
-    for (const file of this.files) {
-        fd.append("beforePicture", file);
-    }
+  //Tilføjer alle filer til FormData
+  for (const file of this.files) {
+    fd.append('beforePicture', file);
+  }
 
-    const res = await fetch("/uploadtaskimage/"+taskId+"/0", {
-        method: "POST",
-        body: fd
-    });    
-    this.value = "";
+  const res = await fetch('/uploadtaskimage/'+taskId+'/0', {
+    method: 'POST',
+    body: fd,
+  });
+  this.value = '';
 
-    const count = await res.json();
-    beforeCount.textContent = count > 0 ? `${count} uploadet` : '';
+  const count = await res.json();
+  beforeCount.textContent = count > 0 ? `${count} uploadet` : '';
 });
 
 //Viser antal valgte før billeder og uploader billeder til server og database
 afterInput.addEventListener('change', async function () {
-    const fd = new FormData();
+  const fd = new FormData();
 
-    //Tilføjer alle filer til FormData
-    for (const file of this.files) {
-        fd.append("afterPicture", file);
-    }
+  //Tilføjer alle filer til FormData
+  for (const file of this.files) {
+    fd.append('afterPicture', file);
+  }
 
-    const res = await fetch("/uploadtaskimage/"+taskId+"/1", {
-        method: "POST",
-        body: fd
-    });    
-    this.value = "";
+  const res = await fetch('/uploadtaskimage/'+taskId+'/1', {
+    method: 'POST',
+    body: fd,
+  });
+  this.value = '';
 
-    const count = await res.json();
-    afterCount.textContent = count > 0 ? `${count} uploadet` : '';
-    
+  const count = await res.json();
+  afterCount.textContent = count > 0 ? `${count} uploadet` : '';
+
 });
 
 //Removes a product from the selected products on the view and database
 productSelect.addEventListener('input', function () {
-    const selectedOption = this.options[this.selectedIndex];
-    const unit = selectedOption.getAttribute('data-unit');
-    unitDisplay.textContent = unit || '';
+  const selectedOption = this.options[this.selectedIndex];
+  const unit = selectedOption.getAttribute('data-unit');
+  unitDisplay.textContent = unit || '';
 });
 
 
 //Adds a product from the selected products on the view and database
 async function addProduct () {
 
-    const productId = productSelect.value;
-    const amount = amountInput.value;
+  const productId = productSelect.value;
+  const amount = amountInput.value;
 
-    if (!productId || !amount) {
-        alert('Vælg et produkt og indtast mængde');
-        return;
-    }
-
-
-    //Post http call med det nye produkt som retunere alle produkter forbundet med opgaven
-    const res = await fetch("/createTask/upload/product", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-        taskId: taskId,
-        productId: productId,
-        amount: amount
-        }),
-    });    
-    const products = await res.json();
+  if (!productId || !amount) {
+    alert('Vælg et produkt og indtast mængde');
+    return;
+  }
 
 
-    updateProductDiv(products);
+  //Post http call med det nye produkt som retunere alle produkter forbundet med opgaven
+  const res = await fetch('/createTask/upload/product', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({
+      taskId: taskId,
+      productId: productId,
+      amount: amount,
+    }),
+  });
+  const products = await res.json();
 
 
-    //Insert hidden data into product selections
-    const productIdElement = document.createElement('option');
-    productIdElement.value = productId;
-    productIdElement.selected = true;
-    productIdContainer.append(productIdElement);
-    const productAmountElement = document.createElement('option');
-    productAmountElement.value = amount;
-    productAmountElement.selected = true;
-    productAmountContainer.append(productAmountElement);
+  updateProductDiv(products);
+
+
+  //Insert hidden data into product selections
+  const productIdElement = document.createElement('option');
+  productIdElement.value = productId;
+  productIdElement.selected = true;
+  productIdContainer.append(productIdElement);
+  const productAmountElement = document.createElement('option');
+  productAmountElement.value = amount;
+  productAmountElement.selected = true;
+  productAmountContainer.append(productAmountElement);
 
 
 
-    // Reset form
-    productSelect.value = '';
-    amountInput.value = '';
-    unitDisplay.textContent = '';
+  // Reset form
+  productSelect.value = '';
+  amountInput.value = '';
+  unitDisplay.textContent = '';
 
 }
 
 //Removes a product from the selected products on the view and database
 async function removeProduct (taskId, productId){
-    const res = await fetch("/createTask/remove/product", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-        taskId: taskId,
-        productId: productId
-        }),
-    });    
-    const products = await res.json();
-    updateProductDiv(products);
+  const res = await fetch('/createTask/remove/product', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({
+      taskId: taskId,
+      productId: productId,
+    }),
+  });
+  const products = await res.json();
+  updateProductDiv(products);
 }
 
 
 //updates the element that shows the selected products with the given products
 function updateProductDiv (products){
-    //Makes sure the selectedProducts and the divs er tomme
-    let selectedProducts = [];
-    selectedProductsDiv.innerHTML = "";
-    
-    //looper over alle produkter og opretter dem som html elementer
-    products.forEach(product => {
+  //Makes sure the selectedProducts and the divs er tomme
+  const selectedProducts = [];
+  selectedProductsDiv.innerHTML = '';
 
-        // Opretter HTML element
-        const productDiv = document.createElement('div');
-        productDiv.className = 'product-row';
-        productDiv.innerHTML = `
+  //looper over alle produkter og opretter dem som html elementer
+  products.forEach(product => {
+
+    // Opretter HTML element
+    const productDiv = document.createElement('div');
+    productDiv.className = 'product-row';
+    productDiv.innerHTML = `
             <span class="product-display">${product['Product.name']}: ${product.amount} ${product['Product.Unit.name']}</span>
             <button type="button" class="remove-btn" onclick="removeProduct(${product.taskId},${product.productId})">Fjern</button>`;
-        selectedProductsDiv.appendChild(productDiv);
+    selectedProductsDiv.appendChild(productDiv);
 
 
-    });
+  });
 }

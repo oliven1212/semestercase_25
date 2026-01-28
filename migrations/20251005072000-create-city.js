@@ -4,24 +4,24 @@ module.exports = {
   async up(queryInterface, Sequelize) {
     await queryInterface.createTable('Cities', {
       zipCode: {
-          allowNull: false,
-          primaryKey: true,
-        type: Sequelize.INTEGER
+        allowNull: false,
+        primaryKey: true,
+        type: Sequelize.INTEGER,
       },
       name: {
-        type: Sequelize.STRING
+        type: Sequelize.STRING,
       },
       createdAt: {
         allowNull: false,
-        type: Sequelize.DATE
+        type: Sequelize.DATE,
       },
       updatedAt: {
         allowNull: false,
-        type: Sequelize.DATE
-      }
+        type: Sequelize.DATE,
+      },
     });
   },
   async down(queryInterface, Sequelize) {
     await queryInterface.dropTable('Cities');
-  }
+  },
 };

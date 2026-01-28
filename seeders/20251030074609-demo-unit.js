@@ -12,13 +12,13 @@ module.exports = {
      *   isBetaMember: false
      * }], {});
     */
-   await queryInterface.bulkInsert('Units', [
+    await queryInterface.bulkInsert('Units', [
       {
         id: 1,
         name: 'Kg',
         createdAt: new Date(),
         updatedAt: new Date(),
-      },      
+      },
       {
         id: 2,
         name: 'L',
@@ -42,5 +42,5 @@ module.exports = {
     * await queryInterface.bulkDelete('People', null, {});
     */
     await queryInterface.bulkDelete('Units', null, {});
-  }
+  },
 };

@@ -5,11 +5,11 @@ exports.gasstation = async (req, res) => {
   const users = await User.findAll({raw: true});
   const owner = await User.findOne({
     where: { id: req.session.user.id },
-    raw: true
+    raw: true,
   });
   const gasstationId = await GasstationUser.findAll({
     where: { userId: req.session.user.id },
-    raw: true
+    raw: true,
   });
   const gasstationIds = gasstationId.map(link => link.gasstationId);
 
@@ -17,15 +17,15 @@ exports.gasstation = async (req, res) => {
     where: { id: gasstationIds },
     include:
         [{
-        model: Branch,
-      },
+          model: Branch,
+        },
         {
-            model: City,
+          model: City,
         }],
-      order: [[City, 'name', 'ASC']],
+    order: [[City, 'name', 'ASC']],
     raw: true,
   });
-  res.render("home/gasstation", {
+  res.render('home/gasstation', {
     title: 'gasstation',
     message: 'Vælg tankstation',
     users: users,
